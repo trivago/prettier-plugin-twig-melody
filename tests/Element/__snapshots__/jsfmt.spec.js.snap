@@ -7,7 +7,7 @@ exports[`attributes.melody.twig 1`] = `
         Next
     </a>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-<a href="#abcd"  target="_blank"  lang="en">Link</a>
+<a href="#abcd" target="_blank" lang="en">Link</a>
 
 
 
@@ -24,10 +24,8 @@ exports[`children.melody.twig 1`] = `
 </div>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <div class="{{ css.loader }}"><div class="{{ css.barWrapper }}"><span
-            class="{{ css.bar }}"
-        ></span></div><strong
-        class="{{ css.text }}"
-    >{{ checking_deals }}</strong></div>
+            class="{{ css.bar }}"></span></div><strong
+        class="{{ css.text }}">{{ checking_deals }}</strong></div>
 
 
 
@@ -49,13 +47,26 @@ exports[`manyAttributes.melody.twig 1`] = `
     attr5="five"
     attr6="six"
     attr7="seven"
-    attr8="eight"
->Text</span>
+    attr8="eight">Text</span>
 
 `;
 
 exports[`selfClosing.melody.twig 1`] = `
-<input type="text" name="user" />~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-<input type="text"  name="user"/>
+<input type="text" name="user" />
+
+<input attr1="one" attr2="two" attr3="three" attr4="four" attr5="five" attr6="six" attr7="seven" attr8="eight" />~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+<input type="text" name="user" />
+
+
+
+<input
+    attr1="one"
+    attr2="two"
+    attr3="three"
+    attr4="four"
+    attr5="five"
+    attr6="six"
+    attr7="seven"
+    attr8="eight" />
 
 `;

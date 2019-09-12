@@ -68,7 +68,8 @@ const print = (path, options, print) => {
 
 printFunctions["SequenceExpression"] = (node, path, print) => {
     const docs = [];
-    docs.push(group(join(hardline, path.map(print, "expressions"))), hardline);
+    // docs.push(group(join(hardline, path.map(print, "expressions"))), hardline);
+    docs.push(group(join(line, path.map(print, "expressions"))));
     return concat(docs);
 };
 
@@ -123,48 +124,45 @@ printFunctions["SequenceExpression"] = (node, path, print) => {
     return concat(docs);
 };
 
-const enclosedElementList = (prefix, element, suffix) => {
-    console.log("Element: ", element);
-    return group(
-        concat([prefix, indent(concat([softline, element])), softline, suffix])
-    );
-};
-
-const printList = (path, print, attrName, separator = " ") => {
-    return join(concat([separator, line]), path.map(print, attrName));
-};
-
-const printGroup = (path, print, separator, attrName) => {
+const printGroup = (prefix, elements, suffix) => {
     return group(
         concat([
+            prefix,
             indent(
                 concat([
-                    softline,
-                    join(concat([separator, line]), path.map(print, attrName))
+                    line,
+                    elements
+                    // join(concat([separator, line]), path.map(print, attrName))
                 ])
             ),
-            softline
+            suffix
         ])
     );
 };
 
+const printSeparatedList = (path, print, separator, attrName) => {
+    return join(concat([separator, line]), path.map(print, attrName));
+};
+
 printFunctions["Element"] = (node, path, print) => {
-    const openingTag = ["<", node.name];
     const docs = [];
+    const opener = "<" + node.name;
     const hasAttributes = node.attributes && node.attributes.length > 0;
+    const openingTagEnd = node.selfClosing ? " />" : ">";
 
     if (hasAttributes) {
-        openingTag.push(" ");
-        openingTag.push(printGroup(path, print, " ", "attributes"));
+        docs.push(
+            printGroup(
+                opener,
+                printSeparatedList(path, print, "", "attributes"),
+                openingTagEnd
+            )
+        );
+    } else {
+        docs.push(concat([opener, openingTagEnd]));
     }
 
-    if (node.selfClosing) {
-        openingTag.push("/>");
-        // docs.push(group(concat(openingTag)));
-        docs.push(concat(openingTag));
-    } else {
-        openingTag.push(">");
-        docs.push(group(concat(openingTag)));
+    if (!node.selfClosing) {
         // Too simple: docs.push(indent(join(hardline, path.map(print, 'children'))));
 
         const childDocs = [];
