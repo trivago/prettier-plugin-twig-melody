@@ -1,0 +1,37 @@
+{
+    "name": "prettier-plugin-java",
+    "version": "0.0.10",
+    "description": "Prettier Java Plugin",
+    "main": "src",
+    "repository": "https://github.com/thorbenvh8/prettier-java",
+    "author": "Thorben von Hacht <@thorbenvh8>",
+    "license": "MIT",
+    "files": ["src"],
+    "engines": {
+        "node": ">=6"
+    },
+    "dependencies": {
+        "chevrotain-java": "^0.0.17",
+        "melody-parser": "^1.2.1",
+        "melody-types": "^1.2.1",
+        "prettier": "prettier/prettier#dbe0758b487be2da74a3f8cf4036472685d75fb0"
+    },
+    "devDependencies": {
+        "eslint": "^4.14.0",
+        "eslint-config-prettier": "^2.9.0",
+        "eslint-plugin-import": "^2.8.0",
+        "eslint-plugin-jest": "^21.5.0",
+        "eslint-plugin-prettier": "^2.4.0",
+        "jest": "^21.1.0",
+        "jest-runner-eslint": "^0.3.0"
+    },
+    "scripts": {
+        "lint": "jest -c jest.eslint.config.js",
+        "test": "jest",
+        "preview": "./preview.sh",
+        "prettier": "prettier --plugin=. --parser=java"
+    },
+    "jest": {
+        "projects": ["<rootDir>/jest.*.config.js"]
+    }
+}
