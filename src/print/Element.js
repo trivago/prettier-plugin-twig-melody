@@ -1,11 +1,28 @@
 const prettier = require("prettier");
-const { concat, group, line, indent, join } = prettier.doc.builders;
+const {
+    concat,
+    group,
+    line,
+    softline,
+    indent,
+    join,
+    ifBreak
+} = prettier.doc.builders;
 
-const printOpeningTag = (prefix, attributes, suffix) => {
-    const attrGroupId = Symbol("element-attr-group-id");
-    return group(concat([prefix, indent(concat([line, attributes])), suffix]), {
-        id: attrGroupId
-    });
+const printOpeningTag = (node, path, print) => {
+    const opener = "<" + node.name;
+    const printedAttributes = printSeparatedList(path, print, "", "attributes");
+    const openingTagEnd = node.selfClosing ? " />" : ">";
+    const hasAttributes = node.attributes && node.attributes.length > 0;
+
+    if (hasAttributes) {
+        return concat([
+            opener,
+            indent(concat([line, printedAttributes])),
+            openingTagEnd
+        ]);
+    }
+    return concat([opener, openingTagEnd]);
 };
 
 const printElementChildren = children => {
@@ -17,57 +34,47 @@ const printSeparatedList = (path, print, separator, attrName) => {
 };
 
 const p = (node, path, print) => {
-    const docs = [];
-    const opener = "<" + node.name;
-    const hasAttributes = node.attributes && node.attributes.length > 0;
-    const openingTagEnd = node.selfClosing ? " />" : ">";
-
-    if (hasAttributes) {
-        docs.push(
-            printOpeningTag(
-                opener,
-                printSeparatedList(path, print, "", "attributes"),
-                openingTagEnd
-            )
-        );
-    } else {
-        docs.push(concat([opener, openingTagEnd]));
-    }
+    const elemGroupId = Symbol("element-group-id");
+    const openingGroup = group(printOpeningTag(node, path, print));
 
     if (!node.selfClosing) {
-        const children = join("", path.map(print, "children"));
-        docs.push(printElementChildren(children));
+        const printedChildren = path.map(print, "children");
+        const indentedChildren = indent(
+            concat([ifBreak(softline, ""), ...printedChildren])
+        );
 
-        // const childDocs = [];
-        // const nonBreakingElems = [];
-        // path.each(subPath => {
-        //     const childNode = subPath.getValue();
-        //     if (util.isNonBreaking(childNode)) {
-        //         nonBreakingElems.push(childNode);
-        //     } else {
-        //         // Output collected non-breaking elements first
-        //         // ...
-        //         // Then output breaking element
-        //         // ...
-        //     }
-        //     if (!Node.isPrintTextStatement(childNode)) {
-        //         // if (true) {
-        //         childDocs.push(subPath.call(print));
-        //     } else {
-        //         // Within this node is a StringLiteral, hence node.value.value
-        //         childDocs.push(util.textToDocs(childNode.value.value));
-        //     }
-        // }, "children");
-
-        // docs.push(indent(concat(childDocs)));
-
-        docs.push(concat(["</", node.name, ">"]));
+        const closingTag = concat(["</", node.name, ">"]);
+        return concat([
+            group(
+                concat([
+                    openingGroup,
+                    indentedChildren,
+                    ifBreak(softline, ""),
+                    closingTag
+                ])
+            )
+        ]);
     }
 
-    const attrGroupId = Symbol("attr-group-id");
-    return group(concat(docs), { id: attrGroupId });
-    // return concat(docs);
+    return openingGroup;
 };
+
+function printChildren(path, options, print) {
+    const node = path.getValue();
+
+    const groupIds = node.children.map(() => Symbol(""));
+    return concat(
+        path.map((childPath, childIndex) => {
+            return group(
+                concat([
+                    group(concat([childPath.call(print)]), {
+                        id: groupIds[childIndex]
+                    })
+                ])
+            );
+        }, "children")
+    );
+}
 
 module.exports = {
     printElement: p
