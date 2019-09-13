@@ -70,13 +70,13 @@ const print = (path, options, print) => {
 
 printFunctions["SequenceExpression"] = printSequenceExpression;
 printFunctions["ConstantValue"] = node => {
-    return concat([node.value]);
+    return node.value;
 };
 printFunctions["StringLiteral"] = node => {
-    return concat([node.value]);
+    return node.value;
 };
 printFunctions["Identifier"] = node => {
-    return concat([node.name]);
+    return node.name;
 };
 printFunctions["UnaryExpression"] = (node, path, print) => {
     return concat([node.operator, path.call(print, "argument")]);

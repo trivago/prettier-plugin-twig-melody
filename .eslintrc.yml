@@ -18,6 +18,7 @@ rules:
     no-else-return: error
     no-inner-declarations: error
     no-unneeded-ternary: error
+    no-debugger: off
     no-unused-vars: off
     no-console: off
     no-useless-return: error

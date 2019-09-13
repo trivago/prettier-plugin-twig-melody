@@ -34,7 +34,6 @@ const printSeparatedList = (path, print, separator, attrName) => {
 };
 
 const p = (node, path, print) => {
-    const elemGroupId = Symbol("element-group-id");
     const openingGroup = group(printOpeningTag(node, path, print));
 
     if (!node.selfClosing) {
@@ -44,16 +43,17 @@ const p = (node, path, print) => {
         );
 
         const closingTag = concat(["</", node.name, ">"]);
-        return concat([
-            group(
-                concat([
-                    openingGroup,
-                    indentedChildren,
-                    ifBreak(softline, ""),
-                    closingTag
-                ])
-            )
-        ]);
+        const result = group(
+            concat([
+                openingGroup,
+                indentedChildren,
+                ifBreak(softline, ""),
+                closingTag
+            ])
+        );
+        debugger;
+        // console.log(result);
+        return result;
     }
 
     return openingGroup;

@@ -9,7 +9,10 @@ const p = (node, path, print) => {
     //     concat(replaceNewlines(value, literalline)),
     //     hasTrailingNewline ? hardline : '',
     // ]);
-    return path.call(print, "value");
+
+    const rawString = path.call(print, "value");
+    debugger;
+    return rawString.trim();
 };
 
 module.exports = {
