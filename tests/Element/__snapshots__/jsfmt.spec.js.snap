@@ -11,8 +11,9 @@ exports[`attributes.melody.twig 1`] = `
 
 
 
-<a href="{{ url }}">Next</a>
-
+<a href="{{ url }}">
+        Next
+    </a>
 `;
 
 exports[`children.melody.twig 1`] = `
@@ -23,10 +24,15 @@ exports[`children.melody.twig 1`] = `
     <strong class="{{ css.text }}">{{ 'checking_deals' }}</strong>
 </div>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-<div class="{{ css.loader }}"><div class="{{ css.barWrapper }}"><span
-            class="{{ css.bar }}"></span></div><strong
-        class="{{ css.text }}">{{ checking_deals }}</strong></div>
-
+<div class="{{ css.loader }}">
+    <div
+        class="{{ css.barWrapper }}">
+        <span
+            class="{{ css.bar }}"></span>
+    </div>
+    <strong
+        class="{{ css.text }}">{{ checking_deals }}</strong>
+</div>
 
 
 `;
@@ -34,7 +40,6 @@ exports[`children.melody.twig 1`] = `
 exports[`extraSpaces.melody.twig 1`] = `
 <span  >Text</span >~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <span>Text</span>
-
 `;
 
 exports[`manyAttributes.melody.twig 1`] = `
@@ -48,7 +53,6 @@ exports[`manyAttributes.melody.twig 1`] = `
     attr6="six"
     attr7="seven"
     attr8="eight">Text</span>
-
 `;
 
 exports[`selfClosing.melody.twig 1`] = `
@@ -68,5 +72,4 @@ exports[`selfClosing.melody.twig 1`] = `
     attr6="six"
     attr7="seven"
     attr8="eight" />
-
 `;
