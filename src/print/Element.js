@@ -38,21 +38,16 @@ const p = (node, path, print) => {
 
     if (!node.selfClosing) {
         const printedChildren = path.map(print, "children");
+        const withoutEmptyStrings = printedChildren.filter(s => s !== "");
         const indentedChildren = indent(
-            concat([ifBreak(softline, ""), ...printedChildren])
+            concat([softline, join(softline, withoutEmptyStrings)])
         );
 
         const closingTag = concat(["</", node.name, ">"]);
         const result = group(
-            concat([
-                openingGroup,
-                indentedChildren,
-                ifBreak(softline, ""),
-                closingTag
-            ])
+            concat([openingGroup, indentedChildren, softline, closingTag])
         );
-        debugger;
-        // console.log(result);
+        // debugger;
         return result;
     }
 
