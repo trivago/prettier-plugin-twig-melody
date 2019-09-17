@@ -16,6 +16,7 @@ const { printObjectExpression } = require("./print/ObjectExpression.js");
 const { printCallExpression } = require("./print/CallExpression.js");
 const { printTextStatement } = require("./print/TextStatement.js");
 const { printStringLiteral } = require("./print/StringLiteral.js");
+const { printArrayExpression } = require("./print/ArrayExpression.js");
 
 const printFunctions = {};
 
@@ -106,7 +107,7 @@ printFunctions["NumericLiteral"] = returnNodeValue;
 printFunctions["BooleanLiteral"] = returnNodeValue;
 printFunctions["NullLiteral"] = () => "null";
 printFunctions["BinaryConcatExpression"] = printBinaryExpression;
-printFunctions["ArrayExpression"] = null;
+printFunctions["ArrayExpression"] = printArrayExpression;
 printFunctions["CallExpression"] = printCallExpression;
 printFunctions["NamedArgumentExpression"] = null;
 printFunctions["SliceExpression"] = null;

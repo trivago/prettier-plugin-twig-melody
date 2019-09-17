@@ -91,12 +91,12 @@ const isDynamicValue = node => {
 
 const isExpressionType = node => {
     return (
-        Node.isExpression(node) ||
         Node.isPrintExpressionStatement(node) ||
         Node.isMemberExpression(node) ||
         Node.isUnaryExpression(node) ||
         Node.isBinaryExpression(node) ||
         Node.isBinaryConcatExpression(node) ||
+        Node.isArrayExpression ||
         Node.isConditionalExpression(node) ||
         Node.isCallExpression(node) ||
         Node.isFilterExpression(node)

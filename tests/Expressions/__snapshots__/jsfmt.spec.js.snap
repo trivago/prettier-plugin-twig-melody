@@ -1,9 +1,35 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`arrayExpression.melody.twig 1`] = `
+{{ [2, 3, "cat"] }}
+
+{{ [ 2, 3, "cat","dog",   "mouse"] }}
+
+{{ [ 2, 3, "cat","dog", "mouse", "cake", "elephant", "zebra", 3.1415, translate('translation_key')] }}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{{ [2, 3, "cat"] }}
+""
+{{ [2, 3, "cat", "dog", "mouse"] }}
+""
+{{ [
+    2,
+    3,
+    "cat",
+    "dog",
+    "mouse",
+    "cake",
+    "elephant",
+    "zebra",
+    3.1415,
+    translate("translation_key")
+] }}
+""
+`;
+
 exports[`callExpression.melody.twig 1`] = `
 {{ range(3) }}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{{ range(3) }}
+{{ range(3) }}""
 `;
 
 exports[`filterExpression.melody.twig 1`] = `
@@ -12,16 +38,16 @@ exports[`filterExpression.melody.twig 1`] = `
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {{ "test.foo"
 } | () }}
-
+""
 {{ range(3)
     } |
 } | () }}
-
+""
 `;
 
 exports[`stringConcat.melody.twig 1`] = `
 <div>
 {{ first         }}
 </div>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-<div>{{ first }}</div>
+<div>""{{ first }}""</div>
 `;
