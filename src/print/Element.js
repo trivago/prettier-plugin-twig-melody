@@ -12,7 +12,7 @@ const {
 const printOpeningTag = (node, path, print) => {
     const opener = "<" + node.name;
     const printedAttributes = printSeparatedList(path, print, "", "attributes");
-    const openingTagEnd = node.selfClosing ? " />" : ">";
+    const openingTagEnd = node.selfClosing ? concat([line, "/>"]) : ">";
     const hasAttributes = node.attributes && node.attributes.length > 0;
 
     if (hasAttributes) {

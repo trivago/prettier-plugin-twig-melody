@@ -6,14 +6,16 @@ const p = (node, path, print) => {
         indent(path.call(print, "target")),
         hardline,
         "} | ",
-        this.name
+        node.name
     ];
-    if (this.arguments && this.arguments.length > 0) {
+    if (node.arguments && node.arguments.length > 0) {
         docs.push("(");
         docs.push(path.call(print, "arguments"));
         docs.push(")");
     }
-    return concat(docs);
+    const result = concat(docs);
+    const b = 5;
+    return result;
 };
 
 module.exports = {

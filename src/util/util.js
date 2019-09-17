@@ -70,45 +70,42 @@ const attributeLength = attrNode => {
     return result;
 };
 
-/**
- * 1. Split at newlines
- * 2. Trim each line
- * 3. Merge multiple empty lines into one
- * 4. Join lines with a hard line
- *
- * @param {String} s The string to normalize
- */
-const textToDocs = s => {
-    return fill([normalizeParagraph(s)]);
-};
-//     .reduce((docs, line) => {
-//         // Ignore additional line breaks beyond the first one
-//         if (
-//             line === '' &&
-//             (lastElement(docs) === '' || docs.length === 0)
-//         ) {
-//             return docs;
-//         }
-//         if (line === '') {
-//             return docs.concat([hardline]);
-//         }
-//         return docs.concat([line]);
-//     }, []);
-
-// if (docs.length > 1) {
-//     return fill(join(hardline, docs));
-// }
-// return fill(docs);
-// };
-
 const normalizeParagraph = s =>
     deduplicateWhitespace(s.replace(/\n/g, "").trim());
 
 const deduplicateWhitespace = s => s.replace(/\s+/g, " ");
 // const lastElement = arr => arr.length > 0 && arr[arr.length - 1];
 
+const isDynamicValue = node => {
+    return (
+        Node.isIdentifier(node) ||
+        Node.isMemberExpression(node) ||
+        Node.isUnaryExpression(node) ||
+        Node.isBinaryExpression(node) ||
+        Node.isBinaryConcatExpression(node) ||
+        Node.isConditionalExpression(node) ||
+        Node.isCallExpression(node) ||
+        Node.isFilterExpression(node)
+    );
+};
+
+const isExpressionType = node => {
+    return (
+        Node.isExpression(node) ||
+        Node.isPrintExpressionStatement(node) ||
+        Node.isMemberExpression(node) ||
+        Node.isUnaryExpression(node) ||
+        Node.isBinaryExpression(node) ||
+        Node.isBinaryConcatExpression(node) ||
+        Node.isConditionalExpression(node) ||
+        Node.isCallExpression(node) ||
+        Node.isFilterExpression(node)
+    );
+};
+
 module.exports = {
     normalizeParagraph,
     isNonBreaking,
-    textToDocs
+    isDynamicValue,
+    isExpressionType
 };

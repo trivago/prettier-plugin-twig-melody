@@ -3,7 +3,20 @@
 exports[`attributes.melody.twig 1`] = `
 <a href="#abcd"  target="_blank"   lang="en" >Link</a>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-<a href="#abcd" target="_blank" lang="en">Link</a> 
+<a href="#abcd" target="_blank" lang="en">Link</a>
+`;
+
+exports[`breakingSiblings.melody.twig 1`] = `
+<span>One</span><b>Two</b><i>Three</i><span>Four</span><b>Five</b><i>Six</i><span>Seven</span>
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+<span>One</span>
+<b>Two</b>
+<i>Three</i>
+<span>Four</span>
+<b>Five</b>
+<i>Six</i>
+<span>Seven</span>
+
 `;
 
 exports[`children.melody.twig 1`] = `
@@ -16,7 +29,7 @@ exports[`children.melody.twig 1`] = `
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <div class="{{ css.loader }}">
     <div class="{{ css.barWrapper }}"><span class="{{ css.bar }}"></span></div>
-    <strong class="{{ css.text }}">{{ checking_deals }}</strong>
+    <strong class="{{ css.text }}">{{ "checking_deals" }}</strong>
 </div>
 
 `;
@@ -50,7 +63,7 @@ exports[`emptyLines.melody.twig 1`] = `
 exports[`extraSpaces.melody.twig 1`] = `
 <span  >Text</span >
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-<span>Text</span> 
+<span>Text</span>
 `;
 
 exports[`manyAttributes.melody.twig 1`] = `
@@ -75,7 +88,7 @@ exports[`oneLine.melody.twig 1`] = `
     Next
 </a>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-<a href="{{ url }}">Next</a> 
+<a href="{{ url }}">Next</a>
 `;
 
 exports[`selfClosing.melody.twig 1`] = `
@@ -95,7 +108,8 @@ exports[`selfClosing.melody.twig 1`] = `
     attr5="five"
     attr6="six"
     attr7="seven"
-    attr8="eight" />
+    attr8="eight"
+/>
 
 <input type="text" name="user" />
 <input type="text" name="password" />
@@ -105,7 +119,7 @@ exports[`selfClosing.melody.twig 1`] = `
 
 exports[`siblings.melody.twig 1`] = `
 <span>One</span><b>Two</b><i>Three</i>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-<span>One</span> <b>Two</b> <i>Three</i>
+<span>One</span><b>Two</b><i>Three</i>
 `;
 
 exports[`whitespace.melody.twig 1`] = `

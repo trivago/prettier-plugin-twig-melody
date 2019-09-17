@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`callExpression.melody.twig 1`] = `
+{{ range(3) }}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{{ range(3) }}
+`;
+
+exports[`filterExpression.melody.twig 1`] = `
+{{ 'test.foo' | split('.') }}
+{{ range(3) | sort | join(',') }}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{{ "test.foo"
+} | () }}
+
+{{ range(3)
+    } |
+} | () }}
+
+`;
+
+exports[`stringConcat.melody.twig 1`] = `
+<div>
+{{ first         }}
+</div>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+<div>{{ first }}</div>
+`;

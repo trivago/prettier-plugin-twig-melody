@@ -13,13 +13,16 @@ const { printExpressionStatement } = require("./print/ExpressionStatement.js");
 const { printMemberExpression } = require("./print/MemberExpression.js");
 const { printFilterExpression } = require("./print/FilterExpression.js");
 const { printObjectExpression } = require("./print/ObjectExpression.js");
+const { printCallExpression } = require("./print/CallExpression.js");
 const { printTextStatement } = require("./print/TextStatement.js");
+const { printStringLiteral } = require("./print/StringLiteral.js");
 
 const printFunctions = {};
 
 const print = (path, options, print) => {
     const node = path.getValue();
     const nodeType = node.constructor.name;
+
     if (printFunctions[nodeType]) {
         return printFunctions[nodeType](node, path, print, options);
     }
@@ -72,9 +75,7 @@ printFunctions["SequenceExpression"] = printSequenceExpression;
 printFunctions["ConstantValue"] = node => {
     return node.value;
 };
-printFunctions["StringLiteral"] = node => {
-    return node.value;
-};
+printFunctions["StringLiteral"] = printStringLiteral;
 printFunctions["Identifier"] = node => {
     return node.name;
 };
@@ -93,6 +94,22 @@ printFunctions["ObjectExpression"] = printObjectExpression;
 printFunctions["ObjectProperty"] = (node, path, print) => {
     return concat(path.call(print, "key"), ": ", path.call(print, "value"));
 };
+
+// Return value has to be a string
+const returnNodeValue = node => "" + node.value;
+
+// TODO: Implement
+printFunctions["Fragment"] = (node, path, print) => {
+    return path.call(print, "value");
+};
+printFunctions["NumericLiteral"] = returnNodeValue;
+printFunctions["BooleanLiteral"] = returnNodeValue;
+printFunctions["NullLiteral"] = () => "null";
+printFunctions["BinaryConcatExpression"] = printBinaryExpression;
+printFunctions["ArrayExpression"] = null;
+printFunctions["CallExpression"] = printCallExpression;
+printFunctions["NamedArgumentExpression"] = null;
+printFunctions["SliceExpression"] = null;
 
 module.exports = {
     print
