@@ -17,6 +17,9 @@ const { printCallExpression } = require("./print/CallExpression.js");
 const { printTextStatement } = require("./print/TextStatement.js");
 const { printStringLiteral } = require("./print/StringLiteral.js");
 const { printArrayExpression } = require("./print/ArrayExpression.js");
+const {
+    printNamedArgumentExpression
+} = require("./print/NamedArgumentExpression.js");
 
 const printFunctions = {};
 
@@ -99,7 +102,6 @@ printFunctions["ObjectProperty"] = (node, path, print) => {
 // Return value has to be a string
 const returnNodeValue = node => "" + node.value;
 
-// TODO: Implement
 printFunctions["Fragment"] = (node, path, print) => {
     return path.call(print, "value");
 };
@@ -109,7 +111,7 @@ printFunctions["NullLiteral"] = () => "null";
 printFunctions["BinaryConcatExpression"] = printBinaryExpression;
 printFunctions["ArrayExpression"] = printArrayExpression;
 printFunctions["CallExpression"] = printCallExpression;
-printFunctions["NamedArgumentExpression"] = null;
+printFunctions["NamedArgumentExpression"] = printNamedArgumentExpression;
 printFunctions["SliceExpression"] = null;
 
 module.exports = {

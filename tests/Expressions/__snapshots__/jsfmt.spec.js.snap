@@ -30,8 +30,10 @@ exports[`arrayExpression.melody.twig 1`] = `
 
 exports[`callExpression.melody.twig 1`] = `
 {{ range(3) }}
+
+{{ date('d/m/Y H:i', timezone="Europe/Paris") }}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{{ range(3) }}
+{{ range(3) }}{{ date("d/m/Y H:i", timezone = Europe/Paris) }}
 `;
 
 exports[`filterExpression.melody.twig 1`] = `
