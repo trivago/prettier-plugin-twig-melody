@@ -3,20 +3,20 @@
 exports[`attributes.melody.twig 1`] = `
 <a href="#abcd"  target="_blank"   lang="en" >Link</a>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-<a href=""#abcd"" target=""_blank"" lang=""en"">"Link"</a>""
+<a href="#abcd" target="_blank" lang="en">Link</a>
 `;
 
 exports[`breakingSiblings.melody.twig 1`] = `
 <span>One</span><b>Two</b><i>Three</i><span>Four</span><b>Five</b><i>Six</i><span>Seven</span>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-<span>"One"</span>
-<b>"Two"</b>
-<i>"Three"</i>
-<span>"Four"</span>
-<b>"Five"</b>
-<i>"Six"</i>
-<span>"Seven"</span>
-""
+<span>One</span>
+<b>Two</b>
+<i>Three</i>
+<span>Four</span>
+<b>Five</b>
+<i>Six</i>
+<span>Seven</span>
+
 `;
 
 exports[`children.melody.twig 1`] = `
@@ -28,17 +28,10 @@ exports[`children.melody.twig 1`] = `
 </div>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <div class="{{ css.loader }}">
-    ""
-    <div class="{{ css.barWrapper }}">
-        ""
-        <span class="{{ css.bar }}"></span>
-        ""
-    </div>
-    ""
+    <div class="{{ css.barWrapper }}"><span class="{{ css.bar }}"></span></div>
     <strong class="{{ css.text }}">{{ "checking_deals" }}</strong>
-    ""
 </div>
-""
+
 `;
 
 exports[`emptyLines.melody.twig 1`] = `
@@ -55,55 +48,39 @@ exports[`emptyLines.melody.twig 1`] = `
     <img src="/img/posts/08/07/dns-resolution-expl.png" alt="DNS explained" />
 </div>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <div>
-    ""
-    <img
-        src=""/img/posts/08/07/dns-resolution-expl.png""
-        alt=""DNS explained""
-    />
-    ""
-    <img
-        src=""/img/posts/08/07/dns-resolution-expl.png""
-        alt=""DNS explained""
-    />
-    ""
+    <img src="/img/posts/08/07/dns-resolution-expl.png" alt="DNS explained" />
+
+    <img src="/img/posts/08/07/dns-resolution-expl.png" alt="DNS explained" />
 </div>
-""
+
 <div>
-    ""
-    <img
-        src=""/img/posts/08/07/dns-resolution-expl.png""
-        alt=""DNS explained""
-    />
-    ""
-    <img
-        src=""/img/posts/08/07/dns-resolution-expl.png""
-        alt=""DNS explained""
-    />
-    ""
+    <img src="/img/posts/08/07/dns-resolution-expl.png" alt="DNS explained" />
+
+    <img src="/img/posts/08/07/dns-resolution-expl.png" alt="DNS explained" />
 </div>
 `;
 
 exports[`extraSpaces.melody.twig 1`] = `
 <span  >Text</span >
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-<span>"Text"</span>""
+<span>Text</span>
 `;
 
 exports[`manyAttributes.melody.twig 1`] = `
 <span attr1="one" attr2="two" attr3="three" attr4="four" attr5="five" attr6="six" attr7="seven" attr8="eight">Text</span>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <span
-    attr1=""one""
-    attr2=""two""
-    attr3=""three""
-    attr4=""four""
-    attr5=""five""
-    attr6=""six""
-    attr7=""seven""
-    attr8=""eight"">
-    "Text"
+    attr1="one"
+    attr2="two"
+    attr3="three"
+    attr4="four"
+    attr5="five"
+    attr6="six"
+    attr7="seven"
+    attr8="eight">
+    Text
 </span>
-""
+
 `;
 
 exports[`oneLine.melody.twig 1`] = `
@@ -111,7 +88,7 @@ exports[`oneLine.melody.twig 1`] = `
     Next
 </a>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-<a href="{{ url }}">"Next"</a>""
+<a href="{{ url }}">Next</a>
 `;
 
 exports[`selfClosing.melody.twig 1`] = `
@@ -121,31 +98,31 @@ exports[`selfClosing.melody.twig 1`] = `
 
 <input type="text" name="user" /><input type="text" name="password" /><input type="text" name="password2" />
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-<input type=""text"" name=""user"" />
-""
+<input type="text" name="user" />
+
 <input
-    attr1=""one""
-    attr2=""two""
-    attr3=""three""
-    attr4=""four""
-    attr5=""five""
-    attr6=""six""
-    attr7=""seven""
-    attr8=""eight""
+    attr1="one"
+    attr2="two"
+    attr3="three"
+    attr4="four"
+    attr5="five"
+    attr6="six"
+    attr7="seven"
+    attr8="eight"
 />
-""
-<input type=""text"" name=""user"" />
-<input type=""text"" name=""password"" />
-<input type=""text"" name=""password2"" />
-""
+
+<input type="text" name="user" />
+<input type="text" name="password" />
+<input type="text" name="password2" />
+
 `;
 
 exports[`siblings.melody.twig 1`] = `
 <span>One</span><b>Two</b><i>Three</i>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-<span>"One"</span><b>"Two"</b><i>"Three"</i>
+<span>One</span><b>Two</b><i>Three</i>
 `;
 
 exports[`whitespace.melody.twig 1`] = `
 <span class="price">{{ price }} {{ currencySymbol }}</span>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-<span class=""price"">{{ price }}" "{{ currencySymbol }}</span>
+<span class="price">{{ price }} {{ currencySymbol }}</span>
 `;

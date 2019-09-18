@@ -96,16 +96,47 @@ const isExpressionType = node => {
         Node.isUnaryExpression(node) ||
         Node.isBinaryExpression(node) ||
         Node.isBinaryConcatExpression(node) ||
-        Node.isArrayExpression ||
+        Node.isArrayExpression(node) ||
         Node.isConditionalExpression(node) ||
         Node.isCallExpression(node) ||
         Node.isFilterExpression(node)
     );
 };
 
+const getExpressionType = node => {
+    if (Node.isPrintExpressionStatement(node)) {
+        return "PrintExpressionStatement";
+    }
+    if (Node.isMemberExpression(node)) {
+        return "MemberExpression";
+    }
+    if (Node.isUnaryExpression(node)) {
+        return "UnaryExpression";
+    }
+    if (Node.isBinaryExpression(node)) {
+        return "BinaryExpression";
+    }
+    if (Node.isBinaryConcatExpression(node)) {
+        return "BinaryConcat";
+    }
+    if (Node.isArrayExpression(node)) {
+        return "ArrayExpression";
+    }
+    if (Node.isConditionalExpression(node)) {
+        return "ConditionalExpression";
+    }
+    if (Node.isCallExpression(node)) {
+        return "CallExpression";
+    }
+    if (Node.isFilterExpression(node)) {
+        return "FilterExpression";
+    }
+};
+
 module.exports = {
     normalizeParagraph,
     isNonBreaking,
     isDynamicValue,
-    isExpressionType
+    isExpressionType,
+    getExpressionType
 };
