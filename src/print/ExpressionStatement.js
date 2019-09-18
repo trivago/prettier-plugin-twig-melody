@@ -1,10 +1,15 @@
 const prettier = require("prettier");
-const { concat } = prettier.doc.builders;
+const { concat, group, indent, line } = prettier.doc.builders;
 
 const p = (node, path, print) => {
-    const docs = ["{{ ", path.call(print, "value"), " }}"];
-
-    return concat(docs);
+    return group(
+        concat([
+            "{{",
+            indent(concat([line, path.call(print, "value")])),
+            line,
+            "}}"
+        ])
+    );
 };
 
 module.exports = {

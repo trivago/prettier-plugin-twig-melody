@@ -11,18 +11,20 @@ exports[`arrayExpression.melody.twig 1`] = `
 
 {{ [2, 3, "cat", "dog", "mouse"] }}
 
-{{ [
-    2,
-    3,
-    "cat",
-    "dog",
-    "mouse",
-    "cake",
-    "elephant",
-    "zebra",
-    3.1415,
-    translate("translation_key")
-] }}
+{{
+    [
+        2,
+        3,
+        "cat",
+        "dog",
+        "mouse",
+        "cake",
+        "elephant",
+        "zebra",
+        3.1415,
+        translate("translation_key")
+    ]
+}}
 
 `;
 
@@ -36,12 +38,16 @@ exports[`filterExpression.melody.twig 1`] = `
 {{ 'test.foo' | split('.') }}
 {{ range(3) | sort | join(',') }}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{{ "test.foo"
-} | () }}
+{{
+    "test.foo"
+    } | ()
+}}
 
-{{ range(3)
-    } |
-} | () }}
+{{
+    range(3)
+        } |
+    } | ()
+}}
 
 `;
 
