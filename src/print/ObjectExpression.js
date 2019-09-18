@@ -1,16 +1,14 @@
 const prettier = require("prettier");
-const { concat, indent, hardline } = prettier.doc.builders;
+const { group, concat, softline, line, indent, join } = prettier.doc.builders;
 
 const p = (node, path, print) => {
-    const docs = [
-        "{",
-        hardline,
-        indent(path.map(print, "properties")),
-        hardline,
-        "}"
-    ];
+    const mappedElements = path.map(print, "properties");
+    const indentedContent = concat([
+        softline,
+        join(concat([",", line]), mappedElements)
+    ]);
 
-    return concat(docs);
+    return group(concat(["{", indent(indentedContent), softline, "}"]));
 };
 
 module.exports = {
