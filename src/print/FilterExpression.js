@@ -1,21 +1,30 @@
 const prettier = require("prettier");
-const { concat, indent, hardline } = prettier.doc.builders;
+const { group, concat, indent, line, softline, join } = prettier.doc.builders;
+
+const printGroup = (prefix, elements, separator, suffix) => {
+    debugger;
+    return group(
+        concat([
+            prefix,
+            indent(concat([softline, join(separator, elements)])),
+            softline,
+            suffix
+        ])
+    );
+};
 
 const p = (node, path, print) => {
-    const docs = [
-        indent(path.call(print, "target")),
-        hardline,
-        "} | ",
-        node.name
-    ];
-    if (node.arguments && node.arguments.length > 0) {
-        docs.push("(");
-        docs.push(path.call(print, "arguments"));
-        docs.push(")");
-    }
-    const result = concat(docs);
-    const b = 5;
-    return result;
+    const target = path.call(print, "target");
+    const hasArguments = node.arguments && node.arguments.length > 0;
+    const printedArguments = hasArguments ? path.map(print, "arguments") : [];
+    const args = hasArguments
+        ? printGroup("(", printedArguments, concat([",", line]), ")")
+        : "";
+    const filterName = path.call(print, "name");
+
+    return group(
+        concat([target, " |", indent(concat([line, filterName, args]))])
+    );
 };
 
 module.exports = {

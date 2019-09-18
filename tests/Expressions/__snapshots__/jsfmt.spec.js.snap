@@ -38,17 +38,7 @@ exports[`filterExpression.melody.twig 1`] = `
 {{ 'test.foo' | split('.') }}
 {{ range(3) | sort | join(',') }}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{{
-    "test.foo"
-    } | ()
-}}
-
-{{
-    range(3)
-        } |
-    } | ()
-}}
-
+{{ "test.foo" | split(".") }}{{ range(3) | sort | join(",") }}
 `;
 
 exports[`stringConcat.melody.twig 1`] = `
