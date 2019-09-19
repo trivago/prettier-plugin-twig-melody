@@ -2,7 +2,6 @@ const prettier = require("prettier");
 const { group, concat, indent, line, softline, join } = prettier.doc.builders;
 
 const printGroup = (prefix, elements, separator, suffix) => {
-    debugger;
     return group(
         concat([
             prefix,

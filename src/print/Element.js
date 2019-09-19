@@ -47,7 +47,6 @@ const p = (node, path, print) => {
         const result = group(
             concat([openingGroup, indentedChildren, softline, closingTag])
         );
-        // debugger;
         return result;
     }
 
