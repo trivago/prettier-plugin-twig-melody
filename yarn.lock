@@ -355,7 +355,7 @@ babel-runtime@^6.22.0, babel-runtime@^6.26.0:
     core-js "^2.4.0"
     regenerator-runtime "^0.11.0"
 
-babel-template@^6.16.0, babel-template@^6.24.1, babel-template@^6.26.0:
+babel-template@^6.16.0, babel-template@^6.24.1, babel-template@^6.26.0, babel-template@^6.8.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-template/-/babel-template-6.26.0.tgz#de03e2d16396b069f46dd9fff8521fb1a0e35e02"
   dependencies:
@@ -2260,6 +2260,16 @@ melody-code-frame@^1.2.1:
   dependencies:
     lodash "^4.15.0"
 
+melody-extension-core@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/melody-extension-core/-/melody-extension-core-1.2.1.tgz#c5f5d5a2b475f8175c7fb6c16bf87acdbb621af9"
+  integrity sha512-j54WSCFSSzbOQaNHtVF71YD4zUMIxOFjTq+EtWz+qXaj2SiZquOq5TDk7BdDBfvfBflDdPZyk+1t5dfS/l+NUg==
+  dependencies:
+    babel-template "^6.8.0"
+    babel-types "^6.8.1"
+    lodash "^4.12.0"
+    shortid "^2.2.6"
+
 melody-parser@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/melody-parser/-/melody-parser-1.2.1.tgz#dd121173c08f6d3bf09a63c46d74067b773dddbd"
@@ -2268,6 +2278,11 @@ melody-parser@^1.2.1:
     he "^1.1.0"
     lodash "^4.12.0"
     melody-code-frame "^1.2.1"
+
+melody-traverse@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/melody-traverse/-/melody-traverse-1.2.1.tgz#87696cc239c63acbc70aea615d86dc90cb688aac"
+  integrity sha512-H2ixhvx6q11+XpFoKNW+UKZCxaz61lan0mu7PAEt8++OirgPulslPtFm/Vpd3rqYZ67QYNRUnxje/AdIdJj+CQ==
 
 melody-types@^1.2.1:
   version "1.2.1"
@@ -2353,6 +2368,11 @@ mute-stream@0.0.7:
 nan@^2.3.0:
   version "2.8.0"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.8.0.tgz#ed715f3fe9de02b57a5e6252d90a96675e1f085a"
+
+nanoid@^2.1.0:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-2.1.1.tgz#524fd4acd45c126e0c87cd43ab5ee8346e695df9"
+  integrity sha512-0YbJdaL4JFoejIOoawgLcYValFGJ2iyUuVDIWL3g8Es87SSOWFbWdRUMV3VMSiyPs3SQ3QxCIxFX00q5DLkMCw==
 
 natural-compare@^1.4.0:
   version "1.4.0"
@@ -3109,6 +3129,13 @@ shebang-regex@^1.0.0:
 shellwords@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/shellwords/-/shellwords-0.1.1.tgz#d6b9181c1a48d397324c84871efbcfc73fc0654b"
+
+shortid@^2.2.6:
+  version "2.2.15"
+  resolved "https://registry.yarnpkg.com/shortid/-/shortid-2.2.15.tgz#2b902eaa93a69b11120373cd42a1f1fe4437c122"
+  integrity sha512-5EaCy2mx2Jgc/Fdn9uuDuNIIfWBpzY4XIlhoqtXF6qsf+/+SGZ+FxDdX/ZsMZiWupIWNqAEmiNY4RC+LSmCeOw==
+  dependencies:
+    nanoid "^2.1.0"
 
 sigmund@^1.0.1:
   version "1.0.1"

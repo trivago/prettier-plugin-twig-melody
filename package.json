@@ -6,13 +6,17 @@
     "repository": "https://github.com/thorbenvh8/prettier-java",
     "author": "Thorben von Hacht <@thorbenvh8>",
     "license": "MIT",
-    "files": ["src"],
+    "files": [
+        "src"
+    ],
     "engines": {
         "node": ">=6"
     },
     "dependencies": {
         "chevrotain-java": "^0.0.17",
+        "melody-extension-core": "^1.2.1",
         "melody-parser": "^1.2.1",
+        "melody-traverse": "^1.2.1",
         "melody-types": "^1.2.1",
         "prettier": "prettier/prettier#dbe0758b487be2da74a3f8cf4036472685d75fb0"
     },
@@ -32,6 +36,8 @@
         "prettier": "prettier --plugin=. --parser=java"
     },
     "jest": {
-        "projects": ["<rootDir>/jest.*.config.js"]
+        "projects": [
+            "<rootDir>/jest.*.config.js"
+        ]
     }
 }

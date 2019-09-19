@@ -1,7 +1,7 @@
 "use strict";
 
-const { parse } = require("melody-parser");
 const { print } = require("./printer.js");
+const { parse } = require("./parser.js");
 
 const languages = [
     {

@@ -17,6 +17,7 @@ const { printCallExpression } = require("./print/CallExpression.js");
 const { printTextStatement } = require("./print/TextStatement.js");
 const { printStringLiteral } = require("./print/StringLiteral.js");
 const { printArrayExpression } = require("./print/ArrayExpression.js");
+const { printSliceExpression } = require("./print/SliceExpression.js");
 const {
     printNamedArgumentExpression
 } = require("./print/NamedArgumentExpression.js");
@@ -112,7 +113,18 @@ printFunctions["BinaryConcatExpression"] = printBinaryExpression;
 printFunctions["ArrayExpression"] = printArrayExpression;
 printFunctions["CallExpression"] = printCallExpression;
 printFunctions["NamedArgumentExpression"] = printNamedArgumentExpression;
-printFunctions["SliceExpression"] = null;
+printFunctions["SliceExpression"] = printSliceExpression;
+
+// TODO: Implement
+
+printFunctions["UseStatement"] = (node, path, print) => {
+    debugger;
+    return "";
+};
+printFunctions["BlockStatement"] = (node, path, print) => {
+    debugger;
+    return "";
+};
 
 module.exports = {
     print

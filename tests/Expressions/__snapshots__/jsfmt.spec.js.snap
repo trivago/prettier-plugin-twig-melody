@@ -6,6 +6,14 @@ exports[`arrayExpression.melody.twig 1`] = `
 {{ [ 2, 3, "cat","dog",   "mouse"] }}
 
 {{ [ 2, 3, "cat","dog", "mouse", "cake", "elephant", "zebra", 3.1415, translate('translation_key')] }}
+
+{{ numbers[:1] }}
+
+{{ numbers[1:4] }}
+
+{{ numbers[1:endIndex] }}
+
+{{ numbers[1:] }}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {{ [2, 3, "cat"] }}
 
@@ -25,6 +33,14 @@ exports[`arrayExpression.melody.twig 1`] = `
         translate("translation_key")
     ]
 }}
+
+{{ numbers[:1] }}
+
+{{ numbers[1:4] }}
+
+{{ numbers[1:endIndex] }}
+
+{{ numbers[1:] }}
 
 `;
 
