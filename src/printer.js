@@ -18,6 +18,8 @@ const { printTextStatement } = require("./print/TextStatement.js");
 const { printStringLiteral } = require("./print/StringLiteral.js");
 const { printArrayExpression } = require("./print/ArrayExpression.js");
 const { printSliceExpression } = require("./print/SliceExpression.js");
+const { printUseStatement } = require("./print/UseStatement.js");
+const { printAliasExpression } = require("./print/AliasExpression.js");
 const {
     printNamedArgumentExpression
 } = require("./print/NamedArgumentExpression.js");
@@ -109,18 +111,16 @@ printFunctions["Fragment"] = (node, path, print) => {
 printFunctions["NumericLiteral"] = returnNodeValue;
 printFunctions["BooleanLiteral"] = returnNodeValue;
 printFunctions["NullLiteral"] = () => "null";
-printFunctions["BinaryConcatExpression"] = printBinaryExpression;
 printFunctions["ArrayExpression"] = printArrayExpression;
 printFunctions["CallExpression"] = printCallExpression;
 printFunctions["NamedArgumentExpression"] = printNamedArgumentExpression;
 printFunctions["SliceExpression"] = printSliceExpression;
+printFunctions["UseStatement"] = printUseStatement;
+printFunctions["AliasExpression"] = printAliasExpression;
 
 // TODO: Implement
 
-printFunctions["UseStatement"] = (node, path, print) => {
-    debugger;
-    return "";
-};
+printFunctions["BinaryConcatExpression"] = printBinaryExpression;
 printFunctions["BlockStatement"] = (node, path, print) => {
     debugger;
     return "";

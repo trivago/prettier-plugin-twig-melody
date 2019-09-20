@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`useStatement.melody.twig 1`] = `
+{% use "foo.twig" %}
+
+{% use "blocks.html" with sidebar as base_sidebar, title as base_title %}
+
+{% use "extraLongNameBlocks.html" with sidebar as base_sidebar, title as base_title %}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{% use "foo.twig" %}
+
+{% use "blocks.html" with sidebar as base_sidebar, title as base_title %}
+
+{% use "extraLongNameBlocks.html" with
+    sidebar as base_sidebar,
+    title as base_title
+%}
+
+`;
