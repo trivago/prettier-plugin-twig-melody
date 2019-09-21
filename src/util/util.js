@@ -133,10 +133,16 @@ const getExpressionType = node => {
     }
 };
 
+const quoteChar = () => {
+    // Might change depending on configuration options
+    return '"';
+};
+
 module.exports = {
     normalizeParagraph,
     isNonBreaking,
     isDynamicValue,
     isExpressionType,
-    getExpressionType
+    getExpressionType,
+    quoteChar
 };

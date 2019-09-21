@@ -13,6 +13,7 @@ const { printExpressionStatement } = require("./print/ExpressionStatement.js");
 const { printMemberExpression } = require("./print/MemberExpression.js");
 const { printFilterExpression } = require("./print/FilterExpression.js");
 const { printObjectExpression } = require("./print/ObjectExpression.js");
+const { printObjectProperty } = require("./print/ObjectProperty.js");
 const { printCallExpression } = require("./print/CallExpression.js");
 const { printTextStatement } = require("./print/TextStatement.js");
 const { printStringLiteral } = require("./print/StringLiteral.js");
@@ -21,6 +22,8 @@ const { printSliceExpression } = require("./print/SliceExpression.js");
 const { printUseStatement } = require("./print/UseStatement.js");
 const { printAliasExpression } = require("./print/AliasExpression.js");
 const { printBlockStatement } = require("./print/BlockStatement.js");
+const { printFlushStatement } = require("./print/FlushStatement.js");
+const { printIncludeStatement } = require("./print/IncludeStatement.js");
 const {
     printNamedArgumentExpression
 } = require("./print/NamedArgumentExpression.js");
@@ -99,9 +102,7 @@ printFunctions["PrintExpressionStatement"] = printExpressionStatement;
 printFunctions["MemberExpression"] = printMemberExpression;
 printFunctions["FilterExpression"] = printFilterExpression;
 printFunctions["ObjectExpression"] = printObjectExpression;
-printFunctions["ObjectProperty"] = (node, path, print) => {
-    return concat(path.call(print, "key"), ": ", path.call(print, "value"));
-};
+printFunctions["ObjectProperty"] = printObjectProperty;
 
 // Return value has to be a string
 const returnNodeValue = node => "" + node.value;
@@ -119,6 +120,8 @@ printFunctions["SliceExpression"] = printSliceExpression;
 printFunctions["UseStatement"] = printUseStatement;
 printFunctions["AliasExpression"] = printAliasExpression;
 printFunctions["BlockStatement"] = printBlockStatement;
+printFunctions["FlushStatement"] = printFlushStatement;
+printFunctions["IncludeStatement"] = printIncludeStatement;
 
 // TODO: Implement
 

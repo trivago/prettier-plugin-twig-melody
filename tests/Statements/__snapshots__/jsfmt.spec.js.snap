@@ -25,6 +25,42 @@ exports[`block.melody.twig 1`] = `
 
 `;
 
+exports[`include.melody.twig 1`] = `
+<div key="1" class="test">
+    {{ message | lower | upper }}{% flush %}
+    <span class="">{{ _context.name[1:] }}</span>
+    {{ block('test') }}
+    {{ include('test.twig') }}
+    {% include 'test.twig' %}
+</div>
+
+{% include './Star.twig' only %}
+
+{% include "./Flag.twig" with {
+"styleModifier": flagModifiers,
+"dataVariables": dataVariables,
+"text": "ie_topdeal"
+} only %}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+<div key="1" class="test">
+    {{ message | lower | upper }}
+    {% flush %}
+    <span class="">{{ _context.name[1:] }}</span>
+    {{ block("test") }}
+    {{ include("test.twig") }}
+    {% include "test.twig" %}
+</div>
+
+{% include "./Star.twig" only %}
+
+{% include "./Flag.twig" with {
+    "styleModifier": flagModifiers,
+    "dataVariables": dataVariables,
+    "text": "ie_topdeal"
+} only %}
+
+`;
+
 exports[`useStatement.melody.twig 1`] = `
 {% use "foo.twig" %}
 

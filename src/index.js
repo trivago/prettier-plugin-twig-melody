@@ -66,7 +66,8 @@ const printers = {
         // hasPrettierIgnore,
         printComment,
         canAttachComment,
-        massageAstNode: clean
+        massageAstNode: clean,
+        willPrintOwnComments: () => true
     }
 };
 
