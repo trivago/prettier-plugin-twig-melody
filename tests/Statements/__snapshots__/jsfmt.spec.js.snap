@@ -1,5 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`block.melody.twig 1`] = `
+<section key="0">
+{% block hello %}
+    <div key="1" class="test">
+        <span>Hello</span>
+    </div>
+{% endblock %}
+</section>
+
+{% block bar foo %}
+
+{{ block('hello') }}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+<section key="0">
+    {% block hello %}
+        <div key="1" class="test"><span>Hello</span></div>
+    {% endblock %}
+</section>
+
+{% block bar foo %}
+
+{{ block("hello") }}
+
+`;
+
 exports[`useStatement.melody.twig 1`] = `
 {% use "foo.twig" %}
 

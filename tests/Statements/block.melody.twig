@@ -1,13 +1,11 @@
 <section key="0">
 {% block hello %}
     <div key="1" class="test">
-        {{ message | lower | upper }}{% flush %}
-        <span class="">{{ _context.name[1:] }}</span>
-        {{ block('test') }}
-        {{ include('test.twig') }}
-        {% include 'test.twig' %}
+        <span>Hello</span>
     </div>
 {% endblock %}
-{% block bar foo %}
-{{ block('hello') }}
 </section>
+
+{% block bar foo %}
+
+{{ block('hello') }}

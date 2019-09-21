@@ -20,6 +20,7 @@ const { printArrayExpression } = require("./print/ArrayExpression.js");
 const { printSliceExpression } = require("./print/SliceExpression.js");
 const { printUseStatement } = require("./print/UseStatement.js");
 const { printAliasExpression } = require("./print/AliasExpression.js");
+const { printBlockStatement } = require("./print/BlockStatement.js");
 const {
     printNamedArgumentExpression
 } = require("./print/NamedArgumentExpression.js");
@@ -117,14 +118,11 @@ printFunctions["NamedArgumentExpression"] = printNamedArgumentExpression;
 printFunctions["SliceExpression"] = printSliceExpression;
 printFunctions["UseStatement"] = printUseStatement;
 printFunctions["AliasExpression"] = printAliasExpression;
+printFunctions["BlockStatement"] = printBlockStatement;
 
 // TODO: Implement
 
 printFunctions["BinaryConcatExpression"] = printBinaryExpression;
-printFunctions["BlockStatement"] = (node, path, print) => {
-    debugger;
-    return "";
-};
 
 module.exports = {
     print
