@@ -3,8 +3,14 @@ const { concat } = prettier.doc.builders;
 
 const isWhitespaceOnly = s => typeof s === "string" && s.trim() === "";
 
+/**
+ * Should only be called for strings that contain only whitespace
+ *
+ * @param {String} s The string to format
+ */
 const formatWhitespace = s => {
-    // Multiple empty lines should be compacted into one
+    // Multiple empty lines should be compacted into one (empty
+    // string will be filtered out)
     if (s === "") {
         return "";
     }
@@ -25,16 +31,43 @@ const countNewlines = s => {
 };
 
 const compactStringParts = parts => {
-    return parts.reduce((acc, curr) => {
-        if (curr !== "") {
-            if (isWhitespaceOnly(curr)) {
-                acc.push(formatWhitespace(curr));
-            } else {
-                acc.push(curr);
+    const acc = parts.reduce(
+        (context, curr) => {
+            if (curr !== "") {
+                if (isWhitespaceOnly(curr)) {
+                    // Remove leading whitespace
+                    if (context.result.length > 0) {
+                        const formattedWhitespace = formatWhitespace(curr);
+                        if (
+                            formattedWhitespace === "" &&
+                            curr !== "" &&
+                            context.previousText
+                        ) {
+                            // "Do this.\nOr, do that!"
+                            context.suppressedWhitespace = true;
+                        } else {
+                            context.result.push(formattedWhitespace);
+                            context.previousText = false;
+                        }
+                    }
+                } else {
+                    if (context.suppressedWhitespace) {
+                        context.result.push(" ");
+                    }
+                    context.result.push(curr);
+                    context.previousText = true;
+                    context.suppressedWhitespace = false;
+                }
             }
+            return context;
+        },
+        {
+            result: [],
+            previousText: false,
+            suppressedWhitespace: false
         }
-        return acc;
-    }, []);
+    );
+    return acc.result;
 };
 
 const p = (node, path, print) => {
