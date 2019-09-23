@@ -61,6 +61,28 @@ exports[`include.melody.twig 1`] = `
 
 `;
 
+exports[`spaceless.melody.twig 1`] = `
+{% spaceless %}
+<div class="qtp-item__text" data-test="Speceless testing: {{- formattedIncentive -}} foo">
+    Receive {{ formattedIncentive }} cash back for testing this hotel.
+    Or just <span> be </span> happy!
+</div>
+{% endspaceless %}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{% spaceless %}
+    <div
+        class="qtp-item__text"
+        data-test="{{ "Speceless testing:" ~ formattedIncentive ~ "foo" }}">
+        Receive
+        {{ formattedIncentive }}
+        cash back for testing this hotel. Or just
+        <span>be </span>
+        happy!
+    </div>
+{% endspaceless %}
+
+`;
+
 exports[`useStatement.melody.twig 1`] = `
 {% use "foo.twig" %}
 

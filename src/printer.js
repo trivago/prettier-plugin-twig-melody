@@ -22,8 +22,10 @@ const { printSliceExpression } = require("./print/SliceExpression.js");
 const { printUseStatement } = require("./print/UseStatement.js");
 const { printAliasExpression } = require("./print/AliasExpression.js");
 const { printBlockStatement } = require("./print/BlockStatement.js");
+const { printSpacelessBlock } = require("./print/SpacelessBlock.js");
 const { printFlushStatement } = require("./print/FlushStatement.js");
 const { printIncludeStatement } = require("./print/IncludeStatement.js");
+const { printIfStatement } = require("./print/IfStatement.js");
 const {
     printNamedArgumentExpression
 } = require("./print/NamedArgumentExpression.js");
@@ -120,8 +122,10 @@ printFunctions["SliceExpression"] = printSliceExpression;
 printFunctions["UseStatement"] = printUseStatement;
 printFunctions["AliasExpression"] = printAliasExpression;
 printFunctions["BlockStatement"] = printBlockStatement;
+printFunctions["SpacelessBlock"] = printSpacelessBlock;
 printFunctions["FlushStatement"] = printFlushStatement;
 printFunctions["IncludeStatement"] = printIncludeStatement;
+printFunctions["IfStatement"] = printIfStatement;
 
 // TODO: Implement
 

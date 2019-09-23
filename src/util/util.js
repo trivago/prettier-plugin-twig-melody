@@ -1,6 +1,6 @@
 const prettier = require("prettier");
 const { Node } = require("melody-types");
-const { fill } = prettier.doc.builders;
+const { indent, concat, join, softline } = prettier.doc.builders;
 
 const MAX_ATTRIBUTE_LENGTH_BEFORE_BREAK = 60;
 
@@ -99,8 +99,18 @@ const isExpressionType = node => {
         Node.isArrayExpression(node) ||
         Node.isConditionalExpression(node) ||
         Node.isCallExpression(node) ||
-        Node.isFilterExpression(node)
+        Node.isFilterExpression(node) ||
+        Node.isNamedArgumentExpression(node)
     );
+};
+
+const printChildren = (path, print, childrenKey) => {
+    const printedChildren = path.map(print, childrenKey);
+    const withoutEmptyStrings = printedChildren.filter(s => s !== "");
+    const indentedChildren = indent(
+        concat([softline, join(softline, withoutEmptyStrings)])
+    );
+    return indentedChildren;
 };
 
 const getExpressionType = node => {
@@ -144,5 +154,6 @@ module.exports = {
     isDynamicValue,
     isExpressionType,
     getExpressionType,
-    quoteChar
+    quoteChar,
+    printChildren
 };

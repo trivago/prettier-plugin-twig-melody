@@ -1,13 +1,6 @@
 const prettier = require("prettier");
-const {
-    concat,
-    group,
-    line,
-    softline,
-    indent,
-    join,
-    ifBreak
-} = prettier.doc.builders;
+const { concat, group, line, softline, indent, join } = prettier.doc.builders;
+const { printChildren } = require("../util");
 
 const printOpeningTag = (node, path, print) => {
     const opener = "<" + node.name;
@@ -37,12 +30,7 @@ const p = (node, path, print) => {
     const openingGroup = group(printOpeningTag(node, path, print));
 
     if (!node.selfClosing) {
-        const printedChildren = path.map(print, "children");
-        const withoutEmptyStrings = printedChildren.filter(s => s !== "");
-        const indentedChildren = indent(
-            concat([softline, join(softline, withoutEmptyStrings)])
-        );
-
+        const indentedChildren = printChildren(path, print, "children");
         const closingTag = concat(["</", node.name, ">"]);
         const result = group(
             concat([openingGroup, indentedChildren, softline, closingTag])
@@ -52,23 +40,6 @@ const p = (node, path, print) => {
 
     return openingGroup;
 };
-
-function printChildren(path, options, print) {
-    const node = path.getValue();
-
-    const groupIds = node.children.map(() => Symbol(""));
-    return concat(
-        path.map((childPath, childIndex) => {
-            return group(
-                concat([
-                    group(concat([childPath.call(print)]), {
-                        id: groupIds[childIndex]
-                    })
-                ])
-            );
-        }, "children")
-    );
-}
 
 module.exports = {
     printElement: p
