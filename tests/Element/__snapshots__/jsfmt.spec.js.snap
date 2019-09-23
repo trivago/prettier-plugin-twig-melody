@@ -46,7 +46,8 @@ exports[`emptyLines.melody.twig 1`] = `
     <img src="/img/posts/08/07/dns-resolution-expl.png" alt="DNS explained" />
 
     <img src="/img/posts/08/07/dns-resolution-expl.png" alt="DNS explained" />
-</div>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</div>
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <div>
     <img src="/img/posts/08/07/dns-resolution-expl.png" alt="DNS explained" />
 
@@ -58,6 +59,7 @@ exports[`emptyLines.melody.twig 1`] = `
 
     <img src="/img/posts/08/07/dns-resolution-expl.png" alt="DNS explained" />
 </div>
+
 `;
 
 exports[`extraSpaces.melody.twig 1`] = `
@@ -118,11 +120,13 @@ exports[`selfClosing.melody.twig 1`] = `
 `;
 
 exports[`siblings.melody.twig 1`] = `
-<span>One</span><b>Two</b><i>Three</i>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+<span>One</span><b>Two</b><i>Three</i>
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <span>One</span><b>Two</b><i>Three</i>
 `;
 
 exports[`whitespace.melody.twig 1`] = `
-<span class="price">{{ price }} {{ currencySymbol }}</span>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+<span class="price">{{ price }} {{ currencySymbol }}</span>
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <span class="price">{{ price }} {{ currencySymbol }}</span>
 `;
