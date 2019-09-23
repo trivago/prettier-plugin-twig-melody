@@ -49,7 +49,22 @@ exports[`callExpression.melody.twig 1`] = `
 
 {{ date('d/m/Y H:i', timezone="Europe/Paris") }}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{{ range(3) }}{{ date("d/m/Y H:i", timezone = Europe/Paris) }}
+{{ range(3) }}{{ date("d/m/Y H:i", timezone = "Europe/Paris") }}
+`;
+
+exports[`conditionalExpression.melody.twig 1`] = `
+{{ test ? "One" : "Two" }}
+
+{{ test ? "This is a slightly longer string to overflow the line" : "and here is its counterpart" }}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{{ test ? "One" : "Two" }}
+
+{{
+    test
+        ? "This is a slightly longer string to overflow the line"
+        : "and here is its counterpart"
+}}
+
 `;
 
 exports[`filterExpression.melody.twig 1`] = `
@@ -61,7 +76,8 @@ exports[`filterExpression.melody.twig 1`] = `
 
 exports[`stringConcat.melody.twig 1`] = `
 <div>
-{{ first         }}
-</div>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{{ first      }}
+</div>
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <div>{{ first }}</div>
 `;
