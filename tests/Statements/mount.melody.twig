@@ -1,0 +1,7 @@
+{% mount './component' as 'bar' %}
+
+{% mount async './parts/#{ part }.twig' as 'bar-#{part}' with {foo: 'bar'} delay placeholder by 1s %}
+  Loading...
+{% catch err %}
+  Failed to load with {{ err }}
+{% endmount %}
