@@ -89,7 +89,7 @@ const isDynamicValue = node => {
     );
 };
 
-const isExpressionType = node => {
+const needsQuotedStringLiterals = node => {
     return (
         Node.isPrintExpressionStatement(node) ||
         Node.isMemberExpression(node) ||
@@ -100,7 +100,8 @@ const isExpressionType = node => {
         Node.isConditionalExpression(node) ||
         Node.isCallExpression(node) ||
         Node.isFilterExpression(node) ||
-        Node.isNamedArgumentExpression(node)
+        Node.isNamedArgumentExpression(node) ||
+        Node.isMountStatement(node)
     );
 };
 
@@ -152,7 +153,7 @@ module.exports = {
     normalizeParagraph,
     isNonBreaking,
     isDynamicValue,
-    isExpressionType,
+    needsQuotedStringLiterals,
     getExpressionType,
     quoteChar,
     printChildren

@@ -61,18 +61,36 @@ exports[`include.melody.twig 1`] = `
 
 `;
 
+exports[`mount.melody.twig 1`] = `
+{% mount './component' as 'bar' %}
+
+{% mount async './parts/#{ part }.twig' as 'bar-#{part}' with {foo: 'bar'} delay placeholder by 1s %}
+  Loading... {{ err }}
+{% catch err %}
+  Failed to load with {{ err }}
+{% endmount %}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{% mount "./component" as "bar" %}
+
+{% mount async
+    "./parts/" ~ part ~ ".twig"
+    as "bar-" ~ part
+    with { "foo": "bar" }
+    delay placeholder by 1s
+%}
+
+`;
+
 exports[`spaceless.melody.twig 1`] = `
 {% spaceless %}
-<div class="qtp-item__text" data-test="Spaceless testing: {{- formattedIncentive -}} foo">
+<div class="qtp-item__text">
     Receive {{ formattedIncentive }} cash back for testing this hotel.
     Or just <span> be </span> happy!
 </div>
 {% endspaceless %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {% spaceless %}
-    <div
-        class="qtp-item__text"
-        data-test="{{ "Spaceless testing:" ~ formattedIncentive ~ "foo" }}">
+    <div class="qtp-item__text">
         Receive
         {{ formattedIncentive }}
         cash back for testing this hotel. Or just

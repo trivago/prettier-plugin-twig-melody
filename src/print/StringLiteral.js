@@ -1,4 +1,4 @@
-const { isExpressionType, getExpressionType } = require("../util");
+const { needsQuotedStringLiterals } = require("../util");
 
 const isMelodyNode = n => {
     const proto = n.__proto__;
@@ -18,12 +18,12 @@ const findParentNode = path => {
 };
 
 const p = (node, path, print, options) => {
-    // The parent node of this StringLiteral is 2 positions
+    // The parent node of this StringLiteral is 2 or more positions
     // up in the stack. If it is some kind of Expression,
     // we have to put quotes around the value.
     const parentNode = findParentNode(path);
     if (parentNode) {
-        if (isExpressionType(parentNode)) {
+        if (needsQuotedStringLiterals(parentNode)) {
             return '"' + node.value + '"';
         }
     }
