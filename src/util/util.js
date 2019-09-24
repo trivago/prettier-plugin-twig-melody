@@ -149,6 +149,23 @@ const quoteChar = () => {
     return '"';
 };
 
+const isMelodyNode = n => {
+    const proto = n.__proto__;
+    return typeof n === "object" && proto.type && proto.visitorKeys;
+};
+
+const findParentNode = path => {
+    let currentIndex = path.stack.length - 2;
+    while (currentIndex >= 0) {
+        const currentElement = path.stack[currentIndex];
+        if (isMelodyNode(currentElement)) {
+            return currentElement;
+        }
+        currentIndex--;
+    }
+    return null;
+};
+
 module.exports = {
     normalizeParagraph,
     isNonBreaking,
@@ -156,5 +173,7 @@ module.exports = {
     needsQuotedStringLiterals,
     getExpressionType,
     quoteChar,
-    printChildren
+    printChildren,
+    findParentNode,
+    isMelodyNode
 };

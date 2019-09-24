@@ -1,21 +1,4 @@
-const { needsQuotedStringLiterals } = require("../util");
-
-const isMelodyNode = n => {
-    const proto = n.__proto__;
-    return typeof n === "object" && proto.type && proto.visitorKeys;
-};
-
-const findParentNode = path => {
-    let currentIndex = path.stack.length - 2;
-    while (currentIndex >= 0) {
-        const currentElement = path.stack[currentIndex];
-        if (isMelodyNode(currentElement)) {
-            return currentElement;
-        }
-        currentIndex--;
-    }
-    return null;
-};
+const { needsQuotedStringLiterals, findParentNode } = require("../util");
 
 const p = (node, path, print, options) => {
     // The parent node of this StringLiteral is 2 or more positions

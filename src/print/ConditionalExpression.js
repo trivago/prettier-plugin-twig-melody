@@ -2,7 +2,10 @@ const prettier = require("prettier");
 const { concat, line, indent, group } = prettier.doc.builders;
 
 const p = (node, path, print) => {
-    const rest = [line, "? ", path.call(print, "consequent")];
+    const rest = [line, "?"];
+    if (node.consequent) {
+        rest.push(concat([" ", path.call(print, "consequent")]));
+    }
     if (node.alternate) {
         rest.push(line, ": ", path.call(print, "alternate"));
     }
