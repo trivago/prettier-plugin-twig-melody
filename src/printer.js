@@ -29,6 +29,7 @@ const { printFlushStatement } = require("./print/FlushStatement.js");
 const { printIncludeStatement } = require("./print/IncludeStatement.js");
 const { printIfStatement } = require("./print/IfStatement.js");
 const { printMountStatement } = require("./print/MountStatement.js");
+const { printForStatement } = require("./print/ForStatement.js");
 const {
     printNamedArgumentExpression
 } = require("./print/NamedArgumentExpression.js");
@@ -133,9 +134,7 @@ printFunctions["FlushStatement"] = printFlushStatement;
 printFunctions["IncludeStatement"] = printIncludeStatement;
 printFunctions["IfStatement"] = printIfStatement;
 printFunctions["MountStatement"] = printMountStatement;
-
-// TODO: Implement
-
+printFunctions["ForStatement"] = printForStatement;
 printFunctions["BinaryConcatExpression"] = printBinaryExpression;
 
 module.exports = {

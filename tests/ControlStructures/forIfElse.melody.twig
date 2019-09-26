@@ -1,0 +1,7 @@
+<ul>
+{% for a,b in c | slice(3, c.length) if b is even %}
+    <li>{{ a }} - {{ b }}</li>
+{% else %}
+    <li>No results found</li>
+{% endfor %}
+</ul>

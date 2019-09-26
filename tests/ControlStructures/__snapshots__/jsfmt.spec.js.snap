@@ -1,5 +1,49 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`for.melody.twig 1`] = `
+<ul>
+    {% for item in items %}
+        <li class="{{ loop.last ? 'last' : '' }}">
+            {{ loop.index0 // 2 }} {{ item.name }} {{ loop.index }}
+        </li>
+    {% endfor %}
+</ul>
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+<ul>
+    {% for item in items %}
+
+        <li class="{{ loop.last ? "last" : "" }}">
+            {{ loop.index0 // 2 }}
+
+            {{ item.name }}
+
+            {{ loop.index }}
+        </li>
+
+    {% endfor %}
+</ul>
+
+`;
+
+exports[`forIfElse.melody.twig 1`] = `
+<ul>
+{% for a,b in c | slice(3, c.length) if b is even %}
+    <li>{{ a }} - {{ b }}</li>
+{% else %}
+    <li>No results found</li>
+{% endfor %}
+</ul>
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+<ul>
+    {% for a, b in c | slice(3, c.length) if b is even %}
+        <li>{{ a }}- {{ b }}</li>
+    {% else %}
+        <li>No results found</li>
+    {% endfor %}
+</ul>
+
+`;
+
 exports[`if.melody.twig 1`] = `
 <div>
     {% if foo %}
