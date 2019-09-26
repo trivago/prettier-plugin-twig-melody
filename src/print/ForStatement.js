@@ -13,10 +13,12 @@ const printIfClause = (node, path, print) => {
         path.call(print, "sequence")
     );
     if (node.condition) {
-        parts.push(" if ", path.call(print, "condition"));
+        parts.push(
+            indent(concat([line, "if ", path.call(print, "condition")]))
+        );
     }
-    parts.push(" %}");
-    return concat(parts);
+    parts.push(concat([line, "%}"]));
+    return group(concat(parts));
 };
 
 const indentWithHardline = contents => indent(concat([hardline, contents]));

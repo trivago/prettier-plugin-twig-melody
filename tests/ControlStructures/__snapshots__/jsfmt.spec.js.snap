@@ -33,12 +33,87 @@ exports[`forIfElse.melody.twig 1`] = `
     <li>No results found</li>
 {% endfor %}
 </ul>
+
+<ul>
+    {% for key,value in c[:c.length - 1] if value is defined and not value is even %}
+        <li>{{ key }} - {{ value }}</li>
+    {% else %}
+        {% if regionName is empty %}
+        <li><span><!--//--></span>No results found</li>
+        {% endif %}
+    {% endfor %}
+</ul>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <ul>
     {% for a, b in c | slice(3, c.length) if b is even %}
         <li>{{ a }}- {{ b }}</li>
     {% else %}
         <li>No results found</li>
+    {% endfor %}
+</ul>
+
+<ul>
+    {% for key, value in c[:c.length - 1]
+        if value is defined and value is not even
+    %}
+        <li>{{ key }}- {{ value }}</li>
+    {% else %}
+
+        {% if regionName is empty %}
+            <li><span></span>No results found</li>
+        {% endif %}
+
+    {% endfor %}
+</ul>
+
+`;
+
+exports[`forInclude.melody.twig 1`] = `
+{% for foo in range(1, category) %}
+<span key="{{ foo }}" class="qtp-item__star icon-ic icon-icn_star--white {{ foo }}">
+  {% include './Star.twig' only %}
+</span>
+{% endfor %}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{% for foo in range(1, category) %}
+
+    <span
+        key="{{ foo }}"
+        class="{{ "qtp-item__star icon-ic icon-icn_star--white " ~ foo }}">
+        {% include "./Star.twig" only %}
+    </span>
+
+{% endfor %}
+
+`;
+
+exports[`forWithBlock.melody.twig 1`] = `
+<h1>{{ title | title }}</h1>
+<ul>
+    {% for item in items %}
+        <li class="{{ loop.last ? 'last' : '' }}">
+            {% block title %}
+                {{ loop.index0 }} {{ item.name | title }} {{ loop.index }}
+            {% endblock %}
+        </li>
+    {% endfor %}
+</ul>
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+<h1>{{ title | title }}</h1>
+
+<ul>
+    {% for item in items %}
+
+        <li class="{{ loop.last ? "last" : "" }}">
+            {% block title %}
+                {{ loop.index0 }}
+
+                {{ item.name | title }}
+
+                {{ loop.index }}
+            {% endblock %}
+        </li>
+
     {% endfor %}
 </ul>
 
