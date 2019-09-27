@@ -1,5 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`autoescape.melody.twig 1`] = `
+{% autoescape 'html' %}
+<button type="button">Click me</button>
+{% endautoescape %}
+
+{% autoescape 'html' %}
+<span>Yes</span>
+{% endautoescape %}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{% autoescape "html" %}
+    <button type="button">Click me</button>
+{% endautoescape %}
+
+{% autoescape "html" %}<span>Yes</span>{% endautoescape %}
+
+`;
+
 exports[`block.melody.twig 1`] = `
 <section key="0">
 {% block hello %}
