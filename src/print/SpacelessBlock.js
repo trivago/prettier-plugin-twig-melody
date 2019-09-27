@@ -1,5 +1,5 @@
 const prettier = require("prettier");
-const { concat, softline, group, join, indent } = prettier.doc.builders;
+const { concat, softline, group } = prettier.doc.builders;
 const { printChildren } = require("../util");
 
 const p = (node, path, print) => {
