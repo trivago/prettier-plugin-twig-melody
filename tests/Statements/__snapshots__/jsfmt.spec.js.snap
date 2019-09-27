@@ -42,6 +42,12 @@ exports[`block.melody.twig 1`] = `
 
 `;
 
+exports[`do.melody.twig 1`] = `
+{% do 1 + 2 %}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{% do 1 + 2 %}
+`;
+
 exports[`include.melody.twig 1`] = `
 <div key="1" class="test">
     {{ message | lower | upper }}{% flush %}

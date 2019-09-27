@@ -32,6 +32,7 @@ const { printIfStatement } = require("./print/IfStatement.js");
 const { printMountStatement } = require("./print/MountStatement.js");
 const { printForStatement } = require("./print/ForStatement.js");
 const { printSetStatement } = require("./print/SetStatement.js");
+const { printDoStatement } = require("./print/DoStatement.js");
 const {
     printVariableDeclarationStatement
 } = require("./print/VariableDeclarationStatement.js");
@@ -146,9 +147,10 @@ printFunctions["SetStatement"] = printSetStatement;
 printFunctions[
     "VariableDeclarationStatement"
 ] = printVariableDeclarationStatement;
+printFunctions["DoStatement"] = printDoStatement;
 
 // TODO: Implement
-printFunctions["DoStatement"] = null;
+
 printFunctions["EmbedStatement"] = null;
 printFunctions["ExtendsStatement"] = null;
 printFunctions["FilterBlockStatement"] = null;
