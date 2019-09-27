@@ -101,17 +101,24 @@ const needsQuotedStringLiterals = node => {
         Node.isCallExpression(node) ||
         Node.isFilterExpression(node) ||
         Node.isNamedArgumentExpression(node) ||
-        Node.isMountStatement(node)
+        Node.isMountStatement(node) ||
+        Node.isSetStatement(node) ||
+        Node.isVariableDeclarationStatement(node)
     );
+};
+
+const joinChildExpressions = childExpressions => {
+    return indent(concat([softline, join(softline, childExpressions)]));
+};
+
+const processChildExpressions = childExpressions => {
+    const withoutEmptyStrings = childExpressions.filter(s => s !== "");
+    return joinChildExpressions(withoutEmptyStrings);
 };
 
 const printChildren = (path, print, childrenKey) => {
     const printedChildren = path.map(print, childrenKey);
-    const withoutEmptyStrings = printedChildren.filter(s => s !== "");
-    const indentedChildren = indent(
-        concat([softline, join(softline, withoutEmptyStrings)])
-    );
-    return indentedChildren;
+    return processChildExpressions(printedChildren);
 };
 
 const getExpressionType = node => {
@@ -173,6 +180,7 @@ module.exports = {
     needsQuotedStringLiterals,
     getExpressionType,
     quoteChar,
+    processChildExpressions,
     printChildren,
     findParentNode,
     isMelodyNode

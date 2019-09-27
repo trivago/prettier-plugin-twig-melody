@@ -31,6 +31,10 @@ const { printIncludeStatement } = require("./print/IncludeStatement.js");
 const { printIfStatement } = require("./print/IfStatement.js");
 const { printMountStatement } = require("./print/MountStatement.js");
 const { printForStatement } = require("./print/ForStatement.js");
+const { printSetStatement } = require("./print/SetStatement.js");
+const {
+    printVariableDeclarationStatement
+} = require("./print/VariableDeclarationStatement.js");
 const {
     printNamedArgumentExpression
 } = require("./print/NamedArgumentExpression.js");
@@ -138,6 +142,19 @@ printFunctions["IfStatement"] = printIfStatement;
 printFunctions["MountStatement"] = printMountStatement;
 printFunctions["ForStatement"] = printForStatement;
 printFunctions["BinaryConcatExpression"] = printBinaryExpression;
+printFunctions["SetStatement"] = printSetStatement;
+printFunctions[
+    "VariableDeclarationStatement"
+] = printVariableDeclarationStatement;
+
+// TODO: Implement
+printFunctions["DoStatement"] = null;
+printFunctions["EmbedStatement"] = null;
+printFunctions["ExtendsStatement"] = null;
+printFunctions["FilterBlockStatement"] = null;
+printFunctions["ImportDeclaration"] = null;
+printFunctions["FromStatement"] = null;
+printFunctions["MacroDeclarationStatement"] = null;
 
 module.exports = {
     print
