@@ -23,6 +23,25 @@ exports[`do.melody.twig 1`] = `
 {% do 1 + 2 %}
 `;
 
+exports[`filter.melody.twig 1`] = `
+{% filter upper %}
+    This text becomes uppercase
+{% endfilter %}
+
+{% filter lower|escape('html') %}
+    <strong>SOME TEXT</strong>
+{% endfilter %}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{% filter upper %}
+    This text becomes uppercase
+{% endfilter %}
+
+{% filter lower | escape("html") %}
+    <strong>SOME TEXT</strong>
+{% endfilter %}
+
+`;
+
 exports[`set.melody.twig 1`] = `
 {% set list = [1, 2] %}
 {% set foo = 0 %}
