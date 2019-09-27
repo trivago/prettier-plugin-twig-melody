@@ -16,12 +16,54 @@ exports[`block.melody.twig 1`] = `
 <section key="0">
     {% block hello %}
         <div key="1" class="test"><span>Hello</span></div>
-    {% endblock %}
+    {% endblock hello %}
 </section>
 
 {% block bar foo %}
 
 {{ block("hello") }}
+
+`;
+
+exports[`embed.melody.twig 1`] = `
+{% extends "parent.twig" %}
+
+{% block hello %}
+    <div class="test-{{ foo }} bar">
+        {% embed "foo.twig" with { foo: 'bar' } %}
+            {% block hello %}
+                {{ fun }}
+                {% embed "bar.twig" %}
+                    {% block hello %}
+                        {{ message }}
+                    {% endblock %}
+                    {% block test %}
+                    {% endblock %}
+                {% endembed %}
+            {% endblock hello %}
+        {% endembed %}
+    </div>
+{% endblock %}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{% extends "parent.twig" %}
+
+{% block hello %}
+    <div class="{{ "test-" ~ foo ~ " bar" }}">
+        {% embed "foo.twig" with { "foo": "bar" } %}
+            {% block hello %}
+                {{ fun }}
+                {% embed "bar.twig" %}
+                    {% block hello %}
+                        {{ message }}
+                    {% endblock hello %}
+                    {% block test %}
+
+                    {% endblock test %}
+                {% endembed %}
+            {% endblock hello %}
+        {% endembed %}
+    </div>
+{% endblock hello %}
 
 `;
 
