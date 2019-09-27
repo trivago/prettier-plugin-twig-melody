@@ -1,8 +1,111 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`block.melody.twig 1`] = `
+<section key="0">
+{% block hello %}
+    <div key="1" class="test">
+        <span>Hello</span>
+    </div>
+{% endblock %}
+</section>
+
+{% block bar foo %}
+
+{{ block('hello') }}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+<section key="0">
+    {% block hello %}
+        <div key="1" class="test"><span>Hello</span></div>
+    {% endblock %}
+</section>
+
+{% block bar foo %}
+
+{{ block("hello") }}
+
+`;
+
 exports[`extendsEmbed.melody.twig 1`] = `
 {% extends "parent.twig" %}
 {% extends someVar %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {% extends "parent.twig" %}{% extends someVar %}
+`;
+
+exports[`include.melody.twig 1`] = `
+<div key="1" class="test">
+    {{ message | lower | upper }}{% flush %}
+    <span class="">{{ _context.name[1:] }}</span>
+    {{ block('test') }}
+    {{ include('test.twig') }}
+    {% include 'test.twig' %}
+</div>
+
+{% include './Star.twig' only %}
+
+{% include "./Flag.twig" with {
+"styleModifier": flagModifiers,
+"dataVariables": dataVariables,
+"text": "ie_topdeal"
+} only %}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+<div key="1" class="test">
+    {{ message | lower | upper }}
+    {% flush %}
+    <span class="">{{ _context.name[1:] }}</span>
+    {{ block("test") }}
+    {{ include("test.twig") }}
+    {% include "test.twig" %}
+</div>
+
+{% include "./Star.twig" only %}
+
+{% include "./Flag.twig" with {
+    "styleModifier": flagModifiers,
+    "dataVariables": dataVariables,
+    "text": "ie_topdeal"
+} only %}
+
+`;
+
+exports[`mount.melody.twig 1`] = `
+{% mount './component' as 'bar' %}
+
+{% mount async './parts/#{ part }.twig' as 'bar-#{part}' with {foo: 'bar'} delay placeholder by 1s %}
+  Loading...
+{% catch err %}
+  Failed to load with {{ err }}
+{% endmount %}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{% mount "./component" as "bar" %}
+
+{% mount async
+    "./parts/" ~ part ~ ".twig"
+    as "bar-" ~ part
+    with { "foo": "bar" }
+    delay placeholder by 1s
+%}
+    Loading...
+{% catch err %}
+    Failed to load with {{ err }}
+{% endmount %}
+
+`;
+
+exports[`useStatement.melody.twig 1`] = `
+{% use "foo.twig" %}
+
+{% use "blocks.html" with sidebar as base_sidebar, title as base_title %}
+
+{% use "extraLongNameBlocks.html" with sidebar as base_sidebar, title as base_title %}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{% use "foo.twig" %}
+
+{% use "blocks.html" with sidebar as base_sidebar, title as base_title %}
+
+{% use "extraLongNameBlocks.html" with
+    sidebar as base_sidebar,
+    title as base_title
+%}
+
 `;
