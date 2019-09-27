@@ -103,7 +103,8 @@ const needsQuotedStringLiterals = node => {
         Node.isNamedArgumentExpression(node) ||
         Node.isMountStatement(node) ||
         Node.isSetStatement(node) ||
-        Node.isVariableDeclarationStatement(node)
+        Node.isVariableDeclarationStatement(node) ||
+        Node.isExtendsStatement(node)
     );
 };
 

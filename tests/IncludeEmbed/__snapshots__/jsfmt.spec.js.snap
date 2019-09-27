@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`extendsEmbed.melody.twig 1`] = `
+{% extends "parent.twig" %}
+{% extends someVar %}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{% extends "parent.twig" %}{% extends someVar %}
+`;
