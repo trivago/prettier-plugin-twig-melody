@@ -18,7 +18,6 @@ const printOneFilterExpression = (node, path, print, nodePath) => {
     const printedArguments = hasArguments
         ? path.map(print, ...nodePath, "arguments")
         : [];
-    debugger;
     const args = hasArguments
         ? printGroup("(", printedArguments, concat([",", line]), ")")
         : "";
