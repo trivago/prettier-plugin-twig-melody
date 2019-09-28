@@ -1,2 +1,3 @@
 {{ 'test.foo' | split('.') }}
 {{ range(3) | sort | join(',') }}
+{{ 'SHOUTING' | lower|escape('html') | upper | escape('markdown') | lower | upper | escape('markdown') }}

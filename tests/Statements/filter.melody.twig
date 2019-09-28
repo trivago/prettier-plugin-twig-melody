@@ -2,6 +2,6 @@
     This text becomes uppercase
 {% endfilter %}
 
-{% filter lower|escape('html') %}
+{% filter lower|escape('html') | upper | escape('markdown') | lower | upper | escape('markdown') %}
     <strong>SOME TEXT</strong>
 {% endfilter %}

@@ -70,8 +70,23 @@ exports[`conditionalExpression.melody.twig 1`] = `
 exports[`filterExpression.melody.twig 1`] = `
 {{ 'test.foo' | split('.') }}
 {{ range(3) | sort | join(',') }}
+{{ 'SHOUTING' | lower|escape('html') | upper | escape('markdown') | lower | upper | escape('markdown') }}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{{ "test.foo" | split(".") }}{{ range(3) | sort | join(",") }}
+{{ "test.foo" | split(".") }}
+
+{{ range(3) | sort | join(",") }}
+
+{{
+    "SHOUTING"
+        | lower
+        | escape("html")
+        | upper
+        | escape("markdown")
+        | lower
+        | upper
+        | escape("markdown")
+}}
+
 `;
 
 exports[`operators.melody.twig 1`] = `
