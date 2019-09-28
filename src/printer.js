@@ -38,6 +38,9 @@ const { printEmbedStatement } = require("./print/EmbedStatement.js");
 const { printImportDeclaration } = require("./print/ImportDeclaration.js");
 const { printFromStatement } = require("./print/FromStatement.js");
 const {
+    printMacroDeclarationStatement
+} = require("./print/MacroDeclarationStatement.js");
+const {
     printFilterBlockStatement
 } = require("./print/FilterBlockStatement.js");
 const {
@@ -160,9 +163,7 @@ printFunctions["EmbedStatement"] = printEmbedStatement;
 printFunctions["FilterBlockStatement"] = printFilterBlockStatement;
 printFunctions["ImportDeclaration"] = printImportDeclaration;
 printFunctions["FromStatement"] = printFromStatement;
-
-// TODO: Implement
-printFunctions["MacroDeclarationStatement"] = null;
+printFunctions["MacroDeclarationStatement"] = printMacroDeclarationStatement;
 
 module.exports = {
     print
