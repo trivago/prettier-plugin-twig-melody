@@ -74,6 +74,18 @@ exports[`extendsEmbed.melody.twig 1`] = `
 {% extends "parent.twig" %}{% extends someVar %}
 `;
 
+exports[`import.melody.twig 1`] = `
+{% import "forms.html" as forms %}
+{% import "aVeryLongAndConvolutedAndIntertwinedFilename.html" as someQuiteEccentricLocalVariableName %}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{% import "forms.html" as forms %}
+
+{% import "aVeryLongAndConvolutedAndIntertwinedFilename.html"
+    as someQuiteEccentricLocalVariableName
+%}
+
+`;
+
 exports[`include.melody.twig 1`] = `
 <div key="1" class="test">
     {{ message | lower | upper }}{% flush %}

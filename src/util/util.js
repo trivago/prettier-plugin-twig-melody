@@ -105,7 +105,8 @@ const needsQuotedStringLiterals = node => {
         Node.isSetStatement(node) ||
         Node.isVariableDeclarationStatement(node) ||
         Node.isExtendsStatement(node) ||
-        Node.isEmbedStatement(node)
+        Node.isEmbedStatement(node) ||
+        Node.isImportDeclaration(node)
     );
 };
 
