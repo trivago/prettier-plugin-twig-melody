@@ -12,7 +12,7 @@ const printOpener = (node, path, print) => {
 
 const p = (node, path, print) => {
     const parts = [printOpener(node, path, print)];
-    parts.push(path.call(print, "body"));
+    parts.push(indent(path.call(print, "body")));
     parts.push(softline, "{% endmacro %}");
     return concat(parts);
 };
