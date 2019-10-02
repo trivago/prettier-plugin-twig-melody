@@ -14,7 +14,6 @@ exports[`autoescape.melody.twig 1`] = `
 {% endautoescape %}
 
 {% autoescape "html" %}<span>Yes</span>{% endautoescape %}
-
 `;
 
 exports[`do.melody.twig 1`] = `
@@ -44,7 +43,6 @@ exports[`filter.melody.twig 1`] = `
 %}
     <strong>SOME TEXT</strong>
 {% endfilter %}
-
 `;
 
 exports[`macro.melody.twig 1`] = `
@@ -58,6 +56,15 @@ exports[`macro.melody.twig 1`] = `
     <div class="field">
         {{ forms.input(name, value, type, size) }}
     </div>
+{% endmacro %}
+
+{% macro whitespaceRemoval(name, value, type, size) %}
+
+    <div class="field">
+        {{ forms.input(name, value, type, size) }}
+    </div>
+
+
 {% endmacro %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {% macro input(
@@ -81,16 +88,17 @@ exports[`macro.melody.twig 1`] = `
         value="{{ value | e }}"
         size="{{ size }}"
     />
-
 {% endmacro %}
 
 {% macro wrapped_input( name, value, type, size) %}
     {% import _self as forms %}
 
     <div class="field">{{ forms.input(name, value, type, size) }}</div>
-
 {% endmacro %}
 
+{% macro whitespaceRemoval( name, value, type, size) %}
+    <div class="field">{{ forms.input(name, value, type, size) }}</div>
+{% endmacro %}
 `;
 
 exports[`set.melody.twig 1`] = `
@@ -132,7 +140,6 @@ exports[`set.melody.twig 1`] = `
 {% set foo %}
     <div id="pagination">Some text</div>
 {% endset %}
-
 `;
 
 exports[`spaceless.melody.twig 1`] = `
@@ -152,5 +159,4 @@ exports[`spaceless.melody.twig 1`] = `
         happy!
     </div>
 {% endspaceless %}
-
 `;

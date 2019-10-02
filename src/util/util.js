@@ -111,6 +111,8 @@ const needsQuotedStringLiterals = node => {
     );
 };
 
+const isWhitespaceOnly = s => typeof s === "string" && s.trim() === "";
+
 const joinChildExpressions = childExpressions => {
     return indent(concat([softline, join(softline, childExpressions)]));
 };
@@ -187,5 +189,6 @@ module.exports = {
     processChildExpressions,
     printChildren,
     findParentNode,
-    isMelodyNode
+    isMelodyNode,
+    isWhitespaceOnly
 };

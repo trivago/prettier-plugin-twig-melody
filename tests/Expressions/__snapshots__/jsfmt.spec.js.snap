@@ -41,7 +41,6 @@ exports[`arrayExpression.melody.twig 1`] = `
 {{ numbers[1:endIndex] }}
 
 {{ numbers[1:] }}
-
 `;
 
 exports[`callExpression.melody.twig 1`] = `
@@ -64,7 +63,6 @@ exports[`conditionalExpression.melody.twig 1`] = `
         ? "This is a slightly longer string to overflow the line"
         : "and here is its counterpart"
 }}
-
 `;
 
 exports[`filterExpression.melody.twig 1`] = `
@@ -86,7 +84,6 @@ exports[`filterExpression.melody.twig 1`] = `
         | upper
         | escape("markdown")
 }}
-
 `;
 
 exports[`operators.melody.twig 1`] = `
@@ -265,7 +262,6 @@ exports[`operators.melody.twig 1`] = `
 {{ [2, 3] | length }}
 
 {{ "test.foo" | split(".") }}
-
 `;
 
 exports[`stringConcat.melody.twig 1`] = `

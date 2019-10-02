@@ -9,3 +9,12 @@
         {{ forms.input(name, value, type, size) }}
     </div>
 {% endmacro %}
+
+{% macro whitespaceRemoval(name, value, type, size) %}
+
+    <div class="field">
+        {{ forms.input(name, value, type, size) }}
+    </div>
+
+
+{% endmacro %}

@@ -16,7 +16,6 @@ exports[`breakingSiblings.melody.twig 1`] = `
 <b>Five</b>
 <i>Six</i>
 <span>Seven</span>
-
 `;
 
 exports[`children.melody.twig 1`] = `
@@ -31,7 +30,6 @@ exports[`children.melody.twig 1`] = `
     <div class="{{ css.barWrapper }}"><span class="{{ css.bar }}"></span></div>
     <strong class="{{ css.text }}">{{ "checking_deals" }}</strong>
 </div>
-
 `;
 
 exports[`emptyLines.melody.twig 1`] = `
@@ -59,7 +57,6 @@ exports[`emptyLines.melody.twig 1`] = `
 
     <img src="/img/posts/08/07/dns-resolution-expl.png" alt="DNS explained" />
 </div>
-
 `;
 
 exports[`extraSpaces.melody.twig 1`] = `
@@ -82,7 +79,6 @@ exports[`manyAttributes.melody.twig 1`] = `
     attr8="eight">
     Text
 </span>
-
 `;
 
 exports[`oneLine.melody.twig 1`] = `
@@ -116,7 +112,6 @@ exports[`selfClosing.melody.twig 1`] = `
 <input type="text" name="user" />
 <input type="text" name="password" />
 <input type="text" name="password2" />
-
 `;
 
 exports[`siblings.melody.twig 1`] = `

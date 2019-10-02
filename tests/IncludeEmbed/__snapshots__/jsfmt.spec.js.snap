@@ -22,7 +22,6 @@ exports[`block.melody.twig 1`] = `
 {% block bar foo %}
 
 {{ block("hello") }}
-
 `;
 
 exports[`embed.melody.twig 1`] = `
@@ -64,7 +63,6 @@ exports[`embed.melody.twig 1`] = `
         {% endembed %}
     </div>
 {% endblock hello %}
-
 `;
 
 exports[`extendsEmbed.melody.twig 1`] = `
@@ -99,7 +97,6 @@ exports[`import.melody.twig 1`] = `
     password as pw_field,
     radioButton
 %}
-
 `;
 
 exports[`include.melody.twig 1`] = `
@@ -135,7 +132,6 @@ exports[`include.melody.twig 1`] = `
     "dataVariables": dataVariables,
     "text": "ie_topdeal"
 } only %}
-
 `;
 
 exports[`mount.melody.twig 1`] = `
@@ -159,7 +155,6 @@ exports[`mount.melody.twig 1`] = `
 {% catch err %}
     Failed to load with {{ err }}
 {% endmount %}
-
 `;
 
 exports[`useStatement.melody.twig 1`] = `
@@ -177,5 +172,4 @@ exports[`useStatement.melody.twig 1`] = `
     sidebar as base_sidebar,
     title as base_title
 %}
-
 `;

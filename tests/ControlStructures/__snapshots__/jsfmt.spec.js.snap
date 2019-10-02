@@ -11,7 +11,6 @@ exports[`for.melody.twig 1`] = `
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <ul>
     {% for item in items %}
-
         <li class="{{ loop.last ? "last" : "" }}">
             {{ loop.index0 // 2 }}
 
@@ -19,10 +18,8 @@ exports[`for.melody.twig 1`] = `
 
             {{ loop.index }}
         </li>
-
     {% endfor %}
 </ul>
-
 `;
 
 exports[`forIfElse.melody.twig 1`] = `
@@ -58,14 +55,11 @@ exports[`forIfElse.melody.twig 1`] = `
     %}
         <li>{{ key }}- {{ value }}</li>
     {% else %}
-
         {% if regionName is empty %}
             <li><span></span>No results found</li>
         {% endif %}
-
     {% endfor %}
 </ul>
-
 `;
 
 exports[`forInclude.melody.twig 1`] = `
@@ -76,15 +70,12 @@ exports[`forInclude.melody.twig 1`] = `
 {% endfor %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {% for foo in range(1, category) %}
-
     <span
         key="{{ foo }}"
         class="{{ "qtp-item__star icon-ic icon-icn_star--white " ~ foo }}">
         {% include "./Star.twig" only %}
     </span>
-
 {% endfor %}
-
 `;
 
 exports[`forWithBlock.melody.twig 1`] = `
@@ -103,7 +94,6 @@ exports[`forWithBlock.melody.twig 1`] = `
 
 <ul>
     {% for item in items %}
-
         <li class="{{ loop.last ? "last" : "" }}">
             {% block title %}
                 {{ loop.index0 }}
@@ -113,10 +103,8 @@ exports[`forWithBlock.melody.twig 1`] = `
                 {{ loop.index }}
             {% endblock title %}
         </li>
-
     {% endfor %}
 </ul>
-
 `;
 
 exports[`if.melody.twig 1`] = `
@@ -135,5 +123,4 @@ exports[`if.melody.twig 1`] = `
         <div class="bar"></div>
     {% endif %}
 </div>
-
 `;

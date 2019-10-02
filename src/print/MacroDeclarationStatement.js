@@ -1,5 +1,5 @@
 const prettier = require("prettier");
-const { group, join, concat, line, softline, indent } = prettier.doc.builders;
+const { group, join, concat, line, hardline, indent } = prettier.doc.builders;
 
 const printOpener = (node, path, print) => {
     const parts = ["{% macro ", path.call(print, "name"), "("];
@@ -12,8 +12,8 @@ const printOpener = (node, path, print) => {
 
 const p = (node, path, print) => {
     const parts = [printOpener(node, path, print)];
-    parts.push(indent(path.call(print, "body")));
-    parts.push(softline, "{% endmacro %}");
+    parts.push(indent(concat([hardline, path.call(print, "body")])));
+    parts.push(hardline, "{% endmacro %}");
     return concat(parts);
 };
 

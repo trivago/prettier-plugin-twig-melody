@@ -1,7 +1,6 @@
 const prettier = require("prettier");
 const { concat } = prettier.doc.builders;
-
-const isWhitespaceOnly = s => typeof s === "string" && s.trim() === "";
+const { isWhitespaceOnly } = require("../util");
 
 /**
  * Should only be called for strings that contain only whitespace
