@@ -4,7 +4,10 @@ const { indent, concat, join, softline } = prettier.doc.builders;
 
 const MAX_ATTRIBUTE_LENGTH_BEFORE_BREAK = 60;
 
-const INLINE_ELEMENTS = [
+const TEXT_SPACE = "TEXT_SPACE";
+const TEXT_NEWLINE = "TEXT_NEWLINE";
+
+const INLINE_HTML_ELEMENTS = [
     "abbr",
     "b",
     "br",
@@ -49,7 +52,12 @@ const hasNoBreakingChildren = node => {
     return true;
 };
 
-const isInlineElement = node => INLINE_ELEMENTS.indexOf(node.name) >= 0;
+const isInlineElement = node => {
+    const isInlineHtmlElement =
+        Node.isElement(node) && INLINE_HTML_ELEMENTS.indexOf(node.name) >= 0;
+
+    return isInlineHtmlElement || Node.isExpression(node);
+};
 
 const totalAttributeLength = elementNode =>
     elementNode.attributes &&
@@ -112,6 +120,12 @@ const needsQuotedStringLiterals = node => {
 };
 
 const isWhitespaceOnly = s => typeof s === "string" && s.trim() === "";
+
+const countNewlines = s => {
+    return (s.match(/\n/g) || "").length;
+};
+
+const hasAtLeastTwoNewlines = s => countNewlines(s) >= 2;
 
 const joinChildExpressions = childExpressions => {
     return indent(concat([softline, join(softline, childExpressions)]));
@@ -190,5 +204,10 @@ module.exports = {
     printChildren,
     findParentNode,
     isMelodyNode,
-    isWhitespaceOnly
+    isWhitespaceOnly,
+    isInlineElement,
+    countNewlines,
+    hasAtLeastTwoNewlines,
+    TEXT_SPACE,
+    TEXT_NEWLINE
 };

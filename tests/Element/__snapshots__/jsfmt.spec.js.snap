@@ -52,6 +52,7 @@ exports[`emptyLines.melody.twig 1`] = `
     <img src="/img/posts/08/07/dns-resolution-expl.png" alt="DNS explained" />
 </div>
 
+
 <div>
     <img src="/img/posts/08/07/dns-resolution-expl.png" alt="DNS explained" />
 
@@ -98,6 +99,7 @@ exports[`selfClosing.melody.twig 1`] = `
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <input type="text" name="user" />
 
+
 <input
     attr1="one"
     attr2="two"
@@ -108,6 +110,7 @@ exports[`selfClosing.melody.twig 1`] = `
     attr7="seven"
     attr8="eight"
 />
+
 
 <input type="text" name="user" />
 <input type="text" name="password" />

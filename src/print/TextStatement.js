@@ -1,6 +1,11 @@
 const prettier = require("prettier");
-const { concat } = prettier.doc.builders;
-const { isWhitespaceOnly } = require("../util");
+const { concat, line } = prettier.doc.builders;
+const {
+    isWhitespaceOnly,
+    countNewlines,
+    TEXT_SPACE,
+    TEXT_NEWLINE
+} = require("../util");
 
 /**
  * Should only be called for strings that contain only whitespace
@@ -23,10 +28,6 @@ const formatWhitespace = s => {
         return concat([""]);
     }
     return "";
-};
-
-const countNewlines = s => {
-    return (s.match(/\n/g) || "").length;
 };
 
 const compactStringParts = parts => {
@@ -70,6 +71,15 @@ const compactStringParts = parts => {
 };
 
 const p = (node, path, print) => {
+    // Check for special values that might have been
+    // computed during preprocessing
+    if (node[TEXT_SPACE]) {
+        return line;
+    }
+    if (node[TEXT_NEWLINE]) {
+        return "";
+    }
+
     const rawString = path.call(print, "value");
     if (isWhitespaceOnly(rawString)) {
         return formatWhitespace(rawString);

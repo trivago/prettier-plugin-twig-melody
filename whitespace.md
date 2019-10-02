@@ -23,8 +23,11 @@ E
 Here, neither the leading whitespace nor the trailing whitespace in the `span` tag
 can be removed, because it would change the appearance. What are the criteria?
 
-* The node before the current element (left sibling) is a `PrintTextStatement` ...
+* The element is an inline element...
+* ...AND the node before the current element (left sibling) is a `PrintTextStatement` ...
 * ...AND there is no whitespace before the current element
+* THEN leading whitespace in the current element must be preserved
+* OTHERWISE it can be removed
 
 IDEA: This kind of information can be passed on from parent to child by adding additional properties to the children AST nodes:
 
