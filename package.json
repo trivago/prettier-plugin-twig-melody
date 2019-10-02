@@ -1,19 +1,17 @@
 {
-    "name": "prettier-plugin-java",
+    "name": "prettier-plugin-melody",
     "version": "0.0.10",
-    "description": "Prettier Java Plugin",
+    "description": "Prettier Melody Plugin",
     "main": "src",
-    "repository": "https://github.com/thorbenvh8/prettier-java",
-    "author": "Thorben von Hacht <@thorbenvh8>",
+    "repository":
+        "http://git.trivago.trv/projects/DSE/repos/prettier-melody/browse",
+    "author": "Tom Bartel <thomas.bartel@trivago.com>",
     "license": "MIT",
-    "files": [
-        "src"
-    ],
+    "files": ["src"],
     "engines": {
         "node": ">=6"
     },
     "dependencies": {
-        "chevrotain-java": "^0.0.17",
         "melody-extension-core": "^1.2.1",
         "melody-parser": "^1.2.1",
         "melody-traverse": "^1.2.1",
@@ -32,12 +30,9 @@
     "scripts": {
         "lint": "jest -c jest.eslint.config.js",
         "test": "jest",
-        "preview": "./preview.sh",
-        "prettier": "prettier --plugin=. --parser=java"
+        "prettier": "prettier --plugin=. --parser=melody"
     },
     "jest": {
-        "projects": [
-            "<rootDir>/jest.*.config.js"
-        ]
+        "projects": ["<rootDir>/jest.*.config.js"]
     }
 }
