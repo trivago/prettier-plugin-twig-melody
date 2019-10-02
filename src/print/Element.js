@@ -18,10 +18,6 @@ const printOpeningTag = (node, path, print) => {
     return concat([opener, openingTagEnd]);
 };
 
-const printElementChildren = children => {
-    return group(concat([indent(concat([children]))]));
-};
-
 const printSeparatedList = (path, print, separator, attrName) => {
     return join(concat([separator, line]), path.map(print, attrName));
 };
