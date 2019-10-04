@@ -4,8 +4,10 @@ const { indent, concat, join, softline } = prettier.doc.builders;
 
 const MAX_ATTRIBUTE_LENGTH_BEFORE_BREAK = 60;
 
-const TEXT_SPACE = "TEXT_SPACE";
-const TEXT_NEWLINE = "TEXT_NEWLINE";
+const TEXT_SPACE = Symbol("TEXT_SPACE");
+const TEXT_NEWLINE = Symbol("TEXT_NEWLINE");
+const PRESERVE_LEADING_WHITESPACE = Symbol("PRESERVE_LEADING_WHITESPACE");
+const PRESERVE_TRAILING_WHITESPACE = Symbol("PRESERVE_TRAILING_WHITESPACE");
 
 const INLINE_HTML_ELEMENTS = [
     "abbr",
@@ -18,7 +20,8 @@ const INLINE_HTML_ELEMENTS = [
     "strong",
     "sup",
     "sub",
-    "small"
+    "small",
+    "span"
 ];
 
 const isNonBreaking = (node, elementsAllowed = true) => {
@@ -52,11 +55,59 @@ const hasNoBreakingChildren = node => {
     return true;
 };
 
+const isWhitespaceNode = node => {
+    return (
+        Node.isPrintTextStatement(node) && isWhitespaceOnly(node.value.value)
+    );
+};
+
+const preprocessChildren = children => {
+    if (!Array.isArray(children)) {
+        return children;
+    }
+    const result = [];
+    let previous = null;
+    children.forEach((child, index) => {
+        const isFirstOrLast = index === 0 || index === children.length - 1;
+        const isWhitespace = isWhitespaceNode(child);
+        // Remove initial whitespace
+        if (isFirstOrLast && isWhitespace) {
+            return;
+        }
+        // Whitespace between two children can be removed
+        // if the siblings are not both inline elements
+        if (isWhitespace) {
+            const next = children.length > index ? children[index + 1] : null;
+            const hasMoreThanOneNewline = hasAtLeastTwoNewlines(
+                child.value.value
+            );
+            if (isInlineElement(previous) && isInlineElement(next)) {
+                // Add an (artificial) space to the result
+                child[TEXT_SPACE] = true;
+                result.push(child);
+            } else if (hasAtLeastTwoNewlines(child.value.value)) {
+                // Turn multiple empty lines into only one
+                child[TEXT_NEWLINE] = true;
+                result.push(child);
+            }
+            return;
+        }
+
+        result.push(child);
+        previous = child;
+    });
+    return result;
+};
+
 const isInlineElement = node => {
     const isInlineHtmlElement =
         Node.isElement(node) && INLINE_HTML_ELEMENTS.indexOf(node.name) >= 0;
 
-    return isInlineHtmlElement || Node.isExpression(node);
+    return (
+        isInlineHtmlElement ||
+        Node.isPrintExpressionStatement(node) ||
+        Node.isPrintTextStatement(node)
+    );
 };
 
 const totalAttributeLength = elementNode =>
@@ -201,6 +252,7 @@ module.exports = {
     getExpressionType,
     quoteChar,
     processChildExpressions,
+    joinChildExpressions,
     printChildren,
     findParentNode,
     isMelodyNode,
@@ -208,6 +260,9 @@ module.exports = {
     isInlineElement,
     countNewlines,
     hasAtLeastTwoNewlines,
+    preprocessChildren,
     TEXT_SPACE,
-    TEXT_NEWLINE
+    TEXT_NEWLINE,
+    PRESERVE_LEADING_WHITESPACE,
+    PRESERVE_TRAILING_WHITESPACE
 };

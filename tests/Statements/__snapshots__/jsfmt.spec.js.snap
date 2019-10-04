@@ -10,7 +10,9 @@ exports[`autoescape.melody.twig 1`] = `
 {% endautoescape %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {% autoescape "html" %}
+
     <button type="button">Click me</button>
+
 {% endautoescape %}
 
 {% autoescape "html" %}<span>Yes</span>{% endautoescape %}
@@ -41,7 +43,9 @@ exports[`filter.melody.twig 1`] = `
     | upper
     | escape("markdown")
 %}
+
     <strong>SOME TEXT</strong>
+
 {% endfilter %}
 `;
 
@@ -132,7 +136,9 @@ exports[`set.melody.twig 1`] = `
 {% set foo = "foo" %}
 {% set bar = "bar" %}
 {% set foo %}
+
     <div id="pagination">Some text</div>
+
 {% endset %}
 `;
 
@@ -145,12 +151,11 @@ exports[`spaceless.melody.twig 1`] = `
 {% endspaceless %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {% spaceless %}
+
     <div class="qtp-item__text">
-        Receive
-        {{ formattedIncentive }}
-        cash back for testing this hotel. Or just
-        <span>be </span>
-        happy!
+        Receive {{ formattedIncentive }} cash back for testing this hotel. Or just
+        <span>be</span> happy!
     </div>
+
 {% endspaceless %}
 `;
