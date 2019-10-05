@@ -1,13 +1,12 @@
 const prettier = require("prettier");
 const { Node } = require("melody-types");
-const { indent, concat, join, softline } = prettier.doc.builders;
+const { indent, concat, join, fill, softline } = prettier.doc.builders;
 
 const MAX_ATTRIBUTE_LENGTH_BEFORE_BREAK = 60;
 
-const TEXT_SPACE = Symbol("TEXT_SPACE");
-const TEXT_NEWLINE = Symbol("TEXT_NEWLINE");
 const PRESERVE_LEADING_WHITESPACE = Symbol("PRESERVE_LEADING_WHITESPACE");
 const PRESERVE_TRAILING_WHITESPACE = Symbol("PRESERVE_TRAILING_WHITESPACE");
+const NEWLINES_ONLY = Symbol("NEWLINES_ONLY");
 
 const INLINE_HTML_ELEMENTS = [
     "abbr",
@@ -61,40 +60,19 @@ const isWhitespaceNode = node => {
     );
 };
 
-const preprocessChildren = children => {
+const removeSurroundingWhitespace = children => {
     if (!Array.isArray(children)) {
         return children;
     }
     const result = [];
-    let previous = null;
     children.forEach((child, index) => {
         const isFirstOrLast = index === 0 || index === children.length - 1;
-        const isWhitespace = isWhitespaceNode(child);
         // Remove initial whitespace
-        if (isFirstOrLast && isWhitespace) {
-            return;
-        }
-        // Whitespace between two children can be removed
-        // if the siblings are not both inline elements
-        if (isWhitespace) {
-            const next = children.length > index ? children[index + 1] : null;
-            const hasMoreThanOneNewline = hasAtLeastTwoNewlines(
-                child.value.value
-            );
-            if (isInlineElement(previous) && isInlineElement(next)) {
-                // Add an (artificial) space to the result
-                child[TEXT_SPACE] = true;
-                result.push(child);
-            } else if (hasAtLeastTwoNewlines(child.value.value)) {
-                // Turn multiple empty lines into only one
-                child[TEXT_NEWLINE] = true;
-                result.push(child);
-            }
+        if (isFirstOrLast && isWhitespaceNode(child)) {
             return;
         }
 
         result.push(child);
-        previous = child;
     });
     return result;
 };
@@ -109,6 +87,8 @@ const isInlineElement = node => {
         Node.isPrintTextStatement(node)
     );
 };
+
+const createInlineMap = nodes => nodes.map(node => isInlineElement(node));
 
 const totalAttributeLength = elementNode =>
     elementNode.attributes &&
@@ -192,6 +172,47 @@ const printChildren = (path, print, childrenKey) => {
     return processChildExpressions(printedChildren);
 };
 
+const textStatementsOnlyNewlines = nodes => {
+    nodes.forEach(node => {
+        if (Node.isPrintTextStatement(node)) {
+            node[NEWLINES_ONLY] = true;
+        }
+    });
+};
+
+const printChildGroups = (node, path, print, childrenKey) => {
+    // For the preprocessed children, get a map showing which elements can
+    // be printed inline
+    const inlineMap = createInlineMap(node[childrenKey]);
+    addPreserveWhitespaceInfo(inlineMap, node[childrenKey]);
+    textStatementsOnlyNewlines(node[childrenKey]);
+    const printedChildren = path.map(print, childrenKey);
+    // Go over the children, while carrying along a group to be filled
+    // - If the element is inline, add it to the group
+    // - If the element is not inline, and the group is not empty
+    //       => print the group as fill()
+    let currentGroup = [];
+    const finishedGroups = [];
+    printedChildren.forEach((child, index) => {
+        if (inlineMap[index]) {
+            // Maybe a PrintTextStatement should not be
+            // considered "inline" if it contains more than
+            // one \n character
+            currentGroup.push(child);
+        } else {
+            if (currentGroup.length > 0) {
+                finishedGroups.push(fill(currentGroup));
+                currentGroup = [];
+            }
+            finishedGroups.push(child);
+        }
+    });
+    if (currentGroup.length > 0) {
+        finishedGroups.push(fill(currentGroup));
+    }
+    return finishedGroups;
+};
+
 const getExpressionType = node => {
     if (Node.isPrintExpressionStatement(node)) {
         return "PrintExpressionStatement";
@@ -244,6 +265,22 @@ const findParentNode = path => {
     return null;
 };
 
+const addPreserveWhitespaceInfo = (inlineMap, nodes) => {
+    nodes.forEach((node, index) => {
+        if (Node.isPrintTextStatement(node)) {
+            const hasPreviousInlineElement = index > 0 && inlineMap[index - 1];
+            if (hasPreviousInlineElement) {
+                node[PRESERVE_LEADING_WHITESPACE] = true;
+            }
+            const hasFollowingInlineElement =
+                index < inlineMap.length - 1 && inlineMap[index + 1];
+            if (hasFollowingInlineElement) {
+                node[PRESERVE_TRAILING_WHITESPACE] = true;
+            }
+        }
+    });
+};
+
 module.exports = {
     normalizeParagraph,
     isNonBreaking,
@@ -254,15 +291,18 @@ module.exports = {
     processChildExpressions,
     joinChildExpressions,
     printChildren,
+    printChildGroups,
     findParentNode,
     isMelodyNode,
     isWhitespaceOnly,
     isInlineElement,
+    createInlineMap,
     countNewlines,
     hasAtLeastTwoNewlines,
-    preprocessChildren,
-    TEXT_SPACE,
-    TEXT_NEWLINE,
+    removeSurroundingWhitespace,
+    addPreserveWhitespaceInfo,
+    textStatementsOnlyNewlines,
     PRESERVE_LEADING_WHITESPACE,
-    PRESERVE_TRAILING_WHITESPACE
+    PRESERVE_TRAILING_WHITESPACE,
+    NEWLINES_ONLY
 };

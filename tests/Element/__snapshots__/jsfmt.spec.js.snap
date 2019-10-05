@@ -8,7 +8,17 @@ exports[`attributes.melody.twig 1`] = `
 
 exports[`breakingSiblings.melody.twig 1`] = `
 <span>One</span><b>Two</b><i>Three</i><span>Four</span><b>Five</b><i>Six</i><span>Seven</span>
+
+<span>One</span>
+<b>Two</b>
+<i>Three</i>
+<span>Four</span>
+<b>Five</b>
+<i>Six</i>
+<span>Seven</span>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+<span>One</span><b>Two</b><i>Three</i><span>Four</span><b>Five</b><i>Six</i><span>Seven</span>
+
 <span>One</span>
 <b>Two</b>
 <i>Three</i>
@@ -139,9 +149,7 @@ exports[`whitespace.melody.twig 1`] = `
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <span class="price">{{ price }} {{ currencySymbol }}</span>
 
-
 <span class="price">Price: {{ price }} {{ currencySymbol }} per night</span>
-
 
 <span class="price">This accommodation is {{ price }} {{ currencySymbol }} per night</span>
 

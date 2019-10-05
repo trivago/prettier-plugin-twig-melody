@@ -17,9 +17,7 @@ exports[`arrayExpression.melody.twig 1`] = `
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {{ [2, 3, "cat"] }}
 
-
 {{ [2, 3, "cat", "dog", "mouse"] }}
-
 
 {{
     [
@@ -36,15 +34,11 @@ exports[`arrayExpression.melody.twig 1`] = `
     ]
 }}
 
-
 {{ numbers[:1] }}
-
 
 {{ numbers[1:4] }}
 
-
 {{ numbers[1:endIndex] }}
-
 
 {{ numbers[1:] }}
 `;
@@ -54,7 +48,9 @@ exports[`callExpression.melody.twig 1`] = `
 
 {{ date('d/m/Y H:i', timezone="Europe/Paris") }}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{{ range(3) }} {{ date("d/m/Y H:i", timezone = "Europe/Paris") }}
+{{ range(3) }}
+
+{{ date("d/m/Y H:i", timezone = "Europe/Paris") }}
 `;
 
 exports[`conditionalExpression.melody.twig 1`] = `
@@ -63,7 +59,6 @@ exports[`conditionalExpression.melody.twig 1`] = `
 {{ test ? "This is a slightly longer string to overflow the line" : "and here is its counterpart" }}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {{ test ? "One" : "Two" }}
-
 
 {{
     test
@@ -78,11 +73,7 @@ exports[`filterExpression.melody.twig 1`] = `
 {{ 'SHOUTING' | lower|escape('html') | upper | escape('markdown') | lower | upper | escape('markdown') }}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {{ "test.foo" | split(".") }}
-
-
 {{ range(3) | sort | join(",") }}
-
-
 {{
     "SHOUTING"
         | lower
@@ -154,137 +145,50 @@ exports[`operators.melody.twig 1`] = `
 {{ 'test.foo' | split('.') }}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {{ a b-and b }}
-
-
 {{ a b-or b }}
-
-
 {{ a b-xor b }}
-
-
 {{ a or b }}
-
-
 {{ a and b }}
-
-
 {{ a == b }}
-
-
 {{ a != b }}
-
-
 {{ a < b }}
-
-
 {{ a > b }}
-
-
 {{ a >= b }}
-
-
 {{ a <= b }}
-
-
 {{ a in b }}
-
-
 {{ a not in b }}
-
-
 {{ a matches b }}
-
-
 {{ a matches "^foo" }}
-
-
 {{ a starts with b }}
-
-
 {{ a ends with b }}
-
-
 {{ a .. b }}
-
-
 {{ a + b }}
-
-
 {{ a - b }}
-
-
 {{ a ~ b }}
-
-
 {{ a * b }}
-
-
 {{ a / b }}
-
-
 {{ a % b }}
-
-
 {{ a ** b }}
-
-
 {{ a ? b }}
-
-
 {{ a ? : b }}
-
-
 {{ a ?? b }}
 
-
 {{ a is divisible by(b) }}
-
-
 {{ a is not divisible by(b) }}
-
-
 {{ a is defined }}
-
-
 {{ a is not defined }}
-
-
 {{ isEmpty is empty }}
-
-
 {{ a is not empty }}
-
-
 {{ a is even }}
-
-
 {{ a is not even }}
-
-
 {{ a is iterable }}
-
-
 {{ a is not iterable }}
-
-
 {{ a is null }}
-
-
 {{ a is not null }}
-
-
 {{ a is odd }}
-
-
 {{ a is not odd }}
-
-
 {{ a is same as(b) }}
-
-
 {{ a is not same as(b) }}
-
-
 {{
     a is not same as(
         banana,
@@ -298,31 +202,14 @@ exports[`operators.melody.twig 1`] = `
     )
 }}
 
-
 {{ dump(test) }}
-
-
 {{ range(2, 3) | sort | join(",") }}
-
-
 {{ range(3) | sort | join(",") }}
-
-
 {{ range(2, 3, 2) | sort | join(",") }}
-
-
 {{ test | raw }}
-
-
 {{ 2.4 | abs }}
-
-
 {{ { "a": "b" } | json_encode | trim }}
-
-
 {{ [2, 3] | length }}
-
-
 {{ "test.foo" | split(".") }}
 `;
 

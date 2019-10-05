@@ -3,32 +3,10 @@ const { concat, fill, line, join, hardline } = prettier.doc.builders;
 const {
     isWhitespaceOnly,
     countNewlines,
-    TEXT_SPACE,
-    TEXT_NEWLINE,
     PRESERVE_LEADING_WHITESPACE,
-    PRESERVE_TRAILING_WHITESPACE
+    PRESERVE_TRAILING_WHITESPACE,
+    NEWLINES_ONLY
 } = require("../util");
-
-/**
- * Should only be called for strings that contain only whitespace
- *
- * @param {String} s The string to format
- */
-const formatWhitespace = (s, preserveWhitespace = false) => {
-    // Multiple empty lines should be compacted into one (empty
-    // string will be filtered out)
-    // if (s === "") {
-    //     return "";
-    // }
-
-    const newlines = countNewlines(s);
-    if (newlines === 0 && preserveWhitespace) {
-        return " ";
-    } else if (newlines > 1) {
-        return concat([""]);
-    }
-    return "";
-};
 
 const createTextGroups = (
     s,
@@ -77,24 +55,28 @@ const createTextGroups = (
     return groups;
 };
 
+const newlinesOnly = (s, preserveWhitespace = true) => {
+    const numNewlines = countNewlines(s);
+    if (numNewlines === 0) {
+        return preserveWhitespace ? line : "";
+    } else if (numNewlines === 1) {
+        return hardline;
+    }
+    return concat([hardline, hardline]);
+};
+
 const p = (node, path, print) => {
     // Check for special values that might have been
     // computed during preprocessing
-    if (node[TEXT_SPACE]) {
-        return line;
-    }
-    if (node[TEXT_NEWLINE]) {
-        return "";
-    }
     const preserveLeadingWhitespace =
         node[PRESERVE_LEADING_WHITESPACE] === true;
     const preserveTrailingWhitespace =
         node[PRESERVE_TRAILING_WHITESPACE] === true;
 
     const rawString = path.call(print, "value");
-    // if (isWhitespaceOnly(rawString)) {
-    //     return formatWhitespace(rawString);
-    // }
+    if (isWhitespaceOnly(rawString) && node[NEWLINES_ONLY]) {
+        return newlinesOnly(rawString);
+    }
 
     const textGroups = createTextGroups(
         rawString,
@@ -105,8 +87,7 @@ const p = (node, path, print) => {
         (acc, curr) => [...acc, fill(curr)],
         []
     );
-    const result = join(concat([hardline, hardline]), printedGroups);
-    return result;
+    return join(concat([hardline, hardline]), printedGroups);
 };
 
 module.exports = {

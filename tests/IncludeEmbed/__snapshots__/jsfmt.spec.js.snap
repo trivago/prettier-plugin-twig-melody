@@ -78,7 +78,8 @@ exports[`extendsEmbed.melody.twig 1`] = `
 {% extends "parent.twig" %}
 {% extends someVar %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{% extends "parent.twig" %}{% extends someVar %}
+{% extends "parent.twig" %}
+{% extends someVar %}
 `;
 
 exports[`import.melody.twig 1`] = `
@@ -123,9 +124,9 @@ exports[`include.melody.twig 1`] = `
 } only %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <div key="1" class="test">
-    {{ message | lower | upper }}
-    {% flush %}
-    <span class="">{{ _context.name[1:] }}</span> {{ block("test") }}
+    {{ message | lower | upper }}{% flush %}
+    <span class="">{{ _context.name[1:] }}</span>
+    {{ block("test") }}
     {{ include("test.twig") }}
     {% include "test.twig" %}
 </div>
@@ -158,7 +159,7 @@ exports[`mount.melody.twig 1`] = `
 %}
     Loading...
 {% catch err %}
-    Failed to load with{{ err }}
+    Failed to load with {{ err }}
 {% endmount %}
 `;
 
