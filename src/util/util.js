@@ -1,6 +1,13 @@
 const prettier = require("prettier");
 const { Node } = require("melody-types");
-const { indent, concat, join, fill, softline } = prettier.doc.builders;
+const {
+    indent,
+    concat,
+    join,
+    fill,
+    hardline,
+    softline
+} = prettier.doc.builders;
 
 const MAX_ATTRIBUTE_LENGTH_BEFORE_BREAK = 60;
 
@@ -180,6 +187,12 @@ const textStatementsOnlyNewlines = nodes => {
     });
 };
 
+const addNewlineIfNotEmpty = items => {
+    if (items.length > 0) {
+        items.push(hardline);
+    }
+};
+
 const printChildGroups = (node, path, print, childrenKey) => {
     // For the preprocessed children, get a map showing which elements can
     // be printed inline
@@ -191,24 +204,28 @@ const printChildGroups = (node, path, print, childrenKey) => {
     // - If the element is inline, add it to the group
     // - If the element is not inline, and the group is not empty
     //       => print the group as fill()
-    let currentGroup = [];
+    let inlineGroup = [];
     const finishedGroups = [];
     printedChildren.forEach((child, index) => {
         if (inlineMap[index]) {
             // Maybe a PrintTextStatement should not be
             // considered "inline" if it contains more than
             // one \n character
-            currentGroup.push(child);
+            inlineGroup.push(child);
         } else {
-            if (currentGroup.length > 0) {
-                finishedGroups.push(fill(currentGroup));
-                currentGroup = [];
+            if (inlineGroup.length > 0) {
+                finishedGroups.push(fill(inlineGroup));
+                inlineGroup = [];
+            }
+            // Ensure line break between two block elements
+            if (finishedGroups.length > 0 && !inlineMap[index - 1]) {
+                addNewlineIfNotEmpty(finishedGroups);
             }
             finishedGroups.push(child);
         }
     });
-    if (currentGroup.length > 0) {
-        finishedGroups.push(fill(currentGroup));
+    if (inlineGroup.length > 0) {
+        finishedGroups.push(fill(inlineGroup));
     }
     return finishedGroups;
 };
