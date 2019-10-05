@@ -1,7 +1,7 @@
 const prettier = require("prettier");
-const { concat, hardline, group } = prettier.doc.builders;
+const { concat, hardline, group, indent } = prettier.doc.builders;
 const { Node } = require("melody-types");
-const { processChildExpressions } = require("../util");
+const { removeSurroundingWhitespace, printChildGroups } = require("../util");
 
 const p = (node, path, print) => {
     const hasChildren = Array.isArray(node.body) && node.body.length > 0;
@@ -9,8 +9,9 @@ const p = (node, path, print) => {
     if (hasChildren) {
         const blockName = path.call(print, "name");
         const opener = concat(["{% block ", blockName, " %}"]);
-        const printedBody = path.map(print, "body");
-        const indentedBody = processChildExpressions(printedBody);
+        node.body = removeSurroundingWhitespace(node.body);
+        const childGroups = printChildGroups(node, path, print, "body");
+        const indentedBody = indent(concat([hardline, ...childGroups]));
         const result = group(
             concat([
                 opener,
