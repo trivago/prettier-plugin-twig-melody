@@ -5,6 +5,7 @@ const {
     concat,
     join,
     fill,
+    group,
     hardline,
     softline
 } = prettier.doc.builders;
@@ -230,6 +231,12 @@ const printChildGroups = (node, path, print, childrenKey) => {
     return finishedGroups;
 };
 
+const printChildBlock = (node, path, print, childPath) => {
+    node[childPath] = removeSurroundingWhitespace(node[childPath]);
+    const childGroups = printChildGroups(node, path, print, childPath);
+    return indent(group(concat([hardline, ...childGroups])));
+};
+
 const getExpressionType = node => {
     if (Node.isPrintExpressionStatement(node)) {
         return "PrintExpressionStatement";
@@ -309,6 +316,7 @@ module.exports = {
     joinChildExpressions,
     printChildren,
     printChildGroups,
+    printChildBlock,
     findParentNode,
     isMelodyNode,
     isWhitespaceOnly,

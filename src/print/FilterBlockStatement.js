@@ -1,6 +1,6 @@
 const prettier = require("prettier");
 const { concat, group, line, indent, hardline } = prettier.doc.builders;
-const { removeSurroundingWhitespace, printChildGroups } = require("../util");
+const { printChildBlock } = require("../util");
 
 const printOpeningGroup = (node, path, print) => {
     const parts = ["{% "];
@@ -11,11 +11,7 @@ const printOpeningGroup = (node, path, print) => {
 
 const p = (node, path, print) => {
     const openingGroup = printOpeningGroup(node, path, print);
-
-    node.body = removeSurroundingWhitespace(node.body);
-    const childGroups = printChildGroups(node, path, print, "body");
-    const body = indent(group(concat([hardline, ...childGroups])));
-
+    const body = printChildBlock(node, path, print, "body");
     const closingStatement = concat([hardline, "{% endfilter %}"]);
 
     return concat([openingGroup, body, closingStatement]);

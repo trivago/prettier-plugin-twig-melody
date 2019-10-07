@@ -1,6 +1,6 @@
 const prettier = require("prettier");
 const { concat, indent, hardline, line, group } = prettier.doc.builders;
-const { printChildGroups, removeSurroundingWhitespace } = require("../util");
+const { printChildBlock } = require("../util");
 
 const printOpener = (node, path, print) => {
     const parts = ["{% embed ", path.call(print, "parent")];
@@ -14,16 +14,11 @@ const printOpener = (node, path, print) => {
 };
 
 const p = (node, path, print) => {
-    node.blocks = removeSurroundingWhitespace(node.blocks);
+    const children = printChildBlock(node, path, print, "blocks");
     const printedOpener = printOpener(node, path, print);
-    const childGroups = printChildGroups(node, path, print, "blocks");
     const closing = concat([hardline, "{% endembed %}"]);
 
-    return concat([
-        printedOpener,
-        indent(concat([hardline, ...childGroups])),
-        closing
-    ]);
+    return concat([printedOpener, children, closing]);
 };
 
 module.exports = {
