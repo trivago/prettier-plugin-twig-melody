@@ -135,15 +135,6 @@ const countNewlines = s => {
 
 const hasAtLeastTwoNewlines = s => countNewlines(s) >= 2;
 
-const joinChildExpressions = childExpressions => {
-    return indent(concat([softline, join(softline, childExpressions)]));
-};
-
-const processChildExpressions = childExpressions => {
-    const withoutEmptyStrings = childExpressions.filter(s => s !== "");
-    return joinChildExpressions(withoutEmptyStrings);
-};
-
 const textStatementsOnlyNewlines = nodes => {
     nodes.forEach(node => {
         if (Node.isPrintTextStatement(node)) {
@@ -158,13 +149,14 @@ const addNewlineIfNotEmpty = items => {
     }
 };
 
-const printChildGroups = (node, path, print, childrenKey) => {
+const printChildGroups = (node, path, print, ...childPath) => {
     // For the preprocessed children, get a map showing which elements can
     // be printed inline
-    const inlineMap = createInlineMap(node[childrenKey]);
-    addPreserveWhitespaceInfo(inlineMap, node[childrenKey]);
-    textStatementsOnlyNewlines(node[childrenKey]);
-    const printedChildren = path.map(print, childrenKey);
+    const children = getDeepProperty(node, ...childPath);
+    const inlineMap = createInlineMap(children);
+    addPreserveWhitespaceInfo(inlineMap, children);
+    textStatementsOnlyNewlines(children);
+    const printedChildren = path.map(print, ...childPath);
     // Go over the children, while carrying along a group to be filled
     // - If the element is inline, add it to the group
     // - If the element is not inline, and the group is not empty
@@ -195,9 +187,31 @@ const printChildGroups = (node, path, print, childrenKey) => {
     return finishedGroups;
 };
 
-const printChildBlock = (node, path, print, childPath) => {
-    node[childPath] = removeSurroundingWhitespace(node[childPath]);
-    const childGroups = printChildGroups(node, path, print, childPath);
+const getDeepProperty = (obj, ...properties) => {
+    let result = obj;
+    properties.forEach(p => {
+        result = result[p];
+    });
+    return result;
+};
+
+const setDeepProperty = (obj, value, ...properties) => {
+    let containingObject = obj;
+    const len = properties.length;
+    for (let i = 0; i < len - 1; i++) {
+        containingObject = containingObject[properties[i]];
+    }
+    containingObject[properties[len - 1]] = value;
+};
+
+const printChildBlock = (node, path, print, ...childPath) => {
+    const originalChildren = getDeepProperty(node, ...childPath);
+    setDeepProperty(
+        node,
+        removeSurroundingWhitespace(originalChildren),
+        ...childPath
+    );
+    const childGroups = printChildGroups(node, path, print, ...childPath);
     return indent(group(concat([hardline, ...childGroups])));
 };
 
@@ -274,7 +288,6 @@ module.exports = {
     needsQuotedStringLiterals,
     getExpressionType,
     quoteChar,
-    processChildExpressions,
     printChildGroups,
     printChildBlock,
     findParentNode,
@@ -287,6 +300,7 @@ module.exports = {
     removeSurroundingWhitespace,
     addPreserveWhitespaceInfo,
     textStatementsOnlyNewlines,
+
     PRESERVE_LEADING_WHITESPACE,
     PRESERVE_TRAILING_WHITESPACE,
     NEWLINES_ONLY
