@@ -31,9 +31,15 @@ exports[`filter.melody.twig 1`] = `
 
 {% filter lower|escape('html') | upper | escape('markdown') | lower | upper | escape('markdown') %}
     <strong>SOME TEXT</strong>
+
+    <p>The cat is taking a nap in the sunshine.</p>
+
+    
 {% endfilter %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{% filter upper %}This text becomes uppercase{% endfilter %}
+{% filter upper %}
+    This text becomes uppercase
+{% endfilter %}
 
 {% filter lower
     | escape("html")
@@ -43,9 +49,9 @@ exports[`filter.melody.twig 1`] = `
     | upper
     | escape("markdown")
 %}
-
     <strong>SOME TEXT</strong>
 
+    <p>The cat is taking a nap in the sunshine.</p>
 {% endfilter %}
 `;
 
