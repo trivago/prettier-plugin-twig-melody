@@ -1,6 +1,10 @@
 const prettier = require("prettier");
-const { concat, softline, group } = prettier.doc.builders;
-const { printChildren, quoteChar } = require("../util");
+const { concat, softline, indent, hardline, group } = prettier.doc.builders;
+const {
+    removeSurroundingWhitespace,
+    printChildGroups,
+    quoteChar
+} = require("../util");
 
 const createOpener = node => {
     return concat([
@@ -14,10 +18,15 @@ const createOpener = node => {
 
 const p = (node, path, print) => {
     const parts = [createOpener(node)];
-    parts.push(printChildren(path, print, "expressions"));
-    parts.push(softline, "{% endautoescape %}");
-    const result = group(concat(parts));
-    return result;
+
+    node.expressions = removeSurroundingWhitespace(node.expressions);
+    const childGroups = printChildGroups(node, path, print, "expressions");
+    const expressions = indent(group(concat([hardline, ...childGroups])));
+
+    parts.push(expressions);
+    parts.push(hardline, "{% endautoescape %}");
+
+    return concat(parts);
 };
 
 module.exports = {
