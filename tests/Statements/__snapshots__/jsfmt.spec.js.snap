@@ -155,11 +155,9 @@ exports[`spaceless.melody.twig 1`] = `
 {% endspaceless %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {% spaceless %}
-
     <div class="qtp-item__text">
         Receive {{ formattedIncentive }} cash back for testing this hotel. Or just
         <span>be</span> happy!
     </div>
-
 {% endspaceless %}
 `;
