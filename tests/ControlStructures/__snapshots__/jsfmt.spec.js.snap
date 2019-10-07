@@ -52,9 +52,7 @@ exports[`forIfElse.melody.twig 1`] = `
         <li>{{ key }} - {{ value }}</li>
     {% else %}
         {% if regionName is empty %}
-
             <li><span></span>No results found</li>
-
         {% endif %}
     {% endfor %}
 </ul>
@@ -110,13 +108,9 @@ exports[`if.melody.twig 1`] = `
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <div>
     {% if foo %}
-
         <div class="foo"></div>
-
     {% else %}
-
         <div class="bar"></div>
-
     {% endif %}
 </div>
 `;

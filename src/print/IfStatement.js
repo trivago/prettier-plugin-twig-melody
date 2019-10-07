@@ -1,6 +1,6 @@
 const prettier = require("prettier");
 const { group, indent, line, hardline, concat } = prettier.doc.builders;
-const { printChildren } = require("../util");
+const { printChildBlock } = require("../util");
 
 const p = (node, path, print) => {
     const hasAlternate =
@@ -13,11 +13,11 @@ const p = (node, path, print) => {
             "%}"
         ])
     );
-    const ifBody = printChildren(path, print, "consequent");
+    const ifBody = printChildBlock(node, path, print, "consequent");
     const parts = [ifClause, ifBody];
     if (hasAlternate) {
         parts.push(hardline, "{% else %}");
-        parts.push(printChildren(path, print, "alternate"));
+        parts.push(printChildBlock(node, path, print, "alternate"));
     }
     parts.push(hardline, "{% endif %}");
     return concat(parts);
