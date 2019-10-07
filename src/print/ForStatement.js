@@ -1,6 +1,5 @@
 const prettier = require("prettier");
 const { group, indent, line, hardline, concat } = prettier.doc.builders;
-const { printChildren } = require("../util");
 
 const printIfClause = (node, path, print) => {
     const parts = ["{% for "];
