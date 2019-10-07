@@ -31,35 +31,10 @@ const INLINE_HTML_ELEMENTS = [
     "span"
 ];
 
-const isNonBreaking = (node, elementsAllowed = true) => {
-    return (
-        (elementsAllowed && isNonBreakingElement(node)) ||
-        Node.isConstantValue(node) ||
-        isShallowExpression(node)
-    );
-};
-
-const isNonBreakingElement = node => {
-    return (
-        isInlineElement(node) &&
-        hasNoBreakingChildren(node) &&
-        totalAttributeLength(node) <= MAX_ATTRIBUTE_LENGTH_BEFORE_BREAK
-    );
-};
-
 const isShallowExpression = node => {
     return (
         Node.isPrintExpressionStatement(node) && Node.isIdentifier(node.value)
     );
-};
-
-const hasNoBreakingChildren = node => {
-    for (const child of node.children) {
-        if (!isNonBreaking(child, false)) {
-            return false;
-        }
-    }
-    return true;
 };
 
 const isWhitespaceNode = node => {
@@ -117,12 +92,6 @@ const attributeLength = attrNode => {
     return result;
 };
 
-const normalizeParagraph = s =>
-    deduplicateWhitespace(s.replace(/\n/g, "").trim());
-
-const deduplicateWhitespace = s => s.replace(/\s+/g, " ");
-// const lastElement = arr => arr.length > 0 && arr[arr.length - 1];
-
 const isDynamicValue = node => {
     return (
         Node.isIdentifier(node) ||
@@ -173,11 +142,6 @@ const joinChildExpressions = childExpressions => {
 const processChildExpressions = childExpressions => {
     const withoutEmptyStrings = childExpressions.filter(s => s !== "");
     return joinChildExpressions(withoutEmptyStrings);
-};
-
-const printChildren = (path, print, childrenKey) => {
-    const printedChildren = path.map(print, childrenKey);
-    return processChildExpressions(printedChildren);
 };
 
 const textStatementsOnlyNewlines = nodes => {
@@ -306,15 +270,11 @@ const addPreserveWhitespaceInfo = (inlineMap, nodes) => {
 };
 
 module.exports = {
-    normalizeParagraph,
-    isNonBreaking,
     isDynamicValue,
     needsQuotedStringLiterals,
     getExpressionType,
     quoteChar,
     processChildExpressions,
-    joinChildExpressions,
-    printChildren,
     printChildGroups,
     printChildBlock,
     findParentNode,
