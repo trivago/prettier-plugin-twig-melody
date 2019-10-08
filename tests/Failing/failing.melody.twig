@@ -1,19 +1,5 @@
-<div class="foo {{ bar ? 'bar' }}"></div>
-
-{% if 1 not in elements %}
-    <p>The number 1 is not present in the elements array.</p>
-{% endif %}
-
-{% if not invalid %}
-    <p>All's well.</p>
-{% endif %}
-
 {% if regionName is empty %}
 <li><span><!--//--></span>No results found</li>
 {% endif %}
 
-<div data-test="Testing: {{- formattedIncentive -}} foo">
-
-<li>{{ a }} - {{ b }}</li>
-
-<span class="price">This accommodation is {{ price }} {{ currencySymbol }} per night</span>
+<span data-test="Testing: {{- formattedIncentive -}} foo">Test</span>
