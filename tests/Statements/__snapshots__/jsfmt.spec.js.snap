@@ -10,7 +10,9 @@ exports[`autoescape.melody.twig 1`] = `
 {% endautoescape %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {% autoescape "html" %}
-    <button type="button">Click me</button>
+    <button type="button">
+        Click me
+    </button>
 
     <span>Yes</span>
 {% endautoescape %}
@@ -49,7 +51,9 @@ exports[`filter.melody.twig 1`] = `
 %}
     <strong>SOME TEXT</strong>
 
-    <p>The cat is taking a nap in the sunshine.</p>
+    <p>
+        The cat is taking a nap in the sunshine.
+    </p>
 {% endfilter %}
 `;
 
@@ -101,11 +105,15 @@ exports[`macro.melody.twig 1`] = `
 {% macro wrapped_input( name, value, type, size) %}
     {% import _self as forms %}
 
-    <div class="field">{{ forms.input(name, value, type, size) }}</div>
+    <div class="field">
+        {{ forms.input(name, value, type, size) }}
+    </div>
 {% endmacro %}
 
 {% macro whitespaceRemoval( name, value, type, size) %}
-    <div class="field">{{ forms.input(name, value, type, size) }}</div>
+    <div class="field">
+        {{ forms.input(name, value, type, size) }}
+    </div>
 {% endmacro %}
 `;
 
@@ -145,9 +153,13 @@ exports[`set.melody.twig 1`] = `
 {% set foo = "foo" %}
 {% set bar = "bar" %}
 {% set foo %}
-    <div id="pagination">Some text</div>
+    <div id="pagination">
+        Some text
+    </div>
 
-    <p>Some more text</p>
+    <p>
+        Some more text
+    </p>
 {% endset %}
 `;
 

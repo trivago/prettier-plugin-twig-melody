@@ -1,14 +1,6 @@
 const prettier = require("prettier");
 const { Node } = require("melody-types");
-const {
-    indent,
-    concat,
-    join,
-    fill,
-    group,
-    hardline,
-    softline
-} = prettier.doc.builders;
+const { indent, concat, fill, group, hardline } = prettier.doc.builders;
 
 const MAX_ATTRIBUTE_LENGTH_BEFORE_BREAK = 60;
 
@@ -17,12 +9,14 @@ const PRESERVE_TRAILING_WHITESPACE = Symbol("PRESERVE_TRAILING_WHITESPACE");
 const NEWLINES_ONLY = Symbol("NEWLINES_ONLY");
 
 const INLINE_HTML_ELEMENTS = [
+    "a",
     "abbr",
     "b",
     "br",
     "dd",
     "em",
     "i",
+    "li",
     "s",
     "strong",
     "sup",

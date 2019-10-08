@@ -218,5 +218,19 @@ exports[`stringConcat.melody.twig 1`] = `
 {{ first  ~   second    }}
 </div>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-<div>{{ first ~ second }}</div>
+<div>
+    {{ first ~ second }}
+</div>
+`;
+
+exports[`unaryNot.melody.twig 1`] = `
+{% if not invalid %}
+    <p>All's well.</p>
+{% endif %}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{% if not invalid %}
+    <p>
+        All's well.
+    </p>
+{% endif %}
 `;

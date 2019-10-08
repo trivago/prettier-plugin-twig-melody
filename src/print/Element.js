@@ -1,5 +1,13 @@
 const prettier = require("prettier");
-const { concat, group, line, softline, indent, join } = prettier.doc.builders;
+const {
+    concat,
+    group,
+    line,
+    hardline,
+    softline,
+    indent,
+    join
+} = prettier.doc.builders;
 const {
     removeSurroundingWhitespace,
     isInlineElement,
@@ -34,20 +42,24 @@ const p = (node, path, print) => {
 
         const childGroups = printChildGroups(node, path, print, "children");
         const closingTag = concat(["</", node.name, ">"]);
-        const finalGroup = [openingGroup];
+        const result = [openingGroup];
         const joinedChildren = concat(childGroups);
         if (isInlineElement(node)) {
-            finalGroup.push(indent(joinedChildren));
+            result.push(indent(concat([softline, joinedChildren])), softline);
         } else {
-            finalGroup.push(
-                indent(concat([softline, joinedChildren])),
-                softline
-            );
+            const childBlock = [];
+            if (childGroups.length > 0) {
+                childBlock.push(hardline);
+            }
+            childBlock.push(joinedChildren);
+            result.push(indent(concat(childBlock)));
+            if (childGroups.length > 0) {
+                result.push(hardline);
+            }
         }
-        finalGroup.push(closingTag);
+        result.push(closingTag);
 
-        const result = group(concat(finalGroup));
-        return result;
+        return isInlineElement(node) ? group(concat(result)) : concat(result);
     }
 
     return openingGroup;

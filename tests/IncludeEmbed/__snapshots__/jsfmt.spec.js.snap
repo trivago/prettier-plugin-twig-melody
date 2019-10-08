@@ -15,7 +15,9 @@ exports[`block.melody.twig 1`] = `
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <section key="0">
     {% block hello %}
-        <div key="1" class="test"><span>Hello</span></div>
+        <div key="1" class="test">
+            <span>Hello</span>
+        </div>
     {% endblock hello %}
 </section>
 

@@ -17,7 +17,9 @@ exports[`breakingSiblings.melody.twig 1`] = `
 <i>Six</i>
 <span>Seven</span>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-<span>One</span><b>Two</b><i>Three</i><span>Four</span><b>Five</b><i>Six</i><span>Seven</span>
+<span>One</span><b>Two</b><i>Three</i><span>Four</span><b>Five</b><i>
+    Six
+</i><span>Seven</span>
 
 <span>One</span>
 <b>Two</b>
@@ -37,7 +39,9 @@ exports[`children.melody.twig 1`] = `
 </div>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <div class="{{ css.loader }}">
-    <div class="{{ css.barWrapper }}"><span class="{{ css.bar }}"></span></div>
+    <div class="{{ css.barWrapper }}">
+        <span class="{{ css.bar }}"></span>
+    </div>
     <strong class="{{ css.text }}">{{ "checking_deals" }}</strong>
 </div>
 `;
@@ -86,7 +90,9 @@ exports[`manyAttributes.melody.twig 1`] = `
     attr5="five"
     attr6="six"
     attr7="seven"
-    attr8="eight">Text</span>
+    attr8="eight">
+    Text
+</span>
 `;
 
 exports[`oneLine.melody.twig 1`] = `
@@ -151,7 +157,9 @@ exports[`whitespace.melody.twig 1`] = `
 
 <span class="price">Price: {{ price }} {{ currencySymbol }} per night</span>
 
-<span class="price">This accommodation is {{ price }} {{ currencySymbol }} per night</span>
+<span class="price">
+    This accommodation is {{ price }} {{ currencySymbol }} per night
+</span>
 
 <div>
     Gallia est omnis divisa in {{ "partes tres" }}, quarum unam incolunt Belgae,
