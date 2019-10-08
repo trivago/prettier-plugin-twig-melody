@@ -165,6 +165,9 @@ printFunctions["ImportDeclaration"] = printImportDeclaration;
 printFunctions["FromStatement"] = printFromStatement;
 printFunctions["MacroDeclarationStatement"] = printMacroDeclarationStatement;
 
+// Fallbacks
+printFunctions["String"] = s => s;
+
 module.exports = {
     print
 };
