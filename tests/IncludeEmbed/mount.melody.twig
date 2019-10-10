@@ -5,3 +5,16 @@
 {% catch err %}
   Failed to load with {{ err }}
 {% endmount %}
+
+<div class="profile-wrapper account">
+    {% if isProfilePageDisplayed %}
+        {% mount '../Profile' as 'profile' with {
+            user: user,
+            expressBookingIframeUrl: expressBookingIframeUrl,
+            paymentMethodsIframeUrl: paymentMethodsIframeUrl,
+            isAboveScreenMedium: isAboveScreenMedium,
+            anchor: anchor,
+            recentlyViewedExpanded: recentlyViewedExpanded
+        } %}
+    {% endif %}
+</div>

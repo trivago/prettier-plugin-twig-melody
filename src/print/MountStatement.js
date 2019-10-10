@@ -6,29 +6,37 @@ const formatDelay = delay => {
 };
 
 const buildOpener = (node, path, print) => {
-    const parts = ["{% mount"];
+    const result = [];
+    const firstGroup = ["{% mount"];
     const printedSource = path.call(print, "source");
     if (node.async === true) {
-        parts.push(" async");
+        firstGroup.push(" async");
     }
-    const indentedParts = [line, printedSource];
+    firstGroup.push(line, printedSource);
+
     if (node.key) {
-        indentedParts.push(line, "as ", path.call(print, "key"));
+        firstGroup.push(indent(concat([line, "as ", path.call(print, "key")])));
     }
+    result.push(group(concat(firstGroup)));
     if (node.argument) {
-        indentedParts.push(line, "with ", path.call(print, "argument"));
+        result.push(
+            group(indent(concat([" with ", path.call(print, "argument")])))
+        );
     }
     if (node.delayBy) {
-        indentedParts.push(
-            line,
-            "delay placeholder by ",
-            formatDelay(node.delayBy)
+        result.push(
+            indent(
+                concat([
+                    line,
+                    "delay placeholder by ",
+                    formatDelay(node.delayBy)
+                ])
+            )
         );
     }
 
-    parts.push(indent(concat(indentedParts)));
-    parts.push(concat([line, "%}"]));
-    return group(concat(parts));
+    result.push(concat([line, "%}"]));
+    return group(concat(result));
 };
 
 const buildBody = (path, print) => {
