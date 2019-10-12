@@ -1,15 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`failing.melody.twig 1`] = `
-{% if regionName is empty %}
+{% if searchResultFailing %}
 <li><span><!--//--></span>No results found</li>
 {% endif %}
 
-<span data-test="Testing: {{- formattedIncentive -}} foo">Test</span>
+<span data-whitespace-test="Testing: {{- noWhitespaceTest -}} foo">Test</span>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{% if regionName is empty %}
+{% if searchResultFailing %}
     <li><span></span>No results found</li>
 {% endif %}
 
-<span data-test="{{ "Testing:" ~ formattedIncentive ~ "foo" }}">Test</span>
+<span data-whitespace-test="{{ "Testing:" ~ noWhitespaceTest ~ "foo" }}">
+    Test
+</span>
 `;
