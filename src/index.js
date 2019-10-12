@@ -12,9 +12,9 @@ const languages = [
         aceMode: "html",
         codemirrorMode: "clike",
         codemirrorMimeType: "text/melody-twig",
-        extensions: [".melody.twig", ".twig"],
+        extensions: [".melody.twig", ".html.twig", ".twig"],
         linguistLanguageId: 0,
-        vscodeLanguageIds: ["melody"]
+        vscodeLanguageIds: ["twig"]
     }
 ];
 
