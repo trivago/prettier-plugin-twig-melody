@@ -44,7 +44,11 @@ const createConfiguredParser = (code, ...extensions) => {
         extensions = [coreExtension, ...extensions];
     }
     const parser = new Parser(
-        new TokenStream(createConfiguredLexer(code, ...extensions))
+        new TokenStream(createConfiguredLexer(code, ...extensions), {
+            ignoreWhitespace: true,
+            ignoreComments: false,
+            ignoreHtmlComments: false
+        })
     );
     configureParser(parser, ...extensions);
     return parser;
