@@ -86,6 +86,12 @@ exports[`filterExpression.melody.twig 1`] = `
 }}
 `;
 
+exports[`memberExpression.melody.twig 1`] = `
+{{ alternativeMarriottRewardRates[deal.dealId].short }}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{{ alternativeMarriottRewardRates[deal.dealId].short }}
+`;
+
 exports[`operators.melody.twig 1`] = `
 {{ a b-and b }}
 {{ a b-or b }}

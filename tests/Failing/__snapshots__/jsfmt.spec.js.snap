@@ -6,6 +6,32 @@ exports[`failing.melody.twig 1`] = `
 {% endif %}
 
 <span data-whitespace-test="Testing: {{- noWhitespaceTest -}} foo">Test</span>
+
+{% set highlightValueForMoney = isFeatureEnabled('vFMV5') or isCTestActive('WEB-48935') or isCTestActive('WEB-48956') or isCTestActive('WEB-48955')%}
+
+<li {{ {
+    id: accommodation.id.id,
+    ref: intersectionObserver | default,
+    class: 'hotel-item item-order__list-item js_co_item',
+    'data-co_alt_htl': isAlternative ? '1'
+} | attrs }}>
+    <article>
+        {% mount "@hotelsearch/accommodation-list/src/Slideout/index"
+                as "accommodation-slideout-" ~ accommodation.id.id with {
+                    "key": "accommodation-slideout-" ~ accommodation.id.id,
+                    
+                    "itemId": accommodation.id.id,
+                    "item": accommodation,
+                    "isSearchedItem": isSearchedItem,
+                    "bestPrice": accommodation.deals.bestPrice,
+                    "insights": hasInsights ? insightsData.accommodation.id.id,
+                    "clickedAltDealPartnerId": clickedAltDealPartnerId,
+                    "entirePlace": isEntirePlace
+                        ? entirePlaceData.accommodation.id.id
+                }
+        %}
+    </article>
+</li>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {% if searchResultFailing %}
     <li><span></span>No results found</li>
@@ -14,4 +40,36 @@ exports[`failing.melody.twig 1`] = `
 <span data-whitespace-test="{{ "Testing:" ~ noWhitespaceTest ~ "foo" }}">
     Test
 </span>
+
+{% set highlightValueForMoney =
+    isFeatureEnabled("vFMV5") or isCTestActive("WEB-48935") or
+    isCTestActive("WEB-48956") or
+    isCTestActive("WEB-48955")
+%}
+
+<li
+    {
+        "id": accommodation.id.id,
+        "ref": intersectionObserver | default,
+        "class": "hotel-item item-order__list-item js_co_item",
+        "data-co_alt_htl": isAlternative ? "1"
+    }
+        | attrs>
+    <article>
+        {% mount
+        "@hotelsearch/accommodation-list/src/Slideout/index"
+            as "accommodation-slideout-" ~ accommodation.id.id with {
+                "key": "accommodation-slideout-" ~ accommodation.id.id,
+                "itemId": accommodation.id.id,
+                "item": accommodation,
+                "isSearchedItem": isSearchedItem,
+                "bestPrice": accommodation.deals.bestPrice,
+                "insights": hasInsights ? insightsData.accommodation.id.id,
+                "clickedAltDealPartnerId": clickedAltDealPartnerId,
+                "entirePlace": isEntirePlace
+                    ? entirePlaceData.accommodation.id.id
+            }
+        %}
+    </article>
+</li>
 `;
