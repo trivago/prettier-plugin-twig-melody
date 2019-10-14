@@ -7,7 +7,7 @@
 ## Install
 
 ```bash
-yarn add --dev --exact prettier prettier-plugin-melody
+yarn add --dev --exact prettier prettier-plugin-twig-melody
 ```
 
 ## Use
