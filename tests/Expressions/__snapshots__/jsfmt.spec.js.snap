@@ -43,6 +43,17 @@ exports[`arrayExpression.melody.twig 1`] = `
 {{ numbers[1:] }}
 `;
 
+exports[`binaryExpressions.melody.twig 1`] = `
+{% set highlightValueForMoney = isFeatureEnabled('vFMV5') or isCTestActive('WEB-48935') or isCTestActive('WEB-48956') or isCTestActive('WEB-48955')%}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{% set highlightValueForMoney =
+    isFeatureEnabled("vFMV5")
+    or isCTestActive("WEB-48935")
+    or isCTestActive("WEB-48956")
+    or isCTestActive("WEB-48955")
+%}
+`;
+
 exports[`callExpression.melody.twig 1`] = `
 {{ range(3) }}
 

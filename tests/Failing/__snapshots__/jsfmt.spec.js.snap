@@ -42,9 +42,10 @@ exports[`failing.melody.twig 1`] = `
 </span>
 
 {% set highlightValueForMoney =
-    isFeatureEnabled("vFMV5") or isCTestActive("WEB-48935") or
-    isCTestActive("WEB-48956") or
-    isCTestActive("WEB-48955")
+    isFeatureEnabled("vFMV5")
+    or isCTestActive("WEB-48935")
+    or isCTestActive("WEB-48956")
+    or isCTestActive("WEB-48955")
 %}
 
 <li
