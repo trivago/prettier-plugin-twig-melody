@@ -2,18 +2,18 @@ const prettier = require("prettier");
 const { concat, hardline } = prettier.doc.builders;
 const { printChildBlock, quoteChar } = require("../util");
 
-const createOpener = node => {
+const createOpener = (node, options) => {
     return concat([
         "{% autoescape ",
-        quoteChar(),
+        quoteChar(options),
         node.escapeType || "html",
-        quoteChar(),
+        quoteChar(options),
         " %}"
     ]);
 };
 
-const p = (node, path, print) => {
-    const parts = [createOpener(node)];
+const p = (node, path, print, options) => {
+    const parts = [createOpener(node, options)];
     parts.push(printChildBlock(node, path, print, "expressions"));
     parts.push(hardline, "{% endautoescape %}");
 

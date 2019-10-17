@@ -1,4 +1,9 @@
-const { needsQuotedStringLiterals, findParentNode } = require("../util");
+const {
+    needsQuotedStringLiterals,
+    findParentNode,
+    quoteChar,
+    STRING_NEEDS_QUOTES
+} = require("../util");
 
 const p = (node, path, print, options) => {
     // The parent node of this StringLiteral is 2 or more positions
@@ -6,8 +11,12 @@ const p = (node, path, print, options) => {
     // we have to put quotes around the value.
     const parentNode = findParentNode(path);
     if (parentNode) {
-        if (needsQuotedStringLiterals(parentNode)) {
-            return '"' + node.value + '"';
+        if (
+            needsQuotedStringLiterals(parentNode) ||
+            parentNode[STRING_NEEDS_QUOTES] === true
+        ) {
+            const quote = quoteChar(options);
+            return quote + node.value + quote;
         }
     }
     return node.value;

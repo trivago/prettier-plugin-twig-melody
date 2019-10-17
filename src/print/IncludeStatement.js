@@ -2,12 +2,12 @@ const prettier = require("prettier");
 const { group, concat } = prettier.doc.builders;
 const { quoteChar } = require("../util");
 
-const p = (node, path, print) => {
+const p = (node, path, print, options) => {
     const parts = [
         "{% include ",
-        quoteChar(),
+        quoteChar(options),
         path.call(print, "source"),
-        quoteChar()
+        quoteChar(options)
     ];
     if (node.argument) {
         const printedArguments = path.call(print, "argument");
