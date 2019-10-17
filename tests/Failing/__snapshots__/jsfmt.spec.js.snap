@@ -7,7 +7,10 @@ exports[`failing.melody.twig 1`] = `
 
 <span data-whitespace-test="Testing: {{- noWhitespaceTest -}} foo">Test</span>
 
-{% set highlightValueForMoney = isFeatureEnabled('vFMV5') or isCTestActive('WEB-48935') or isCTestActive('WEB-48956') or isCTestActive('WEB-48955')%}
+{% set isRewardRate = isMarriottRewardRate or 
+    (rewardRateAltIds 
+        and deal.dealId in rewardRateAltIds[accommodation.id.id]) 
+%}
 
 <li {{ {
     id: accommodation.id.id,
@@ -41,11 +44,9 @@ exports[`failing.melody.twig 1`] = `
     Test
 </span>
 
-{% set highlightValueForMoney =
-    isFeatureEnabled("vFMV5")
-    or isCTestActive("WEB-48935")
-    or isCTestActive("WEB-48956")
-    or isCTestActive("WEB-48955")
+{% set isRewardRate =
+    isMarriottRewardRate
+    or rewardRateAltIds and deal.dealId in rewardRateAltIds[accommodation.id.id]
 %}
 
 <li
