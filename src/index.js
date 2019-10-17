@@ -79,6 +79,12 @@ const options = {
         default: [],
         description:
             "Provide additional plugins for Melody. Relative file path from the project root."
+    },
+    twigSingleQuote: {
+        type: "boolean",
+        category: "Global",
+        default: true,
+        description: "Use single quotes in Twig files?"
     }
 };
 
