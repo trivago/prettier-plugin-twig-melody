@@ -2,6 +2,7 @@
 
 const { print } = require("./printer.js");
 const { parse } = require("./parser.js");
+const symbols = require("./util/publicSymbols.js");
 
 const languages = [
     {
@@ -71,10 +72,24 @@ const printers = {
     }
 };
 
-// This exports defines the Prettier plugin
-// See https://github.com/prettier/prettier/blob/master/docs/plugins.md
-module.exports = {
+const options = {
+    twigMelodyPlugins: {
+        type: "array",
+        category: "Global",
+        default: [],
+        description:
+            "Provide additional plugins for Melody. Relative file path from the project root."
+    }
+};
+
+const pluginExports = {
     languages,
     printers,
-    parsers
+    parsers,
+    options
 };
+const combinedExports = Object.assign({}, pluginExports, symbols);
+
+// This exports defines the Prettier plugin
+// See https://github.com/prettier/prettier/blob/master/docs/plugins.md
+module.exports = combinedExports;

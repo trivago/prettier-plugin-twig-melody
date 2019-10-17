@@ -1,5 +1,6 @@
 const { CharStream, Lexer, TokenStream, Parser } = require("melody-parser");
 const { extension: coreExtension } = require("melody-extension-core");
+const { getAdditionalMelodyExtensions } = require("./util");
 
 const createConfiguredLexer = (code, ...extensions) => {
     const lexer = new Lexer(new CharStream(code));
@@ -40,9 +41,6 @@ const configureParser = (parser, ...extensions) => {
 };
 
 const createConfiguredParser = (code, ...extensions) => {
-    if (!extensions.includes(coreExtension)) {
-        extensions = [coreExtension, ...extensions];
-    }
     const parser = new Parser(
         new TokenStream(createConfiguredLexer(code, ...extensions), {
             ignoreWhitespace: true,
@@ -54,8 +52,12 @@ const createConfiguredParser = (code, ...extensions) => {
     return parser;
 };
 
-const parse = code => {
-    const parser = createConfiguredParser(code, coreExtension);
+const parse = (text, parsers, options) => {
+    const extensions = [
+        coreExtension,
+        ...getAdditionalMelodyExtensions(options.twigMelodyPlugins)
+    ];
+    const parser = createConfiguredParser(text, ...extensions);
     return parser.parse();
 };
 

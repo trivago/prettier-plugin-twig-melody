@@ -49,10 +49,32 @@ const {
 const {
     printNamedArgumentExpression
 } = require("./print/NamedArgumentExpression.js");
+const {
+    getPluginPathsFromOptions,
+    loadPlugins
+} = require("./util/pluginUtil.js");
 
 const printFunctions = {};
 
+const applyPlugin = loadedPlugin => {
+    if (loadedPlugin && loadedPlugin.printers) {
+        for (const printerName of Object.keys(loadedPlugin.printers)) {
+            printFunctions[printerName] = loadedPlugin.printers[printerName];
+        }
+    }
+};
+
+const applyPlugins = options => {
+    const pluginPaths = getPluginPathsFromOptions(options);
+    const loadedPlugins = loadPlugins(pluginPaths);
+    loadedPlugins.forEach(plugin => {
+        applyPlugin(plugin);
+    });
+};
+
 const print = (path, options, print) => {
+    applyPlugins(options);
+
     const node = path.getValue();
     const nodeType = node.constructor.name;
 

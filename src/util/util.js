@@ -2,8 +2,6 @@ const prettier = require("prettier");
 const { Node } = require("melody-types");
 const { indent, concat, fill, group, hardline } = prettier.doc.builders;
 
-const MAX_ATTRIBUTE_LENGTH_BEFORE_BREAK = 60;
-
 const PRESERVE_LEADING_WHITESPACE = Symbol("PRESERVE_LEADING_WHITESPACE");
 const PRESERVE_TRAILING_WHITESPACE = Symbol("PRESERVE_TRAILING_WHITESPACE");
 const NEWLINES_ONLY = Symbol("NEWLINES_ONLY");
@@ -239,9 +237,9 @@ const getExpressionType = node => {
     }
 };
 
-const quoteChar = () => {
+const quoteChar = options => {
     // Might change depending on configuration options
-    return '"';
+    return options && options.twigSingleQuote ? "'" : '"';
 };
 
 const isMelodyNode = n => {
