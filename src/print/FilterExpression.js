@@ -76,7 +76,10 @@ const p = (node, path, print) => {
         parts.push(concat([" ", filterExpressions[0]]));
         filterExpressions = filterExpressions.slice(1);
     }
-    if (filterExpressions.length > 0) {
+    if (filterExpressions.length === 1) {
+        // No breaks and indentation for just one expression
+        parts.push(" | ", filterExpressions[0]);
+    } else if (filterExpressions.length > 1) {
         const indentedFilters = concat([
             line,
             "| ",
@@ -85,7 +88,7 @@ const p = (node, path, print) => {
         parts.push(indent(indentedFilters));
     }
     if (needsExpressionEnvironment(path)) {
-        parts.push(line, "}}");
+        parts.push(" }}");
         parts.unshift("{{ ");
     }
 
