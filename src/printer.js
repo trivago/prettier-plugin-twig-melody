@@ -9,6 +9,7 @@ const {
 } = require("./print/ConditionalExpression.js");
 const { printElement } = require("./print/Element.js");
 const { printAttribute } = require("./print/Attribute.js");
+const { printIdentifier } = require("./print/Identifier.js");
 const { printExpressionStatement } = require("./print/ExpressionStatement.js");
 const { printMemberExpression } = require("./print/MemberExpression.js");
 const { printFilterExpression } = require("./print/FilterExpression.js");
@@ -16,6 +17,7 @@ const { printObjectExpression } = require("./print/ObjectExpression.js");
 const { printObjectProperty } = require("./print/ObjectProperty.js");
 const { printCallExpression } = require("./print/CallExpression.js");
 const { printTestExpression } = require("./print/TestExpression.js");
+const { printUnaryExpression } = require("./print/UnaryExpression.js");
 const { printUnarySubclass } = require("./print/UnarySubclass.js");
 const { printTextStatement } = require("./print/TextStatement.js");
 const { printStringLiteral } = require("./print/StringLiteral.js");
@@ -131,12 +133,8 @@ printFunctions["ConstantValue"] = node => {
     return node.value;
 };
 printFunctions["StringLiteral"] = printStringLiteral;
-printFunctions["Identifier"] = node => {
-    return node.name;
-};
-printFunctions["UnaryExpression"] = (node, path, print) => {
-    return concat([node.operator, path.call(print, "argument")]);
-};
+printFunctions["Identifier"] = printIdentifier;
+printFunctions["UnaryExpression"] = printUnaryExpression;
 printFunctions["BinaryExpression"] = printBinaryExpression;
 printFunctions["BinarySubclass"] = printBinaryExpression;
 printFunctions["UnarySubclass"] = printUnarySubclass;

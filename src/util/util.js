@@ -23,12 +23,6 @@ const INLINE_HTML_ELEMENTS = [
     "span"
 ];
 
-const isShallowExpression = node => {
-    return (
-        Node.isPrintExpressionStatement(node) && Node.isIdentifier(node.value)
-    );
-};
-
 const isWhitespaceNode = node => {
     return (
         Node.isPrintTextStatement(node) && isWhitespaceOnly(node.value.value)
@@ -64,38 +58,6 @@ const isInlineElement = node => {
 };
 
 const createInlineMap = nodes => nodes.map(node => isInlineElement(node));
-
-const totalAttributeLength = elementNode =>
-    elementNode.attributes &&
-    elementNode.attributes.reduce(
-        (totalLen, attrNode) => totalLen + attributeLength(attrNode) + 1,
-        0
-    );
-
-/**
- * Adds 3 to the result: 2 for quotes, 1 for equal sign
- * @param {Node} attrNode
- */
-const attributeLength = attrNode => {
-    const result = String.length(attrNode.name);
-    if (attrNode.value) {
-        return result + String.length(attrNode.value) + 3;
-    }
-    return result;
-};
-
-const isDynamicValue = node => {
-    return (
-        Node.isIdentifier(node) ||
-        Node.isMemberExpression(node) ||
-        Node.isUnaryExpression(node) ||
-        Node.isBinaryExpression(node) ||
-        Node.isBinaryConcatExpression(node) ||
-        Node.isConditionalExpression(node) ||
-        Node.isCallExpression(node) ||
-        Node.isFilterExpression(node)
-    );
-};
 
 const needsQuotedStringLiterals = node => {
     return (
@@ -237,28 +199,6 @@ const getExpressionType = node => {
     }
 };
 
-const quoteChar = options => {
-    // Might change depending on configuration options
-    return options && options.twigSingleQuote ? "'" : '"';
-};
-
-const isMelodyNode = n => {
-    const proto = n.__proto__;
-    return typeof n === "object" && proto.type && proto.visitorKeys;
-};
-
-const findParentNode = path => {
-    let currentIndex = path.stack.length - 2;
-    while (currentIndex >= 0) {
-        const currentElement = path.stack[currentIndex];
-        if (isMelodyNode(currentElement)) {
-            return currentElement;
-        }
-        currentIndex--;
-    }
-    return null;
-};
-
 const addPreserveWhitespaceInfo = (inlineMap, nodes) => {
     nodes.forEach((node, index) => {
         if (Node.isPrintTextStatement(node)) {
@@ -276,14 +216,10 @@ const addPreserveWhitespaceInfo = (inlineMap, nodes) => {
 };
 
 module.exports = {
-    isDynamicValue,
     needsQuotedStringLiterals,
     getExpressionType,
-    quoteChar,
     printChildGroups,
     printChildBlock,
-    findParentNode,
-    isMelodyNode,
     isWhitespaceOnly,
     isInlineElement,
     createInlineMap,

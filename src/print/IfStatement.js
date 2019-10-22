@@ -1,8 +1,9 @@
 const prettier = require("prettier");
 const { group, indent, line, hardline, concat } = prettier.doc.builders;
-const { printChildBlock } = require("../util");
+const { EXPRESSION_NEEDED, printChildBlock } = require("../util");
 
 const p = (node, path, print) => {
+    node[EXPRESSION_NEEDED] = false;
     const hasAlternate =
         Array.isArray(node.alternate) && node.alternate.length > 0;
     const ifClause = group(

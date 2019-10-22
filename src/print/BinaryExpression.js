@@ -1,6 +1,11 @@
 const prettier = require("prettier");
 const { group, join, concat, line } = prettier.doc.builders;
 const { Node } = require("melody-types");
+const {
+    EXPRESSION_NEEDED,
+    needsExpressionEnvironment,
+    wrapInEnvironment
+} = require("../util");
 
 const printOneOperand = (node, path, print, nodePath) => {
     return concat([
@@ -12,6 +17,8 @@ const printOneOperand = (node, path, print, nodePath) => {
 };
 
 const p = (node, path, print) => {
+    node[EXPRESSION_NEEDED] = false;
+
     let currentNode = node;
     const pathToFinalLeftHandSide = ["left"];
     const binaryExpressions = [printOneOperand(node, path, print, [])];
@@ -40,6 +47,10 @@ const p = (node, path, print) => {
         currentNode = currentNode.left;
     }
     binaryExpressions.unshift(path.call(print, ...pathToFinalLeftHandSide));
+
+    if (needsExpressionEnvironment(path)) {
+        wrapInEnvironment(binaryExpressions);
+    }
 
     return group(join("", binaryExpressions));
 };

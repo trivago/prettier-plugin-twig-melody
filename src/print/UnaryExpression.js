@@ -8,12 +8,7 @@ const {
 
 const p = (node, path, print) => {
     node[EXPRESSION_NEEDED] = false;
-    const parts = [path.call(print, "object")];
-    parts.push(node.computed ? "[" : ".");
-    parts.push(path.call(print, "property"));
-    if (node.computed) {
-        parts.push("]");
-    }
+    const parts = [node.operator, path.call(print, "argument")];
     if (needsExpressionEnvironment(path)) {
         wrapInEnvironment(parts);
     }
@@ -21,5 +16,5 @@ const p = (node, path, print) => {
 };
 
 module.exports = {
-    printMemberExpression: p
+    printUnaryExpression: p
 };

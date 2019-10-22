@@ -3,6 +3,7 @@
 const { print } = require("./printer.js");
 const { parse } = require("./parser.js");
 const symbols = require("./util/publicSymbols.js");
+const publicFunctions = require("./util/publicFunctions.js");
 
 const languages = [
     {
@@ -94,7 +95,12 @@ const pluginExports = {
     parsers,
     options
 };
-const combinedExports = Object.assign({}, pluginExports, symbols);
+const combinedExports = Object.assign(
+    {},
+    pluginExports,
+    symbols,
+    publicFunctions
+);
 
 // This exports defines the Prettier plugin
 // See https://github.com/prettier/prettier/blob/master/docs/plugins.md

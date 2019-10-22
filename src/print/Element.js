@@ -11,7 +11,8 @@ const {
 const {
     removeSurroundingWhitespace,
     isInlineElement,
-    printChildGroups
+    printChildGroups,
+    EXPRESSION_NEEDED
 } = require("../util");
 
 const printOpeningTag = (node, path, print) => {
@@ -35,6 +36,8 @@ const printSeparatedList = (path, print, separator, attrName) => {
 };
 
 const p = (node, path, print) => {
+    // Set a flag in case attributes contain, e.g., a FilterExpression
+    node[EXPRESSION_NEEDED] = true;
     const openingGroup = group(printOpeningTag(node, path, print));
 
     if (!node.selfClosing) {

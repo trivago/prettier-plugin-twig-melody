@@ -1,9 +1,10 @@
 const prettier = require("prettier");
 const { concat, hardline, group } = prettier.doc.builders;
 const { Node } = require("melody-types");
-const { printChildBlock } = require("../util");
+const { EXPRESSION_NEEDED, printChildBlock } = require("../util");
 
 const p = (node, path, print) => {
+    node[EXPRESSION_NEEDED] = false;
     const hasChildren = Array.isArray(node.body) && node.body.length > 0;
 
     if (hasChildren) {
@@ -16,7 +17,9 @@ const p = (node, path, print) => {
                 opener,
                 indentedBody,
                 hardline,
-                "{% endblock " + blockName + " %}"
+                "{% endblock ",
+                blockName,
+                " %}"
             ])
         );
         return result;

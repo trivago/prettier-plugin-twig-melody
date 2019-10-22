@@ -1,6 +1,15 @@
 const prettier = require("prettier");
 const { group, concat, indent, line, softline, join } = prettier.doc.builders;
 const { Node } = require("melody-types");
+const {
+    EXPRESSION_NEEDED,
+    FILTER_BLOCK,
+    needsExpressionEnvironment,
+    someParentNode
+} = require("../util");
+
+const isInFilterBlock = path =>
+    someParentNode(path, node => node[FILTER_BLOCK] === true);
 
 const printGroup = (prefix, elements, separator, suffix) => {
     return group(
@@ -31,6 +40,8 @@ const joinFilters = filterExpressions => {
 
 const p = (node, path, print) => {
     let currentNode = node;
+    node[EXPRESSION_NEEDED] = false;
+
     const pathToFinalTarget = ["target"];
     let filterExpressions = [printOneFilterExpression(node, path, print, [])];
 
@@ -59,7 +70,7 @@ const p = (node, path, print) => {
     }
 
     const finalTarget = path.call(print, ...pathToFinalTarget);
-    const isFilterBlock = finalTarget === "filter"; // Special case of FilterBlockStatement
+    const isFilterBlock = isInFilterBlock(path); // Special case of FilterBlockStatement
     const parts = [finalTarget];
     if (isFilterBlock) {
         parts.push(concat([" ", filterExpressions[0]]));
@@ -72,6 +83,10 @@ const p = (node, path, print) => {
             joinFilters(filterExpressions)
         ]);
         parts.push(indent(indentedFilters));
+    }
+    if (needsExpressionEnvironment(path)) {
+        parts.push(line, "}}");
+        parts.unshift("{{ ");
     }
 
     return group(concat(parts));

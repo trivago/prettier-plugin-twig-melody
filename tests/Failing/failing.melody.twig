@@ -9,17 +9,18 @@
         and deal.dealId in rewardRateAltIds[accommodation.id.id]) 
 %}
 
-<li {{ {
+<fantasy {{ {
     id: accommodation.id.id,
     ref: intersectionObserver | default,
     class: 'hotel-item item-order__list-item js_co_item',
     'data-co_alt_htl': isAlternative ? '1'
-} | attrs }}>
+} | attrs }}>Test</fantasy>
+
+<li>
     <article>
         {% mount "@hotelsearch/accommodation-list/src/Slideout/index"
                 as "accommodation-slideout-" ~ accommodation.id.id with {
-                    "key": "accommodation-slideout-" ~ accommodation.id.id,
-                    
+                    "key": "accommodation-slideout-" ~ accommodation.id.id,                
                     "itemId": accommodation.id.id,
                     "item": accommodation,
                     "isSearchedItem": isSearchedItem,

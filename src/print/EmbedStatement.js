@@ -1,8 +1,9 @@
 const prettier = require("prettier");
 const { concat, indent, hardline, line, group } = prettier.doc.builders;
-const { printChildBlock } = require("../util");
+const { EXPRESSION_NEEDED, printChildBlock } = require("../util");
 
 const printOpener = (node, path, print) => {
+    node[EXPRESSION_NEEDED] = false;
     const parts = ["{% embed ", path.call(print, "parent")];
     if (node.argument) {
         parts.push(

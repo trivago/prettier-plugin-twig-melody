@@ -12,6 +12,20 @@
  */
 const STRING_NEEDS_QUOTES = Symbol("STRING_NEEDS_QUOTES");
 
+/**
+ * This signals to child nodes that an expression environment
+ * {{ ... }} has not yet been opened, so they might have
+ * to open one. Example: An Element node, in its attributes
+ * array, can directly contain a FilterExpression. Usually,
+ * a FilterExpression does not open an {{...}} environment,
+ * but here, it has to.
+ */
+const EXPRESSION_NEEDED = Symbol("EXPRESSION_NEEDED");
+
+const FILTER_BLOCK = Symbol("FILTER_BLOCK");
+
 module.exports = {
-    STRING_NEEDS_QUOTES
+    STRING_NEEDS_QUOTES,
+    EXPRESSION_NEEDED,
+    FILTER_BLOCK
 };

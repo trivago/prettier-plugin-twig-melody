@@ -1,5 +1,6 @@
 const prettier = require("prettier");
 const { group, concat, indent, line, hardline } = prettier.doc.builders;
+const { EXPRESSION_NEEDED } = require("../util");
 
 const formatDelay = delay => {
     return "" + delay / 1000 + "s";
@@ -55,6 +56,7 @@ const buildErrorHandling = (node, path, print) => {
 };
 
 const p = (node, path, print) => {
+    node[EXPRESSION_NEEDED] = false;
     const parts = [buildOpener(node, path, print)];
     if (node.body) {
         parts.push(buildBody(path, print));
