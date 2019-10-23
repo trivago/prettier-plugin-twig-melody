@@ -32,7 +32,8 @@
     "scripts": {
         "lint": "jest -c jest.eslint.config.js",
         "test": "jest",
-        "prettier": "prettier --plugin=. --parser=melody"
+        "prettier": "prettier --plugin=. --parser=melody",
+        "publish": "npm publish"
     },
     "jest": {
         "projects": ["<rootDir>/jest.*.config.js"]
