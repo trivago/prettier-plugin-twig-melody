@@ -18,13 +18,14 @@ yarn add --dev prettier-plugin-twig-melody
 prettier --write "**/*.melody.twig"
 ```
 
-In your editor, if the plugin is not automatically picked up and invoked (e.g., if you are using format on save, but no formatting is happening when you save), try adding the plugin explicitly in your Prettier configuration (e.g., `.prettierrc.json`) using the `plugins` key:
+In your editor, if the plugin is not automatically picked up and invoked (e.g., if you are using format on save, but no formatting is happening when you save), try adding the plugin explicitly in your Prettier configuration (e.g., `.prettierrc.json`) using the `plugins` key. Since the Prettier plugin system currently does not support array types, multiple paths must be separated by a pipe character (`|`):
 
 ```json
 {
     "printWidth": 80,
     "tabWidth": 4,
-    "plugins": ["./node_modules/prettier-plugin-twig-melody"]
+    "plugins":
+        "./node_modules/prettier-plugin-twig-melody|./path/to/some/other/plugin"
 }
 ```
 

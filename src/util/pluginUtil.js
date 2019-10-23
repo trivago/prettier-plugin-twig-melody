@@ -2,8 +2,11 @@ const path = require("path");
 const resolve = require("resolve");
 
 const getPluginPathsFromOptions = options => {
-    if (options.twigMelodyPlugins && Array.isArray(options.twigMelodyPlugins)) {
-        return options.twigMelodyPlugins;
+    if (
+        options.twigMelodyPlugins &&
+        typeof options.twigMelodyPlugins === "string"
+    ) {
+        return options.twigMelodyPlugins.split("|").map(s => s.trim());
     }
     return [];
 };
