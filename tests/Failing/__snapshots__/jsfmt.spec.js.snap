@@ -11,24 +11,6 @@ exports[`failing.melody.twig 1`] = `
     (rewardRateAltIds 
         and deal.dealId in rewardRateAltIds[accommodation.id.id]) 
 %}
-
-<li>
-    <article>
-        {% mount "@hotelsearch/accommodation-list/src/Slideout/index"
-                as "accommodation-slideout-" ~ accommodation.id.id with {
-                    "key": "accommodation-slideout-" ~ accommodation.id.id,                
-                    "itemId": accommodation.id.id,
-                    "item": accommodation,
-                    "isSearchedItem": isSearchedItem,
-                    "bestPrice": accommodation.deals.bestPrice,
-                    "insights": hasInsights ? insightsData.accommodation.id.id,
-                    "clickedAltDealPartnerId": clickedAltDealPartnerId,
-                    "entirePlace": isEntirePlace
-                        ? entirePlaceData.accommodation.id.id
-                }
-        %}
-    </article>
-</li>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {% if searchResultFailing %}
     <li><span></span>No results found</li>
@@ -42,23 +24,4 @@ exports[`failing.melody.twig 1`] = `
     isMarriottRewardRate
     or rewardRateAltIds and deal.dealId in rewardRateAltIds[accommodation.id.id]
 %}
-
-<li>
-    <article>
-        {% mount
-        "@hotelsearch/accommodation-list/src/Slideout/index"
-            as "accommodation-slideout-" ~ accommodation.id.id with {
-                "key": "accommodation-slideout-" ~ accommodation.id.id,
-                "itemId": accommodation.id.id,
-                "item": accommodation,
-                "isSearchedItem": isSearchedItem,
-                "bestPrice": accommodation.deals.bestPrice,
-                "insights": hasInsights ? insightsData.accommodation.id.id,
-                "clickedAltDealPartnerId": clickedAltDealPartnerId,
-                "entirePlace": isEntirePlace
-                    ? entirePlaceData.accommodation.id.id
-            }
-        %}
-    </article>
-</li>
 `;

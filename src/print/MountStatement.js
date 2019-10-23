@@ -13,7 +13,7 @@ const buildOpener = (node, path, print) => {
     if (node.async === true) {
         firstGroup.push(" async");
     }
-    firstGroup.push(line, printedSource);
+    firstGroup.push(" ", printedSource);
 
     if (node.key) {
         firstGroup.push(indent(concat([line, "as ", path.call(print, "key")])));
