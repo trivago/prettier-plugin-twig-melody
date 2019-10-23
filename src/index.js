@@ -74,19 +74,19 @@ const printers = {
 };
 
 const options = {
-    // twigMelodyPlugins: {
-    //     type: "array",
-    //     category: "Global",
-    //     default: [],
-    //     description:
-    //         "Provide additional plugins for Melody. Relative file path from the project root."
-    // },
-    // twigSingleQuote: {
-    //     type: "boolean",
-    //     category: "Global",
-    //     default: true,
-    //     description: "Use single quotes in Twig files?"
-    // }
+    twigMelodyPlugins: {
+        type: "path",
+        category: "Global",
+        default: "",
+        description:
+            "Provide additional plugins for Melody. Relative file path from the project root."
+    },
+    twigSingleQuote: {
+        type: "boolean",
+        category: "Global",
+        default: true,
+        description: "Use single quotes in Twig files?"
+    }
 };
 
 const pluginExports = {
