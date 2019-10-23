@@ -12,13 +12,6 @@ exports[`failing.melody.twig 1`] = `
         and deal.dealId in rewardRateAltIds[accommodation.id.id]) 
 %}
 
-<fantasy {{ {
-    id: accommodation.id.id,
-    ref: intersectionObserver | default,
-    class: 'hotel-item item-order__list-item js_co_item',
-    'data-co_alt_htl': isAlternative ? '1'
-} | attrs }}>Test</fantasy>
-
 <li>
     <article>
         {% mount "@hotelsearch/accommodation-list/src/Slideout/index"
@@ -49,16 +42,6 @@ exports[`failing.melody.twig 1`] = `
     isMarriottRewardRate
     or rewardRateAltIds and deal.dealId in rewardRateAltIds[accommodation.id.id]
 %}
-
-<fantasy
-    {{ {
-        "id": accommodation.id.id,
-        "ref": intersectionObserver | default,
-        "class": "hotel-item item-order__list-item js_co_item",
-        "data-co_alt_htl": isAlternative ? "1"
-    } | attrs }}>
-    Test
-</fantasy>
 
 <li>
     <article>

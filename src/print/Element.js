@@ -22,9 +22,10 @@ const printOpeningTag = (node, path, print) => {
     const hasAttributes = node.attributes && node.attributes.length > 0;
 
     if (hasAttributes) {
+        const separator = node.attributes.length === 1 ? " " : line;
         return concat([
             opener,
-            indent(concat([line, printedAttributes])),
+            indent(concat([separator, printedAttributes])),
             openingTagEnd
         ]);
     }
