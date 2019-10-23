@@ -172,6 +172,10 @@ exports[`mount.melody.twig 1`] = `
         %}
     </article>
 </li>
+
+<div class="popover__body">
+    {% mount ContentComponent as 'popover-component' ~ activeView with _context %}
+</div>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {% mount "./component" as "bar" %}
 
@@ -216,6 +220,11 @@ exports[`mount.melody.twig 1`] = `
         %}
     </article>
 </li>
+
+<div class="popover__body">
+    {% mount ContentComponent as "popover-component" ~ activeView with _context
+    %}
+</div>
 `;
 
 exports[`useStatement.melody.twig 1`] = `

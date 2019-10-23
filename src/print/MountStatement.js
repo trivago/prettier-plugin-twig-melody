@@ -9,7 +9,8 @@ const formatDelay = delay => {
 const buildOpener = (node, path, print) => {
     const result = [];
     const firstGroup = ["{% mount"];
-    const printedSource = path.call(print, "source");
+    const sourcePath = node.name ? "name" : "source";
+    const printedSource = path.call(print, sourcePath);
     if (node.async === true) {
         firstGroup.push(" async");
     }
