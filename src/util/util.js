@@ -169,36 +169,6 @@ const printChildBlock = (node, path, print, ...childPath) => {
     return indent(group(concat([hardline, ...childGroups])));
 };
 
-const getExpressionType = node => {
-    if (Node.isPrintExpressionStatement(node)) {
-        return "PrintExpressionStatement";
-    }
-    if (Node.isMemberExpression(node)) {
-        return "MemberExpression";
-    }
-    if (Node.isUnaryExpression(node)) {
-        return "UnaryExpression";
-    }
-    if (Node.isBinaryExpression(node)) {
-        return "BinaryExpression";
-    }
-    if (Node.isBinaryConcatExpression(node)) {
-        return "BinaryConcat";
-    }
-    if (Node.isArrayExpression(node)) {
-        return "ArrayExpression";
-    }
-    if (Node.isConditionalExpression(node)) {
-        return "ConditionalExpression";
-    }
-    if (Node.isCallExpression(node)) {
-        return "CallExpression";
-    }
-    if (Node.isFilterExpression(node)) {
-        return "FilterExpression";
-    }
-};
-
 const addPreserveWhitespaceInfo = (inlineMap, nodes) => {
     nodes.forEach((node, index) => {
         if (Node.isPrintTextStatement(node)) {
@@ -217,7 +187,6 @@ const addPreserveWhitespaceInfo = (inlineMap, nodes) => {
 
 module.exports = {
     needsQuotedStringLiterals,
-    getExpressionType,
     printChildGroups,
     printChildBlock,
     isWhitespaceOnly,

@@ -1,7 +1,5 @@
 "use strict";
 
-const prettier = require("prettier");
-const { concat } = prettier.doc.builders;
 const { printSequenceExpression } = require("./print/SequenceExpression.js");
 const { printBinaryExpression } = require("./print/BinaryExpression.js");
 const {
