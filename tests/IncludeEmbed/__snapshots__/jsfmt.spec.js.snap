@@ -115,6 +115,14 @@ exports[`include.melody.twig 1`] = `
 "dataVariables": dataVariables,
 "text": "ie_topdeal"
 } only %}
+
+<div>
+{% include "./Flag.twig" with {
+"styleModifier": flagModifiers,
+"dataVariables": dataVariables,
+"text": "ie_topdeal"
+} only %}
+</div>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <div key="1" class="test">
     {{ message | lower | upper }}{% flush %}
@@ -131,6 +139,14 @@ exports[`include.melody.twig 1`] = `
     "dataVariables": dataVariables,
     "text": "ie_topdeal"
 } only %}
+
+<div>
+    {% include "./Flag.twig" with {
+        "styleModifier": flagModifiers,
+        "dataVariables": dataVariables,
+        "text": "ie_topdeal"
+    } only %}
+</div>
 `;
 
 exports[`mount.melody.twig 1`] = `
