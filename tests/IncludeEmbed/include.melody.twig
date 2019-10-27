@@ -9,15 +9,7 @@
 {% include './Star.twig' only %}
 
 {% include "./Flag.twig" with {
-    "styleModifier": flagModifiers,
-    "dataVariables": dataVariables,
-    "text": "ie_topdeal"
+"styleModifier": flagModifiers,
+"dataVariables": dataVariables,
+"text": "ie_topdeal"
 } only %}
-
-<div>
-    {% include "./Flag.twig" with {
-        "styleModifier": flagModifiers,
-        "dataVariables": dataVariables,
-        "text": "ie_topdeal"
-    } only %}
-</div>

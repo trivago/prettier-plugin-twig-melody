@@ -115,14 +115,6 @@ exports[`include.melody.twig 1`] = `
 "dataVariables": dataVariables,
 "text": "ie_topdeal"
 } only %}
-
-<div>
-{% include "./Flag.twig" with {
-"styleModifier": flagModifiers,
-"dataVariables": dataVariables,
-"text": "ie_topdeal"
-} only %}
-</div>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <div key="1" class="test">
     {{ message | lower | upper }}{% flush %}
@@ -139,14 +131,6 @@ exports[`include.melody.twig 1`] = `
     "dataVariables": dataVariables,
     "text": "ie_topdeal"
 } only %}
-
-<div>
-    {% include "./Flag.twig" with {
-        "styleModifier": flagModifiers,
-        "dataVariables": dataVariables,
-        "text": "ie_topdeal"
-    } only %}
-</div>
 `;
 
 exports[`mount.melody.twig 1`] = `
@@ -175,7 +159,7 @@ exports[`mount.melody.twig 1`] = `
     <article>
         {% mount "@hotelsearch/accommodation-list/src/Slideout/index"
                 as "accommodation-slideout-" ~ accommodation.id.id with {
-                    "key": "accommodation-slideout-" ~ accommodation.id.id,
+                    "key": "accommodation-slideout-" ~ accommodation.id.id,                
                     "itemId": accommodation.id.id,
                     "item": accommodation,
                     "isSearchedItem": isSearchedItem,
