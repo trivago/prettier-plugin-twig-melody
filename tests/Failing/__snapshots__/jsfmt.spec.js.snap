@@ -22,6 +22,12 @@ exports[`failing.melody.twig 1`] = `
         'useWiderItems': useWiderItems
     }
 ) only %}
+
+<div class="striped-rows">
+    <!-- Pregunta 1 -->
+    {% include 'pages/formularios/sub/pregunta-simple.html' %}
+    {% set index = index + 1 %}
+</div>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {% if searchResultFailing %}
     <li><span></span>No results found</li>
@@ -48,4 +54,9 @@ exports[`failing.melody.twig 1`] = `
         "useWiderItems": useWiderItems
     }
 ) only %}
+
+<div class="striped-rows">
+    <!-- Pregunta 1 -->{% include "pages/formularios/sub/pregunta-simple.html" %}
+    {% set index = index + 1 %}
+</div>
 `;
