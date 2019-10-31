@@ -6,7 +6,8 @@ const getPluginPathsFromOptions = options => {
         options.twigMelodyPlugins &&
         typeof options.twigMelodyPlugins === "string"
     ) {
-        return options.twigMelodyPlugins.split("|").map(s => s.trim());
+        const paths = options.twigMelodyPlugins || "";
+        return paths.split("|").map(s => s.trim());
     }
     return [];
 };
