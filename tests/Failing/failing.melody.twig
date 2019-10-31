@@ -8,3 +8,14 @@
     (rewardRateAltIds 
         and deal.dealId in rewardRateAltIds[accommodation.id.id]) 
 %}
+
+{% if isRTL %}&#8206;{% endif %}
+
+{% include './usefulDeal.melody.twig' with deal | merge(
+    {
+        'index': loop.index0,
+        'isOverview': isOverview,
+        'isRTL': isRTL,
+        'useWiderItems': useWiderItems
+    }
+) only %}

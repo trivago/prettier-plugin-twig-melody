@@ -11,6 +11,17 @@ exports[`failing.melody.twig 1`] = `
     (rewardRateAltIds 
         and deal.dealId in rewardRateAltIds[accommodation.id.id]) 
 %}
+
+{% if isRTL %}&#8206;{% endif %}
+
+{% include './usefulDeal.melody.twig' with deal | merge(
+    {
+        'index': loop.index0,
+        'isOverview': isOverview,
+        'isRTL': isRTL,
+        'useWiderItems': useWiderItems
+    }
+) only %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {% if searchResultFailing %}
     <li><span></span>No results found</li>
@@ -24,4 +35,17 @@ exports[`failing.melody.twig 1`] = `
     isMarriottRewardRate
     or rewardRateAltIds and deal.dealId in rewardRateAltIds[accommodation.id.id]
 %}
+
+{% if isRTL %}
+    ‎
+{% endif %}
+
+{% include "./usefulDeal.melody.twig" with deal | merge(
+    {
+        "index": loop.index0,
+        "isOverview": isOverview,
+        "isRTL": isRTL,
+        "useWiderItems": useWiderItems
+    }
+) only %}
 `;
