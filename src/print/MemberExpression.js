@@ -1,5 +1,5 @@
 const prettier = require("prettier");
-const { concat } = prettier.doc.builders;
+const { concat, group } = prettier.doc.builders;
 const {
     EXPRESSION_NEEDED,
     needsExpressionEnvironment,
@@ -17,7 +17,7 @@ const p = (node, path, print) => {
     if (needsExpressionEnvironment(path)) {
         wrapInEnvironment(parts);
     }
-    return concat(parts);
+    return group(concat(parts));
 };
 
 module.exports = {
