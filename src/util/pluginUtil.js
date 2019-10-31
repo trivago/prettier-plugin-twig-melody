@@ -12,11 +12,22 @@ const getPluginPathsFromOptions = options => {
     return [];
 };
 
+const getProjectRoot = () => {
+    const parts = __dirname.split(path.sep);
+    let index = parts.length - 1;
+    let dirName = parts[index];
+    while (dirName !== "node_modules") {
+        index--;
+        dirName = parts[index];
+    }
+    const subPath = parts.slice(0, index);
+    return path.join(...subPath);
+};
+
 const tryLoadPlugin = pluginPath => {
     try {
-        const requirePath = resolve.sync(
-            path.resolve(process.cwd(), pluginPath)
-        );
+        const projectRoot = getProjectRoot();
+        const requirePath = resolve.sync(path.resolve(projectRoot, pluginPath));
         return eval("require")(requirePath);
     } catch (e) {
         console.error("Could not load plugin path " + pluginPath);
