@@ -5,3 +5,14 @@
         <div class="bar"></div>
     {% endif %}
 </div>
+
+{% if partner %}
+    <img class="{{ {
+        (css.logo): not useWiderItems,
+        (css.logoWider): useWiderItems
+    } | classes }}" srcABC="{{ partner.logoUrl }}" alt="{{ partner.name }}" />
+{% elseif partnerName %}
+    <b class="{{ css.name }}">{{ partnerName }}</b>
+{% elseif partnerImg %}
+    <b class="{{ css.image }}">{{ partnerImg }}</b>
+{% endif %}
