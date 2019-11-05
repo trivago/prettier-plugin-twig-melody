@@ -266,7 +266,7 @@ exports[`operators.melody.twig 1`] = `
 {{ range(2, 3, 2) | sort | join(",") }}
 {{ test | raw }}
 {{ 2.4 | abs }}
-{{ { "a": "b" } | json_encode | trim }}
+{{ { a: "b" } | json_encode | trim }}
 {{ [2, 3] | length }}
 {{ "test.foo" | split(".") }}
 `;

@@ -131,8 +131,8 @@ exports[`if.melody.twig 1`] = `
 {% if partner %}
     <img
         class="{{ {
-            "css.logo": not useWiderItems,
-            "css.logoWider": useWiderItems
+            (css.logo): not useWiderItems,
+            (css.logoWider): useWiderItems
         } | classes }}"
         srcABC="{{ partner.logoUrl }}"
         alt="{{ partner.name }}"

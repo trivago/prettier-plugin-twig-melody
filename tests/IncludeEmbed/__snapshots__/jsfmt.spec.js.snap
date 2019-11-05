@@ -50,7 +50,7 @@ exports[`embed.melody.twig 1`] = `
 
 {% block hello %}
     <div class="{{ "test-" ~ foo ~ " bar" }}">
-        {% embed "foo.twig" with { "foo": "bar" } %}
+        {% embed "foo.twig" with { foo: "bar" } %}
             {% block hello %}
                 {{ fun }}
                 {% embed "bar.twig" %}
@@ -179,9 +179,7 @@ exports[`mount.melody.twig 1`] = `
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {% mount "./component" as "bar" %}
 
-{% mount async "./parts/" ~ part ~ ".twig" as "bar-" ~ part with {
-        "foo": "bar"
-    }
+{% mount async "./parts/" ~ part ~ ".twig" as "bar-" ~ part with { foo: "bar" }
     delay placeholder by 1s
 %}
     Loading...
@@ -192,12 +190,12 @@ exports[`mount.melody.twig 1`] = `
 <div class="profile-wrapper account">
     {% if isProfilePageDisplayed %}
         {% mount "../Profile" as "profile" with {
-                "user": user,
-                "expressBookingIframeUrl": expressBookingIframeUrl,
-                "paymentMethodsIframeUrl": paymentMethodsIframeUrl,
-                "isAboveScreenMedium": isAboveScreenMedium,
-                "anchor": anchor,
-                "recentlyViewedExpanded": recentlyViewedExpanded
+                user: user,
+                expressBookingIframeUrl: expressBookingIframeUrl,
+                paymentMethodsIframeUrl: paymentMethodsIframeUrl,
+                isAboveScreenMedium: isAboveScreenMedium,
+                anchor: anchor,
+                recentlyViewedExpanded: recentlyViewedExpanded
             }
         %}
     {% endif %}
