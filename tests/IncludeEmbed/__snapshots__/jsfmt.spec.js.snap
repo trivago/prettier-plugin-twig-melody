@@ -24,6 +24,7 @@ exports[`block.melody.twig 1`] = `
 {% block bar foo %}
 
 {{ block("hello") }}
+
 `;
 
 exports[`embed.melody.twig 1`] = `
@@ -65,6 +66,7 @@ exports[`embed.melody.twig 1`] = `
         {% endembed %}
     </div>
 {% endblock hello %}
+
 `;
 
 exports[`extendsEmbed.melody.twig 1`] = `
@@ -73,6 +75,7 @@ exports[`extendsEmbed.melody.twig 1`] = `
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {% extends "parent.twig" %}
 {% extends someVar %}
+
 `;
 
 exports[`import.melody.twig 1`] = `
@@ -97,6 +100,7 @@ exports[`import.melody.twig 1`] = `
     password as pw_field,
     radioButton
 %}
+
 `;
 
 exports[`include.melody.twig 1`] = `
@@ -131,6 +135,7 @@ exports[`include.melody.twig 1`] = `
     "dataVariables": dataVariables,
     "text": "ie_topdeal"
 } only %}
+
 `;
 
 exports[`mount.melody.twig 1`] = `
@@ -223,6 +228,7 @@ exports[`mount.melody.twig 1`] = `
     {% mount ContentComponent as "popover-component" ~ activeView with _context
     %}
 </div>
+
 `;
 
 exports[`useStatement.melody.twig 1`] = `
@@ -240,4 +246,5 @@ exports[`useStatement.melody.twig 1`] = `
     sidebar as base_sidebar,
     title as base_title
 %}
+
 `;

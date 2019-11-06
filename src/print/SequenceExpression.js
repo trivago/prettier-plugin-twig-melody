@@ -1,10 +1,17 @@
 const prettier = require("prettier");
-const { concat } = prettier.doc.builders;
-const { removeSurroundingWhitespace, printChildGroups } = require("../util");
+const { concat, hardline } = prettier.doc.builders;
+const {
+    removeSurroundingWhitespace,
+    printChildGroups,
+    isRootNode
+} = require("../util");
 
 const p = (node, path, print) => {
     node.expressions = removeSurroundingWhitespace(node.expressions);
     const items = printChildGroups(node, path, print, "expressions");
+    if (isRootNode(path)) {
+        return concat([...items, hardline]);
+    }
     return concat(items);
 };
 

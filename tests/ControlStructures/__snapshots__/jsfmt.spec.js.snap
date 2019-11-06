@@ -16,6 +16,7 @@ exports[`for.melody.twig 1`] = `
         </li>
     {% endfor %}
 </ul>
+
 `;
 
 exports[`forIfElse.melody.twig 1`] = `
@@ -56,6 +57,7 @@ exports[`forIfElse.melody.twig 1`] = `
         {% endif %}
     {% endfor %}
 </ul>
+
 `;
 
 exports[`forInclude.melody.twig 1`] = `
@@ -72,6 +74,7 @@ exports[`forInclude.melody.twig 1`] = `
         {% include "./Star.twig" only %}
     </span>
 {% endfor %}
+
 `;
 
 exports[`forWithBlock.melody.twig 1`] = `
@@ -98,6 +101,7 @@ exports[`forWithBlock.melody.twig 1`] = `
         </li>
     {% endfor %}
 </ul>
+
 `;
 
 exports[`if.melody.twig 1`] = `
@@ -142,4 +146,5 @@ exports[`if.melody.twig 1`] = `
 {% elseif partnerImg %}
     <b class="{{ css.image }}">{{ partnerImg }}</b>
 {% endif %}
+
 `;

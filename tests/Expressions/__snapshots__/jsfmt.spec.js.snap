@@ -41,6 +41,7 @@ exports[`arrayExpression.melody.twig 1`] = `
 {{ numbers[1:endIndex] }}
 
 {{ numbers[1:] }}
+
 `;
 
 exports[`binaryExpressions.melody.twig 1`] = `
@@ -70,6 +71,7 @@ exports[`binaryExpressions.melody.twig 1`] = `
     or condition3 and condition4 and condition5
     or condition6
 %}
+
 `;
 
 exports[`callExpression.melody.twig 1`] = `
@@ -103,6 +105,7 @@ exports[`callExpression.melody.twig 1`] = `
         </div>
     </div>
 </span>
+
 `;
 
 exports[`conditionalExpression.melody.twig 1`] = `
@@ -117,6 +120,7 @@ exports[`conditionalExpression.melody.twig 1`] = `
         ? "This is a slightly longer string to overflow the line"
         : "and here is its counterpart"
 }}
+
 `;
 
 exports[`filterExpression.melody.twig 1`] = `
@@ -136,12 +140,14 @@ exports[`filterExpression.melody.twig 1`] = `
         | upper
         | escape("markdown")
 }}
+
 `;
 
 exports[`memberExpression.melody.twig 1`] = `
 {{ alternativeMarriottRewardRates[deal.dealId].short }}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {{ alternativeMarriottRewardRates[deal.dealId].short }}
+
 `;
 
 exports[`operators.melody.twig 1`] = `
@@ -269,6 +275,7 @@ exports[`operators.melody.twig 1`] = `
 {{ { a: "b" } | json_encode | trim }}
 {{ [2, 3] | length }}
 {{ "test.foo" | split(".") }}
+
 `;
 
 exports[`stringConcat.melody.twig 1`] = `
@@ -279,6 +286,7 @@ exports[`stringConcat.melody.twig 1`] = `
 <div>
     {{ first ~ second }}
 </div>
+
 `;
 
 exports[`unaryNot.melody.twig 1`] = `
@@ -291,4 +299,5 @@ exports[`unaryNot.melody.twig 1`] = `
         All's well.
     </p>
 {% endif %}
+
 `;

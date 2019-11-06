@@ -16,12 +16,14 @@ exports[`autoescape.melody.twig 1`] = `
 
     <span>Yes</span>
 {% endautoescape %}
+
 `;
 
 exports[`do.melody.twig 1`] = `
 {% do 1 + 2 %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {% do 1 + 2 %}
+
 `;
 
 exports[`filter.melody.twig 1`] = `
@@ -55,6 +57,7 @@ exports[`filter.melody.twig 1`] = `
         The cat is taking a nap in the sunshine.
     </p>
 {% endfilter %}
+
 `;
 
 exports[`macro.melody.twig 1`] = `
@@ -115,6 +118,7 @@ exports[`macro.melody.twig 1`] = `
         {{ forms.input(name, value, type, size) }}
     </div>
 {% endmacro %}
+
 `;
 
 exports[`set.melody.twig 1`] = `
@@ -161,6 +165,7 @@ exports[`set.melody.twig 1`] = `
         Some more text
     </p>
 {% endset %}
+
 `;
 
 exports[`spaceless.melody.twig 1`] = `
@@ -177,4 +182,5 @@ exports[`spaceless.melody.twig 1`] = `
         <span>be</span> happy!
     </div>
 {% endspaceless %}
+
 `;

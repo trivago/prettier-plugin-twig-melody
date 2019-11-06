@@ -22,6 +22,10 @@ exports[`failing.melody.twig 1`] = `
         'useWiderItems': useWiderItems
     }
 ) only %}
+
+{% if accommodation.deals.minPrice and accommodation.deals.minPrice.displayPrice %}
+    Test content
+{% endif %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {% if searchResultFailing %}
     <li><span></span>No results found</li>
@@ -48,4 +52,11 @@ exports[`failing.melody.twig 1`] = `
         "useWiderItems": useWiderItems
     }
 ) only %}
+
+{% if
+    accommodation.deals.minPrice and accommodation.deals.minPrice.displayPrice
+%}
+    Test content
+{% endif %}
+
 `;
