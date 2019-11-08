@@ -49,7 +49,12 @@ const createConfiguredParser = (code, ...extensions) => {
             ignoreWhitespace: true,
             ignoreComments: false,
             ignoreHtmlComments: false
-        })
+        }),
+        {
+            ignoreComments: false,
+            ignoreHtmlComments: false,
+            decodeEntities: false
+        }
     );
     configureParser(parser, ...extensions);
     return parser;

@@ -1,6 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`failing.melody.twig 1`] = `
+{# This is a Twig comment #}
 {% if searchResultFailing %}
 <li><span><!--//--></span>No results found</li>
 {% endif %}
@@ -27,6 +28,7 @@ exports[`failing.melody.twig 1`] = `
     Test content
 {% endif %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 {% if searchResultFailing %}
     <li><span></span>No results found</li>
 {% endif %}
@@ -41,7 +43,7 @@ exports[`failing.melody.twig 1`] = `
 %}
 
 {% if isRTL %}
-    ‎
+    &#8206;
 {% endif %}
 
 {% include './usefulDeal.melody.twig' with deal | merge(
