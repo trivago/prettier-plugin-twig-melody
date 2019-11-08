@@ -40,6 +40,7 @@ const p = (node, path, print) => {
     // Set a flag in case attributes contain, e.g., a FilterExpression
     node[EXPRESSION_NEEDED] = true;
     const openingGroup = group(printOpeningTag(node, path, print));
+    node[EXPRESSION_NEEDED] = false;
 
     if (!node.selfClosing) {
         node.children = removeSurroundingWhitespace(node.children);

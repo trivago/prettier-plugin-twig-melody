@@ -13,13 +13,14 @@ exports[`attributes.melody.twig 1`] = `
 <a href="#abcd" target="_blank" lang="en">Link</a>
 
 <fantasy {{ {
-        "id": accommodation.id.id,
-        "ref": intersectionObserver | default,
-        "class": "hotel-item item-order__list-item js_co_item",
-        "data-co_alt_htl": isAlternative ? "1"
+        id: accommodation.id.id,
+        ref: intersectionObserver | default,
+        class: 'hotel-item item-order__list-item js_co_item',
+        'data-co_alt_htl': isAlternative ? '1'
     } | attrs }}>
     Test
 </fantasy>
+
 `;
 
 exports[`breakingSiblings.melody.twig 1`] = `
@@ -44,6 +45,7 @@ exports[`breakingSiblings.melody.twig 1`] = `
 <b>Five</b>
 <i>Six</i>
 <span>Seven</span>
+
 `;
 
 exports[`children.melody.twig 1`] = `
@@ -58,8 +60,9 @@ exports[`children.melody.twig 1`] = `
     <div class="{{ css.barWrapper }}">
         <span class="{{ css.bar }}"></span>
     </div>
-    <strong class="{{ css.text }}">{{ "checking_deals" }}</strong>
+    <strong class="{{ css.text }}">{{ 'checking_deals' }}</strong>
 </div>
+
 `;
 
 exports[`emptyLines.melody.twig 1`] = `
@@ -87,12 +90,14 @@ exports[`emptyLines.melody.twig 1`] = `
 
     <img src="/img/posts/08/07/dns-resolution-expl.png" alt="DNS explained" />
 </div>
+
 `;
 
 exports[`extraSpaces.melody.twig 1`] = `
 <span  >Text</span >
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <span>Text</span>
+
 `;
 
 exports[`manyAttributes.melody.twig 1`] = `
@@ -109,6 +114,7 @@ exports[`manyAttributes.melody.twig 1`] = `
     attr8="eight">
     Text
 </span>
+
 `;
 
 exports[`oneLine.melody.twig 1`] = `
@@ -117,6 +123,7 @@ exports[`oneLine.melody.twig 1`] = `
 </a>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <a href="{{ url }}">Next</a>
+
 `;
 
 exports[`selfClosing.melody.twig 1`] = `
@@ -142,12 +149,14 @@ exports[`selfClosing.melody.twig 1`] = `
 <input type="text" name="user" />
 <input type="text" name="password" />
 <input type="text" name="password2" />
+
 `;
 
 exports[`siblings.melody.twig 1`] = `
 <span>One</span><b>Two</b><i>Three</i>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <span>One</span><b>Two</b><i>Three</i>
+
 `;
 
 exports[`whitespace.melody.twig 1`] = `
@@ -178,7 +187,7 @@ exports[`whitespace.melody.twig 1`] = `
 </span>
 
 <div>
-    Gallia est omnis divisa in {{ "partes tres" }}, quarum unam incolunt Belgae,
+    Gallia est omnis divisa in {{ 'partes tres' }}, quarum unam incolunt Belgae,
     aliam Aquitani, tertiam, qui ipsorum lingua Celtae, nostra Galli
     appellantur.
 
@@ -190,4 +199,5 @@ exports[`whitespace.melody.twig 1`] = `
     Aquitani another, those who in their own language are called Celts, in our
     Gauls, the third.
 </div>
+
 `;

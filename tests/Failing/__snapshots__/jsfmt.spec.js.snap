@@ -2,6 +2,7 @@
 
 exports[`failing.melody.twig 1`] = `
 {% if searchResultFailing %}
+            {# This is a Twig comment #}
 <li><span><!--//--></span>No results found</li>
 {% endif %}
 
@@ -11,12 +12,27 @@ exports[`failing.melody.twig 1`] = `
     (rewardRateAltIds 
         and deal.dealId in rewardRateAltIds[accommodation.id.id]) 
 %}
+
+{% if isRTL %}&#8206;{% endif %}
+
+{% include './usefulDeal.melody.twig' with deal | merge(
+    {
+        'index': loop.index0,
+        'isOverview': isOverview,
+        'isRTL': isRTL,
+        'useWiderItems': useWiderItems
+    }
+) only %}
+
+{% if accommodation.deals.minPrice and accommodation.deals.minPrice.displayPrice %}
+    Test content
+{% endif %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {% if searchResultFailing %}
-    <li><span></span>No results found</li>
+    {# This is a Twig comment #} <li><span><!--//--></span>No results found</li>
 {% endif %}
 
-<span data-whitespace-test="{{ "Testing:" ~ noWhitespaceTest ~ "foo" }}">
+<span data-whitespace-test="{{ 'Testing:' ~ noWhitespaceTest ~ 'foo' }}">
     Test
 </span>
 
@@ -24,4 +40,24 @@ exports[`failing.melody.twig 1`] = `
     isMarriottRewardRate
     or rewardRateAltIds and deal.dealId in rewardRateAltIds[accommodation.id.id]
 %}
+
+{% if isRTL %}
+    &#8206;
+{% endif %}
+
+{% include './usefulDeal.melody.twig' with deal | merge(
+    {
+        'index': loop.index0,
+        'isOverview': isOverview,
+        'isRTL': isRTL,
+        'useWiderItems': useWiderItems
+    }
+) only %}
+
+{% if
+    accommodation.deals.minPrice and accommodation.deals.minPrice.displayPrice
+%}
+    Test content
+{% endif %}
+
 `;

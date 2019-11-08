@@ -15,22 +15,22 @@ exports[`arrayExpression.melody.twig 1`] = `
 
 {{ numbers[1:] }}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{{ [2, 3, "cat"] }}
+{{ [2, 3, 'cat'] }}
 
-{{ [2, 3, "cat", "dog", "mouse"] }}
+{{ [2, 3, 'cat', 'dog', 'mouse'] }}
 
 {{
     [
         2,
         3,
-        "cat",
-        "dog",
-        "mouse",
-        "cake",
-        "elephant",
-        "zebra",
+        'cat',
+        'dog',
+        'mouse',
+        'cake',
+        'elephant',
+        'zebra',
         3.1415,
-        translate("translation_key")
+        translate('translation_key')
     ]
 }}
 
@@ -41,6 +41,7 @@ exports[`arrayExpression.melody.twig 1`] = `
 {{ numbers[1:endIndex] }}
 
 {{ numbers[1:] }}
+
 `;
 
 exports[`binaryExpressions.melody.twig 1`] = `
@@ -51,10 +52,10 @@ exports[`binaryExpressions.melody.twig 1`] = `
 {% set name = condition1 and condition2 or condition3 and condition4 and condition5 or condition6 %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {% set highlightValueForMoney =
-    isFeatureEnabled("vFMV5")
-    or isCTestActive("WEB-48935")
-    or isCTestActive("WEB-48956")
-    or isCTestActive("WEB-48955")
+    isFeatureEnabled('vFMV5')
+    or isCTestActive('WEB-48935')
+    or isCTestActive('WEB-48956')
+    or isCTestActive('WEB-48955')
 %}
 
 {% set name =
@@ -70,16 +71,41 @@ exports[`binaryExpressions.melody.twig 1`] = `
     or condition3 and condition4 and condition5
     or condition6
 %}
+
 `;
 
 exports[`callExpression.melody.twig 1`] = `
 {{ range(3) }}
 
 {{ date('d/m/Y H:i', timezone="Europe/Paris") }}
+
+<span class="{{ css.partner }}">
+    <div>
+        <div>
+            {{
+                helpers.partner(cheapestPrice.group.groupId, cheapestPrice.name.value)
+            }}
+        </div>
+    </div>
+</span>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {{ range(3) }}
 
-{{ date("d/m/Y H:i", timezone = "Europe/Paris") }}
+{{ date('d/m/Y H:i', timezone = 'Europe/Paris') }}
+
+<span class="{{ css.partner }}">
+    <div>
+        <div>
+            {{
+                helpers.partner(
+                    cheapestPrice.group.groupId,
+                    cheapestPrice.name.value
+                )
+            }}
+        </div>
+    </div>
+</span>
+
 `;
 
 exports[`conditionalExpression.melody.twig 1`] = `
@@ -87,13 +113,14 @@ exports[`conditionalExpression.melody.twig 1`] = `
 
 {{ test ? "This is a slightly longer string to overflow the line" : "and here is its counterpart" }}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{{ test ? "One" : "Two" }}
+{{ test ? 'One' : 'Two' }}
 
 {{
     test
-        ? "This is a slightly longer string to overflow the line"
-        : "and here is its counterpart"
+        ? 'This is a slightly longer string to overflow the line'
+        : 'and here is its counterpart'
 }}
+
 `;
 
 exports[`filterExpression.melody.twig 1`] = `
@@ -101,24 +128,26 @@ exports[`filterExpression.melody.twig 1`] = `
 {{ range(3) | sort | join(',') }}
 {{ 'SHOUTING' | lower|escape('html') | upper | escape('markdown') | lower | upper | escape('markdown') }}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{{ "test.foo" | split(".") }}
-{{ range(3) | sort | join(",") }}
+{{ 'test.foo' | split('.') }}
+{{ range(3) | sort | join(',') }}
 {{
-    "SHOUTING"
+    'SHOUTING'
         | lower
-        | escape("html")
+        | escape('html')
         | upper
-        | escape("markdown")
+        | escape('markdown')
         | lower
         | upper
-        | escape("markdown")
+        | escape('markdown')
 }}
+
 `;
 
 exports[`memberExpression.melody.twig 1`] = `
 {{ alternativeMarriottRewardRates[deal.dealId].short }}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {{ alternativeMarriottRewardRates[deal.dealId].short }}
+
 `;
 
 exports[`operators.melody.twig 1`] = `
@@ -193,7 +222,7 @@ exports[`operators.melody.twig 1`] = `
 {{ a in b }}
 {{ a not in b }}
 {{ a matches b }}
-{{ a matches "^foo" }}
+{{ a matches '^foo' }}
 {{ a starts with b }}
 {{ a ends with b }}
 {{ a .. b }}
@@ -238,14 +267,15 @@ exports[`operators.melody.twig 1`] = `
 }}
 
 {{ dump(test) }}
-{{ range(2, 3) | sort | join(",") }}
-{{ range(3) | sort | join(",") }}
-{{ range(2, 3, 2) | sort | join(",") }}
+{{ range(2, 3) | sort | join(',') }}
+{{ range(3) | sort | join(',') }}
+{{ range(2, 3, 2) | sort | join(',') }}
 {{ test | raw }}
 {{ 2.4 | abs }}
-{{ { "a": "b" } | json_encode | trim }}
+{{ { a: 'b' } | json_encode | trim }}
 {{ [2, 3] | length }}
-{{ "test.foo" | split(".") }}
+{{ 'test.foo' | split('.') }}
+
 `;
 
 exports[`stringConcat.melody.twig 1`] = `
@@ -256,6 +286,7 @@ exports[`stringConcat.melody.twig 1`] = `
 <div>
     {{ first ~ second }}
 </div>
+
 `;
 
 exports[`unaryNot.melody.twig 1`] = `
@@ -268,4 +299,5 @@ exports[`unaryNot.melody.twig 1`] = `
         All's well.
     </p>
 {% endif %}
+
 `;

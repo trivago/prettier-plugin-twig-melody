@@ -12,8 +12,7 @@ const p = (node, path, print) => {
     const parts = [
         path.call(print, "callee"),
         "(",
-        softline,
-        indent(join(concat([",", line]), mappedArguments)),
+        indent(concat([softline, join(concat([",", line]), mappedArguments)])),
         softline,
         ")"
     ];

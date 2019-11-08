@@ -48,6 +48,10 @@ const findParentNode = path => {
     return null;
 };
 
+const isRootNode = path => {
+    return findParentNode(path) === null;
+};
+
 const someParentNode = (path, predicate) => {
     let currentIndex = path.stack.length - 2;
     while (currentIndex >= 0) {
@@ -90,6 +94,7 @@ module.exports = {
     needsExpressionEnvironment,
     wrapInEnvironment,
     findParentNode,
+    isRootNode,
     isMelodyNode,
     someParentNode,
     walkParents,

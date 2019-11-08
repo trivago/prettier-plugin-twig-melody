@@ -46,6 +46,18 @@ const removeSurroundingWhitespace = children => {
     return result;
 };
 
+const endsWithHtmlComment = s => s.endsWith("-->");
+
+const isInlineTextStatement = node => {
+    if (!Node.isPrintTextStatement(node)) {
+        return false;
+    }
+    // If the statement ends with an HTML comment
+    const trimmedValue =
+        typeof node.value.value === "string" && node.value.value.trim();
+    return !endsWithHtmlComment(trimmedValue);
+};
+
 const isInlineElement = node => {
     const isInlineHtmlElement =
         Node.isElement(node) && INLINE_HTML_ELEMENTS.indexOf(node.name) >= 0;
@@ -53,7 +65,7 @@ const isInlineElement = node => {
     return (
         isInlineHtmlElement ||
         Node.isPrintExpressionStatement(node) ||
-        Node.isPrintTextStatement(node)
+        isInlineTextStatement(node)
     );
 };
 

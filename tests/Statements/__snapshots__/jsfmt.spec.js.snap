@@ -9,19 +9,21 @@ exports[`autoescape.melody.twig 1`] = `
 
 {% endautoescape %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{% autoescape "html" %}
+{% autoescape 'html' %}
     <button type="button">
         Click me
     </button>
 
     <span>Yes</span>
 {% endautoescape %}
+
 `;
 
 exports[`do.melody.twig 1`] = `
 {% do 1 + 2 %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {% do 1 + 2 %}
+
 `;
 
 exports[`filter.melody.twig 1`] = `
@@ -42,12 +44,12 @@ exports[`filter.melody.twig 1`] = `
 {% endfilter %}
 
 {% filter lower
-    | escape("html")
+    | escape('html')
     | upper
-    | escape("markdown")
+    | escape('markdown')
     | lower
     | upper
-    | escape("markdown")
+    | escape('markdown')
 %}
     <strong>SOME TEXT</strong>
 
@@ -55,6 +57,7 @@ exports[`filter.melody.twig 1`] = `
         The cat is taking a nap in the sunshine.
     </p>
 {% endfilter %}
+
 `;
 
 exports[`macro.melody.twig 1`] = `
@@ -115,6 +118,7 @@ exports[`macro.melody.twig 1`] = `
         {{ forms.input(name, value, type, size) }}
     </div>
 {% endmacro %}
+
 `;
 
 exports[`set.melody.twig 1`] = `
@@ -137,21 +141,21 @@ exports[`set.melody.twig 1`] = `
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {% set list = [1, 2] %}
 {% set foo = 0 %}
-{% set foo = "foo" ~ "bar" %}
+{% set foo = 'foo' ~ 'bar' %}
 {% set foo =
-    { "fruit": "apple", "shape": "round", "taste": "sweet", "region": "Europe" }
+    { 'fruit': 'apple', 'shape': 'round', 'taste': 'sweet', 'region': 'Europe' }
 %}
 {% set foo =
     {
-        "fruit": "apple",
-        "shape": "round",
-        "taste": "sweet",
-        "region": "Europe",
-        "colour": "reddish"
+        'fruit': 'apple',
+        'shape': 'round',
+        'taste': 'sweet',
+        'region': 'Europe',
+        'colour': 'reddish'
     }
 %}
-{% set foo = "foo" %}
-{% set bar = "bar" %}
+{% set foo = 'foo' %}
+{% set bar = 'bar' %}
 {% set foo %}
     <div id="pagination">
         Some text
@@ -161,6 +165,7 @@ exports[`set.melody.twig 1`] = `
         Some more text
     </p>
 {% endset %}
+
 `;
 
 exports[`spaceless.melody.twig 1`] = `
@@ -177,4 +182,5 @@ exports[`spaceless.melody.twig 1`] = `
         <span>be</span> happy!
     </div>
 {% endspaceless %}
+
 `;

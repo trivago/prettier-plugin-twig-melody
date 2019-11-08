@@ -6,16 +6,28 @@ const getPluginPathsFromOptions = options => {
         options.twigMelodyPlugins &&
         typeof options.twigMelodyPlugins === "string"
     ) {
-        return options.twigMelodyPlugins.split("|").map(s => s.trim());
+        const paths = options.twigMelodyPlugins || "";
+        return paths.split("|").map(s => s.trim());
     }
     return [];
 };
 
+const getProjectRoot = () => {
+    const parts = __dirname.split(path.sep);
+    let index = parts.length - 1;
+    let dirName = parts[index];
+    while (dirName !== "node_modules") {
+        index--;
+        dirName = parts[index];
+    }
+    const subPath = parts.slice(0, index);
+    return path.join(...subPath);
+};
+
 const tryLoadPlugin = pluginPath => {
     try {
-        const requirePath = resolve.sync(
-            path.resolve(process.cwd(), pluginPath)
-        );
+        const projectRoot = getProjectRoot();
+        const requirePath = resolve.sync(path.resolve(projectRoot, pluginPath));
         return eval("require")(requirePath);
     } catch (e) {
         console.error("Could not load plugin path " + pluginPath);

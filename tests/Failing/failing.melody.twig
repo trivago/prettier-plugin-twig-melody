@@ -1,4 +1,5 @@
 {% if searchResultFailing %}
+            {# This is a Twig comment #}
 <li><span><!--//--></span>No results found</li>
 {% endif %}
 
@@ -8,3 +9,18 @@
     (rewardRateAltIds 
         and deal.dealId in rewardRateAltIds[accommodation.id.id]) 
 %}
+
+{% if isRTL %}&#8206;{% endif %}
+
+{% include './usefulDeal.melody.twig' with deal | merge(
+    {
+        'index': loop.index0,
+        'isOverview': isOverview,
+        'isRTL': isRTL,
+        'useWiderItems': useWiderItems
+    }
+) only %}
+
+{% if accommodation.deals.minPrice and accommodation.deals.minPrice.displayPrice %}
+    Test content
+{% endif %}
