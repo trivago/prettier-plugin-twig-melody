@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`failing.melody.twig 1`] = `
-{# This is a Twig comment #}
 {% if searchResultFailing %}
+            {# This is a Twig comment #}
 <li><span><!--//--></span>No results found</li>
 {% endif %}
 
@@ -28,9 +28,8 @@ exports[`failing.melody.twig 1`] = `
     Test content
 {% endif %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 {% if searchResultFailing %}
-    <li><span></span>No results found</li>
+    {# This is a Twig comment #} <li><span><!--//--></span>No results found</li>
 {% endif %}
 
 <span data-whitespace-test="{{ 'Testing:' ~ noWhitespaceTest ~ 'foo' }}">
