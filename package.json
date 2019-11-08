@@ -6,16 +6,18 @@
     "repository": "https://github.com/trivago/prettier-plugin-twig-melody",
     "author": "Tom Bartel <thomas.bartel@trivago.com>",
     "license": "Apache 2.0",
-    "files": ["src"],
+    "files": [
+        "src"
+    ],
     "engines": {
         "node": ">=6"
     },
     "dependencies": {
         "babel-types": "^6.26.0",
-        "melody-extension-core": "^1.2.1",
-        "melody-parser": "^1.2.1",
-        "melody-traverse": "^1.2.1",
-        "melody-types": "^1.2.1",
+        "melody-extension-core": "^1.3.0",
+        "melody-parser": "^1.3.0",
+        "melody-traverse": "^1.3.0",
+        "melody-types": "^1.3.0",
         "prettier": "^1.8.2",
         "resolve": "^1.12.0"
     },
@@ -34,6 +36,8 @@
         "prettier": "prettier --plugin=. --parser=melody"
     },
     "jest": {
-        "projects": ["<rootDir>/jest.*.config.js"]
+        "projects": [
+            "<rootDir>/jest.*.config.js"
+        ]
     }
 }
