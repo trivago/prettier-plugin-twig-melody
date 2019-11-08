@@ -9,7 +9,7 @@ exports[`autoescape.melody.twig 1`] = `
 
 {% endautoescape %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{% autoescape "html" %}
+{% autoescape 'html' %}
     <button type="button">
         Click me
     </button>
@@ -44,12 +44,12 @@ exports[`filter.melody.twig 1`] = `
 {% endfilter %}
 
 {% filter lower
-    | escape("html")
+    | escape('html')
     | upper
-    | escape("markdown")
+    | escape('markdown')
     | lower
     | upper
-    | escape("markdown")
+    | escape('markdown')
 %}
     <strong>SOME TEXT</strong>
 
@@ -141,21 +141,21 @@ exports[`set.melody.twig 1`] = `
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {% set list = [1, 2] %}
 {% set foo = 0 %}
-{% set foo = "foo" ~ "bar" %}
+{% set foo = 'foo' ~ 'bar' %}
 {% set foo =
-    { "fruit": "apple", "shape": "round", "taste": "sweet", "region": "Europe" }
+    { 'fruit': 'apple', 'shape': 'round', 'taste': 'sweet', 'region': 'Europe' }
 %}
 {% set foo =
     {
-        "fruit": "apple",
-        "shape": "round",
-        "taste": "sweet",
-        "region": "Europe",
-        "colour": "reddish"
+        'fruit': 'apple',
+        'shape': 'round',
+        'taste': 'sweet',
+        'region': 'Europe',
+        'colour': 'reddish'
     }
 %}
-{% set foo = "foo" %}
-{% set bar = "bar" %}
+{% set foo = 'foo' %}
+{% set bar = 'bar' %}
 {% set foo %}
     <div id="pagination">
         Some text

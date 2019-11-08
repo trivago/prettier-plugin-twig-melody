@@ -23,7 +23,7 @@ exports[`block.melody.twig 1`] = `
 
 {% block bar foo %}
 
-{{ block("hello") }}
+{{ block('hello') }}
 
 `;
 
@@ -47,14 +47,14 @@ exports[`embed.melody.twig 1`] = `
     </div>
 {% endblock %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{% extends "parent.twig" %}
+{% extends 'parent.twig' %}
 
 {% block hello %}
-    <div class="{{ "test-" ~ foo ~ " bar" }}">
-        {% embed "foo.twig" with { foo: "bar" } %}
+    <div class="{{ 'test-' ~ foo ~ ' bar' }}">
+        {% embed 'foo.twig' with { foo: 'bar' } %}
             {% block hello %}
                 {{ fun }}
-                {% embed "bar.twig" %}
+                {% embed 'bar.twig' %}
                     {% block hello %}
                         {{ message }}
                     {% endblock hello %}
@@ -73,7 +73,7 @@ exports[`extendsEmbed.melody.twig 1`] = `
 {% extends "parent.twig" %}
 {% extends someVar %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{% extends "parent.twig" %}
+{% extends 'parent.twig' %}
 {% extends someVar %}
 
 `;
@@ -86,14 +86,14 @@ exports[`import.melody.twig 1`] = `
 {% from 'forms.html' import input as input_field,textarea %}
 {% from 'aVeryLongAndConvolutedAndIntertwinedFilename.html' import input as input_field, textarea, select, password as pw_field, radioButton %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{% import "forms.html" as forms %}
-{% import "aVeryLongAndConvolutedAndIntertwinedFilename.html"
+{% import 'forms.html' as forms %}
+{% import 'aVeryLongAndConvolutedAndIntertwinedFilename.html'
     as someQuiteEccentricLocalVariableName
 %}
 
-{% from "macros.twig" import hello %}
-{% from "forms.html" import input as input_field, textarea %}
-{% from "aVeryLongAndConvolutedAndIntertwinedFilename.html" import
+{% from 'macros.twig' import hello %}
+{% from 'forms.html' import input as input_field, textarea %}
+{% from 'aVeryLongAndConvolutedAndIntertwinedFilename.html' import
     input as input_field,
     textarea,
     select,
@@ -123,17 +123,17 @@ exports[`include.melody.twig 1`] = `
 <div key="1" class="test">
     {{ message | lower | upper }}{% flush %}
     <span class="">{{ _context.name[1:] }}</span>
-    {{ block("test") }}
-    {{ include("test.twig") }}
-    {% include "test.twig" %}
+    {{ block('test') }}
+    {{ include('test.twig') }}
+    {% include 'test.twig' %}
 </div>
 
-{% include "./Star.twig" only %}
+{% include './Star.twig' only %}
 
-{% include "./Flag.twig" with {
-    "styleModifier": flagModifiers,
-    "dataVariables": dataVariables,
-    "text": "ie_topdeal"
+{% include './Flag.twig' with {
+    'styleModifier': flagModifiers,
+    'dataVariables': dataVariables,
+    'text': 'ie_topdeal'
 } only %}
 
 `;
@@ -182,9 +182,9 @@ exports[`mount.melody.twig 1`] = `
     {% mount ContentComponent as 'popover-component' ~ activeView with _context %}
 </div>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{% mount "./component" as "bar" %}
+{% mount './component' as 'bar' %}
 
-{% mount async "./parts/" ~ part ~ ".twig" as "bar-" ~ part with { foo: "bar" }
+{% mount async './parts/' ~ part ~ '.twig' as 'bar-' ~ part with { foo: 'bar' }
     delay placeholder by 1s
 %}
     Loading...
@@ -194,7 +194,7 @@ exports[`mount.melody.twig 1`] = `
 
 <div class="profile-wrapper account">
     {% if isProfilePageDisplayed %}
-        {% mount "../Profile" as "profile" with {
+        {% mount '../Profile' as 'profile' with {
                 user: user,
                 expressBookingIframeUrl: expressBookingIframeUrl,
                 paymentMethodsIframeUrl: paymentMethodsIframeUrl,
@@ -208,16 +208,16 @@ exports[`mount.melody.twig 1`] = `
 
 <li>
     <article>
-        {% mount "@hotelsearch/accommodation-list/src/Slideout/index"
-            as "accommodation-slideout-" ~ accommodation.id.id with {
-                "key": "accommodation-slideout-" ~ accommodation.id.id,
-                "itemId": accommodation.id.id,
-                "item": accommodation,
-                "isSearchedItem": isSearchedItem,
-                "bestPrice": accommodation.deals.bestPrice,
-                "insights": hasInsights ? insightsData.accommodation.id.id,
-                "clickedAltDealPartnerId": clickedAltDealPartnerId,
-                "entirePlace": isEntirePlace
+        {% mount '@hotelsearch/accommodation-list/src/Slideout/index'
+            as 'accommodation-slideout-' ~ accommodation.id.id with {
+                'key': 'accommodation-slideout-' ~ accommodation.id.id,
+                'itemId': accommodation.id.id,
+                'item': accommodation,
+                'isSearchedItem': isSearchedItem,
+                'bestPrice': accommodation.deals.bestPrice,
+                'insights': hasInsights ? insightsData.accommodation.id.id,
+                'clickedAltDealPartnerId': clickedAltDealPartnerId,
+                'entirePlace': isEntirePlace
                     ? entirePlaceData.accommodation.id.id
             }
         %}
@@ -225,7 +225,7 @@ exports[`mount.melody.twig 1`] = `
 </li>
 
 <div class="popover__body">
-    {% mount ContentComponent as "popover-component" ~ activeView with _context
+    {% mount ContentComponent as 'popover-component' ~ activeView with _context
     %}
 </div>
 

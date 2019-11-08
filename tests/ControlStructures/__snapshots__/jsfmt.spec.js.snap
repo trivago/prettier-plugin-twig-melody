@@ -11,7 +11,7 @@ exports[`for.melody.twig 1`] = `
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <ul>
     {% for item in items %}
-        <li class="{{ loop.last ? "last" : "" }}">
+        <li class="{{ loop.last ? 'last' : '' }}">
             {{ loop.index0 // 2 }} {{ item.name }} {{ loop.index }}
         </li>
     {% endfor %}
@@ -70,8 +70,8 @@ exports[`forInclude.melody.twig 1`] = `
 {% for foo in range(1, category) %}
     <span
         key="{{ foo }}"
-        class="{{ "qtp-item__star icon-ic icon-icn_star--white " ~ foo }}">
-        {% include "./Star.twig" only %}
+        class="{{ 'qtp-item__star icon-ic icon-icn_star--white ' ~ foo }}">
+        {% include './Star.twig' only %}
     </span>
 {% endfor %}
 
@@ -94,7 +94,7 @@ exports[`forWithBlock.melody.twig 1`] = `
 </h1>
 <ul>
     {% for item in items %}
-        <li class="{{ loop.last ? "last" : "" }}">
+        <li class="{{ loop.last ? 'last' : '' }}">
             {% block title %}
                 {{ loop.index0 }} {{ item.name | title }} {{ loop.index }}
             {% endblock title %}

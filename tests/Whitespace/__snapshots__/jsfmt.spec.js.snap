@@ -27,7 +27,7 @@ exports[`element.melody.twig 1`] = `
 
 <div class="striped-rows">
     <!-- Pregunta 1 -->
-    {% include "pages/formularios/sub/pregunta-simple.html" %}
+    {% include 'pages/formularios/sub/pregunta-simple.html' %}
     {% set index = index + 1 %}
 </div>
 

@@ -15,8 +15,8 @@ exports[`attributes.melody.twig 1`] = `
 <fantasy {{ {
         id: accommodation.id.id,
         ref: intersectionObserver | default,
-        class: "hotel-item item-order__list-item js_co_item",
-        "data-co_alt_htl": isAlternative ? "1"
+        class: 'hotel-item item-order__list-item js_co_item',
+        'data-co_alt_htl': isAlternative ? '1'
     } | attrs }}>
     Test
 </fantasy>
@@ -60,7 +60,7 @@ exports[`children.melody.twig 1`] = `
     <div class="{{ css.barWrapper }}">
         <span class="{{ css.bar }}"></span>
     </div>
-    <strong class="{{ css.text }}">{{ "checking_deals" }}</strong>
+    <strong class="{{ css.text }}">{{ 'checking_deals' }}</strong>
 </div>
 
 `;
@@ -187,7 +187,7 @@ exports[`whitespace.melody.twig 1`] = `
 </span>
 
 <div>
-    Gallia est omnis divisa in {{ "partes tres" }}, quarum unam incolunt Belgae,
+    Gallia est omnis divisa in {{ 'partes tres' }}, quarum unam incolunt Belgae,
     aliam Aquitani, tertiam, qui ipsorum lingua Celtae, nostra Galli
     appellantur.
 
