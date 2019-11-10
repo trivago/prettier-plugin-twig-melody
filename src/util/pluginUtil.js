@@ -21,7 +21,16 @@ const getProjectRoot = () => {
         dirName = parts[index];
     }
     const subPath = parts.slice(0, index);
-    return path.join(...subPath);
+    const joined = path.join(...subPath);
+
+    // This might contain something like
+    //   Users/jdoe/project
+    // => leading slash missing, which can cause
+    // problems. To stay OS independent, let's
+    // re-add everything that came before the result
+    // we have so far.
+    const foundIndex = __dirname.indexOf(joined);
+    return __dirname.slice(0, foundIndex) + joined;
 };
 
 const tryLoadPlugin = pluginPath => {
