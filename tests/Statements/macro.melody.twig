@@ -18,3 +18,9 @@
 
 
 {% endmacro %}
+
+{% macro partner(groupId, value) %}
+    {# 80 is the groupid of specific hotel websites that may not have a correct partner name #}
+    {{ groupId == 80 ? 'book_hotel_website_test' | translate : value }}
+{% endmacro %}
+
