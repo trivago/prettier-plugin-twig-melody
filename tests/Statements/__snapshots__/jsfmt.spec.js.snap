@@ -105,7 +105,7 @@ exports[`macro.melody.twig 1`] = `
     />
 {% endmacro %}
 
-{% macro wrapped_input( name, value, type, size) %}
+{% macro wrapped_input(name, value, type, size) %}
     {% import _self as forms %}
 
     <div class="field">
@@ -113,7 +113,7 @@ exports[`macro.melody.twig 1`] = `
     </div>
 {% endmacro %}
 
-{% macro whitespaceRemoval( name, value, type, size) %}
+{% macro whitespaceRemoval(name, value, type, size) %}
     <div class="field">
         {{ forms.input(name, value, type, size) }}
     </div>
