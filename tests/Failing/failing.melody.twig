@@ -3,6 +3,37 @@
 <li><span><!--//--></span>No results found</li>
 {% endif %}
 
+{% macro partner(groupId, value) %}
+    {# 80 is the groupid of specific hotel websites that may not have a correct partner name #}
+    {{ groupId == 80 ? 'book_hotel_website_test' | translate : value }}
+{% endmacro %}
+
+{##
+# Ellipsis Loader Wrapper
+#
+# @param string key Unique key
+# @param string [id] Element's unique id
+# @param string [classList] Space separated list of classes to add to the loader
+# @param boolean [isFullPage] Indicates whether the loader is full page or not
+# @param boolean [isAbsolute] Indicates whether the loader is absolutely positioned or not
+# @param string [type] Type of loader (one of branded, bright, or dark)
+# @param string [text] Contains text to display below loading animation
+# @param boolean [isVisible] Whether the loader is visible or not
+# @param boolean [centreVertically] Whether the loader is vertically centred or not (default: true)
+# @param object [attributeList] Object of key:value attribute pairs to add to the loader
+#}
+
+{##
+ # Slideout Deal Description
+ #
+ #  @param boolean  isMultiRoom         MultiRoom Room Type
+ #  @param string   description         Deal Description
+ #  @param array    rateAttributes      Deal Attributes (array of string values)
+ #  @param string   price               Deal price
+ #}
+
+
+
 <span data-whitespace-test="Testing: {{- noWhitespaceTest -}} foo">Test</span>
 
 {% set isRewardRate = isMarriottRewardRate or 
