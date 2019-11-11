@@ -3,7 +3,7 @@
 exports[`failing.melody.twig 1`] = `
 {% if searchResultFailing %}
             {# This is a Twig comment #}
-<li><span><!--//--></span>No results found</li>
+<li>No results found</li>
 {% endif %}
 
 {##
@@ -30,16 +30,7 @@ exports[`failing.melody.twig 1`] = `
  #  @param string   price               Deal price
  #}
 
-
-
 <span data-whitespace-test="Testing: {{- noWhitespaceTest -}} foo">Test</span>
-
-{% set isRewardRate = isMarriottRewardRate or 
-    (rewardRateAltIds 
-        and deal.dealId in rewardRateAltIds[accommodation.id.id]) 
-%}
-
-{% if isRTL %}&#8206;{% endif %}
 
 {% include './usefulDeal.melody.twig' with deal | merge(
     {
@@ -50,12 +41,17 @@ exports[`failing.melody.twig 1`] = `
     }
 ) only %}
 
+{% set isRewardRate = isMarriottRewardRate or 
+    (rewardRateAltIds 
+        and deal.dealId in rewardRateAltIds[accommodation.id.id]) 
+%}
+
 {% if accommodation.deals.minPrice and accommodation.deals.minPrice.displayPrice %}
     Test content
 {% endif %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {% if searchResultFailing %}
-    {# This is a Twig comment #} <li><span><!--//--></span>No results found</li>
+    {# This is a Twig comment #} <li>No results found</li>
 {% endif %} {##
 # Ellipsis Loader Wrapper
 #
@@ -82,15 +78,6 @@ exports[`failing.melody.twig 1`] = `
     Test
 </span>
 
-{% set isRewardRate =
-    isMarriottRewardRate
-    or rewardRateAltIds and deal.dealId in rewardRateAltIds[accommodation.id.id]
-%}
-
-{% if isRTL %}
-    &#8206;
-{% endif %}
-
 {% include './usefulDeal.melody.twig' with deal | merge(
     {
         'index': loop.index0,
@@ -99,6 +86,11 @@ exports[`failing.melody.twig 1`] = `
         'useWiderItems': useWiderItems
     }
 ) only %}
+
+{% set isRewardRate =
+    isMarriottRewardRate
+    or rewardRateAltIds and deal.dealId in rewardRateAltIds[accommodation.id.id]
+%}
 
 {% if
     accommodation.deals.minPrice and accommodation.deals.minPrice.displayPrice

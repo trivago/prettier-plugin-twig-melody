@@ -1,6 +1,6 @@
 {% if searchResultFailing %}
             {# This is a Twig comment #}
-<li><span><!--//--></span>No results found</li>
+<li>No results found</li>
 {% endif %}
 
 {##
@@ -27,16 +27,7 @@
  #  @param string   price               Deal price
  #}
 
-
-
 <span data-whitespace-test="Testing: {{- noWhitespaceTest -}} foo">Test</span>
-
-{% set isRewardRate = isMarriottRewardRate or 
-    (rewardRateAltIds 
-        and deal.dealId in rewardRateAltIds[accommodation.id.id]) 
-%}
-
-{% if isRTL %}&#8206;{% endif %}
 
 {% include './usefulDeal.melody.twig' with deal | merge(
     {
@@ -46,6 +37,11 @@
         'useWiderItems': useWiderItems
     }
 ) only %}
+
+{% set isRewardRate = isMarriottRewardRate or 
+    (rewardRateAltIds 
+        and deal.dealId in rewardRateAltIds[accommodation.id.id]) 
+%}
 
 {% if accommodation.deals.minPrice and accommodation.deals.minPrice.displayPrice %}
     Test content
