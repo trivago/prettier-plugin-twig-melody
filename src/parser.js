@@ -48,7 +48,8 @@ const createConfiguredParser = (code, ...extensions) => {
         new TokenStream(createConfiguredLexer(code, ...extensions), {
             ignoreWhitespace: true,
             ignoreComments: false,
-            ignoreHtmlComments: false
+            ignoreHtmlComments: false,
+            applyWhitespaceTrimming: false
         }),
         {
             ignoreComments: false,
