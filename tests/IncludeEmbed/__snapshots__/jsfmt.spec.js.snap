@@ -50,7 +50,7 @@ exports[`embed.melody.twig 1`] = `
 {% extends 'parent.twig' %}
 
 {% block hello %}
-    <div class="{{ 'test-' ~ foo ~ ' bar' }}">
+    <div class="test-{{ foo }} bar">
         {% embed 'foo.twig' with { foo: 'bar' } %}
             {% block hello %}
                 {{ fun }}
@@ -139,16 +139,16 @@ exports[`include.melody.twig 1`] = `
 {% include './Star.twig' only %}
 
 {% include './Flag.twig' with {
-    'styleModifier': flagModifiers,
-    'dataVariables': dataVariables,
-    'text': 'ie_topdeal'
+    styleModifier: flagModifiers,
+    dataVariables: dataVariables,
+    text: 'ie_topdeal'
 } only %}
 
 <div>
     {% include './Flag.twig' with {
-        'styleModifier': flagModifiers,
-        'dataVariables': dataVariables,
-        'text': 'ie_topdeal'
+        styleModifier: flagModifiers,
+        dataVariables: dataVariables,
+        text: 'ie_topdeal'
     } only %}
 </div>
 
@@ -226,15 +226,14 @@ exports[`mount.melody.twig 1`] = `
     <article>
         {% mount '@hotelsearch/accommodation-list/src/Slideout/index'
             as 'accommodation-slideout-' ~ accommodation.id.id with {
-                'key': 'accommodation-slideout-' ~ accommodation.id.id,
-                'itemId': accommodation.id.id,
-                'item': accommodation,
-                'isSearchedItem': isSearchedItem,
-                'bestPrice': accommodation.deals.bestPrice,
-                'insights': hasInsights ? insightsData.accommodation.id.id,
-                'clickedAltDealPartnerId': clickedAltDealPartnerId,
-                'entirePlace': isEntirePlace
-                    ? entirePlaceData.accommodation.id.id
+                key: 'accommodation-slideout-' ~ accommodation.id.id,
+                itemId: accommodation.id.id,
+                item: accommodation,
+                isSearchedItem: isSearchedItem,
+                bestPrice: accommodation.deals.bestPrice,
+                insights: hasInsights ? insightsData.accommodation.id.id,
+                clickedAltDealPartnerId: clickedAltDealPartnerId,
+                entirePlace: isEntirePlace ? entirePlaceData.accommodation.id.id
             }
         %}
     </article>
@@ -264,4 +263,3 @@ exports[`useStatement.melody.twig 1`] = `
 %}
 
 `;
-

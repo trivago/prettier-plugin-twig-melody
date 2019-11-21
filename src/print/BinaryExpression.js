@@ -3,6 +3,7 @@ const { group, join, concat, line } = prettier.doc.builders;
 const { Node } = require("melody-types");
 const {
     EXPRESSION_NEEDED,
+    STRING_NEEDS_QUOTES,
     needsExpressionEnvironment,
     wrapInEnvironment
 } = require("../util");
@@ -18,6 +19,7 @@ const printOneOperand = (node, path, print, nodePath) => {
 
 const p = (node, path, print) => {
     node[EXPRESSION_NEEDED] = false;
+    node[STRING_NEEDS_QUOTES] = true;
 
     let currentNode = node;
     const pathToFinalLeftHandSide = ["left"];
@@ -45,6 +47,8 @@ const p = (node, path, print) => {
         );
         pathToFinalLeftHandSide.push("left"); // Go one level deeper
         currentNode = currentNode.left;
+        currentNode[EXPRESSION_NEEDED] = false;
+        currentNode[STRING_NEEDS_QUOTES] = true;
     }
     binaryExpressions.unshift(path.call(print, ...pathToFinalLeftHandSide));
 

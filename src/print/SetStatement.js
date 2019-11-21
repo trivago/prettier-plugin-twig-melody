@@ -1,6 +1,6 @@
 const prettier = require("prettier");
 const { group, concat, line, hardline } = prettier.doc.builders;
-const { printChildBlock } = require("../util");
+const { printChildBlock, STRING_NEEDS_QUOTES } = require("../util");
 
 const buildSetStatement = printedAssignment => {
     return group(concat(["{% set ", printedAssignment, line, "%}"]));
@@ -36,6 +36,7 @@ const printEmbracingSet = (node, path, print) => {
         path.call(print, "assignments", "0", "name"),
         " %}"
     ];
+    node[STRING_NEEDS_QUOTES] = false;
     const printedContents = printChildBlock(
         node,
         path,
@@ -51,6 +52,7 @@ const printEmbracingSet = (node, path, print) => {
 };
 
 const p = (node, path, print) => {
+    node[STRING_NEEDS_QUOTES] = true;
     if (isEmbracingSet(node)) {
         return printEmbracingSet(node, path, print);
     }

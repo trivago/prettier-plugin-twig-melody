@@ -12,7 +12,8 @@ const {
     removeSurroundingWhitespace,
     isInlineElement,
     printChildGroups,
-    EXPRESSION_NEEDED
+    EXPRESSION_NEEDED,
+    STRING_NEEDS_QUOTES
 } = require("../util");
 
 const printOpeningTag = (node, path, print) => {
@@ -41,6 +42,7 @@ const p = (node, path, print) => {
     node[EXPRESSION_NEEDED] = true;
     const openingGroup = group(printOpeningTag(node, path, print));
     node[EXPRESSION_NEEDED] = false;
+    node[STRING_NEEDS_QUOTES] = false;
 
     if (!node.selfClosing) {
         node.children = removeSurroundingWhitespace(node.children);

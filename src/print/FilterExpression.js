@@ -3,6 +3,7 @@ const { group, concat, indent, line, softline, join } = prettier.doc.builders;
 const { Node } = require("melody-types");
 const {
     EXPRESSION_NEEDED,
+    STRING_NEEDS_QUOTES,
     FILTER_BLOCK,
     needsExpressionEnvironment,
     someParentNode
@@ -41,6 +42,7 @@ const joinFilters = filterExpressions => {
 const p = (node, path, print) => {
     let currentNode = node;
     node[EXPRESSION_NEEDED] = false;
+    node[STRING_NEEDS_QUOTES] = true;
 
     const pathToFinalTarget = ["target"];
     let filterExpressions = [printOneFilterExpression(node, path, print, [])];

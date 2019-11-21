@@ -1,5 +1,6 @@
 const prettier = require("prettier");
 const { group, concat, join, line, indent } = prettier.doc.builders;
+const { STRING_NEEDS_QUOTES } = require("../util");
 
 const printImportDeclaration = node => {
     const parts = [node.key.name];
@@ -10,6 +11,7 @@ const printImportDeclaration = node => {
 };
 
 const p = (node, path, print) => {
+    node[STRING_NEEDS_QUOTES] = true;
     // Unfortunately, ImportDeclaration has different
     // formatting needs here compared to when used
     // standalone. Therefore, we collect them manually.

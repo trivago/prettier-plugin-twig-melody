@@ -71,28 +71,6 @@ const isInlineElement = node => {
 
 const createInlineMap = nodes => nodes.map(node => isInlineElement(node));
 
-const needsQuotedStringLiterals = node => {
-    return (
-        Node.isPrintExpressionStatement(node) ||
-        Node.isMemberExpression(node) ||
-        Node.isUnaryExpression(node) ||
-        Node.isBinaryExpression(node) ||
-        Node.isBinaryConcatExpression(node) ||
-        Node.isArrayExpression(node) ||
-        Node.isConditionalExpression(node) ||
-        Node.isCallExpression(node) ||
-        Node.isFilterExpression(node) ||
-        Node.isNamedArgumentExpression(node) ||
-        Node.isMountStatement(node) ||
-        Node.isSetStatement(node) ||
-        Node.isVariableDeclarationStatement(node) ||
-        Node.isExtendsStatement(node) ||
-        Node.isEmbedStatement(node) ||
-        Node.isImportDeclaration(node) ||
-        Node.isFromStatement(node)
-    );
-};
-
 const isWhitespaceOnly = s => typeof s === "string" && s.trim() === "";
 
 const countNewlines = s => {
@@ -198,7 +176,6 @@ const addPreserveWhitespaceInfo = (inlineMap, nodes) => {
 };
 
 module.exports = {
-    needsQuotedStringLiterals,
     printChildGroups,
     printChildBlock,
     isWhitespaceOnly,

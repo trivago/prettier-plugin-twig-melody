@@ -12,8 +12,11 @@ const { line } = prettier.doc.builders;
  *                        representing the current AST traversal state
  * @param {function} callback Gets called with each ancestor node
  */
-const walkParents = (path, callback) => {
-    let currentIndex = path.stack.length - 2;
+const walkParents = (path, callback, startWithSelf = false) => {
+    let currentIndex = path.stack.length - 1;
+    if (!startWithSelf) {
+        currentIndex -= 1;
+    }
     while (currentIndex >= 0) {
         const currentElement = path.stack[currentIndex];
         if (isMelodyNode(currentElement)) {
@@ -24,6 +27,21 @@ const walkParents = (path, callback) => {
         }
         currentIndex--;
     }
+};
+
+const firstValueInAncestorChain = (path, property, defaultValue) => {
+    let currentIndex = path.stack.length - 1;
+    while (currentIndex >= 0) {
+        const currentElement = path.stack[currentIndex];
+        if (
+            isMelodyNode(currentElement) &&
+            currentElement[property] !== undefined
+        ) {
+            return currentElement[property];
+        }
+        currentIndex--;
+    }
+    return defaultValue;
 };
 
 const quoteChar = options => {
@@ -50,6 +68,18 @@ const findParentNode = path => {
 
 const isRootNode = path => {
     return findParentNode(path) === null;
+};
+
+const testCurrentAndParentNodes = (path, predicate) =>
+    testCurrentNode(path, predicate) || someParentNode(path, predicate);
+
+const testCurrentNode = (path, predicate) => {
+    const index = path.stack.length - 1;
+    if (index >= 0) {
+        const node = path.stack[index];
+        return isMelodyNode(node) && predicate(node);
+    }
+    return false;
 };
 
 const someParentNode = (path, predicate) => {
@@ -98,5 +128,8 @@ module.exports = {
     isMelodyNode,
     someParentNode,
     walkParents,
-    quoteChar
+    firstValueInAncestorChain,
+    quoteChar,
+    testCurrentNode,
+    testCurrentAndParentNodes
 };

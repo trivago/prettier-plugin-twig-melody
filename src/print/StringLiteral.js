@@ -1,24 +1,23 @@
 const {
-    needsQuotedStringLiterals,
-    findParentNode,
+    firstValueInAncestorChain,
     quoteChar,
     STRING_NEEDS_QUOTES
 } = require("../util");
 
 const p = (node, path, print, options) => {
-    // The parent node of this StringLiteral is 2 or more positions
-    // up in the stack. If it is some kind of Expression,
-    // we have to put quotes around the value.
-    const parentNode = findParentNode(path);
-    if (parentNode) {
-        if (
-            needsQuotedStringLiterals(parentNode) ||
-            parentNode[STRING_NEEDS_QUOTES] === true
-        ) {
-            const quote = quoteChar(options);
-            return quote + node.value + quote;
-        }
+    // The structure this string literal is part of
+    // determines if we need quotes or not
+    const needsQuotes = firstValueInAncestorChain(
+        path,
+        STRING_NEEDS_QUOTES,
+        false
+    );
+
+    if (needsQuotes) {
+        const quote = quoteChar(options);
+        return quote + node.value + quote;
     }
+
     return node.value;
 };
 
