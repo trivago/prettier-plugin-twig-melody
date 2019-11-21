@@ -78,10 +78,10 @@ exports[`failing.melody.twig 1`] = `
 
 {% include './usefulDeal.melody.twig' with deal | merge(
     {
-        'index': loop.index0,
-        'isOverview': isOverview,
-        'isRTL': isRTL,
-        'useWiderItems': useWiderItems
+        index: loop.index0,
+        isOverview: isOverview,
+        isRTL: isRTL,
+        useWiderItems: useWiderItems
     }
 ) only %}
 
