@@ -16,7 +16,7 @@ exports[`attributes.melody.twig 1`] = `
         id: accommodation.id.id,
         ref: intersectionObserver | default,
         class: 'hotel-item item-order__list-item js_co_item',
-        data-co_alt_htl: isAlternative ? '1'
+        'data-co_alt_htl': isAlternative ? '1'
     } | attrs }}>
     Test
 </fantasy>

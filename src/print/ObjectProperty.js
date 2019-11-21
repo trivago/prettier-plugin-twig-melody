@@ -1,9 +1,13 @@
 const prettier = require("prettier");
 const { concat } = prettier.doc.builders;
-const { STRING_NEEDS_QUOTES } = require("../util");
+const { isValidIdentifierName, STRING_NEEDS_QUOTES } = require("../util");
+const { Node } = require("melody-types");
 
 const p = (node, path, print, options) => {
-    node[STRING_NEEDS_QUOTES] = false;
+    node[STRING_NEEDS_QUOTES] =
+        !node.computed &&
+        Node.isStringLiteral(node.key) &&
+        !isValidIdentifierName(node.key.value);
     const parts = [];
     if (node.computed) {
         parts.push("(");

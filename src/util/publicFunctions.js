@@ -49,6 +49,11 @@ const quoteChar = options => {
     return options && options.twigSingleQuote ? "'" : '"';
 };
 
+const isValidIdentifierName = s => {
+    const identifierRegex = /^[0-9A-Z_$]+$/i;
+    return typeof s === "string" && identifierRegex.test(s);
+};
+
 const isMelodyNode = n => {
     const proto = n.__proto__;
     return typeof n === "object" && proto.type && proto.visitorKeys;
@@ -130,6 +135,7 @@ module.exports = {
     walkParents,
     firstValueInAncestorChain,
     quoteChar,
+    isValidIdentifierName,
     testCurrentNode,
     testCurrentAndParentNodes
 };
