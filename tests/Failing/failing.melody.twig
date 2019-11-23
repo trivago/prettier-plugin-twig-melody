@@ -1,8 +1,3 @@
-{% if searchResultFailing %}
-            {# This is a Twig comment #}
-<li>No results found</li>
-{% endif %}
-
 {##
 # Ellipsis Loader Wrapper
 #
@@ -46,3 +41,10 @@
 {% if accommodation.deals.minPrice and accommodation.deals.minPrice.displayPrice %}
     Test content
 {% endif %}
+
+{{ {
+    a: "foo",
+    "b#{ar}": "bar",
+    2: 4,
+    (a): foo,
+} }}

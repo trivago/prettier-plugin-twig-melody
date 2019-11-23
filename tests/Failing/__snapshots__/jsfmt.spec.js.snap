@@ -1,11 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`failing.melody.twig 1`] = `
-{% if searchResultFailing %}
-            {# This is a Twig comment #}
-<li>No results found</li>
-{% endif %}
-
 {##
 # Ellipsis Loader Wrapper
 #
@@ -49,10 +44,15 @@ exports[`failing.melody.twig 1`] = `
 {% if accommodation.deals.minPrice and accommodation.deals.minPrice.displayPrice %}
     Test content
 {% endif %}
+
+{{ {
+    a: "foo",
+    "b#{ar}": "bar",
+    2: 4,
+    (a): foo,
+} }}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{% if searchResultFailing %}
-    {# This is a Twig comment #} <li>No results found</li>
-{% endif %} {##
+{##
 # Ellipsis Loader Wrapper
 #
 # @param string key Unique key
@@ -66,6 +66,7 @@ exports[`failing.melody.twig 1`] = `
 # @param boolean [centreVertically] Whether the loader is vertically centred or not (default: true)
 # @param object [attributeList] Object of key:value attribute pairs to add to the loader
 #}
+
 {##
  # Slideout Deal Description
  #
@@ -74,7 +75,8 @@ exports[`failing.melody.twig 1`] = `
  #  @param array    rateAttributes      Deal Attributes (array of string values)
  #  @param string   price               Deal price
  #}
-<span data-whitespace-test="Testing:{{ noWhitespaceTest }}foo  ">Test</span>
+
+<span data-whitespace-test="Testing: {{ noWhitespaceTest }} foo  ">Test</span>
 
 {% include './usefulDeal.melody.twig' with deal | merge(
     {
@@ -95,5 +97,7 @@ exports[`failing.melody.twig 1`] = `
 %}
     Test content
 {% endif %}
+
+{{ { a: 'foo', ('b#{ ar }'): 'bar', 2: 4, (a): foo } }}
 
 `;
