@@ -22,10 +22,19 @@ const STRING_NEEDS_QUOTES = Symbol("STRING_NEEDS_QUOTES");
  */
 const EXPRESSION_NEEDED = Symbol("EXPRESSION_NEEDED");
 
+/**
+ * Signals to child nodes that they are part of a string,
+ * which means that expressions have to be interpolated.
+ * Example:
+ * "Part #{ partNr } of #{ partCount }"
+ */
+const INSIDE_OF_STRING = Symbol("INSIDE_OF_STRING");
+
 const FILTER_BLOCK = Symbol("FILTER_BLOCK");
 
 module.exports = {
     STRING_NEEDS_QUOTES,
+    INSIDE_OF_STRING,
     EXPRESSION_NEEDED,
     FILTER_BLOCK
 };

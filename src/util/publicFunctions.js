@@ -1,4 +1,4 @@
-const { EXPRESSION_NEEDED } = require("./publicSymbols.js");
+const { EXPRESSION_NEEDED, INSIDE_OF_STRING } = require("./publicSymbols.js");
 const prettier = require("prettier");
 const { line } = prettier.doc.builders;
 
@@ -99,19 +99,44 @@ const someParentNode = (path, predicate) => {
     return false;
 };
 
-const needsExpressionEnvironment = path => {
+/**
+ * Returns EXPRESSION_NEEDED or INSIDE_OF_STRING, depending
+ * on what kind of wrapping is needed around expressions:
+ * EXPRESSION_NEEDED => {{ ... }}
+ * INSIDE_OF_STRING => #{ ... }
+ *
+ * @param {FastPath} path The representation of the current AST traversal state
+ */
+const shouldExpressionsBeWrapped = path => {
     let result = false;
     walkParents(path, node => {
-        if (node[EXPRESSION_NEEDED] === false) {
-            // Abort walking up the ancestor chain
+        if (node[INSIDE_OF_STRING] === true) {
+            result = INSIDE_OF_STRING;
             return false;
         }
         if (node[EXPRESSION_NEEDED] === true) {
-            result = true;
+            result = EXPRESSION_NEEDED;
+            return false;
+        }
+        if (
+            node[EXPRESSION_NEEDED] === false ||
+            node[INSIDE_OF_STRING] === false
+        ) {
+            // Abort walking up the ancestor chain
             return false;
         }
     });
     return result;
+};
+
+const wrapExpressionIfNeeded = (path, fragments) => {
+    const wrapType = shouldExpressionsBeWrapped(path);
+    if (wrapType === EXPRESSION_NEEDED) {
+        wrapInEnvironment(fragments);
+    } else if (wrapType === INSIDE_OF_STRING) {
+        wrapInStringInterpolation(fragments);
+    }
+    return fragments;
 };
 
 /**
@@ -125,9 +150,20 @@ const wrapInEnvironment = parts => {
     parts.push(line, "}}");
 };
 
+/**
+ * Puts string interpolation braces #{ ... } around an element
+ *
+ * @param {array} parts The finished, printed element,
+ *                  except for concatenation and grouping
+ */
+const wrapInStringInterpolation = parts => {
+    parts.unshift("#{ ");
+    parts.push(" }");
+};
+
 module.exports = {
-    needsExpressionEnvironment,
-    wrapInEnvironment,
+    shouldExpressionsBeWrapped,
+    wrapExpressionIfNeeded,
     findParentNode,
     isRootNode,
     isMelodyNode,

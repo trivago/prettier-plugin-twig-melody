@@ -3,8 +3,7 @@ const { group, concat, softline, line, indent, join } = prettier.doc.builders;
 const {
     EXPRESSION_NEEDED,
     STRING_NEEDS_QUOTES,
-    needsExpressionEnvironment,
-    wrapInEnvironment
+    wrapExpressionIfNeeded
 } = require("../util");
 
 const p = (node, path, print) => {
@@ -19,9 +18,7 @@ const p = (node, path, print) => {
         ")"
     ];
 
-    if (needsExpressionEnvironment(path)) {
-        wrapInEnvironment(parts);
-    }
+    wrapExpressionIfNeeded(path, parts);
 
     return group(concat(parts));
 };

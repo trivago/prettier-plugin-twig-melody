@@ -5,7 +5,7 @@ const {
     EXPRESSION_NEEDED,
     STRING_NEEDS_QUOTES,
     FILTER_BLOCK,
-    needsExpressionEnvironment,
+    shouldExpressionsBeWrapped,
     someParentNode
 } = require("../util");
 
@@ -89,7 +89,10 @@ const p = (node, path, print) => {
         ]);
         parts.push(indent(indentedFilters));
     }
-    if (needsExpressionEnvironment(path)) {
+
+    if (shouldExpressionsBeWrapped(path)) {
+        // We manually wrap here, to avoid a line break
+        // between the curly braces
         parts.push(" }}");
         parts.unshift("{{ ");
     }
