@@ -44,13 +44,6 @@ exports[`failing.melody.twig 1`] = `
 {% if accommodation.deals.minPrice and accommodation.deals.minPrice.displayPrice %}
     Test content
 {% endif %}
-
-{{ {
-    a: "foo",
-    "b#{ar}": "bar",
-    2: 4,
-    (a): foo,
-} }}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {##
 # Ellipsis Loader Wrapper
@@ -97,7 +90,5 @@ exports[`failing.melody.twig 1`] = `
 %}
     Test content
 {% endif %}
-
-{{ { a: 'foo', ('b#{ ar }'): 'bar', 2: 4, (a): foo } }}
 
 `;

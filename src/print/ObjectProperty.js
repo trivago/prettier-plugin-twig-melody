@@ -8,12 +8,14 @@ const p = (node, path, print, options) => {
         !node.computed &&
         Node.isStringLiteral(node.key) &&
         !isValidIdentifierName(node.key.value);
+    const needsParentheses =
+        node.computed && !Node.isBinaryConcatExpression(node.key);
     const parts = [];
-    if (node.computed) {
+    if (needsParentheses) {
         parts.push("(");
     }
     parts.push(path.call(print, "key"));
-    if (node.computed) {
+    if (needsParentheses) {
         parts.push(")");
     }
     parts.push(": ");

@@ -150,6 +150,18 @@ exports[`memberExpression.melody.twig 1`] = `
 
 `;
 
+exports[`objectExpression.melody.twig 1`] = `
+{{ {
+    a: "foo",
+    "b#{ar}": "bar",
+    2: 4,
+    (a): foo,
+} }}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{{ { a: 'foo', 'b#{ ar }': 'bar', 2: 4, (a): foo } }}
+
+`;
+
 exports[`operators.melody.twig 1`] = `
 {{ a b-and b }}
 {{ a b-or b }}
