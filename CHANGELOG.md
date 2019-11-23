@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.0.31
+
+-   Features
+    -   Uses Melody 1.4.0
+    -   Whitespace trimming is now suppressed
+    -   Trim left and trim right marks are preserved `{{- ... -}}`
+
 ## v0.0.30
 
 -   Bug fixes:
