@@ -70,7 +70,7 @@ const printNonStringExpression = (node, path, print) => {
     }
     binaryExpressions.unshift(path.call(print, ...pathToFinalLeftHandSide));
 
-    wrapExpressionIfNeeded(path, binaryExpressions);
+    wrapExpressionIfNeeded(path, binaryExpressions, node);
 
     return group(join("", binaryExpressions));
 };

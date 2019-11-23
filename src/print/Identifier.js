@@ -6,7 +6,7 @@ const p = (node, path) => {
     node[EXPRESSION_NEEDED] = false;
 
     const parts = [node.name];
-    wrapExpressionIfNeeded(path, parts);
+    wrapExpressionIfNeeded(path, parts, node);
     return group(concat(parts));
 };
 

@@ -25,8 +25,6 @@ exports[`failing.melody.twig 1`] = `
  #  @param string   price               Deal price
  #}
 
-<span data-whitespace-test="Testing: {{- noWhitespaceTest -}} foo  ">Test</span>
-
 {% include './usefulDeal.melody.twig' with deal | merge(
     {
         'index': loop.index0,
@@ -68,8 +66,6 @@ exports[`failing.melody.twig 1`] = `
  #  @param array    rateAttributes      Deal Attributes (array of string values)
  #  @param string   price               Deal price
  #}
-
-<span data-whitespace-test="Testing: {{ noWhitespaceTest }} foo  ">Test</span>
 
 {% include './usefulDeal.melody.twig' with deal | merge(
     {

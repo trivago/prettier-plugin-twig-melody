@@ -18,7 +18,7 @@ const p = (node, path, print) => {
         ")"
     ];
 
-    wrapExpressionIfNeeded(path, parts);
+    wrapExpressionIfNeeded(path, parts, node);
 
     return group(concat(parts));
 };

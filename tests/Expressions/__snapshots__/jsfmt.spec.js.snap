@@ -294,10 +294,14 @@ exports[`stringConcat.melody.twig 1`] = `
 <div>
 {{ first  ~   second    }}
 </div>
+
+<span data-whitespace-test="Testing: {{- noWhitespaceTest -}} foo">Test</span>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <div>
     {{ first ~ second }}
 </div>
+
+<span data-whitespace-test="Testing: {{- noWhitespaceTest -}} foo">Test</span>
 
 `;
 

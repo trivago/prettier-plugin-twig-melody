@@ -129,10 +129,10 @@ const shouldExpressionsBeWrapped = path => {
     return result;
 };
 
-const wrapExpressionIfNeeded = (path, fragments) => {
+const wrapExpressionIfNeeded = (path, fragments, node = {}) => {
     const wrapType = shouldExpressionsBeWrapped(path);
     if (wrapType === EXPRESSION_NEEDED) {
-        wrapInEnvironment(fragments);
+        wrapInEnvironment(fragments, node.trimLeft, node.trimRight);
     } else if (wrapType === INSIDE_OF_STRING) {
         wrapInStringInterpolation(fragments);
     }
@@ -145,9 +145,11 @@ const wrapExpressionIfNeeded = (path, fragments) => {
  * @param {array} parts The finished, printed element,
  *                  except for concatenation and grouping
  */
-const wrapInEnvironment = parts => {
-    parts.unshift("{{", line);
-    parts.push(line, "}}");
+const wrapInEnvironment = (parts, trimLeft = false, trimRight = false) => {
+    const leftBraces = trimLeft ? "{{-" : "{{";
+    const rightBraces = trimRight ? "-}}" : "}}";
+    parts.unshift(leftBraces, line);
+    parts.push(line, rightBraces);
 };
 
 /**

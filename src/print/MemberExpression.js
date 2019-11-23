@@ -15,7 +15,7 @@ const p = (node, path, print) => {
     if (node.computed) {
         parts.push("]");
     }
-    wrapExpressionIfNeeded(path, parts);
+    wrapExpressionIfNeeded(path, parts, node);
     return group(concat(parts));
 };
 

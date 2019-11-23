@@ -18,7 +18,7 @@ const p = (node, path, print) => {
         rest.push(line, ": ", path.call(print, "alternate"));
     }
     const parts = [path.call(print, "test"), indent(concat(rest))];
-    wrapExpressionIfNeeded(path, parts);
+    wrapExpressionIfNeeded(path, parts, node);
 
     return group(concat(parts));
 };

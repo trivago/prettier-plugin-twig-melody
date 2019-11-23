@@ -11,7 +11,7 @@ const p = (node, path, print) => {
     ]);
 
     const parts = ["{", indent(indentedContent), line, "}"];
-    wrapExpressionIfNeeded(path, parts);
+    wrapExpressionIfNeeded(path, parts, node);
 
     return group(concat(parts));
 };
