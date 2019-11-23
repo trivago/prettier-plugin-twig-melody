@@ -22,7 +22,7 @@ exports[`special-cases.melody.twig 1`] = `
 {% endif %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {% if isRTL %}
-    &#8206;
+    ‎
 {% endif %}
 
 {% if searchResultFailing %}

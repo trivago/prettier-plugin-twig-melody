@@ -23,10 +23,9 @@ const p = (node, path, print = print) => {
     node[STRING_NEEDS_QUOTES] = false;
     if (node.value) {
         docs.push('="');
-        node.value.isMelodyGenerated = true;
         if (
             Node.isBinaryConcatExpression(node.value) &&
-            node.value.isMelodyGenerated
+            node.value.wasImplicitConcatenation
         ) {
             // Special handling for concatenated string values
             docs.push(

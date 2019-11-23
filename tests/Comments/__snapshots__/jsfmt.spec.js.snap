@@ -4,7 +4,19 @@ exports[`twig-comments.melody.twig 1`] = `
 {# One #}
 
 {# Two #}
+
+{% if searchResultFailing %}
+            {# This is a Twig comment #}
+<li>No results found</li>
+{% endif %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{# One #} {# Two #}
+{# One #}
+
+{# Two #}
+
+{% if searchResultFailing %}
+    {# This is a Twig comment #}
+    <li>No results found</li>
+{% endif %}
 
 `;

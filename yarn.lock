@@ -2479,41 +2479,41 @@ math-random@^1.0.1:
   resolved "https://registry.yarnpkg.com/math-random/-/math-random-1.0.4.tgz#5dd6943c938548267016d4e34f057583080c514c"
   integrity sha512-rUxjysqif/BZQH2yhd5Aaq7vXMSx9NdEsQcyA07uEzIvxgI7zIr33gGsh+RU0/XjmQpCW7RsVof1vlkvQVCK5A==
 
-melody-code-frame@^1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/melody-code-frame/-/melody-code-frame-1.3.0.tgz#b853d3f69083e17daa6b9200e605e64ad96457fe"
-  integrity sha512-C2/+EalPitXcdkG6Qk6i6HF0snGrTcjyEm4jdvb5QDWKMs5LsFtemXI24GG9yD8i3RrLq7LfvMwj7/+/qnnXMw==
+melody-code-frame@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/melody-code-frame/-/melody-code-frame-1.4.0.tgz#8443504cf699b4000fbb06d4bbac0b294349c004"
+  integrity sha512-iLHSBhDEZU/VaEiK3kw/p+4VGJuJlEVPjsXVl6rsvw2AzGmG2eGyNDyGJDaGXcjI8FI10psE89BrSa5X0eS7Zw==
   dependencies:
     lodash "^4.15.0"
 
-melody-extension-core@^1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/melody-extension-core/-/melody-extension-core-1.3.0.tgz#86741a174a06c1a221f7e531c3a02c470f578002"
-  integrity sha512-FPD5azYoQfxJ3cGIboPIvZ3o3VVlXf8ouPjlbNpz1d6k5bhUBtBkdYklf9tQCK1l+jrF96lpTpWpl7LoOeM1ZA==
+melody-extension-core@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/melody-extension-core/-/melody-extension-core-1.4.0.tgz#0770e8a3b92262ec3d84dc37a88e5164073b59b1"
+  integrity sha512-ZSGhlooylRa9FtrP0swmu+fY3BLC5KXpf7/A7XxP7Z/GwNyfIWBreG23ywY8xILVcKZHpLwwVxHnr7CbMZvv+A==
   dependencies:
     babel-template "^6.8.0"
     babel-types "^6.8.1"
     lodash "^4.12.0"
     shortid "^2.2.6"
 
-melody-parser@^1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/melody-parser/-/melody-parser-1.3.0.tgz#52af77aa8aa046a11678a3a21e0b7d8cc42943e9"
-  integrity sha512-PidTkaa+2K1Ztg3gluLISYBqr8ULLAF71GvBU0iAQX0Pu9B0TNUTGLQQK0WU4yWNUnwXbFKPCFhfycYqJh+qkg==
+melody-parser@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/melody-parser/-/melody-parser-1.4.0.tgz#ff364f920d70cf8a04a7117155d69c1806acdde2"
+  integrity sha512-Vd7BQUOj6d0QuJIZL6hqQ7jT5fLytVUMa8T/0acVNCZaaemRAGkJENIBBVG+o0vdYTl1Yk4CoZ0xImfqzJCNlA==
   dependencies:
     he "^1.1.0"
     lodash "^4.12.0"
-    melody-code-frame "^1.3.0"
+    melody-code-frame "^1.4.0"
 
-melody-traverse@^1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/melody-traverse/-/melody-traverse-1.3.0.tgz#cec4b0fed9aca0b7f9ef4a6cc514adb75cfd52de"
-  integrity sha512-Ms3qt9rZ5GTet/4zXIWWv6ClUFsUBSG98Vs7C+TX0KhtDfzC+9+lElQ0mxIcGyNX9Qpkp0dgyGnLezVwHn9d4Q==
+melody-traverse@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/melody-traverse/-/melody-traverse-1.4.0.tgz#200ad82bfc9250bec7408ae1940a5bd1050ea01b"
+  integrity sha512-oUIooxjC01092qkH8o82Hg+2K+NVmA5zI8RG0/VW8NL2KcNvtundq+T626bM3XqC4ocpf/coDJg0YEaoQXNGYg==
 
-melody-types@^1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/melody-types/-/melody-types-1.3.0.tgz#7469198b39c8e307da4cf9945b4d7f075f76e9b2"
-  integrity sha512-dCBLbK9r0C4HTuylJaLX4H0+75bjsEbUXIsHkZrWYtHJxaghmeD/n4P9dNpatHMsx8pjwib8upZjGCKemr55Mg==
+melody-types@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/melody-types/-/melody-types-1.4.0.tgz#87190c55a7ccdb4704f134511538073e30a071a2"
+  integrity sha512-msn+ui1NJSTzd6yJQyk8xDJT8qkzqGuRkBTIjuNYGp33emieqbMkICEL+koGMz0ZvvZ1Q++OeCyFomf3mBw1JQ==
   dependencies:
     babel-types "^6.8.1"
 
@@ -2657,9 +2657,9 @@ nan@^2.12.1:
   integrity sha512-INOFj37C7k3AfaNTtX8RhsTw7qRy7eLET14cROi9+5HAVbbHuIWUHEauBv5qT4Av2tWasiTY1Jw6puUNqRJXQg==
 
 nanoid@^2.1.0:
-  version "2.1.6"
-  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-2.1.6.tgz#0665418f692e54cf44f34d4010761f3240a03314"
-  integrity sha512-2NDzpiuEy3+H0AVtdt8LoFi7PnqkOnIzYmJQp7xsEU6VexLluHQwKREuiz57XaQC5006seIadPrIZJhyS2n7aw==
+  version "2.1.7"
+  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-2.1.7.tgz#d775e3e7c6470bbaaae3da9a647a80e228e0abf7"
+  integrity sha512-fmS3qwDldm4bE01HCIRqNk+f255CNjnAoeV3Zzzv0KemObHKqYgirVaZA9DtKcjogicWjYcHkJs4D5A8CjnuVQ==
 
 nanomatch@^1.2.9:
   version "1.2.13"
