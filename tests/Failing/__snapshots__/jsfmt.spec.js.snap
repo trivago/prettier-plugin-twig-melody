@@ -11,15 +11,6 @@ exports[`failing.melody.twig 1`] = `
         {{ '&#8206;' | raw }}
     {% endif %}
 
-{% include './usefulDeal.melody.twig' with deal | merge(
-    {
-        'index': loop.index0,
-        'isOverview': isOverview,
-        'isRTL': isRTL,
-        'useWiderItems': useWiderItems
-    }
-) only %}
-
 {% set isRewardRate = isMarriottRewardRate or 
     (rewardRateAltIds 
         and deal.dealId in rewardRateAltIds[accommodation.id.id]) 
@@ -63,15 +54,6 @@ exports[`failing.melody.twig 1`] = `
 {% if isRTL %}
     {{ '&#8206;' | raw }}
 {% endif %}
-
-{% include './usefulDeal.melody.twig' with deal | merge(
-    {
-        index: loop.index0,
-        isOverview: isOverview,
-        isRTL: isRTL,
-        useWiderItems: useWiderItems
-    }
-) only %}
 
 {% set isRewardRate =
     isMarriottRewardRate
