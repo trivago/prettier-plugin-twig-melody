@@ -1,29 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`failing.melody.twig 1`] = `
-{##
-# Ellipsis Loader Wrapper
-#
-# @param string key Unique key
-# @param string [id] Element's unique id
-# @param string [classList] Space separated list of classes to add to the loader
-# @param boolean [isFullPage] Indicates whether the loader is full page or not
-# @param boolean [isAbsolute] Indicates whether the loader is absolutely positioned or not
-# @param string [type] Type of loader (one of branded, bright, or dark)
-# @param string [text] Contains text to display below loading animation
-# @param boolean [isVisible] Whether the loader is visible or not
-# @param boolean [centreVertically] Whether the loader is vertically centred or not (default: true)
-# @param object [attributeList] Object of key:value attribute pairs to add to the loader
-#}
+<!-- trim marks stripped -->
+{%- set width = width | default(160) -%}
 
-{##
- # Slideout Deal Description
- #
- #  @param boolean  isMultiRoom         MultiRoom Room Type
- #  @param string   description         Deal Description
- #  @param array    rateAttributes      Deal Attributes (array of string values)
- #  @param string   price               Deal price
- #}
+<!-- don't break -->
+{% if isLeftToRight %}&#8206;{% endif %} 
+
+{% if isRTL %}
+        {{ '&#8206;' | raw }}
+    {% endif %}
 
 {% include './usefulDeal.melody.twig' with deal | merge(
     {
@@ -42,7 +28,7 @@ exports[`failing.melody.twig 1`] = `
 {% if accommodation.deals.minPrice and accommodation.deals.minPrice.displayPrice %}
     Test content
 {% endif %}
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 {##
 # Ellipsis Loader Wrapper
 #
@@ -66,6 +52,17 @@ exports[`failing.melody.twig 1`] = `
  #  @param array    rateAttributes      Deal Attributes (array of string values)
  #  @param string   price               Deal price
  #}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+<!-- trim marks stripped -->
+{% set width = width | default(160) %}
+<!-- don't break -->
+{% if isLeftToRight %}
+    ‎
+{% endif %}
+
+{% if isRTL %}
+    {{ '&#8206;' | raw }}
+{% endif %}
 
 {% include './usefulDeal.melody.twig' with deal | merge(
     {
@@ -86,5 +83,29 @@ exports[`failing.melody.twig 1`] = `
 %}
     Test content
 {% endif %}
+
+{##
+# Ellipsis Loader Wrapper
+#
+# @param string key Unique key
+# @param string [id] Element's unique id
+# @param string [classList] Space separated list of classes to add to the loader
+# @param boolean [isFullPage] Indicates whether the loader is full page or not
+# @param boolean [isAbsolute] Indicates whether the loader is absolutely positioned or not
+# @param string [type] Type of loader (one of branded, bright, or dark)
+# @param string [text] Contains text to display below loading animation
+# @param boolean [isVisible] Whether the loader is visible or not
+# @param boolean [centreVertically] Whether the loader is vertically centred or not (default: true)
+# @param object [attributeList] Object of key:value attribute pairs to add to the loader
+#}
+
+{##
+ # Slideout Deal Description
+ #
+ #  @param boolean  isMultiRoom         MultiRoom Room Type
+ #  @param string   description         Deal Description
+ #  @param array    rateAttributes      Deal Attributes (array of string values)
+ #  @param string   price               Deal price
+ #}
 
 `;
