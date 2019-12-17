@@ -8,7 +8,23 @@ exports[`for.melody.twig 1`] = `
         </li>
     {% endfor %}
 </ul>
+
+<ul>
+    {%- for item in items -%}
+        <li class="{{ loop.last ? 'last' : '' }}">
+            {{ loop.index0 // 2 }} {{ item.name }} {{ loop.index }}
+        </li>
+    {%- endfor -%}
+</ul>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+<ul>
+    {% for item in items %}
+        <li class="{{ loop.last ? 'last' : '' }}">
+            {{ loop.index0 // 2 }} {{ item.name }} {{ loop.index }}
+        </li>
+    {% endfor %}
+</ul>
+
 <ul>
     {% for item in items %}
         <li class="{{ loop.last ? 'last' : '' }}">
@@ -21,21 +37,21 @@ exports[`for.melody.twig 1`] = `
 
 exports[`forIfElse.melody.twig 1`] = `
 <ul>
-{% for a,b in c | slice(3, c.length) if b is even %}
+{% for a,b in c | slice(3, c.length) if b is even -%}
     <li>{{ a }} - {{ b }}</li>
-{% else %}
+{%- else %}
     <li>No results found</li>
-{% endfor %}
+{%- endfor %}
 </ul>
 
 <ul>
     {% for key,value in c[:c.length - 1] if value is defined and not value is even %}
         <li>{{ key }} - {{ value }}</li>
-    {% else %}
+    {% else -%}
         {% if regionName is empty %}
         <li><span><!--//--></span>No results found</li>
         {% endif %}
-    {% endfor %}
+    {% endfor -%}
 </ul>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <ul>
