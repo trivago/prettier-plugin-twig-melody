@@ -12,6 +12,12 @@ exports[`block.melody.twig 1`] = `
 {% block bar foo %}
 
 {{ block('hello') }}
+
+{%- block hello -%}
+    Hello
+{%- endblock -%}
+
+{%- block bar foo -%}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <section key="0">
     {% block hello %}
@@ -25,6 +31,12 @@ exports[`block.melody.twig 1`] = `
 
 {{ block('hello') }}
 
+{% block hello %}
+    Hello
+{% endblock hello %}
+
+{% block bar foo %}
+
 `;
 
 exports[`embed.melody.twig 1`] = `
@@ -32,18 +44,18 @@ exports[`embed.melody.twig 1`] = `
 
 {% block hello %}
     <div class="test-{{ foo }} bar">
-        {% embed "foo.twig" with { foo: 'bar' } %}
+        {%- embed "foo.twig" with { foo: 'bar' } %}
             {% block hello %}
                 {{ fun }}
-                {% embed "bar.twig" %}
+                {% embed "bar.twig" -%}
                     {% block hello %}
                         {{ message }}
                     {% endblock %}
                     {% block test %}
                     {% endblock %}
-                {% endembed %}
+                {%- endembed %}
             {% endblock hello %}
-        {% endembed %}
+        {% endembed -%}
     </div>
 {% endblock %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

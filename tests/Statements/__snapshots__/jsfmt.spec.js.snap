@@ -8,6 +8,10 @@ exports[`autoescape.melody.twig 1`] = `
 <span>Yes</span>
 
 {% endautoescape %}
+
+{%- autoescape 'html' -%}
+<button type="button">Click me</button>
+{%- endautoescape -%}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {% autoescape 'html' %}
     <button type="button">
@@ -15,6 +19,12 @@ exports[`autoescape.melody.twig 1`] = `
     </button>
 
     <span>Yes</span>
+{% endautoescape %}
+
+{% autoescape 'html' %}
+    <button type="button">
+        Click me
+    </button>
 {% endautoescape %}
 
 `;

@@ -9,7 +9,12 @@ const p = (node, path, print) => {
 
     if (hasChildren) {
         const blockName = path.call(print, "name");
-        const opener = concat(["{% block ", blockName, " %}"]);
+        const opener = concat([
+            node.trimLeft ? "{%-" : "{%",
+            " block ",
+            blockName,
+            node.trimRightBlock ? " -%}" : " %}"
+        ]);
         const indentedBody = printChildBlock(node, path, print, "body");
 
         const result = group(
@@ -17,19 +22,21 @@ const p = (node, path, print) => {
                 opener,
                 indentedBody,
                 hardline,
-                "{% endblock ",
+                node.trimLeftEndblock ? "{%-" : "{%",
+                " endblock ",
                 blockName,
-                " %}"
+                node.trimRight ? " -%}" : " %}"
             ])
         );
         return result;
     } else if (Node.isPrintExpressionStatement(node.body)) {
         const parts = [
-            "{% block ",
+            node.trimLeft ? "{%-" : "{%",
+            " block ",
             path.call(print, "name"),
             " ",
             path.call(print, "body", "value"),
-            " %}"
+            node.trimRight ? " -%}" : " %}"
         ];
         return concat(parts);
     }

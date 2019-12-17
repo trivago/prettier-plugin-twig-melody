@@ -9,3 +9,9 @@
 {% block bar foo %}
 
 {{ block('hello') }}
+
+{%- block hello -%}
+    Hello
+{%- endblock -%}
+
+{%- block bar foo -%}
