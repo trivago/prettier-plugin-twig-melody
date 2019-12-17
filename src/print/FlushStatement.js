@@ -1,5 +1,7 @@
 const p = (node, path, print) => {
-    return "{% flush %}";
+    const dashLeft = node.trimLeft ? "-" : "";
+    const dashRight = node.trimRight ? "-" : "";
+    return `{%${dashLeft} flush ${dashRight}%}`;
 };
 
 module.exports = {
