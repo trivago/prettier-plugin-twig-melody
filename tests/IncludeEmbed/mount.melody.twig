@@ -1,10 +1,10 @@
-{% mount './component' as 'bar' %}
+{%- mount './component' as 'bar' -%}
 
-{% mount async './parts/#{ part }.twig' as 'bar-#{part}' with {foo: 'bar'} delay placeholder by 1s %}
+{% mount async './parts/#{ part }.twig' as 'bar-#{part}' with {foo: 'bar'} delay placeholder by 1s -%}
   Loading...
-{% catch err %}
+{%- catch err -%}
   Failed to load with {{ err }}
-{% endmount %}
+{%- endmount -%}
 
 <div class="profile-wrapper account">
     {% if isProfilePageDisplayed %}
