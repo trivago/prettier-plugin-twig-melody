@@ -1,11 +1,17 @@
 # Changelog
 
+## v0.0.32
+
+-   Features
+    -   Uses Melody 1.5.0
+    -   Trim left and trim right marks are preserved for Twig tags `{%- ... -%}`
+
 ## v0.0.31
 
 -   Features
     -   Uses Melody 1.4.0
     -   Whitespace trimming is now suppressed
-    -   Trim left and trim right marks are preserved `{{- ... -}}`
+    -   Trim left and trim right marks are preserved for expressions `{{- ... -}}`
 
 ## v0.0.30
 
