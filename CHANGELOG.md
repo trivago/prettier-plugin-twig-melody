@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.0.33
+
+-   Bugfix
+    -   Empty block was causing an error. Does not an more.
+
 ## v0.0.32
 
 -   Features
