@@ -684,7 +684,12 @@ copy-descriptor@^0.1.0:
   resolved "https://registry.yarnpkg.com/copy-descriptor/-/copy-descriptor-0.1.1.tgz#676f6eb3c39997c2ee1ac3a924fd6124748f578d"
   integrity sha1-Z29us8OZl8LuGsOpJP1hJHSPV40=
 
-core-js@^2.4.0, core-js@^2.5.0:
+core-js@^2.4.0:
+  version "2.6.11"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.11.tgz#38831469f9922bded8ee21c9dc46985e0399308c"
+  integrity sha512-5wjnpaT/3dV+XB4borEsnAYQchn00XSgTAWKDkEqv+K8KevjbzmofK6hfJ9TZIlpj2N0xQpazy7PiRQiWHqzWg==
+
+core-js@^2.5.0:
   version "2.6.10"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.10.tgz#8a5b8391f8cc7013da703411ce5b585706300d7f"
   integrity sha512-I39t74+4t+zau64EN1fE5v2W31Adtc/REhzWN+gWRRXg6WH5qAsZm62DHpQ1+Yhe4047T55jvzz7MUqF/dBBlA==
@@ -2479,41 +2484,41 @@ math-random@^1.0.1:
   resolved "https://registry.yarnpkg.com/math-random/-/math-random-1.0.4.tgz#5dd6943c938548267016d4e34f057583080c514c"
   integrity sha512-rUxjysqif/BZQH2yhd5Aaq7vXMSx9NdEsQcyA07uEzIvxgI7zIr33gGsh+RU0/XjmQpCW7RsVof1vlkvQVCK5A==
 
-melody-code-frame@^1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/melody-code-frame/-/melody-code-frame-1.4.0.tgz#8443504cf699b4000fbb06d4bbac0b294349c004"
-  integrity sha512-iLHSBhDEZU/VaEiK3kw/p+4VGJuJlEVPjsXVl6rsvw2AzGmG2eGyNDyGJDaGXcjI8FI10psE89BrSa5X0eS7Zw==
+melody-code-frame@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/melody-code-frame/-/melody-code-frame-1.5.0.tgz#93702128b192fe9dfc322ddeca1cab4789ef3f38"
+  integrity sha512-0Y1DGzdewZt14D2XTDmAkVgwmZIg3vi2SKrRgRv98zHET4ICJtWnlWXQiiOYbW7MWblEPtYZGbCmzKspxxKqrw==
   dependencies:
     lodash "^4.15.0"
 
-melody-extension-core@^1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/melody-extension-core/-/melody-extension-core-1.4.0.tgz#0770e8a3b92262ec3d84dc37a88e5164073b59b1"
-  integrity sha512-ZSGhlooylRa9FtrP0swmu+fY3BLC5KXpf7/A7XxP7Z/GwNyfIWBreG23ywY8xILVcKZHpLwwVxHnr7CbMZvv+A==
+melody-extension-core@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/melody-extension-core/-/melody-extension-core-1.5.0.tgz#ece5207f8dba627a2ca9eb9551f84ce59ed127b7"
+  integrity sha512-C2hAKImvCwoTTvJe/Dfdzpx21WsP7d1wbSrSsTjAqpSNcVhOQeDVXJUemYhVNM9LfTK0dh/pFQ+pUSkSKmbahQ==
   dependencies:
     babel-template "^6.8.0"
     babel-types "^6.8.1"
     lodash "^4.12.0"
     shortid "^2.2.6"
 
-melody-parser@^1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/melody-parser/-/melody-parser-1.4.0.tgz#ff364f920d70cf8a04a7117155d69c1806acdde2"
-  integrity sha512-Vd7BQUOj6d0QuJIZL6hqQ7jT5fLytVUMa8T/0acVNCZaaemRAGkJENIBBVG+o0vdYTl1Yk4CoZ0xImfqzJCNlA==
+melody-parser@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/melody-parser/-/melody-parser-1.5.0.tgz#58e402d8642e587f53049ce61c2c267bad617117"
+  integrity sha512-H9Sjbumh3dzf3sFaAOzkWSHzI3rZKZXbN1eZVGqO0n8TGsDKdqu6/Ex+Lx4H+W1lVKdDbZXtp6og+ap/a1joig==
   dependencies:
     he "^1.1.0"
     lodash "^4.12.0"
-    melody-code-frame "^1.4.0"
+    melody-code-frame "^1.5.0"
 
-melody-traverse@^1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/melody-traverse/-/melody-traverse-1.4.0.tgz#200ad82bfc9250bec7408ae1940a5bd1050ea01b"
-  integrity sha512-oUIooxjC01092qkH8o82Hg+2K+NVmA5zI8RG0/VW8NL2KcNvtundq+T626bM3XqC4ocpf/coDJg0YEaoQXNGYg==
+melody-traverse@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/melody-traverse/-/melody-traverse-1.5.0.tgz#c13eb83c786d7923a7b302dd9eda0abbb4e101ca"
+  integrity sha512-U+gQzf8nhgHzBU/MQBBQn3TIChIlqEpEkzF396v4vbf6eXbdlccUNijouImYKJgv8Le/DZUvFY7S0CNg6cXgvg==
 
-melody-types@^1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/melody-types/-/melody-types-1.4.0.tgz#87190c55a7ccdb4704f134511538073e30a071a2"
-  integrity sha512-msn+ui1NJSTzd6yJQyk8xDJT8qkzqGuRkBTIjuNYGp33emieqbMkICEL+koGMz0ZvvZ1Q++OeCyFomf3mBw1JQ==
+melody-types@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/melody-types/-/melody-types-1.5.0.tgz#f5a9c6387695fd8be6ff82bbd796b62176921293"
+  integrity sha512-X3rXiKrtFytzHBCDPvgo0rf+8psljhoU48Kpq5xj2dw+7X8/uuVjmdasJssa2ftUEtgB7zjDH7YZnJlg1mNJFw==
   dependencies:
     babel-types "^6.8.1"
 
@@ -2657,9 +2662,9 @@ nan@^2.12.1:
   integrity sha512-INOFj37C7k3AfaNTtX8RhsTw7qRy7eLET14cROi9+5HAVbbHuIWUHEauBv5qT4Av2tWasiTY1Jw6puUNqRJXQg==
 
 nanoid@^2.1.0:
-  version "2.1.7"
-  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-2.1.7.tgz#d775e3e7c6470bbaaae3da9a647a80e228e0abf7"
-  integrity sha512-fmS3qwDldm4bE01HCIRqNk+f255CNjnAoeV3Zzzv0KemObHKqYgirVaZA9DtKcjogicWjYcHkJs4D5A8CjnuVQ==
+  version "2.1.8"
+  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-2.1.8.tgz#2dbb0224231b246e3b4c819de7bfea6384dabf08"
+  integrity sha512-g1z+n5s26w0TGKh7gjn7HCqurNKMZWzH08elXzh/gM/csQHd/UqDV6uxMghQYg9IvqRPm1QpeMk50YMofHvEjQ==
 
 nanomatch@^1.2.9:
   version "1.2.13"

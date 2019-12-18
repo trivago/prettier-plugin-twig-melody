@@ -26,11 +26,11 @@ exports[`for.melody.twig 1`] = `
 </ul>
 
 <ul>
-    {% for item in items %}
+    {%- for item in items -%}
         <li class="{{ loop.last ? 'last' : '' }}">
             {{ loop.index0 // 2 }} {{ item.name }} {{ loop.index }}
         </li>
-    {% endfor %}
+    {%- endfor -%}
 </ul>
 
 `;
@@ -55,11 +55,11 @@ exports[`forIfElse.melody.twig 1`] = `
 </ul>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <ul>
-    {% for a, b in c | slice(3, c.length) if b is even %}
+    {% for a, b in c | slice(3, c.length) if b is even -%}
         <li>{{ a }} - {{ b }}</li>
-    {% else %}
+    {%- else %}
         <li>No results found</li>
-    {% endfor %}
+    {%- endfor %}
 </ul>
 
 <ul>
@@ -67,11 +67,11 @@ exports[`forIfElse.melody.twig 1`] = `
         if value is defined and value is not even
     %}
         <li>{{ key }} - {{ value }}</li>
-    {% else %}
+    {% else -%}
         {% if regionName is empty %}
             <li><span><!--//--></span>No results found</li>
         {% endif %}
-    {% endfor %}
+    {% endfor -%}
 </ul>
 
 `;
@@ -141,14 +141,14 @@ exports[`if.melody.twig 1`] = `
 {% endif -%}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <div>
-    {% if foo %}
+    {%- if foo %}
         <div class="foo"></div>
-    {% else %}
+    {% else -%}
         <div class="bar"></div>
-    {% endif %}
+    {%- endif %}
 </div>
 
-{% if partner %}
+{% if partner -%}
     <img
         class="{{ {
             (css.logo): not useWiderItems,
@@ -157,9 +157,9 @@ exports[`if.melody.twig 1`] = `
         srcABC="{{ partner.logoUrl }}"
         alt="{{ partner.name }}"
     />
-{% elseif partnerName %}
+{%- elseif partnerName %}
     <b class="{{ css.name }}">{{ partnerName }}</b>
-{% elseif partnerImg %}
+{% elseif partnerImg -%}
     <b class="{{ css.image }}">{{ partnerImg }}</b>
 {% endif %}
 

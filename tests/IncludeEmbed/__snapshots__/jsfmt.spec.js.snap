@@ -31,11 +31,11 @@ exports[`block.melody.twig 1`] = `
 
 {{ block('hello') }}
 
-{% block hello %}
+{%- block hello -%}
     Hello
-{% endblock hello %}
+{%- endblock hello -%}
 
-{% block bar foo %}
+{%- block bar foo -%}
 
 `;
 
@@ -63,19 +63,19 @@ exports[`embed.melody.twig 1`] = `
 
 {% block hello %}
     <div class="test-{{ foo }} bar">
-        {% embed 'foo.twig' with { foo: 'bar' } %}
+        {%- embed 'foo.twig' with { foo: 'bar' } %}
             {% block hello %}
                 {{ fun }}
-                {% embed 'bar.twig' %}
+                {% embed 'bar.twig' -%}
                     {% block hello %}
                         {{ message }}
                     {% endblock hello %}
                     {% block test %}
 
                     {% endblock test %}
-                {% endembed %}
+                {%- endembed %}
             {% endblock hello %}
-        {% endembed %}
+        {% endembed -%}
     </div>
 {% endblock hello %}
 
@@ -85,8 +85,8 @@ exports[`extendsEmbed.melody.twig 1`] = `
 {%- extends "parent.twig" %}
 {% extends someVar -%}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{% extends 'parent.twig' %}
-{% extends someVar %}
+{%- extends 'parent.twig' %}
+{% extends someVar -%}
 
 `;
 
@@ -104,7 +104,7 @@ exports[`import.melody.twig 1`] = `
 %}
 
 {% from 'macros.twig' import hello %}
-{% from 'forms.html' import input as input_field, textarea %}
+{%- from 'forms.html' import input as input_field, textarea -%}
 {% from 'aVeryLongAndConvolutedAndIntertwinedFilename.html' import
     input as input_field,
     textarea,

@@ -21,11 +21,11 @@ exports[`autoescape.melody.twig 1`] = `
     <span>Yes</span>
 {% endautoescape %}
 
-{% autoescape 'html' %}
+{%- autoescape 'html' -%}
     <button type="button">
         Click me
     </button>
-{% endautoescape %}
+{%- endautoescape -%}
 
 `;
 
@@ -36,7 +36,7 @@ exports[`do.melody.twig 1`] = `
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {% do 1 + 2 %}
 
-{% do 1 + 2 %}
+{%- do 1 + 2 -%}
 
 `;
 
@@ -61,11 +61,11 @@ exports[`filter.melody.twig 1`] = `
     This text becomes uppercase
 {% endfilter %}
 
-{% filter upper %}
+{% filter upper -%}
     This text becomes uppercase
-{% endfilter %}
+{%- endfilter %}
 
-{% filter lower
+{%- filter lower
     | escape('html')
     | upper
     | escape('markdown')
@@ -78,7 +78,7 @@ exports[`filter.melody.twig 1`] = `
     <p>
         The cat is taking a nap in the sunshine.
     </p>
-{% endfilter %}
+{% endfilter -%}
 
 `;
 
@@ -86,8 +86,8 @@ exports[`flush.melody.twig 1`] = `
 {%- flush %}
 {% flush -%}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{% flush %}
-{% flush %}
+{%- flush %}
+{% flush -%}
 
 `;
 
