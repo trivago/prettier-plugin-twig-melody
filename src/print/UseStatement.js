@@ -2,7 +2,12 @@ const prettier = require("prettier");
 const { concat, group, indent, join, line } = prettier.doc.builders;
 
 const p = (node, path, print) => {
-    const docs = ['{% use "', path.call(print, "source"), '"'];
+    const docs = [
+        node.trimLeft ? "{%-" : "{%",
+        ' use "',
+        path.call(print, "source"),
+        '"'
+    ];
     const hasAliases = node.aliases && node.aliases.length > 0;
     if (hasAliases) {
         docs.push(" with");
@@ -14,7 +19,7 @@ const p = (node, path, print) => {
     } else {
         docs.push(" ");
     }
-    docs.push("%}");
+    docs.push(node.trimRight ? "-%}" : "%}");
     return group(concat(docs));
 };
 
