@@ -5,7 +5,7 @@ const { EXPRESSION_NEEDED, printChildBlock } = require("../util");
 
 const p = (node, path, print) => {
     node[EXPRESSION_NEEDED] = false;
-    const hasChildren = Array.isArray(node.body) && node.body.length > 0;
+    const hasChildren = Array.isArray(node.body);
 
     if (hasChildren) {
         const blockName = path.call(print, "name");
@@ -15,19 +15,20 @@ const p = (node, path, print) => {
             blockName,
             node.trimRightBlock ? " -%}" : " %}"
         ]);
-        const indentedBody = printChildBlock(node, path, print, "body");
-
-        const result = group(
-            concat([
-                opener,
-                indentedBody,
-                hardline,
-                node.trimLeftEndblock ? "{%-" : "{%",
-                " endblock ",
-                blockName,
-                node.trimRight ? " -%}" : " %}"
-            ])
+        const parts = [opener];
+        if (node.body.length > 0) {
+            const indentedBody = printChildBlock(node, path, print, "body");
+            parts.push(indentedBody);
+        }
+        parts.push(hardline);
+        parts.push(
+            node.trimLeftEndblock ? "{%-" : "{%",
+            " endblock ",
+            blockName,
+            node.trimRight ? " -%}" : " %}"
         );
+
+        const result = group(concat(parts));
         return result;
     } else if (Node.isPrintExpressionStatement(node.body)) {
         const parts = [

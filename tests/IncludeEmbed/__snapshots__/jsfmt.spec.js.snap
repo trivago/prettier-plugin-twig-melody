@@ -13,6 +13,8 @@ exports[`block.melody.twig 1`] = `
 
 {{ block('hello') }}
 
+{% block content %}{% endblock %}
+
 {%- block hello -%}
     Hello
 {%- endblock -%}
@@ -30,6 +32,9 @@ exports[`block.melody.twig 1`] = `
 {% block bar foo %}
 
 {{ block('hello') }}
+
+{% block content %}
+{% endblock content %}
 
 {%- block hello -%}
     Hello
