@@ -165,12 +165,12 @@ exports[`macro.melody.twig 1`] = `
 
 exports[`set.melody.twig 1`] = `
 {% set list = [1, 2] %}
-{% set foo = 0 %}
+{%- set foo = 0 -%}
 {% set foo = 'foo' ~ 'bar' %}
 {% set foo = {'fruit': 'apple', 'shape': 'round', 'taste': 'sweet', 'region': 'Europe' } %}
 {% set foo = {'fruit': 'apple', 'shape': 'round', 'taste': 'sweet', 'region': 'Europe', 'colour': 'reddish' } %}
 {% set foo, bar = 'foo', 'bar' %}
-{% set foo %}
+{%- set foo -%}
 
     <div id="pagination">
 
@@ -179,10 +179,10 @@ exports[`set.melody.twig 1`] = `
 
 
     <p>Some more text</p>
-{% endset %}
+{%- endset -%}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {% set list = [1, 2] %}
-{% set foo = 0 %}
+{%- set foo = 0 -%}
 {% set foo = 'foo' ~ 'bar' %}
 {% set foo =
     { fruit: 'apple', shape: 'round', taste: 'sweet', region: 'Europe' }
@@ -198,7 +198,7 @@ exports[`set.melody.twig 1`] = `
 %}
 {% set foo = 'foo' %}
 {% set bar = 'bar' %}
-{% set foo %}
+{%- set foo -%}
     <div id="pagination">
         Some text
     </div>
@@ -206,7 +206,7 @@ exports[`set.melody.twig 1`] = `
     <p>
         Some more text
     </p>
-{% endset %}
+{%- endset -%}
 
 `;
 

@@ -45,7 +45,7 @@ exports[`failing.melody.twig 1`] = `
  #}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <!-- trim marks stripped -->
-{% set width = width | default(160) %}
+{%- set width = width | default(160) -%}
 
 <!-- don't break -->
 {% if isLeftToRight %}
