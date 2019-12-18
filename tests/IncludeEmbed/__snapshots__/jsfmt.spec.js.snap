@@ -126,7 +126,7 @@ exports[`include.melody.twig 1`] = `
 
 {% include './Star.twig' only %}
 
-{% include "./Flag.twig" with {
+{%- include "./Flag.twig" with {
 "styleModifier": flagModifiers,
 "dataVariables": dataVariables,
 "text": "ie_topdeal"
@@ -137,7 +137,7 @@ exports[`include.melody.twig 1`] = `
 "styleModifier": flagModifiers,
 "dataVariables": dataVariables,
 "text": "ie_topdeal"
-} only %}
+} only -%}
 </div>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <div key="1" class="test">
@@ -150,7 +150,7 @@ exports[`include.melody.twig 1`] = `
 
 {% include './Star.twig' only %}
 
-{% include './Flag.twig' with {
+{%- include './Flag.twig' with {
     styleModifier: flagModifiers,
     dataVariables: dataVariables,
     text: 'ie_topdeal'
@@ -161,7 +161,7 @@ exports[`include.melody.twig 1`] = `
         styleModifier: flagModifiers,
         dataVariables: dataVariables,
         text: 'ie_topdeal'
-    } only %}
+    } only -%}
 </div>
 
 `;

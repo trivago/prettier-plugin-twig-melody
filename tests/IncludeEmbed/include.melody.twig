@@ -8,7 +8,7 @@
 
 {% include './Star.twig' only %}
 
-{% include "./Flag.twig" with {
+{%- include "./Flag.twig" with {
 "styleModifier": flagModifiers,
 "dataVariables": dataVariables,
 "text": "ie_topdeal"
@@ -19,5 +19,5 @@
 "styleModifier": flagModifiers,
 "dataVariables": dataVariables,
 "text": "ie_topdeal"
-} only %}
+} only -%}
 </div>
