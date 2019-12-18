@@ -217,6 +217,10 @@ exports[`spaceless.melody.twig 1`] = `
     Or just <span> be </span> happy!
 </div>
 {% endspaceless %}
+
+{%- spaceless -%}
+The quick brown fox
+{%- endspaceless -%}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {% spaceless %}
     <div class="qtp-item__text">
@@ -224,5 +228,9 @@ exports[`spaceless.melody.twig 1`] = `
         <span>be</span> happy!
     </div>
 {% endspaceless %}
+
+{%- spaceless -%}
+    The quick brown fox
+{%- endspaceless -%}
 
 `;
