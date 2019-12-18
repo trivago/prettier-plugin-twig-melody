@@ -6,11 +6,12 @@ const p = (node, path, print) => {
     node[STRING_NEEDS_QUOTES] = true;
     return group(
         concat([
-            "{% import ",
+            node.trimLeft ? "{%-" : "{%",
+            " import ",
             path.call(print, "key"),
             indent(concat([line, "as ", path.call(print, "alias")])),
             line,
-            "%}"
+            node.trimRight ? "-%}" : "%}"
         ])
     );
 };
