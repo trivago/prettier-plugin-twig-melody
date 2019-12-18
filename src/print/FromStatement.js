@@ -21,12 +21,13 @@ const p = (node, path, print) => {
     );
     return group(
         concat([
-            "{% from ",
+            node.trimLeft ? "{%-" : "{%",
+            " from ",
             path.call(print, "source"),
             " import",
             indentedParts,
             line,
-            "%}"
+            node.trimRight ? "-%}" : "%}"
         ])
     );
 };

@@ -12,25 +12,35 @@ const {
 const isInFilterBlock = path =>
     someParentNode(path, node => node[FILTER_BLOCK] === true);
 
-const printGroup = (prefix, elements, separator, suffix) => {
+const printArguments = (node, path, print, nodePath) => {
+    const hasArguments = node.arguments && node.arguments.length > 0;
+    if (!hasArguments) {
+        return "";
+    }
+
+    const printedArguments = path.map(print, ...nodePath, "arguments");
+    if (
+        node.arguments.length === 1 &&
+        Node.isObjectExpression(node.arguments[0])
+    ) {
+        // Optimization: Avoid additional indentation level
+        return group(concat(["(", printedArguments[0], ")"]));
+    }
+
     return group(
         concat([
-            prefix,
-            indent(concat([softline, join(separator, elements)])),
+            "(",
+            indent(
+                concat([softline, join(concat([",", line]), printedArguments)])
+            ),
             softline,
-            suffix
+            ")"
         ])
     );
 };
 
 const printOneFilterExpression = (node, path, print, nodePath) => {
-    const hasArguments = node.arguments && node.arguments.length > 0;
-    const printedArguments = hasArguments
-        ? path.map(print, ...nodePath, "arguments")
-        : [];
-    const args = hasArguments
-        ? printGroup("(", printedArguments, concat([",", line]), ")")
-        : "";
+    const args = printArguments(node, path, print, nodePath);
     const filterName = path.call(print, ...nodePath, "name");
     return concat([filterName, args]);
 };

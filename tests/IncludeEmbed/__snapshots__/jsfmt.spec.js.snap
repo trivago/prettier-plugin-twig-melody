@@ -12,6 +12,12 @@ exports[`block.melody.twig 1`] = `
 {% block bar foo %}
 
 {{ block('hello') }}
+
+{%- block hello -%}
+    Hello
+{%- endblock -%}
+
+{%- block bar foo -%}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <section key="0">
     {% block hello %}
@@ -25,6 +31,12 @@ exports[`block.melody.twig 1`] = `
 
 {{ block('hello') }}
 
+{%- block hello -%}
+    Hello
+{%- endblock hello -%}
+
+{%- block bar foo -%}
+
 `;
 
 exports[`embed.melody.twig 1`] = `
@@ -32,18 +44,18 @@ exports[`embed.melody.twig 1`] = `
 
 {% block hello %}
     <div class="test-{{ foo }} bar">
-        {% embed "foo.twig" with { foo: 'bar' } %}
+        {%- embed "foo.twig" with { foo: 'bar' } %}
             {% block hello %}
                 {{ fun }}
-                {% embed "bar.twig" %}
+                {% embed "bar.twig" -%}
                     {% block hello %}
                         {{ message }}
                     {% endblock %}
                     {% block test %}
                     {% endblock %}
-                {% endembed %}
+                {%- endembed %}
             {% endblock hello %}
-        {% endembed %}
+        {% endembed -%}
     </div>
 {% endblock %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -51,48 +63,48 @@ exports[`embed.melody.twig 1`] = `
 
 {% block hello %}
     <div class="test-{{ foo }} bar">
-        {% embed 'foo.twig' with { foo: 'bar' } %}
+        {%- embed 'foo.twig' with { foo: 'bar' } %}
             {% block hello %}
                 {{ fun }}
-                {% embed 'bar.twig' %}
+                {% embed 'bar.twig' -%}
                     {% block hello %}
                         {{ message }}
                     {% endblock hello %}
                     {% block test %}
 
                     {% endblock test %}
-                {% endembed %}
+                {%- endembed %}
             {% endblock hello %}
-        {% endembed %}
+        {% endembed -%}
     </div>
 {% endblock hello %}
 
 `;
 
 exports[`extendsEmbed.melody.twig 1`] = `
-{% extends "parent.twig" %}
-{% extends someVar %}
+{%- extends "parent.twig" %}
+{% extends someVar -%}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{% extends 'parent.twig' %}
-{% extends someVar %}
+{%- extends 'parent.twig' %}
+{% extends someVar -%}
 
 `;
 
 exports[`import.melody.twig 1`] = `
-{% import "forms.html" as forms %}
-{% import "aVeryLongAndConvolutedAndIntertwinedFilename.html" as someQuiteEccentricLocalVariableName %}
+{%- import "forms.html" as forms %}
+{% import "aVeryLongAndConvolutedAndIntertwinedFilename.html" as someQuiteEccentricLocalVariableName -%}
 
 {% from "macros.twig" import hello %}
-{% from 'forms.html' import input as input_field,textarea %}
+{%- from 'forms.html' import input as input_field,textarea -%}
 {% from 'aVeryLongAndConvolutedAndIntertwinedFilename.html' import input as input_field, textarea, select, password as pw_field, radioButton %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{% import 'forms.html' as forms %}
+{%- import 'forms.html' as forms %}
 {% import 'aVeryLongAndConvolutedAndIntertwinedFilename.html'
     as someQuiteEccentricLocalVariableName
-%}
+-%}
 
 {% from 'macros.twig' import hello %}
-{% from 'forms.html' import input as input_field, textarea %}
+{%- from 'forms.html' import input as input_field, textarea -%}
 {% from 'aVeryLongAndConvolutedAndIntertwinedFilename.html' import
     input as input_field,
     textarea,
@@ -114,7 +126,7 @@ exports[`include.melody.twig 1`] = `
 
 {% include './Star.twig' only %}
 
-{% include "./Flag.twig" with {
+{%- include "./Flag.twig" with {
 "styleModifier": flagModifiers,
 "dataVariables": dataVariables,
 "text": "ie_topdeal"
@@ -125,7 +137,7 @@ exports[`include.melody.twig 1`] = `
 "styleModifier": flagModifiers,
 "dataVariables": dataVariables,
 "text": "ie_topdeal"
-} only %}
+} only -%}
 </div>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <div key="1" class="test">
@@ -138,7 +150,7 @@ exports[`include.melody.twig 1`] = `
 
 {% include './Star.twig' only %}
 
-{% include './Flag.twig' with {
+{%- include './Flag.twig' with {
     styleModifier: flagModifiers,
     dataVariables: dataVariables,
     text: 'ie_topdeal'
@@ -149,19 +161,19 @@ exports[`include.melody.twig 1`] = `
         styleModifier: flagModifiers,
         dataVariables: dataVariables,
         text: 'ie_topdeal'
-    } only %}
+    } only -%}
 </div>
 
 `;
 
 exports[`mount.melody.twig 1`] = `
-{% mount './component' as 'bar' %}
+{%- mount './component' as 'bar' -%}
 
-{% mount async './parts/#{ part }.twig' as 'bar-#{part}' with {foo: 'bar'} delay placeholder by 1s %}
+{% mount async './parts/#{ part }.twig' as 'bar-#{part}' with {foo: 'bar'} delay placeholder by 1s -%}
   Loading...
-{% catch err %}
+{%- catch err -%}
   Failed to load with {{ err }}
-{% endmount %}
+{%- endmount -%}
 
 <div class="profile-wrapper account">
     {% if isProfilePageDisplayed %}
@@ -198,15 +210,15 @@ exports[`mount.melody.twig 1`] = `
     {% mount ContentComponent as 'popover-component' ~ activeView with _context %}
 </div>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{% mount './component' as 'bar' %}
+{%- mount './component' as 'bar' -%}
 
 {% mount async './parts/#{ part }.twig' as 'bar-#{ part }' with { foo: 'bar' }
     delay placeholder by 1s
-%}
+-%}
     Loading...
-{% catch err %}
+{%- catch err -%}
     Failed to load with {{ err }}
-{% endmount %}
+{%- endmount -%}
 
 <div class="profile-wrapper account">
     {% if isProfilePageDisplayed %}
@@ -249,17 +261,17 @@ exports[`mount.melody.twig 1`] = `
 exports[`useStatement.melody.twig 1`] = `
 {% use "foo.twig" %}
 
-{% use "blocks.html" with sidebar as base_sidebar, title as base_title %}
+{%- use "blocks.html" with sidebar as base_sidebar, title as base_title %}
 
-{% use "extraLongNameBlocks.html" with sidebar as base_sidebar, title as base_title %}
+{% use "extraLongNameBlocks.html" with sidebar as base_sidebar, title as base_title -%}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {% use "foo.twig" %}
 
-{% use "blocks.html" with sidebar as base_sidebar, title as base_title %}
+{%- use "blocks.html" with sidebar as base_sidebar, title as base_title %}
 
 {% use "extraLongNameBlocks.html" with
     sidebar as base_sidebar,
     title as base_title
-%}
+-%}
 
 `;

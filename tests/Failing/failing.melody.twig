@@ -1,3 +1,19 @@
+<!-- don't break -->
+{% if isLeftToRight %}&#8206;{% endif %} 
+
+{% if isRTL %}
+        {{ '&#8206;' | raw }}
+    {% endif %}
+
+{% set isRewardRate = isMarriottRewardRate or 
+    (rewardRateAltIds 
+        and deal.dealId in rewardRateAltIds[accommodation.id.id]) 
+%}
+
+{% if accommodation.deals.minPrice and accommodation.deals.minPrice.displayPrice %}
+    Test content
+{% endif %}
+
 {##
 # Ellipsis Loader Wrapper
 #
@@ -21,21 +37,3 @@
  #  @param array    rateAttributes      Deal Attributes (array of string values)
  #  @param string   price               Deal price
  #}
-
-{% include './usefulDeal.melody.twig' with deal | merge(
-    {
-        'index': loop.index0,
-        'isOverview': isOverview,
-        'isRTL': isRTL,
-        'useWiderItems': useWiderItems
-    }
-) only %}
-
-{% set isRewardRate = isMarriottRewardRate or 
-    (rewardRateAltIds 
-        and deal.dealId in rewardRateAltIds[accommodation.id.id]) 
-%}
-
-{% if accommodation.deals.minPrice and accommodation.deals.minPrice.displayPrice %}
-    Test content
-{% endif %}

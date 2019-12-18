@@ -2,17 +2,17 @@
 
 {% block hello %}
     <div class="test-{{ foo }} bar">
-        {% embed "foo.twig" with { foo: 'bar' } %}
+        {%- embed "foo.twig" with { foo: 'bar' } %}
             {% block hello %}
                 {{ fun }}
-                {% embed "bar.twig" %}
+                {% embed "bar.twig" -%}
                     {% block hello %}
                         {{ message }}
                     {% endblock %}
                     {% block test %}
                     {% endblock %}
-                {% endembed %}
+                {%- endembed %}
             {% endblock hello %}
-        {% endembed %}
+        {% endembed -%}
     </div>
 {% endblock %}

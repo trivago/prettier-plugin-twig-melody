@@ -1,18 +1,18 @@
 <div>
-    {% if foo %}
+    {%- if foo %}
         <div class="foo"></div>
-    {% else %}
+    {% else -%}
         <div class="bar"></div>
-    {% endif %}
+    {%- endif %}
 </div>
 
-{% if partner %}
+{% if partner -%}
     <img class="{{ {
         (css.logo): not useWiderItems,
         (css.logoWider): useWiderItems
     } | classes }}" srcABC="{{ partner.logoUrl }}" alt="{{ partner.name }}" />
-{% elseif partnerName %}
+{%- elseif partnerName %}
     <b class="{{ css.name }}">{{ partnerName }}</b>
-{% elseif partnerImg %}
+{% elseif partnerImg -%}
     <b class="{{ css.image }}">{{ partnerImg }}</b>
-{% endif %}
+{%- endif -%}

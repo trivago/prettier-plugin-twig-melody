@@ -8,6 +8,10 @@ exports[`autoescape.melody.twig 1`] = `
 <span>Yes</span>
 
 {% endautoescape %}
+
+{%- autoescape 'html' -%}
+<button type="button">Click me</button>
+{%- endautoescape -%}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {% autoescape 'html' %}
     <button type="button">
@@ -17,12 +21,22 @@ exports[`autoescape.melody.twig 1`] = `
     <span>Yes</span>
 {% endautoescape %}
 
+{%- autoescape 'html' -%}
+    <button type="button">
+        Click me
+    </button>
+{%- endautoescape -%}
+
 `;
 
 exports[`do.melody.twig 1`] = `
 {% do 1 + 2 %}
+
+{%- do 1 + 2 -%}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {% do 1 + 2 %}
+
+{%- do 1 + 2 -%}
 
 `;
 
@@ -31,19 +45,27 @@ exports[`filter.melody.twig 1`] = `
     This text becomes uppercase
 {% endfilter %}
 
-{% filter lower|escape('html') | upper | escape('markdown') | lower | upper | escape('markdown') %}
+{% filter upper -%}
+    This text becomes uppercase
+{%- endfilter %}
+
+{%- filter lower|escape('html') | upper | escape('markdown') | lower | upper | escape('markdown') %}
     <strong>SOME TEXT</strong>
 
     <p>The cat is taking a nap in the sunshine.</p>
 
     
-{% endfilter %}
+{% endfilter -%}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {% filter upper %}
     This text becomes uppercase
 {% endfilter %}
 
-{% filter lower
+{% filter upper -%}
+    This text becomes uppercase
+{%- endfilter %}
+
+{%- filter lower
     | escape('html')
     | upper
     | escape('markdown')
@@ -56,7 +78,16 @@ exports[`filter.melody.twig 1`] = `
     <p>
         The cat is taking a nap in the sunshine.
     </p>
-{% endfilter %}
+{% endfilter -%}
+
+`;
+
+exports[`flush.melody.twig 1`] = `
+{%- flush %}
+{% flush -%}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{%- flush %}
+{% flush -%}
 
 `;
 
@@ -65,22 +96,22 @@ exports[`macro.melody.twig 1`] = `
     <input type="{{ type }}" name="{{ name }}" value="{{ value|e }}" size="{{ size }}" />
 {% endmacro %}
 
-{% macro wrapped_input(name, value, type, size) %}
+{%- macro wrapped_input(name, value, type, size) %}
     {% import _self as forms %}
 
     <div class="field">
         {{ forms.input(name, value, type, size) }}
     </div>
-{% endmacro %}
+{% endmacro -%}
 
-{% macro whitespaceRemoval(name, value, type, size) %}
+{% macro whitespaceRemoval(name, value, type, size) -%}
 
     <div class="field">
         {{ forms.input(name, value, type, size) }}
     </div>
 
 
-{% endmacro %}
+{%- endmacro %}
 
 {% macro partner(groupId, value) %}
     {# 80 is the groupid of specific hotel websites that may not have a correct partner name #}
@@ -111,19 +142,19 @@ exports[`macro.melody.twig 1`] = `
     />
 {% endmacro %}
 
-{% macro wrapped_input(name, value, type, size) %}
+{%- macro wrapped_input(name, value, type, size) %}
     {% import _self as forms %}
 
     <div class="field">
         {{ forms.input(name, value, type, size) }}
     </div>
-{% endmacro %}
+{% endmacro -%}
 
-{% macro whitespaceRemoval(name, value, type, size) %}
+{% macro whitespaceRemoval(name, value, type, size) -%}
     <div class="field">
         {{ forms.input(name, value, type, size) }}
     </div>
-{% endmacro %}
+{%- endmacro %}
 
 {% macro partner(groupId, value) %}
     {# 80 is the groupid of specific hotel websites that may not have a correct partner name #}
@@ -134,12 +165,12 @@ exports[`macro.melody.twig 1`] = `
 
 exports[`set.melody.twig 1`] = `
 {% set list = [1, 2] %}
-{% set foo = 0 %}
+{%- set foo = 0 -%}
 {% set foo = 'foo' ~ 'bar' %}
 {% set foo = {'fruit': 'apple', 'shape': 'round', 'taste': 'sweet', 'region': 'Europe' } %}
 {% set foo = {'fruit': 'apple', 'shape': 'round', 'taste': 'sweet', 'region': 'Europe', 'colour': 'reddish' } %}
 {% set foo, bar = 'foo', 'bar' %}
-{% set foo %}
+{%- set foo -%}
 
     <div id="pagination">
 
@@ -148,10 +179,10 @@ exports[`set.melody.twig 1`] = `
 
 
     <p>Some more text</p>
-{% endset %}
+{%- endset -%}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {% set list = [1, 2] %}
-{% set foo = 0 %}
+{%- set foo = 0 -%}
 {% set foo = 'foo' ~ 'bar' %}
 {% set foo =
     { fruit: 'apple', shape: 'round', taste: 'sweet', region: 'Europe' }
@@ -167,7 +198,7 @@ exports[`set.melody.twig 1`] = `
 %}
 {% set foo = 'foo' %}
 {% set bar = 'bar' %}
-{% set foo %}
+{%- set foo -%}
     <div id="pagination">
         Some text
     </div>
@@ -175,7 +206,7 @@ exports[`set.melody.twig 1`] = `
     <p>
         Some more text
     </p>
-{% endset %}
+{%- endset -%}
 
 `;
 
@@ -186,6 +217,10 @@ exports[`spaceless.melody.twig 1`] = `
     Or just <span> be </span> happy!
 </div>
 {% endspaceless %}
+
+{%- spaceless -%}
+The quick brown fox
+{%- endspaceless -%}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {% spaceless %}
     <div class="qtp-item__text">
@@ -193,5 +228,9 @@ exports[`spaceless.melody.twig 1`] = `
         <span>be</span> happy!
     </div>
 {% endspaceless %}
+
+{%- spaceless -%}
+    The quick brown fox
+{%- endspaceless -%}
 
 `;

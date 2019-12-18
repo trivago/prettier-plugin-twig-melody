@@ -1,10 +1,10 @@
 {% set list = [1, 2] %}
-{% set foo = 0 %}
+{%- set foo = 0 -%}
 {% set foo = 'foo' ~ 'bar' %}
 {% set foo = {'fruit': 'apple', 'shape': 'round', 'taste': 'sweet', 'region': 'Europe' } %}
 {% set foo = {'fruit': 'apple', 'shape': 'round', 'taste': 'sweet', 'region': 'Europe', 'colour': 'reddish' } %}
 {% set foo, bar = 'foo', 'bar' %}
-{% set foo %}
+{%- set foo -%}
 
     <div id="pagination">
 
@@ -13,4 +13,4 @@
 
 
     <p>Some more text</p>
-{% endset %}
+{%- endset -%}

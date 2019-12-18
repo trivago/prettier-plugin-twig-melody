@@ -2,8 +2,8 @@ const prettier = require("prettier");
 const { group, indent, line, hardline, concat } = prettier.doc.builders;
 const { EXPRESSION_NEEDED } = require("../util");
 
-const printIfClause = (node, path, print) => {
-    const parts = ["{% for "];
+const printFor = (node, path, print) => {
+    const parts = [node.trimLeft ? "{%-" : "{%", " for "];
     if (node.keyTarget) {
         parts.push(path.call(print, "keyTarget"), ", ");
     }
@@ -17,7 +17,7 @@ const printIfClause = (node, path, print) => {
             indent(concat([line, "if ", path.call(print, "condition")]))
         );
     }
-    parts.push(concat([line, "%}"]));
+    parts.push(concat([line, node.trimRightFor ? "-%}" : "%}"]));
     return group(concat(parts));
 };
 
@@ -25,15 +25,25 @@ const indentWithHardline = contents => indent(concat([hardline, contents]));
 
 const p = (node, path, print) => {
     node[EXPRESSION_NEEDED] = false;
-    const parts = [printIfClause(node, path, print)];
+    const parts = [printFor(node, path, print)];
     const printedChildren = path.call(print, "body");
     parts.push(indentWithHardline(printedChildren));
     if (node.otherwise) {
-        parts.push(hardline, "{% else %}");
+        parts.push(
+            hardline,
+            node.trimLeftElse ? "{%-" : "{%",
+            " else ",
+            node.trimRightElse ? "-%}" : "%}"
+        );
         const printedOtherwise = path.call(print, "otherwise");
         parts.push(indentWithHardline(printedOtherwise));
     }
-    parts.push(hardline, "{% endfor %}");
+    parts.push(
+        hardline,
+        node.trimLeftEndfor ? "{%-" : "{%",
+        " endfor ",
+        node.trimRight ? "-%}" : "%}"
+    );
 
     return concat(parts);
 };

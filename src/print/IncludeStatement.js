@@ -4,7 +4,8 @@ const { quoteChar } = require("../util");
 
 const p = (node, path, print, options) => {
     const parts = [
-        "{% include ",
+        node.trimLeft ? "{%-" : "{%",
+        " include ",
         quoteChar(options),
         path.call(print, "source"),
         quoteChar(options)
@@ -18,7 +19,7 @@ const p = (node, path, print, options) => {
     if (node.contextFree) {
         parts.push(" only");
     }
-    parts.push(" %}");
+    parts.push(node.trimRight ? " -%}" : " %}");
     return group(concat(parts));
 };
 

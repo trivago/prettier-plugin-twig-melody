@@ -8,7 +8,7 @@ const formatDelay = delay => {
 
 const buildOpener = (node, path, print) => {
     const result = [];
-    const firstGroup = ["{% mount"];
+    const firstGroup = [node.trimLeft ? "{%-" : "{%", " mount"];
     const sourcePath = node.name ? "name" : "source";
     const printedSource = path.call(print, sourcePath);
     if (node.async === true) {
@@ -36,8 +36,9 @@ const buildOpener = (node, path, print) => {
             )
         );
     }
-
-    result.push(concat([line, "%}"]));
+    const trimRightMount =
+        node.body || node.otherwise ? node.trimRightMount : node.trimRight;
+    result.push(concat([line, trimRightMount ? "-%}" : "%}"]));
     return group(concat(result));
 };
 
@@ -47,11 +48,13 @@ const buildBody = (path, print) => {
 
 const buildErrorHandling = (node, path, print) => {
     const parts = [];
-    parts.push(concat([hardline, "{% catch "]));
+    parts.push(
+        concat([hardline, node.trimLeftCatch ? "{%-" : "{%", " catch "])
+    );
     if (node.errorVariableName) {
         parts.push(path.call(print, "errorVariableName"), " ");
     }
-    parts.push("%}");
+    parts.push(node.trimRightCatch ? "-%}" : "%}");
     parts.push(indent(concat([hardline, path.call(print, "otherwise")])));
     return concat(parts);
 };
@@ -67,7 +70,14 @@ const p = (node, path, print) => {
         parts.push(buildErrorHandling(node, path, print));
     }
     if (node.body || node.otherwise) {
-        parts.push(concat([hardline, "{% endmount %}"]));
+        parts.push(
+            concat([
+                hardline,
+                node.trimLeftEndmount ? "{%-" : "{%",
+                " endmount ",
+                node.trimRight ? "-%}" : "%}"
+            ])
+        );
     }
 
     return concat(parts);

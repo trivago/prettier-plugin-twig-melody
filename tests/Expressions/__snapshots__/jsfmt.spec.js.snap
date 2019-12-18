@@ -88,6 +88,13 @@ exports[`callExpression.melody.twig 1`] = `
         </div>
     </div>
 </span>
+
+{{ date({
+    index: 5,
+    isOverview: true,
+    isLongPropertyName: true,
+    hasBeenWaiting: true
+}) }}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {{ range(3) }}
 
@@ -105,6 +112,15 @@ exports[`callExpression.melody.twig 1`] = `
         </div>
     </div>
 </span>
+
+{{
+    date({
+        index: 5,
+        isOverview: true,
+        isLongPropertyName: true,
+        hasBeenWaiting: true
+    })
+}}
 
 `;
 
@@ -127,6 +143,15 @@ exports[`filterExpression.melody.twig 1`] = `
 {{ 'test.foo' | split('.') }}
 {{ range(3) | sort | join(',') }}
 {{ 'SHOUTING' | lower|escape('html') | upper | escape('markdown') | lower | upper | escape('markdown') }}
+
+{% include './usefulDeal.melody.twig' with deal | merge(
+    {
+        'index': loop.index0,
+        'isOverview': isOverview,
+        'isRTL': isRTL,
+        'useWiderItems': useWiderItems
+    }
+) only %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {{ 'test.foo' | split('.') }}
 {{ range(3) | sort | join(',') }}
@@ -140,6 +165,13 @@ exports[`filterExpression.melody.twig 1`] = `
         | upper
         | escape('markdown')
 }}
+
+{% include './usefulDeal.melody.twig' with deal | merge({
+    index: loop.index0,
+    isOverview: isOverview,
+    isRTL: isRTL,
+    useWiderItems: useWiderItems
+}) only %}
 
 `;
 

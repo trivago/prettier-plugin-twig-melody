@@ -4,7 +4,12 @@ const { STRING_NEEDS_QUOTES } = require("../util");
 
 const p = (node, path, print) => {
     node[STRING_NEEDS_QUOTES] = true;
-    return concat(["{% extends ", path.call(print, "parentName"), " %}"]);
+    return concat([
+        node.trimLeft ? "{%-" : "{%",
+        " extends ",
+        path.call(print, "parentName"),
+        node.trimRight ? " -%}" : " %}"
+    ]);
 };
 
 module.exports = {
