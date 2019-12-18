@@ -36,9 +36,8 @@ const p = (node, path, print) => {
         parts.push(hardline);
         parts.push(path.call(print, "alternate"));
     }
-    // The {% endif %} will be taken care of
-    // by the final step in the recursion
-    if (!hasElseIfBranch) {
+    // The {% endif %} will be taken care of by the "root" if statement
+    if (!isElseIf) {
         parts.push(
             hardline,
             node.trimLeftEndif ? "{%-" : "{%",

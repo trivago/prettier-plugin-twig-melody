@@ -138,7 +138,7 @@ exports[`if.melody.twig 1`] = `
     <b class="{{ css.name }}">{{ partnerName }}</b>
 {% elseif partnerImg -%}
     <b class="{{ css.image }}">{{ partnerImg }}</b>
-{% endif -%}
+{%- endif -%}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <div>
     {%- if foo %}
@@ -161,6 +161,6 @@ exports[`if.melody.twig 1`] = `
     <b class="{{ css.name }}">{{ partnerName }}</b>
 {% elseif partnerImg -%}
     <b class="{{ css.image }}">{{ partnerImg }}</b>
-{% endif %}
+{%- endif -%}
 
 `;
