@@ -7,8 +7,25 @@
     '$address': '<span itemprop="streetAddress">' ~ address_attributes.address ~ '</span>',
 } %}
 
+<!-- Breaks after div => get rid of break -->
+<div class="grouped-concepts__content pos-relative" {{ {
+    ref: groupedConceptsContentRef
+} | attrs }}>
+    abcd
+</div>
+
+{% set showArrows = hideArrowWhenDisabled | default(false)
+    ? shouldShowArrows | default(false) and scrollEnabled | default(false)
+    : shouldShowArrows | default(false)
+%}
+
+<!-- Self-closing tags have a break before the /> => check if that should really be the case -->
+<img alt="" {{ { src: image.url, class: css.image, itemprop: 'photo', decoding: 'async', draggable: 'false' } | attrs }}/>
+<span alt="" {{ { src: image.url, class: css.image, itemprop: 'photo', decoding: 'async', draggable: 'false' } | attrs }} >Content</span>
+
+
 <!-- don't break -->
-{% if isLeftToRight %}&#8206;{% endif %} 
+{% if isLeftToRight %}Hund{% endif %} 
 
 {% if isRTL %}
         {{ '&#8206;' | raw }}
@@ -17,6 +34,11 @@
 {% set isRewardRate = isMarriottRewardRate or 
     (rewardRateAltIds 
         and deal.dealId in rewardRateAltIds[accommodation.id.id]) 
+%}
+
+{% set isRewardRate = (isMarriottRewardRate or 
+    rewardRateAltIds) 
+        and deal.dealId in rewardRateAltIds[accommodation.id.id] 
 %}
 
 {% if accommodation.deals.minPrice and accommodation.deals.minPrice.displayPrice %}
