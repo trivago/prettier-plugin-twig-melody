@@ -19,11 +19,6 @@
     : shouldShowArrows | default(false)
 %}
 
-<!-- Self-closing tags have a break before the /> => check if that should really be the case -->
-<img alt="" {{ { src: image.url, class: css.image, itemprop: 'photo', decoding: 'async', draggable: 'false' } | attrs }}/>
-<span alt="" {{ { src: image.url, class: css.image, itemprop: 'photo', decoding: 'async', draggable: 'false' } | attrs }} >Content</span>
-
-
 <!-- don't break -->
 {% if isLeftToRight %}Hund{% endif %} 
 
