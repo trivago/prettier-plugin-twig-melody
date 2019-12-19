@@ -106,8 +106,7 @@ exports[`failing.melody.twig 1`] = `
         itemprop: 'photo',
         decoding: 'async',
         draggable: 'false'
-    } | attrs }}
-/>
+    } | attrs }} />
 <span
     alt=""
     {{ {

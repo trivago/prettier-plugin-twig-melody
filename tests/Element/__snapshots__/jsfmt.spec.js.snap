@@ -143,8 +143,7 @@ exports[`selfClosing.melody.twig 1`] = `
     attr5="five"
     attr6="six"
     attr7="seven"
-    attr8="eight"
-/>
+    attr8="eight" />
 
 <input type="text" name="user" />
 <input type="text" name="password" />

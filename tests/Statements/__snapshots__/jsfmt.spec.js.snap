@@ -138,8 +138,7 @@ exports[`macro.melody.twig 1`] = `
         type="{{ type }}"
         name="{{ name }}"
         value="{{ value | e }}"
-        size="{{ size }}"
-    />
+        size="{{ size }}" />
 {% endmacro %}
 
 {%- macro wrapped_input(name, value, type, size) %}
