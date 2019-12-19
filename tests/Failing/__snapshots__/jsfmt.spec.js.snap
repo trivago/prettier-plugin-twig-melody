@@ -10,10 +10,6 @@ exports[`failing.melody.twig 1`] = `
     '$address': '<span itemprop="streetAddress">' ~ address_attributes.address ~ '</span>',
 } %}
 
-<TRAP class="{{ {
-            ('hero__title--' ~ (locale | lower)): locale in ['CN', 'JP', 'DE', 'RU'],
-        } | classes }}">Heading</TRAP>
-
 <!-- don't break -->
 {% if isLeftToRight %}&#8206;{% endif %} 
 
@@ -65,12 +61,6 @@ exports[`failing.melody.twig 1`] = `
         ~ '</span>'
     }
 %}
-
-<TRAP class="{{ {
-        ('hero__title--' ~ locale | lower): locale in ['CN', 'JP', 'DE', 'RU']
-    } | classes }}">
-    Heading
-</TRAP>
 
 <!-- don't break -->
 {% if isLeftToRight %}

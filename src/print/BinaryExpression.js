@@ -10,15 +10,19 @@ const {
 } = require("../util");
 
 const printOneOperand = (node, path, print, nodePath) => {
+    const shouldPrintParentheses = Node.isFilterExpression(node.right);
+
     return concat([
         line,
         node.operator,
         " ",
-        path.call(print, ...nodePath, "right")
+        shouldPrintParentheses ? "(" : "",
+        path.call(print, ...nodePath, "right"),
+        shouldPrintParentheses ? ")" : ""
     ]);
 };
 
-const printConcatenatedString = (node, path, print, options) => {
+const printInterpolatedString = (node, path, print, options) => {
     node[STRING_NEEDS_QUOTES] = false;
     node[INSIDE_OF_STRING] = true;
 
@@ -35,7 +39,7 @@ const printConcatenatedString = (node, path, print, options) => {
     return concat(printedFragments);
 };
 
-const printNonStringExpression = (node, path, print) => {
+const printBinaryExpression = (node, path, print) => {
     node[EXPRESSION_NEEDED] = false;
     node[STRING_NEEDS_QUOTES] = true;
 
@@ -77,9 +81,9 @@ const printNonStringExpression = (node, path, print) => {
 
 const p = (node, path, print, options) => {
     if (Node.isBinaryConcatExpression(node) && node.wasImplicitConcatenation) {
-        return printConcatenatedString(node, path, print, options);
+        return printInterpolatedString(node, path, print, options);
     }
-    return printNonStringExpression(node, path, print);
+    return printBinaryExpression(node, path, print);
 };
 
 module.exports = {
