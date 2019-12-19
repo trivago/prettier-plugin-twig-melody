@@ -10,16 +10,9 @@ exports[`failing.melody.twig 1`] = `
     '$address': '<span itemprop="streetAddress">' ~ address_attributes.address ~ '</span>',
 } %}
 
-<h1 class="{{ {
-            'base': 'hero__title',
+<TRAP class="{{ {
             ('hero__title--' ~ (locale | lower)): locale in ['CN', 'JP', 'DE', 'RU'],
-            'hero__title--full-width': isPersonalised and not displayHeroLogo
-        } | classes }}">Heading</h1>
-
-<span class="{{ {
-        base: 'slideout-deal__price',
-        ('slideout-deal__price--' ~ modifier ?? ''): modifier ?? false
-    } | classes }}">Span content</span>
+        } | classes }}">Heading</TRAP>
 
 <!-- don't break -->
 {% if isLeftToRight %}&#8206;{% endif %} 
@@ -73,20 +66,11 @@ exports[`failing.melody.twig 1`] = `
     }
 %}
 
-<h1 class="{{ {
-        base: 'hero__title',
-        'hero__title--' ~ locale | lower: locale in ['CN', 'JP', 'DE', 'RU'],
-        'hero__title--full-width': isPersonalised and not displayHeroLogo
+<TRAP class="{{ {
+        ('hero__title--' ~ locale | lower): locale in ['CN', 'JP', 'DE', 'RU']
     } | classes }}">
     Heading
-</h1>
-
-<span class="{{ {
-        base: 'slideout-deal__price',
-        'slideout-deal__price--' ~ modifier ?? '': modifier ?? false
-    } | classes }}">
-    Span content
-</span>
+</TRAP>
 
 <!-- don't break -->
 {% if isLeftToRight %}
