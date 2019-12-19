@@ -184,11 +184,14 @@ exports[`set.melody.twig 1`] = `
 {% set list = [1, 2] %}
 {%- set foo = 0 -%}
 {% set foo = 'foo' ~ 'bar' %}
-{% set foo =
-    { fruit: 'apple', shape: 'round', taste: 'sweet', region: 'Europe' }
+{% set foo = {
+        fruit: 'apple',
+        shape: 'round',
+        taste: 'sweet',
+        region: 'Europe'
+    }
 %}
-{% set foo =
-    {
+{% set foo = {
         fruit: 'apple',
         shape: 'round',
         taste: 'sweet',

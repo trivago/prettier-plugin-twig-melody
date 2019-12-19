@@ -50,7 +50,7 @@ const quoteChar = options => {
 };
 
 const isValidIdentifierName = s => {
-    const identifierRegex = /^[0-9A-Z_$]+$/i;
+    const identifierRegex = /^[A-Z][0-9A-Z_$]*$/i;
     return typeof s === "string" && identifierRegex.test(s);
 };
 

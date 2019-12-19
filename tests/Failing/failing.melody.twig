@@ -1,3 +1,23 @@
+<!-- Cannot fix this. Either always parentheses, or never when args empty -->
+{% include './partials/arrowBtn.melody.twig' with {
+    ref: prev | parensStripped(),
+} only %}
+
+{% set replacement = {
+    '$address': '<span itemprop="streetAddress">' ~ address_attributes.address ~ '</span>',
+} %}
+
+<h1 class="{{ {
+            'base': 'hero__title',
+            ('hero__title--' ~ (locale | lower)): locale in ['CN', 'JP', 'DE', 'RU'],
+            'hero__title--full-width': isPersonalised and not displayHeroLogo
+        } | classes }}">Heading</h1>
+
+<span class="{{ {
+        base: 'slideout-deal__price',
+        ('slideout-deal__price--' ~ modifier ?? ''): modifier ?? false
+    } | classes }}">Span content</span>
+
 <!-- don't break -->
 {% if isLeftToRight %}&#8206;{% endif %} 
 

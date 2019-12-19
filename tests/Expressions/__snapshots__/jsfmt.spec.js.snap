@@ -51,22 +51,19 @@ exports[`binaryExpressions.melody.twig 1`] = `
 
 {% set name = condition1 and condition2 or condition3 and condition4 and condition5 or condition6 %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{% set highlightValueForMoney =
-    isFeatureEnabled('vFMV5')
+{% set highlightValueForMoney = isFeatureEnabled('vFMV5')
     or isCTestActive('WEB-48935')
     or isCTestActive('WEB-48956')
     or isCTestActive('WEB-48955')
 %}
 
-{% set name =
-    condition1
+{% set name = condition1
     or condition2 and condition3
     or condition4
     or condition5 and condition6
 %}
 
-{% set name =
-    condition1
+{% set name = condition1
     and condition2
     or condition3 and condition4 and condition5
     or condition6
