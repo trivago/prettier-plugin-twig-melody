@@ -7,11 +7,6 @@
     '$address': '<span itemprop="streetAddress">' ~ address_attributes.address ~ '</span>',
 } %}
 
-{% set showArrows = hideArrowWhenDisabled | default(false)
-    ? shouldShowArrows | default(false) and scrollEnabled | default(false)
-    : shouldShowArrows | default(false)
-%}
-
 <!-- don't break -->
 {% if isLeftToRight %}Hund{% endif %} 
 

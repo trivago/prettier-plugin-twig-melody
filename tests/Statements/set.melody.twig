@@ -14,3 +14,8 @@
 
     <p>Some more text</p>
 {%- endset -%}
+
+{% set showArrows = hideArrowWhenDisabled | default(false)
+    ? shouldShowArrows | default(false) and scrollEnabled | default(false)
+    : shouldShowArrows | default(false)
+%}

@@ -10,11 +10,6 @@ exports[`failing.melody.twig 1`] = `
     '$address': '<span itemprop="streetAddress">' ~ address_attributes.address ~ '</span>',
 } %}
 
-{% set showArrows = hideArrowWhenDisabled | default(false)
-    ? shouldShowArrows | default(false) and scrollEnabled | default(false)
-    : shouldShowArrows | default(false)
-%}
-
 <!-- don't break -->
 {% if isLeftToRight %}Hund{% endif %} 
 
@@ -70,12 +65,6 @@ exports[`failing.melody.twig 1`] = `
         ~ address_attributes.address
         ~ '</span>'
     }
-%}
-
-{% set showArrows =
-    hideArrowWhenDisabled | default(false)
-        ? shouldShowArrows | default(false) and (scrollEnabled | default(false))
-        : shouldShowArrows | default(false)
 %}
 
 <!-- don't break -->

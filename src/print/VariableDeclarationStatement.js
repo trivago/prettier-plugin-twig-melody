@@ -9,7 +9,8 @@ const p = (node, path, print) => {
     const printedValue = path.call(print, "value");
     const space =
         Node.isObjectExpression(node.value) ||
-        Node.isBinaryExpression(node.value)
+        Node.isBinaryExpression(node.value) ||
+        Node.isConditionalExpression(node.value)
             ? " "
             : line;
     return group(
