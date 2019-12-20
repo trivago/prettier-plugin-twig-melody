@@ -84,8 +84,7 @@ exports[`forInclude.melody.twig 1`] = `
 {% endfor %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {% for foo in range(1, category) %}
-    <span
-        key="{{ foo }}"
+    <span key="{{ foo }}"
         class="qtp-item__star icon-ic icon-icn_star--white {{ foo }}">
         {% include './Star.twig' only %}
     </span>
@@ -149,8 +148,7 @@ exports[`if.melody.twig 1`] = `
 </div>
 
 {% if partner -%}
-    <img
-        class="{{ {
+    <img class="{{ {
             (css.logo): not useWiderItems,
             (css.logoWider): useWiderItems
         } | classes }}"

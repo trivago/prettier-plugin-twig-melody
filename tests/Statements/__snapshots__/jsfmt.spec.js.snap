@@ -134,8 +134,7 @@ exports[`macro.melody.twig 1`] = `
     sky,
     hedgehog)
 %}
-    <input
-        type="{{ type }}"
+    <input type="{{ type }}"
         name="{{ name }}"
         value="{{ value | e }}"
         size="{{ size }}" />

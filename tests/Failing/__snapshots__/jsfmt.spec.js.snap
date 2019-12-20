@@ -11,7 +11,7 @@ exports[`failing.melody.twig 1`] = `
 } %}
 
 <!-- Breaks after div => get rid of break -->
-<div class="grouped-concepts__content pos-relative" {{ {
+<div class="grouped-concepts__content pos-relative" title="Title" {{ {
     ref: groupedConceptsContentRef
 } | attrs }}>
     abcd
@@ -80,8 +80,8 @@ exports[`failing.melody.twig 1`] = `
 %}
 
 <!-- Breaks after div => get rid of break -->
-<div
-    class="grouped-concepts__content pos-relative"
+<div class="grouped-concepts__content pos-relative"
+    title="Title"
     {{ { ref: groupedConceptsContentRef } | attrs }}>
     abcd
 </div>

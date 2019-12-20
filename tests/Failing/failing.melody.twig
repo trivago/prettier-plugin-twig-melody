@@ -7,13 +7,6 @@
     '$address': '<span itemprop="streetAddress">' ~ address_attributes.address ~ '</span>',
 } %}
 
-<!-- Breaks after div => get rid of break -->
-<div class="grouped-concepts__content pos-relative" {{ {
-    ref: groupedConceptsContentRef
-} | attrs }}>
-    abcd
-</div>
-
 {% set showArrows = hideArrowWhenDisabled | default(false)
     ? shouldShowArrows | default(false) and scrollEnabled | default(false)
     : shouldShowArrows | default(false)
