@@ -10,13 +10,6 @@ exports[`failing.melody.twig 1`] = `
     '$address': '<span itemprop="streetAddress">' ~ address_attributes.address ~ '</span>',
 } %}
 
-<!-- Breaks after div => get rid of break -->
-<div class="grouped-concepts__content pos-relative" title="Title" {{ {
-    ref: groupedConceptsContentRef
-} | attrs }}>
-    abcd
-</div>
-
 {% set showArrows = hideArrowWhenDisabled | default(false)
     ? shouldShowArrows | default(false) and scrollEnabled | default(false)
     : shouldShowArrows | default(false)
@@ -78,13 +71,6 @@ exports[`failing.melody.twig 1`] = `
         ~ '</span>'
     }
 %}
-
-<!-- Breaks after div => get rid of break -->
-<div class="grouped-concepts__content pos-relative"
-    title="Title"
-    {{ { ref: groupedConceptsContentRef } | attrs }}>
-    abcd
-</div>
 
 {% set showArrows =
     hideArrowWhenDisabled | default(false)
