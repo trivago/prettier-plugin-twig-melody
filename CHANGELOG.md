@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.0.34
+
+Various small bug fixes and cosmetic optimizations
+
 ## v0.0.33
 
 -   Bugfix
