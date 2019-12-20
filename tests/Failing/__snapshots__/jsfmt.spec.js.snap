@@ -6,9 +6,44 @@ exports[`failing.melody.twig 1`] = `
     ref: prev | parensStripped(),
 } only %}
 
+<!-- indent operators -->
 {% set replacement = {
     '$address': '<span itemprop="streetAddress">' ~ address_attributes.address ~ '</span>',
 } %}
+
+<!-- Always break the objects -->
+<section class="{{ {
+    base: css.prices,
+    (css.incomplete): isIncomplete
+} | classes }}">
+</section>
+
+<!-- Possibly reduce level of indentation. Empty object with only one space -->
+{% set recommendedClickoutAttributes = hasRecommendedPrice ? clickoutAttributes | merge({
+    'data-id': recommendedPrice.dealId,
+    'data-co_params': recommendedPrice.clcklB | json_encode(),
+    'data-co_li_lo': 1
+}) : {} %}
+
+<!-- reduce indentation depth -->
+{% mount './web47490/PackageDealBadge' as 'PackageDealBadge' with {
+    packageDealOTAId: accommodation.packageDealOTAId,
+    destination: accommodation.locality.value,
+    accommodationId: accommodation.id.id
+} %}
+
+<!-- Remove space at the end of attribute -->
+<div id="pspIframe ">abcd</div>
+
+<p class="alert__message">
+    {{
+        'results_for'
+            | translate({
+                searchedterm: '<mark class="highlight-search-term">' ~ semKeyword ~ '</mark>'
+            })
+            | raw
+    }}
+</p>
 
 <!-- don't break -->
 {% if isLeftToRight %}Hund{% endif %} 
@@ -56,12 +91,54 @@ exports[`failing.melody.twig 1`] = `
     ref: prev | parensStripped
 } only %}
 
+<!-- indent operators -->
 {% set replacement = {
         '$address': '<span itemprop="streetAddress">'
         ~ address_attributes.address
         ~ '</span>'
     }
 %}
+
+<!-- Always break the objects -->
+<section class="{{ {
+        base: css.prices,
+        (css.incomplete): isIncomplete
+    } | classes }}"></section>
+
+<!-- Possibly reduce level of indentation. Empty object with only one space -->
+{% set recommendedClickoutAttributes = hasRecommendedPrice
+        ? clickoutAttributes | merge({
+            'data-id': recommendedPrice.dealId,
+            'data-co_params': recommendedPrice.clcklB | json_encode,
+            'data-co_li_lo': 1
+        })
+        : {  }
+%}
+
+<!-- reduce indentation depth -->
+{% mount './web47490/PackageDealBadge' as 'PackageDealBadge' with {
+        packageDealOTAId: accommodation.packageDealOTAId,
+        destination: accommodation.locality.value,
+        accommodationId: accommodation.id.id
+    }
+%}
+
+<!-- Remove space at the end of attribute -->
+<div id="pspIframe ">
+    abcd
+</div>
+
+<p class="alert__message">
+    {{
+        'results_for'
+            | translate({
+                searchedterm: '<mark class="highlight-search-term">'
+                ~ semKeyword
+                ~ '</mark>'
+            })
+            | raw
+    }}
+</p>
 
 <!-- don't break -->
 {% if isLeftToRight %}
