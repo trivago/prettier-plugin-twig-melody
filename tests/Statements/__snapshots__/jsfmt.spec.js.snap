@@ -215,7 +215,8 @@ exports[`set.melody.twig 1`] = `
 {%- endset -%}
 
 {% set showArrows = hideArrowWhenDisabled | default(false)
-        ? shouldShowArrows | default(false) and (scrollEnabled | default(false))
+        ? (shouldShowArrows | default(false))
+            and (scrollEnabled | default(false))
         : shouldShowArrows | default(false)
 %}
 

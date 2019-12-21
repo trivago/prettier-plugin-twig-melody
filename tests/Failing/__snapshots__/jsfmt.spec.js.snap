@@ -6,11 +6,6 @@ exports[`failing.melody.twig 1`] = `
     ref: prev | parensStripped(),
 } only %}
 
-<!-- indent operators -->
-{% set replacement = {
-    '$address': '<span itemprop="streetAddress">' ~ address_attributes.address ~ '</span>',
-} %}
-
 <!-- Always break the objects -->
 <section class="{{ {
     base: css.prices,
@@ -62,6 +57,9 @@ exports[`failing.melody.twig 1`] = `
         and deal.dealId in rewardRateAltIds[accommodation.id.id] 
 %}
 
+{% set result = (conditionAlpha or conditionBeta) 
+            and (conditionGamma or conditionDelta) %}
+
 {##
 # Ellipsis Loader Wrapper
 #
@@ -90,14 +88,6 @@ exports[`failing.melody.twig 1`] = `
 {% include './partials/arrowBtn.melody.twig' with {
     ref: prev | parensStripped
 } only %}
-
-<!-- indent operators -->
-{% set replacement = {
-        '$address': '<span itemprop="streetAddress">'
-        ~ address_attributes.address
-        ~ '</span>'
-    }
-%}
 
 <!-- Always break the objects -->
 <section class="{{ {
@@ -133,8 +123,8 @@ exports[`failing.melody.twig 1`] = `
         'results_for'
             | translate({
                 searchedterm: '<mark class="highlight-search-term">'
-                ~ semKeyword
-                ~ '</mark>'
+                    ~ semKeyword
+                    ~ '</mark>'
             })
             | raw
     }}
@@ -150,12 +140,16 @@ exports[`failing.melody.twig 1`] = `
 {% endif %}
 
 {% set isRewardRate = isMarriottRewardRate
-    or rewardRateAltIds and deal.dealId in rewardRateAltIds[accommodation.id.id]
+        or rewardRateAltIds
+        and deal.dealId in rewardRateAltIds[accommodation.id.id]
 %}
 
-{% set isRewardRate = isMarriottRewardRate
-    or rewardRateAltIds
-    and deal.dealId in rewardRateAltIds[accommodation.id.id]
+{% set isRewardRate = (isMarriottRewardRate or rewardRateAltIds)
+        and deal.dealId in rewardRateAltIds[accommodation.id.id]
+%}
+
+{% set result = (conditionAlpha or conditionBeta)
+        and (conditionGamma or conditionDelta)
 %}
 
 {##

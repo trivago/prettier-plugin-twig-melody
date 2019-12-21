@@ -3,11 +3,6 @@
     ref: prev | parensStripped(),
 } only %}
 
-<!-- indent operators -->
-{% set replacement = {
-    '$address': '<span itemprop="streetAddress">' ~ address_attributes.address ~ '</span>',
-} %}
-
 <!-- Always break the objects -->
 <section class="{{ {
     base: css.prices,
@@ -58,6 +53,9 @@
     rewardRateAltIds) 
         and deal.dealId in rewardRateAltIds[accommodation.id.id] 
 %}
+
+{% set result = (conditionAlpha or conditionBeta) 
+            and (conditionGamma or conditionDelta) %}
 
 {##
 # Ellipsis Loader Wrapper
