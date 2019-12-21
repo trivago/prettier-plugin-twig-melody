@@ -8,3 +8,5 @@
 {% set replacement = {
     '$address': '<span itemprop="streetAddress">' ~ address_attributes.address ~ '</span>',
 } %}
+
+{% set renderLoadingBar = showNewLoadingAnimation and isCTestActive('WEB-47697') and showLoadingBar and (isABCD or isLoading)  %}

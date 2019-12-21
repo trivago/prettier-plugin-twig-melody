@@ -11,6 +11,8 @@ const {
 } = require("../util");
 const { extension: coreExtension } = require("melody-extension-core");
 const ALREADY_INDENTED = Symbol("ALREADY_INDENTED");
+const IS_ROOT_BINARY_EXPRESSION = Symbol("IS_ROOT_BINARY_EXPRESSION");
+const OPERATOR_PRECEDENCE = Symbol("OPERATOR_PRECEDENCE");
 
 const operatorPrecedence = coreExtension.binaryOperators.reduce((acc, curr) => {
     acc[curr.text] = curr.precedence;
@@ -53,6 +55,7 @@ const printBinaryExpression2 = (node, path, print) => {
 
     const isBinaryLeft = Node.isBinaryExpression(node.left);
     const isBinaryRight = Node.isBinaryExpression(node.right);
+    const isLogicalOperator = ["and", "or", "not"].indexOf(node.operator) > -1;
 
     const alreadyIndented = firstValueInAncestorChain(
         path,
@@ -62,8 +65,21 @@ const printBinaryExpression2 = (node, path, print) => {
     if (!alreadyIndented && isBinaryRight) {
         node.right[ALREADY_INDENTED] = true;
     }
+    const foundRootAbove = firstValueInAncestorChain(
+        path,
+        IS_ROOT_BINARY_EXPRESSION,
+        false
+    );
+    if (!foundRootAbove) {
+        node[IS_ROOT_BINARY_EXPRESSION] = true;
+    }
 
-    const precedence = operatorPrecedence[node.operator];
+    const parentPrecedence = foundRootAbove
+        ? firstValueInAncestorChain(path, OPERATOR_PRECEDENCE, -1)
+        : -1;
+    const ownPrecedence = operatorPrecedence[node.operator];
+    node[OPERATOR_PRECEDENCE] = ownPrecedence;
+
     const leftPrecedence = isBinaryLeft
         ? operatorPrecedence[node.left.operator]
         : Number.MAX_SAFE_INTEGER;
@@ -75,9 +91,9 @@ const printBinaryExpression2 = (node, path, print) => {
 
     const parts = [];
     const leftNeedsParens =
-        leftPrecedence < precedence || Node.isFilterExpression(node.left);
+        leftPrecedence < ownPrecedence || Node.isFilterExpression(node.left);
     const rightNeedsParens =
-        rightPrecedence < precedence || Node.isFilterExpression(node.right);
+        rightPrecedence < ownPrecedence || Node.isFilterExpression(node.right);
     if (leftNeedsParens) {
         parts.push("(");
     }
@@ -96,7 +112,12 @@ const printBinaryExpression2 = (node, path, print) => {
     const rightHandSide = alreadyIndented
         ? concat(potentiallyIndented)
         : indent(concat(potentiallyIndented));
-    return group(concat([...parts, rightHandSide]));
+    const result = concat([...parts, rightHandSide]);
+    return !foundRootAbove ||
+        !isLogicalOperator ||
+        (isLogicalOperator && ownPrecedence < parentPrecedence)
+        ? group(result)
+        : result;
 };
 
 const printBinaryExpression = (node, path, print) => {
