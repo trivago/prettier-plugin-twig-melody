@@ -86,6 +86,18 @@ const options = {
         category: "Global",
         default: true,
         description: "Use single quotes in Twig files?"
+    },
+    twigAlwaysBreakObjects: {
+        type: "boolean",
+        category: "Global",
+        default: true,
+        description: "Should objects always break in Twig files?"
+    },
+    twigPrintWidth: {
+        type: "int",
+        category: "Global",
+        default: 80,
+        description: "Print width for Twig files"
     }
 };
 

@@ -3,13 +3,6 @@
     ref: prev | parensStripped(),
 } only %}
 
-<!-- Always break the objects -->
-<section class="{{ {
-    base: css.prices,
-    (css.incomplete): isIncomplete
-} | classes }}">
-</section>
-
 <!-- Possibly reduce level of indentation. Empty object with only one space -->
 {% set recommendedClickoutAttributes = hasRecommendedPrice ? clickoutAttributes | merge({
     'data-id': recommendedPrice.dealId,

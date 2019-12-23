@@ -6,6 +6,12 @@ exports[`controversial.melody.twig 1`] = `
 <!-- Alternatively, introduce another variable -->
 {% set altIds = rewardRateAltIds[accommodation.id.id] %}
 {% set isRewardRate = isMarriottRewardRate or (rewardRateAltIds and deal.dealId in rewardRateAltIds[accommodation.id.id]) %}
+
+<!-- Always break objects -->
+<section class="{{ {
+    base: css.prices
+} | classes }}">
+</section>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {% set isRewardRate = isMarriottRewardRate
         or rewardRateAltIds
@@ -19,6 +25,11 @@ exports[`controversial.melody.twig 1`] = `
             and deal.dealId in rewardRateAltIds[accommodation.id.id]
 %}
 
+<!-- Always break objects -->
+<section class="{{ {
+        base: css.prices
+    } | classes }}"></section>
+
 `;
 
 exports[`failing.melody.twig 1`] = `
@@ -26,13 +37,6 @@ exports[`failing.melody.twig 1`] = `
 {% include './partials/arrowBtn.melody.twig' with {
     ref: prev | parensStripped(),
 } only %}
-
-<!-- Always break the objects -->
-<section class="{{ {
-    base: css.prices,
-    (css.incomplete): isIncomplete
-} | classes }}">
-</section>
 
 <!-- Possibly reduce level of indentation. Empty object with only one space -->
 {% set recommendedClickoutAttributes = hasRecommendedPrice ? clickoutAttributes | merge({
@@ -97,12 +101,6 @@ exports[`failing.melody.twig 1`] = `
     ref: prev | parensStripped
 } only %}
 
-<!-- Always break the objects -->
-<section class="{{ {
-        base: css.prices,
-        (css.incomplete): isIncomplete
-    } | classes }}"></section>
-
 <!-- Possibly reduce level of indentation. Empty object with only one space -->
 {% set recommendedClickoutAttributes = hasRecommendedPrice
         ? clickoutAttributes | merge({
@@ -110,7 +108,7 @@ exports[`failing.melody.twig 1`] = `
             'data-co_params': recommendedPrice.clcklB | json_encode,
             'data-co_li_lo': 1
         })
-        : {  }
+        : { }
 %}
 
 <!-- reduce indentation depth -->
