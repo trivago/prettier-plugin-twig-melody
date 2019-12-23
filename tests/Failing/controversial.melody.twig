@@ -9,3 +9,20 @@
     base: css.prices
 } | classes }}">
 </section>
+
+<!-- This is what happens if we reduce indentation depth here:
+    "as" and object keys at same indentation level
+-->
+<article>
+    {% mount '@hotelsearch/accommodation-list/src/Slideout/index'
+        as 'accommodation-slideout-' ~ accommodation.id.id with {
+        key: 'accommodation-slideout-' ~ accommodation.id.id,
+        itemId: accommodation.id.id,
+        item: accommodation,
+        isSearchedItem: isSearchedItem,
+        bestPrice: accommodation.deals.bestPrice,
+        insights: hasInsights ? insightsData.accommodation.id.id,
+        clickedAltDealPartnerId: clickedAltDealPartnerId,
+        entirePlace: isEntirePlace ? entirePlaceData.accommodation.id.id
+    } %}
+</article>
