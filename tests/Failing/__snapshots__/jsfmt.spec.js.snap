@@ -5,7 +5,7 @@ exports[`controversial.melody.twig 1`] = `
 
 <!-- Alternatively, introduce another variable -->
 {% set altIds = rewardRateAltIds[accommodation.id.id] %}
-{% set isRewardRate = isMarriottRewardRate or (rewardRateAltIds and deal.dealId in rewardRateAltIds[accommodation.id.id]) %}
+{% set isRewardRate = isMarriottRewardRate or (rewardRateAltIds and deal.dealId in altIds) %}
 
 <!-- Always break objects -->
 <section class="{{ {
@@ -14,15 +14,13 @@ exports[`controversial.melody.twig 1`] = `
 </section>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {% set isRewardRate = isMarriottRewardRate
-        or rewardRateAltIds
-            and deal.dealId in rewardRateAltIds[accommodation.id.id]
+    or rewardRateAltIds and deal.dealId in rewardRateAltIds[accommodation.id.id]
 %}
 
 <!-- Alternatively, introduce another variable -->
 {% set altIds = rewardRateAltIds[accommodation.id.id] %}
 {% set isRewardRate = isMarriottRewardRate
-        or rewardRateAltIds
-            and deal.dealId in rewardRateAltIds[accommodation.id.id]
+    or rewardRateAltIds and deal.dealId in altIds
 %}
 
 <!-- Always break objects -->
@@ -37,13 +35,6 @@ exports[`failing.melody.twig 1`] = `
 {% include './partials/arrowBtn.melody.twig' with {
     ref: prev | parensStripped(),
 } only %}
-
-<!-- Possibly reduce level of indentation. Empty object with only one space -->
-{% set recommendedClickoutAttributes = hasRecommendedPrice ? clickoutAttributes | merge({
-    'data-id': recommendedPrice.dealId,
-    'data-co_params': recommendedPrice.clcklB | json_encode(),
-    'data-co_li_lo': 1
-}) : {} %}
 
 <!-- reduce indentation depth -->
 {% mount './web47490/PackageDealBadge' as 'PackageDealBadge' with {
@@ -100,16 +91,6 @@ exports[`failing.melody.twig 1`] = `
 {% include './partials/arrowBtn.melody.twig' with {
     ref: prev | parensStripped
 } only %}
-
-<!-- Possibly reduce level of indentation. Empty object with only one space -->
-{% set recommendedClickoutAttributes = hasRecommendedPrice
-        ? clickoutAttributes | merge({
-            'data-id': recommendedPrice.dealId,
-            'data-co_params': recommendedPrice.clcklB | json_encode,
-            'data-co_li_lo': 1
-        })
-        : { }
-%}
 
 <!-- reduce indentation depth -->
 {% mount './web47490/PackageDealBadge' as 'PackageDealBadge' with {

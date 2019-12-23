@@ -7,15 +7,14 @@ const p = (node, path, print) => {
     const printedName = path.call(print, "name");
     node[STRING_NEEDS_QUOTES] = true;
     const printedValue = path.call(print, "value");
-    const space =
+    const shouldCondenseLayout =
         Node.isObjectExpression(node.value) ||
         Node.isBinaryExpression(node.value) ||
-        Node.isConditionalExpression(node.value)
-            ? " "
-            : line;
-    return group(
-        concat([printedName, " =", indent(concat([space, printedValue]))])
-    );
+        Node.isConditionalExpression(node.value);
+    const rightHandSide = shouldCondenseLayout
+        ? concat([" ", printedValue])
+        : indent(concat([line, printedValue]));
+    return group(concat([printedName, " =", rightHandSide]));
 };
 
 module.exports = {

@@ -183,24 +183,30 @@ exports[`set.melody.twig 1`] = `
     ? shouldShowArrows | default(false) and scrollEnabled | default(false)
     : shouldShowArrows | default(false)
 %}
+
+{% set recommendedClickoutAttributes = hasRecommendedPrice ? clickoutAttributes | merge({
+    'data-id': recommendedPrice.dealId,
+    'data-co_params': recommendedPrice.clcklB | json_encode(),
+    'data-co_li_lo': 1
+}) : {} %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {% set list = [1, 2] %}
 {%- set foo = 0 -%}
 {% set foo = 'foo' ~ 'bar' %}
 {% set foo = {
-        fruit: 'apple',
-        shape: 'round',
-        taste: 'sweet',
-        region: 'Europe'
-    }
+    fruit: 'apple',
+    shape: 'round',
+    taste: 'sweet',
+    region: 'Europe'
+}
 %}
 {% set foo = {
-        fruit: 'apple',
-        shape: 'round',
-        taste: 'sweet',
-        region: 'Europe',
-        colour: 'reddish'
-    }
+    fruit: 'apple',
+    shape: 'round',
+    taste: 'sweet',
+    region: 'Europe',
+    colour: 'reddish'
+}
 %}
 {% set foo = 'foo' %}
 {% set bar = 'bar' %}
@@ -215,9 +221,17 @@ exports[`set.melody.twig 1`] = `
 {%- endset -%}
 
 {% set showArrows = hideArrowWhenDisabled | default(false)
-        ? (shouldShowArrows | default(false))
-            and (scrollEnabled | default(false))
-        : shouldShowArrows | default(false)
+    ? (shouldShowArrows | default(false)) and (scrollEnabled | default(false))
+    : shouldShowArrows | default(false)
+%}
+
+{% set recommendedClickoutAttributes = hasRecommendedPrice
+    ? clickoutAttributes | merge({
+        'data-id': recommendedPrice.dealId,
+        'data-co_params': recommendedPrice.clcklB | json_encode,
+        'data-co_li_lo': 1
+    })
+    : { }
 %}
 
 `;

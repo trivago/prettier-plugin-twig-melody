@@ -3,13 +3,6 @@
     ref: prev | parensStripped(),
 } only %}
 
-<!-- Possibly reduce level of indentation. Empty object with only one space -->
-{% set recommendedClickoutAttributes = hasRecommendedPrice ? clickoutAttributes | merge({
-    'data-id': recommendedPrice.dealId,
-    'data-co_params': recommendedPrice.clcklB | json_encode(),
-    'data-co_li_lo': 1
-}) : {} %}
-
 <!-- reduce indentation depth -->
 {% mount './web47490/PackageDealBadge' as 'PackageDealBadge' with {
     packageDealOTAId: accommodation.packageDealOTAId,

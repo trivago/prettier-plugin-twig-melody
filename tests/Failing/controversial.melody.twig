@@ -2,7 +2,7 @@
 
 <!-- Alternatively, introduce another variable -->
 {% set altIds = rewardRateAltIds[accommodation.id.id] %}
-{% set isRewardRate = isMarriottRewardRate or (rewardRateAltIds and deal.dealId in rewardRateAltIds[accommodation.id.id]) %}
+{% set isRewardRate = isMarriottRewardRate or (rewardRateAltIds and deal.dealId in altIds) %}
 
 <!-- Always break objects -->
 <section class="{{ {
