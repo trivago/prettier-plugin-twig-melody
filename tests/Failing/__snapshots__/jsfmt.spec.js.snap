@@ -1,5 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`controversial.melody.twig 1`] = `
+{% set isRewardRate = isMarriottRewardRate or (rewardRateAltIds and deal.dealId in rewardRateAltIds[accommodation.id.id]) %}
+
+<!-- Alternatively, introduce another variable -->
+{% set altIds = rewardRateAltIds[accommodation.id.id] %}
+{% set isRewardRate = isMarriottRewardRate or (rewardRateAltIds and deal.dealId in rewardRateAltIds[accommodation.id.id]) %}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{% set isRewardRate = isMarriottRewardRate
+        or rewardRateAltIds
+            and deal.dealId in rewardRateAltIds[accommodation.id.id]
+%}
+
+<!-- Alternatively, introduce another variable -->
+{% set altIds = rewardRateAltIds[accommodation.id.id] %}
+{% set isRewardRate = isMarriottRewardRate
+        or rewardRateAltIds
+            and deal.dealId in rewardRateAltIds[accommodation.id.id]
+%}
+
+`;
+
 exports[`failing.melody.twig 1`] = `
 <!-- Cannot fix this. Either always parentheses, or never when args empty -->
 {% include './partials/arrowBtn.melody.twig' with {
@@ -46,19 +67,6 @@ exports[`failing.melody.twig 1`] = `
 {% if isRTL %}
         {{ '&#8206;' | raw }}
     {% endif %}
-
-{% set isRewardRate = isMarriottRewardRate or 
-    (rewardRateAltIds 
-        and deal.dealId in rewardRateAltIds[accommodation.id.id]) 
-%}
-
-{% set isRewardRate = (isMarriottRewardRate or 
-    rewardRateAltIds) 
-        and deal.dealId in rewardRateAltIds[accommodation.id.id] 
-%}
-
-{% set result = (conditionAlpha or conditionBeta) 
-            and (conditionGamma or conditionDelta) %}
 
 {##
 # Ellipsis Loader Wrapper
@@ -138,19 +146,6 @@ exports[`failing.melody.twig 1`] = `
 {% if isRTL %}
     {{ '&#8206;' | raw }}
 {% endif %}
-
-{% set isRewardRate = isMarriottRewardRate
-        or rewardRateAltIds
-        and deal.dealId in rewardRateAltIds[accommodation.id.id]
-%}
-
-{% set isRewardRate = (isMarriottRewardRate or rewardRateAltIds)
-        and deal.dealId in rewardRateAltIds[accommodation.id.id]
-%}
-
-{% set result = (conditionAlpha or conditionBeta)
-        and (conditionGamma or conditionDelta)
-%}
 
 {##
 # Ellipsis Loader Wrapper

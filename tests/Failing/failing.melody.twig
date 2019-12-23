@@ -44,19 +44,6 @@
         {{ '&#8206;' | raw }}
     {% endif %}
 
-{% set isRewardRate = isMarriottRewardRate or 
-    (rewardRateAltIds 
-        and deal.dealId in rewardRateAltIds[accommodation.id.id]) 
-%}
-
-{% set isRewardRate = (isMarriottRewardRate or 
-    rewardRateAltIds) 
-        and deal.dealId in rewardRateAltIds[accommodation.id.id] 
-%}
-
-{% set result = (conditionAlpha or conditionBeta) 
-            and (conditionGamma or conditionDelta) %}
-
 {##
 # Ellipsis Loader Wrapper
 #

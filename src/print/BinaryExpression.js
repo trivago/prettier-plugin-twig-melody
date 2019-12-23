@@ -73,6 +73,9 @@ const printBinaryExpression2 = (node, path, print) => {
     if (!foundRootAbove) {
         node[IS_ROOT_BINARY_EXPRESSION] = true;
     }
+    const parentOperator = foundRootAbove
+        ? firstValueInAncestorChain(path, "operator")
+        : "";
 
     const parentPrecedence = foundRootAbove
         ? firstValueInAncestorChain(path, OPERATOR_PRECEDENCE, -1)
@@ -113,9 +116,11 @@ const printBinaryExpression2 = (node, path, print) => {
         ? concat(potentiallyIndented)
         : indent(concat(potentiallyIndented));
     const result = concat([...parts, rightHandSide]);
+
     return !foundRootAbove ||
         !isLogicalOperator ||
-        (isLogicalOperator && ownPrecedence < parentPrecedence)
+        (isLogicalOperator && ownPrecedence < parentPrecedence) ||
+        (isLogicalOperator && node.operator !== parentOperator)
         ? group(result)
         : result;
 };

@@ -10,3 +10,7 @@
 } %}
 
 {% set renderLoadingBar = showNewLoadingAnimation and isCTestActive('WEB-47697') and showLoadingBar and (isABCD or isLoading)  %}
+
+{% set result = (conditionAlpha or conditionBeta) 
+            and (conditionGamma or conditionDelta) %}
+

@@ -30,7 +30,7 @@ const walkParents = (path, callback, startWithSelf = false) => {
 };
 
 const firstValueInAncestorChain = (path, property, defaultValue) => {
-    let currentIndex = path.stack.length - 1;
+    let currentIndex = path.stack.length - 2; // Don't start with self
     while (currentIndex >= 0) {
         const currentElement = path.stack[currentIndex];
         if (

@@ -57,6 +57,10 @@ exports[`binaryExpressions.melody.twig 1`] = `
 } %}
 
 {% set renderLoadingBar = showNewLoadingAnimation and isCTestActive('WEB-47697') and showLoadingBar and (isABCD or isLoading)  %}
+
+{% set result = (conditionAlpha or conditionBeta) 
+            and (conditionGamma or conditionDelta) %}
+
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {% set highlightValueForMoney = isFeatureEnabled('vFMV5')
         or isCTestActive('WEB-48935')
@@ -65,18 +69,13 @@ exports[`binaryExpressions.melody.twig 1`] = `
 %}
 
 {% set name = condition1
-        or condition2
-        and condition3
+        or condition2 and condition3
         or condition4
-        or condition5
-        and condition6
+        or condition5 and condition6
 %}
 
-{% set name = condition1
-        and condition2
-        or condition3
-        and condition4
-        and condition5
+{% set name = condition1 and condition2
+        or condition3 and condition4 and condition5
         or condition6
 %}
 
@@ -92,6 +91,10 @@ exports[`binaryExpressions.melody.twig 1`] = `
         and isCTestActive('WEB-47697')
         and showLoadingBar
         and (isABCD or isLoading)
+%}
+
+{% set result = (conditionAlpha or conditionBeta)
+        and (conditionGamma or conditionDelta)
 %}
 
 `;
