@@ -3,6 +3,11 @@ const { concat } = prettier.doc.builders;
 const { EXPRESSION_NEEDED, STRING_NEEDS_QUOTES } = require("../util");
 const { Node } = require("melody-types");
 
+const mayCorrectWhitespace = attrName =>
+    ["id", "class", "type"].indexOf(attrName) > -1;
+
+const sanitizeWhitespace = s => s.replace(/\s+/g, " ").trim();
+
 const printConcatenatedString = (valueNode, path, print, ...initialPath) => {
     const printedFragments = [];
     let currentNode = valueNode;
@@ -32,6 +37,10 @@ const p = (node, path, print = print) => {
                 printConcatenatedString(node.value, path, print, "value")
             );
         } else {
+            const isStringValue = Node.isStringLiteral(node.value);
+            if (mayCorrectWhitespace(node.name.name) && isStringValue) {
+                node.value.value = sanitizeWhitespace(node.value.value);
+            }
             docs.push(path.call(print, "value"));
         }
         docs.push('"');

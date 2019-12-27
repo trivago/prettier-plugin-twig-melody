@@ -9,6 +9,9 @@ exports[`attributes.melody.twig 1`] = `
     class: 'hotel-item item-order__list-item js_co_item',
     'data-co_alt_htl': isAlternative ? '1'
 } | attrs }}>Test</fantasy>
+
+<!-- Remove extra spaces in attribute values -->
+<div id="pspIframe " class="  red   hot  ">abcd</div>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <a href="#abcd" target="_blank" lang="en">Link</a>
 
@@ -20,6 +23,11 @@ exports[`attributes.melody.twig 1`] = `
     } | attrs }}>
     Test
 </fantasy>
+
+<!-- Remove extra spaces in attribute values -->
+<div id="pspIframe" class="red hot">
+    abcd
+</div>
 
 `;
 

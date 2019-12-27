@@ -71,9 +71,6 @@ exports[`failing.melody.twig 1`] = `
     ref: prev | parensStripped(),
 } only %}
 
-<!-- Remove space at the end of attribute -->
-<div id="pspIframe ">abcd</div>
-
 <p class="alert__message">
     {{
         'results_for'
@@ -88,11 +85,6 @@ exports[`failing.melody.twig 1`] = `
 {% include './partials/arrowBtn.melody.twig' with {
     ref: prev | parensStripped
 } only %}
-
-<!-- Remove space at the end of attribute -->
-<div id="pspIframe ">
-    abcd
-</div>
 
 <p class="alert__message">
     {{
