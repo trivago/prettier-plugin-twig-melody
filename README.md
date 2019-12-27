@@ -24,8 +24,7 @@ In your editor, if the plugin is not automatically picked up and invoked (e.g., 
 {
     "printWidth": 80,
     "tabWidth": 4,
-    "plugins":
-        "./node_modules/prettier-plugin-twig-melody|./path/to/some/other/plugin"
+    "plugins": "./node_modules/prettier-plugin-twig-melody|./path/to/some/other/plugin"
 }
 ```
 
@@ -40,6 +39,27 @@ Values can be `true` or `false`. If `true`, single quotes will be used for strin
 ### twigMelodyPlugins
 
 An array containing file paths to plugin directories. This can be used to add your own printers and parser extensions.
+
+### twigPrintWidth
+
+Because Twig files might have a lot of nesting, it can be useful to define a separate print width for Twig files. This can be done with this option. If it is not set, the standard `printWidth` option is used.
+
+### twigAlwaysBreakObjects
+
+If set to `true`, objects will always be wrapped/broken, even if they would fit on one line:
+
+```
+<section class="{{ {
+    base: css.prices
+} | classes }}">
+</section>
+```
+
+If set to `false` (default value), this would be printed as:
+
+```
+<section class="{{ { base: css.prices } | classes }}"></section>
+```
 
 ## Plugins
 
@@ -65,11 +85,11 @@ module.exports = {
 
 As we can see, a plugin to the plugin exports two fields:
 
-* `melodyExtensions`: A list of extensions to the [Melody](https://melody.js.org) framework that might export `tags`, `visitors`, `functionMap` and the like. Usually, such an extension will add additional parsing functionality to the core parser.
-* `printers`: The Prettier printing functionality for your additional language constructs, tags, operators, etc. This is an object where the keys are the node types in the Melody AST (abstract syntax tree) &mdash; as retrieved through `node.constructor.name` &mdash;, and the values are the print functions with the standard Prettier signature.
+-   `melodyExtensions`: A list of extensions to the [Melody](https://melody.js.org) framework that might export `tags`, `visitors`, `functionMap` and the like. Usually, such an extension will add additional parsing functionality to the core parser.
+-   `printers`: The Prettier printing functionality for your additional language constructs, tags, operators, etc. This is an object where the keys are the node types in the Melody AST (abstract syntax tree) &mdash; as retrieved through `node.constructor.name` &mdash;, and the values are the print functions with the standard Prettier signature.
 
 Don't forget to make your plugins known through the `twigMelodyPlugins` option in your Prettier configuration.
 
 ## Testing
 
-* You can call `yarn test`to test against all regular tests
+-   You can call `yarn test`to test against all regular tests

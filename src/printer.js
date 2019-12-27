@@ -80,6 +80,10 @@ const print = (path, options, print) => {
     const node = path.getValue();
     const nodeType = node.constructor.name;
 
+    if (options.twigPrintWidth) {
+        options.printWidth = options.twigPrintWidth;
+    }
+
     if (printFunctions[nodeType]) {
         return printFunctions[nodeType](node, path, print, options);
     }
