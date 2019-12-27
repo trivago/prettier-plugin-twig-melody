@@ -2,6 +2,7 @@ const prettier = require("prettier");
 const { group, indent, line, hardline, concat } = prettier.doc.builders;
 const { EXPRESSION_NEEDED, printChildBlock } = require("../util");
 const { Node } = require("melody-types");
+const { hasNoNewlines } = require("../util");
 
 const IS_ELSEIF = Symbol("IS_ELSEIF");
 
@@ -11,6 +12,15 @@ const p = (node, path, print) => {
         Array.isArray(node.alternate) && node.alternate.length > 0;
     const hasElseIfBranch = Node.isIfStatement(node.alternate);
     const isElseIf = node[IS_ELSEIF] === true;
+    const hasOnlyOneChild = node.consequent.length === 1;
+    const firstChild = node.consequent[0];
+    const printInline =
+        !isElseIf &&
+        !node.alternate &&
+        hasOnlyOneChild &&
+        !Node.isElement(firstChild) &&
+        (!Node.isPrintTextStatement(firstChild) ||
+            hasNoNewlines(firstChild.value.value));
 
     const ifClause = group(
         concat([
@@ -21,7 +31,9 @@ const p = (node, path, print) => {
             node.trimRightIf ? "-%}" : "%}"
         ])
     );
-    const ifBody = printChildBlock(node, path, print, "consequent");
+    const ifBody = printInline
+        ? path.call(print, "consequent", "0")
+        : printChildBlock(node, path, print, "consequent");
     const parts = [ifClause, ifBody];
     if (hasElseBranch) {
         parts.push(
@@ -39,7 +51,7 @@ const p = (node, path, print) => {
     // The {% endif %} will be taken care of by the "root" if statement
     if (!isElseIf) {
         parts.push(
-            hardline,
+            printInline ? "" : hardline,
             node.trimLeftEndif ? "{%-" : "{%",
             " endif ",
             node.trimRight ? "-%}" : "%}"

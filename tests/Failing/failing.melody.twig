@@ -3,13 +3,6 @@
     ref: prev | parensStripped(),
 } only %}
 
-<!-- reduce indentation depth -->
-{% mount './web47490/PackageDealBadge' as 'PackageDealBadge' with {
-    packageDealOTAId: accommodation.packageDealOTAId,
-    destination: accommodation.locality.value,
-    accommodationId: accommodation.id.id
-} %}
-
 <!-- Remove space at the end of attribute -->
 <div id="pspIframe ">abcd</div>
 
@@ -22,10 +15,3 @@
             | raw
     }}
 </p>
-
-<!-- don't break -->
-{% if isLeftToRight %}Hund{% endif %} 
-
-{% if isRTL %}
-        {{ '&#8206;' | raw }}
-    {% endif %}

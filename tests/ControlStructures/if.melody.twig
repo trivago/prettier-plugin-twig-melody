@@ -16,3 +16,10 @@
 {% elseif partnerImg -%}
     <b class="{{ css.image }}">{{ partnerImg }}</b>
 {%- endif -%}
+
+<!-- Don't break -->
+{% if isLeftToRight %}Hund{% endif %} 
+{% if isRTL %}{{ '&#8206;' | raw }}{% endif %}
+
+<!-- Do break -->
+{% if unitAfter | length > 0 and not withoutDisplayPattern %}<span key="unit-after" class="unit unit--after">{{ unitAfter }}</span>{% endif %}

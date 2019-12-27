@@ -77,6 +77,10 @@ const countNewlines = s => {
     return (s.match(/\n/g) || "").length;
 };
 
+const hasNoNewlines = s => {
+    return countNewlines(s) === 0;
+};
+
 const hasAtLeastTwoNewlines = s => countNewlines(s) >= 2;
 
 const textStatementsOnlyNewlines = nodes => {
@@ -182,6 +186,7 @@ module.exports = {
     isInlineElement,
     createInlineMap,
     countNewlines,
+    hasNoNewlines,
     hasAtLeastTwoNewlines,
     removeSurroundingWhitespace,
     addPreserveWhitespaceInfo,
