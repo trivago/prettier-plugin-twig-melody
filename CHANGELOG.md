@@ -1,12 +1,26 @@
 # Changelog
 
+## v0.1.0
+
+-   Features
+
+    -   "If" statements can be in one line now, under certain circumstances
+    -   New option `twigAlwaysBreakObjects`
+    -   New option `twigPrintWidth`
+    -   All util functions are public now (available to plugins)
+    -   Optimizations: Fewer line breaks in a lot of cases, less indentation
+    -   Long HTML comments are re-wrapped now
+
+-   Bug fixes
+    -   Respect operator precedence in binary expressions (especially boolean)
+
 ## v0.0.34
 
 Various small bug fixes and cosmetic optimizations
 
 ## v0.0.33
 
--   Bugfix
+-   Bug fix
     -   Empty block was causing an error. Does not an more.
 
 ## v0.0.32
