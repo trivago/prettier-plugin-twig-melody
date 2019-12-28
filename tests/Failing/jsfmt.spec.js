@@ -1,1 +1,4 @@
-run_spec(__dirname, ["melody"]);
+run_spec(__dirname, ["melody"], {
+    twigPrintWidth: 120,
+    twigAlwaysBreakObjects: false
+});

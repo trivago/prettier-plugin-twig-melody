@@ -31,3 +31,8 @@
 {% include './partials/arrowBtn.melody.twig' with {
     ref: prev | default(),
 } only %}
+
+<!-- A lot of line breaks with a width of 80 and twigAlwaysBreakObjects = true -->
+<p class="alert__message">
+    {{ 'results_for' | translate({ 'searchedterm': '<mark class="highlight-search-term">' ~ semKeyword ~ '</mark>'}) | raw }}
+</p>
