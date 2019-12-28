@@ -29,6 +29,11 @@ exports[`controversial.melody.twig 1`] = `
         entirePlace: isEntirePlace ? entirePlaceData.accommodation.id.id
     } %}
 </article>
+
+<!-- Parentheses stripped. Cannot fix this. Either always parentheses, or never when args empty. -->
+{% include './partials/arrowBtn.melody.twig' with {
+    ref: prev | default(),
+} only %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {% set isRewardRate = isMarriottRewardRate
     or rewardRateAltIds and deal.dealId in rewardRateAltIds[accommodation.id.id]
@@ -45,9 +50,8 @@ exports[`controversial.melody.twig 1`] = `
         base: css.prices
     } | classes }}"></section>
 
-<!-- This is what happens if we reduce indentation depth here:
-    "as" and object keys at same indentation level
--->
+<!-- This is what happens if we reduce indentation depth here: "as" and object keys
+    at same indentation level -->
 <article>
     {% mount '@hotelsearch/accommodation-list/src/Slideout/index'
         as 'accommodation-slideout-' ~ accommodation.id.id with {
@@ -63,14 +67,15 @@ exports[`controversial.melody.twig 1`] = `
     %}
 </article>
 
+<!-- Parentheses stripped. Cannot fix this. Either always parentheses, or never when
+    args empty. -->
+{% include './partials/arrowBtn.melody.twig' with {
+    ref: prev | default
+} only %}
+
 `;
 
 exports[`failing.melody.twig 1`] = `
-<!-- Cannot fix this. Either always parentheses, or never when args empty -->
-{% include './partials/arrowBtn.melody.twig' with {
-    ref: prev | parensStripped(),
-} only %}
-
 <p class="alert__message">
     {{
         'results_for'
@@ -81,11 +86,6 @@ exports[`failing.melody.twig 1`] = `
     }}
 </p>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-<!-- Cannot fix this. Either always parentheses, or never when args empty -->
-{% include './partials/arrowBtn.melody.twig' with {
-    ref: prev | parensStripped
-} only %}
-
 <p class="alert__message">
     {{
         'results_for'

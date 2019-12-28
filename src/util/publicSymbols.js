@@ -30,11 +30,36 @@ const EXPRESSION_NEEDED = Symbol("EXPRESSION_NEEDED");
  */
 const INSIDE_OF_STRING = Symbol("INSIDE_OF_STRING");
 
+/**
+ * Signals to FilterStatement nodes that they are part of
+ * a filter block
+ */
 const FILTER_BLOCK = Symbol("FILTER_BLOCK");
+
+/**
+ * Signals to text nodes that they should preserve leading
+ * whitespace (whitespace at the beginning)
+ */
+const PRESERVE_LEADING_WHITESPACE = Symbol("PRESERVE_LEADING_WHITESPACE");
+
+/**
+ * Signals to text nodes that they should preserve trailing
+ * whitespace (whitespace at the end)
+ */
+const PRESERVE_TRAILING_WHITESPACE = Symbol("PRESERVE_TRAILING_WHITESPACE");
+
+/**
+ * Signals to text statements that only newlines should be
+ * preserved when hitting a whitespace-only node
+ */
+const NEWLINES_ONLY = Symbol("NEWLINES_ONLY");
 
 module.exports = {
     STRING_NEEDS_QUOTES,
     INSIDE_OF_STRING,
     EXPRESSION_NEEDED,
-    FILTER_BLOCK
+    FILTER_BLOCK,
+    PRESERVE_TRAILING_WHITESPACE,
+    PRESERVE_LEADING_WHITESPACE,
+    NEWLINES_ONLY
 };
