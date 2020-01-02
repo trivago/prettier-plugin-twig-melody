@@ -55,6 +55,7 @@ const {
     getPluginPathsFromOptions,
     loadPlugins
 } = require("./util/pluginUtil.js");
+const { ORIGINAL_SOURCE } = require("./parser");
 
 const printFunctions = {};
 
@@ -74,23 +75,52 @@ const applyPlugins = options => {
     });
 };
 
+let originalSource = "";
 const print = (path, options, print) => {
     applyPlugins(options);
 
     const node = path.getValue();
     const nodeType = node.constructor.name;
 
+    // Try to save original source from AST root
+    if (node[ORIGINAL_SOURCE]) {
+        originalSource = node[ORIGINAL_SOURCE];
+    }
+
     if (options.twigPrintWidth) {
         options.printWidth = options.twigPrintWidth;
     }
 
+    // Happy path
     if (printFunctions[nodeType]) {
         return printFunctions[nodeType](node, path, print, options);
     }
+
     console.warn(`No print function available for node type "${nodeType}"`);
+
+    // 1st fallback: Use originalSource property on AST node
+    if (node.originalSource) {
+        return node.originalSource;
+    }
+    // 2nd fallback: Use the node's loc property with the
+    // originalSource property on the AST root
+    if (canGetSubstringForNode(node)) {
+        return getSubstringForNode(node);
+    }
+
     return "";
 };
 
+const getSubstringForNode = node =>
+    originalSource.substring(node.loc.start.index, node.loc.end.index);
+
+const canGetSubstringForNode = node =>
+    originalSource &&
+    node.loc &&
+    node.loc.start &&
+    node.loc.end &&
+    node.loc.start.index &&
+    node.loc.end.index;
 /**
  * Prettier printing works with a so-called FastPath object, which is
  * passed into many of the following methods through a "path" argument.
