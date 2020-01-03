@@ -75,7 +75,25 @@ const applyPlugins = options => {
     });
 };
 
+const isCertainHtmlComment = regex => node => {
+    return (
+        node.constructor.name === "HtmlComment" &&
+        node.value.value &&
+        node.value.value.match(regex)
+    );
+};
+
+const isIgnoreNextComment = isCertainHtmlComment(/<!--.*prettier-ignore.*-->/);
+const isIgnoreRegionStartComment = isCertainHtmlComment(
+    /<!--.*prettier-ignore-start.*-->/
+);
+const isIgnoreRegionEndComment = isCertainHtmlComment(
+    /<!--.*prettier-ignore-end.*-->/
+);
+
 let originalSource = "";
+let ignoreRegion = false;
+let ignoreNext = false;
 const print = (path, options, print) => {
     applyPlugins(options);
 
@@ -91,12 +109,22 @@ const print = (path, options, print) => {
         options.printWidth = options.twigPrintWidth;
     }
 
-    // Happy path
-    if (printFunctions[nodeType]) {
-        return printFunctions[nodeType](node, path, print, options);
-    }
+    const useOriginalSource = ignoreNext || ignoreRegion;
+    const hasPrintFunction = printFunctions[nodeType];
 
-    console.warn(`No print function available for node type "${nodeType}"`);
+    // Happy path: We have a formatting function, and the user wants the
+    // node formatted
+    if (!useOriginalSource && hasPrintFunction) {
+        return printFunctions[nodeType](node, path, print, options);
+    } else if (!hasPrintFunction) {
+        console.warn(`No print function available for node type "${nodeType}"`);
+    }
+    ignoreNext = isIgnoreNextComment(node);
+    ignoreRegion = isIgnoreRegionStartComment(node);
+
+    if (ignoreRegion && isIgnoreRegionEndComment(node)) {
+        ignoreRegion = false;
+    }
 
     // 1st fallback: Use originalSource property on AST node
     if (node.originalSource) {
