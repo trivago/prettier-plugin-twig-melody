@@ -12,7 +12,9 @@ const p = (node, path, print) => {
     node[STRING_NEEDS_QUOTES] = true;
     const mappedArguments = path.map(print, "arguments");
     const parts = [path.call(print, "callee"), "("];
-    if (
+    if (node.arguments.length === 0) {
+        parts.push(")");
+    } else if (
         node.arguments.length === 1 &&
         Node.isObjectExpression(node.arguments[0])
     ) {
