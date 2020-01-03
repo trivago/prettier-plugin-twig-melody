@@ -1,11 +1,19 @@
 const prettier = require("prettier");
 const { concat, join, indent, hardline } = prettier.doc.builders;
-const { createTextGroups } = require("../util");
-
-const stripCommentChars = s => (s.length >= 7 ? s.slice(4, -3) : s);
+const {
+    createTextGroups,
+    stripHtmlCommentChars,
+    normalizeHtmlComment
+} = require("../util");
 
 const p = (node, path, print) => {
-    const commentText = stripCommentChars(node.value.value || "");
+    const commentText = stripHtmlCommentChars(node.value.value || "");
+
+    if (commentText.trim() === "prettier-ignore-end") {
+        // Weird workaround for a bug I don't understand
+        return normalizeHtmlComment(commentText);
+    }
+
     const textGroups = createTextGroups(commentText, true, true);
 
     return concat([

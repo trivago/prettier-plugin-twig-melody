@@ -1,6 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`twig-comments.melody.twig 1`] = `
+exports[`htmlComments.melody.twig 1`] = `
+<!-- Simple one-line comment -->
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+<!-- Simple one-line comment -->
+
+`;
+
+exports[`twigComments.melody.twig 1`] = `
 {# One #}
 
 {# Two #}

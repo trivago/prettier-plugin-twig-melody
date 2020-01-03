@@ -53,7 +53,7 @@ const {
 } = require("./print/NamedArgumentExpression.js");
 const {
     isWhitespaceNode,
-    isWhitespaceOnly,
+    normalizeHtmlComment,
     getPluginPathsFromOptions,
     loadPlugins
 } = require("./util");
@@ -81,7 +81,7 @@ const isCertainHtmlComment = substr => node => {
     return (
         node.constructor.name === "HtmlComment" &&
         node.value.value &&
-        node.value.value.match(new RegExp("\\b" + substr + "\\b"))
+        normalizeHtmlComment(node.value.value) === "<!-- " + substr + " -->"
     );
 };
 
@@ -95,14 +95,16 @@ let originalSource = "";
 let ignoreRegion = false;
 let ignoreNext = false;
 
-const updatePrettierIgnoreState = node => {
+const checkForIgnoreStart = node => {
     // Keep current "ignoreNext" value if it's true,
     // but is not applied in this step yet
     ignoreNext =
         (ignoreNext && !shouldApplyIgnoreNext(node)) ||
         isIgnoreNextComment(node);
-    ignoreRegion = isIgnoreRegionStartComment(node);
+    ignoreRegion = ignoreRegion || isIgnoreRegionStartComment(node);
+};
 
+const checkForIgnoreEnd = node => {
     if (ignoreRegion && isIgnoreRegionEndComment(node)) {
         ignoreRegion = false;
     }
@@ -116,7 +118,7 @@ const print = (path, options, print) => {
     const node = path.getValue();
     const nodeType = node.constructor.name;
 
-    // Try to save original source from AST root
+    // Try to get the entire original source from AST root
     if (node[ORIGINAL_SOURCE]) {
         originalSource = node[ORIGINAL_SOURCE];
     }
@@ -125,6 +127,7 @@ const print = (path, options, print) => {
         options.printWidth = options.twigPrintWidth;
     }
 
+    checkForIgnoreEnd(node);
     const useOriginalSource =
         (shouldApplyIgnoreNext(node) && ignoreNext) || ignoreRegion;
     const hasPrintFunction = printFunctions[nodeType];
@@ -132,13 +135,13 @@ const print = (path, options, print) => {
     // Happy path: We have a formatting function, and the user wants the
     // node formatted
     if (!useOriginalSource && hasPrintFunction) {
-        updatePrettierIgnoreState(node);
+        checkForIgnoreStart(node);
         return printFunctions[nodeType](node, path, print, options);
     } else if (!hasPrintFunction) {
         console.warn(`No print function available for node type "${nodeType}"`);
     }
 
-    updatePrettierIgnoreState(node);
+    checkForIgnoreStart(node);
 
     // 1st fallback: Use originalSource property on AST node
     if (node.originalSource) {

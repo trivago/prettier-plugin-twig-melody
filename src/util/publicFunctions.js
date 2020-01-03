@@ -199,14 +199,21 @@ const hasNoNewlines = s => {
 
 const hasAtLeastTwoNewlines = s => countNewlines(s) >= 2;
 
+// Split string by whitespace, but preserving the whitespace
+// "\n   Next\n" => ["", "\n   ", "Next", "\n", ""]
+const splitByWhitespace = s => s.split(/([\s\n]+)/gm);
+
+const unifyWhitespace = (s, replacement = " ") =>
+    splitByWhitespace(s)
+        .filter(s => !isWhitespaceOnly(s))
+        .join(replacement);
+
 const createTextGroups = (
     s,
     preserveLeadingWhitespace,
     preserveTrailingWhitespace
 ) => {
-    // Split string by whitespace, but preserving the whitespace
-    // "\n   Next\n" => ["", "\n   ", "Next", "\n", ""]
-    const parts = s.split(/([\s\n]+)/gm);
+    const parts = splitByWhitespace(s);
     const groups = [];
     let currentGroup = [];
     const len = parts.length;
@@ -306,6 +313,22 @@ const addNewlineIfNotEmpty = items => {
 };
 
 const endsWithHtmlComment = s => s.endsWith("-->");
+
+const stripHtmlCommentChars = s => {
+    let result = s;
+    if (result.startsWith("<!--")) {
+        result = result.slice(4);
+    }
+    if (result.endsWith("-->")) {
+        result = result.slice(0, -3);
+    }
+    return result;
+};
+
+const normalizeHtmlComment = s => {
+    const commentText = stripHtmlCommentChars(s);
+    return "<!-- " + unifyWhitespace(commentText) + " -->";
+};
 
 const isInlineTextStatement = node => {
     if (!Node.isPrintTextStatement(node)) {
@@ -410,6 +433,8 @@ module.exports = {
     hasNoNewlines,
     countNewlines,
     hasAtLeastTwoNewlines,
+    stripHtmlCommentChars,
+    normalizeHtmlComment,
     createTextGroups,
     removeSurroundingWhitespace,
     getDeepProperty,
