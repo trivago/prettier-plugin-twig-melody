@@ -52,9 +52,11 @@ const {
     printNamedArgumentExpression
 } = require("./print/NamedArgumentExpression.js");
 const {
+    isWhitespaceNode,
+    isWhitespaceOnly,
     getPluginPathsFromOptions,
     loadPlugins
-} = require("./util/pluginUtil.js");
+} = require("./util");
 const { ORIGINAL_SOURCE } = require("./parser");
 
 const printFunctions = {};
@@ -75,25 +77,39 @@ const applyPlugins = options => {
     });
 };
 
-const isCertainHtmlComment = regex => node => {
+const isCertainHtmlComment = substr => node => {
     return (
         node.constructor.name === "HtmlComment" &&
         node.value.value &&
-        node.value.value.match(regex)
+        node.value.value.match(new RegExp("\\b" + substr + "\\b"))
     );
 };
 
-const isIgnoreNextComment = isCertainHtmlComment(/<!--.*prettier-ignore.*-->/);
+const isIgnoreNextComment = isCertainHtmlComment("prettier-ignore");
 const isIgnoreRegionStartComment = isCertainHtmlComment(
-    /<!--.*prettier-ignore-start.*-->/
+    "prettier-ignore-start"
 );
-const isIgnoreRegionEndComment = isCertainHtmlComment(
-    /<!--.*prettier-ignore-end.*-->/
-);
+const isIgnoreRegionEndComment = isCertainHtmlComment("prettier-ignore-end");
 
 let originalSource = "";
 let ignoreRegion = false;
 let ignoreNext = false;
+
+const updatePrettierIgnoreState = node => {
+    // Keep current "ignoreNext" value if it's true,
+    // but is not applied in this step yet
+    ignoreNext =
+        (ignoreNext && !shouldApplyIgnoreNext(node)) ||
+        isIgnoreNextComment(node);
+    ignoreRegion = isIgnoreRegionStartComment(node);
+
+    if (ignoreRegion && isIgnoreRegionEndComment(node)) {
+        ignoreRegion = false;
+    }
+};
+
+const shouldApplyIgnoreNext = node => !isWhitespaceNode(node);
+
 const print = (path, options, print) => {
     applyPlugins(options);
 
@@ -109,22 +125,20 @@ const print = (path, options, print) => {
         options.printWidth = options.twigPrintWidth;
     }
 
-    const useOriginalSource = ignoreNext || ignoreRegion;
+    const useOriginalSource =
+        (shouldApplyIgnoreNext(node) && ignoreNext) || ignoreRegion;
     const hasPrintFunction = printFunctions[nodeType];
 
     // Happy path: We have a formatting function, and the user wants the
     // node formatted
     if (!useOriginalSource && hasPrintFunction) {
+        updatePrettierIgnoreState(node);
         return printFunctions[nodeType](node, path, print, options);
     } else if (!hasPrintFunction) {
         console.warn(`No print function available for node type "${nodeType}"`);
     }
-    ignoreNext = isIgnoreNextComment(node);
-    ignoreRegion = isIgnoreRegionStartComment(node);
 
-    if (ignoreRegion && isIgnoreRegionEndComment(node)) {
-        ignoreRegion = false;
-    }
+    updatePrettierIgnoreState(node);
 
     // 1st fallback: Use originalSource property on AST node
     if (node.originalSource) {

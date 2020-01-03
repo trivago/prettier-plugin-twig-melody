@@ -248,7 +248,9 @@ const createTextGroups = (
 
 const isWhitespaceNode = node => {
     return (
-        Node.isPrintTextStatement(node) && isWhitespaceOnly(node.value.value)
+        (Node.isPrintTextStatement(node) &&
+            isWhitespaceOnly(node.value.value)) ||
+        (Node.isStringLiteral(node) && isWhitespaceOnly(node.value))
     );
 };
 
@@ -404,6 +406,7 @@ module.exports = {
     testCurrentNode,
     testCurrentAndParentNodes,
     isWhitespaceOnly,
+    isWhitespaceNode,
     hasNoNewlines,
     countNewlines,
     hasAtLeastTwoNewlines,
