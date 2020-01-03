@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.1.1
+
+-   Bug fixes
+    -   Avoid extraneous line breaks for zero-argument call expressions: [https://github.com/trivago/prettier-plugin-twig-melody/issues/10](https://github.com/trivago/prettier-plugin-twig-melody/issues/10)
+
 ## v0.1.0
 
 -   Features
