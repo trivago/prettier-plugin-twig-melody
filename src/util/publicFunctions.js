@@ -199,6 +199,16 @@ const hasNoNewlines = s => {
 
 const hasAtLeastTwoNewlines = s => countNewlines(s) >= 2;
 
+const normalizeWhitespace = whitespace => {
+    const numNewlines = countNewlines(whitespace);
+    if (numNewlines > 0) {
+        // Normalize to one/two newline(s)
+        return numNewlines > 1 ? [hardline, hardline] : [hardline];
+    }
+    // Normalize to one single space
+    return [line];
+};
+
 const createTextGroups = (
     s,
     preserveLeadingWhitespace,
@@ -219,12 +229,11 @@ const createTextGroups = (
                     index === len - 1 ||
                     (index === len - 2 && parts[len - 1] === "");
                 // Remove leading whitespace if allowed
-                if (isFirst && preserveLeadingWhitespace) {
-                    // Normalize to one single space
-                    currentGroup.push(line);
-                } else if (isLast && preserveTrailingWhitespace) {
-                    // Remove trailing whitespace if allowed
-                    currentGroup.push(line);
+                if (
+                    (isFirst && preserveLeadingWhitespace) ||
+                    (isLast && preserveTrailingWhitespace)
+                ) {
+                    currentGroup.push(...normalizeWhitespace(curr));
                 } else if (!isFirst && !isLast) {
                     const numNewlines = countNewlines(curr);
                     if (numNewlines <= 1) {
@@ -326,6 +335,9 @@ const isInlineElement = node => {
     );
 };
 
+const isCommentNode = node =>
+    Node.isTwigComment(node) || Node.isHtmlComment(node);
+
 const createInlineMap = nodes => nodes.map(node => isInlineElement(node));
 
 const textStatementsOnlyNewlines = nodes => {
@@ -338,14 +350,18 @@ const textStatementsOnlyNewlines = nodes => {
 
 const addPreserveWhitespaceInfo = (inlineMap, nodes) => {
     nodes.forEach((node, index) => {
+        const previousNodeIsComment =
+            index > 0 && isCommentNode(nodes[index - 1]);
+        const followingNodeIsComment =
+            index < nodes.length - 1 && isCommentNode(nodes[index + 1]);
         if (Node.isPrintTextStatement(node)) {
             const hasPreviousInlineElement = index > 0 && inlineMap[index - 1];
-            if (hasPreviousInlineElement) {
+            if (hasPreviousInlineElement || previousNodeIsComment) {
                 node[PRESERVE_LEADING_WHITESPACE] = true;
             }
             const hasFollowingInlineElement =
                 index < inlineMap.length - 1 && inlineMap[index + 1];
-            if (hasFollowingInlineElement) {
+            if (hasFollowingInlineElement || followingNodeIsComment) {
                 node[PRESERVE_TRAILING_WHITESPACE] = true;
             }
         }
