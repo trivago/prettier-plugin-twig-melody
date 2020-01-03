@@ -119,6 +119,8 @@ exports[`callExpression.melody.twig 1`] = `
     isLongPropertyName: true,
     hasBeenWaiting: true
 }) }}
+
+{{ craft.someCoolObject.someMethodToUse({ foo: 'bar', bar: 'baz', baz: 'foo' }).all() }}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {{ range(3) }}
 
@@ -144,6 +146,14 @@ exports[`callExpression.melody.twig 1`] = `
         isLongPropertyName: true,
         hasBeenWaiting: true
     })
+}}
+
+{{
+    craft.someCoolObject.someMethodToUse({
+        foo: 'bar',
+        bar: 'baz',
+        baz: 'foo'
+    }).all()
 }}
 
 `;
