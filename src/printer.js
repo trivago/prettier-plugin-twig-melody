@@ -78,6 +78,7 @@ const applyPlugins = options => {
 };
 
 const isCertainHtmlComment = substr => node => {
+    Switch to TwigComment!
     return (
         node.constructor.name === "HtmlComment" &&
         node.value.value &&
