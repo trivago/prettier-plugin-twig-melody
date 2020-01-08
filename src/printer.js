@@ -143,11 +143,7 @@ const print = (path, options, print) => {
 
     checkForIgnoreStart(node);
 
-    // 1st fallback: Use originalSource property on AST node
-    if (node.originalSource) {
-        return node.originalSource;
-    }
-    // 2nd fallback: Use the node's loc property with the
+    // Fallback: Use the node's loc property with the
     // originalSource property on the AST root
     if (canGetSubstringForNode(node)) {
         return getSubstringForNode(node);
