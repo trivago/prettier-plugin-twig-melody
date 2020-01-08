@@ -53,7 +53,8 @@ const {
 } = require("./print/NamedArgumentExpression.js");
 const {
     isWhitespaceNode,
-    normalizeHtmlComment,
+    isHtmlCommentEqualTo,
+    isTwigCommentEqualTo,
     getPluginPathsFromOptions,
     loadPlugins
 } = require("./util");
@@ -77,20 +78,19 @@ const applyPlugins = options => {
     });
 };
 
-const isCertainHtmlComment = substr => node => {
-    Switch to TwigComment!
-    return (
-        node.constructor.name === "HtmlComment" &&
-        node.value.value &&
-        normalizeHtmlComment(node.value.value) === "<!-- " + substr + " -->"
-    );
-};
+const isHtmlIgnoreNextComment = isHtmlCommentEqualTo("prettier-ignore");
+const isHtmlIgnoreStartComment = isHtmlCommentEqualTo("prettier-ignore-start");
+const isHtmlIgnoreEndComment = isHtmlCommentEqualTo("prettier-ignore-end");
+const isTwigIgnoreNextComment = isTwigCommentEqualTo("prettier-ignore");
+const isTwigIgnoreStartComment = isTwigCommentEqualTo("prettier-ignore-start");
+const isTwigIgnoreEndComment = isTwigCommentEqualTo("prettier-ignore-end");
 
-const isIgnoreNextComment = isCertainHtmlComment("prettier-ignore");
-const isIgnoreRegionStartComment = isCertainHtmlComment(
-    "prettier-ignore-start"
-);
-const isIgnoreRegionEndComment = isCertainHtmlComment("prettier-ignore-end");
+const isIgnoreNextComment = s =>
+    isHtmlIgnoreNextComment(s) || isTwigIgnoreNextComment(s);
+const isIgnoreRegionStartComment = s =>
+    isHtmlIgnoreStartComment(s) || isTwigIgnoreStartComment(s);
+const isIgnoreRegionEndComment = s =>
+    isHtmlIgnoreEndComment(s) || isTwigIgnoreEndComment(s);
 
 let originalSource = "";
 let ignoreRegion = false;
