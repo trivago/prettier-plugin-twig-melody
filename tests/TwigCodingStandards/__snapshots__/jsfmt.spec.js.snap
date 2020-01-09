@@ -37,15 +37,11 @@ exports[`twigCodingStandards.melody.twig 1`] = `
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {{ foo }}
 {# comment #}
-{% if foo %}
-
-{% endif %}
+{% if foo %}{% endif %}
 
 {{ foo }}
 {#- comment -#}
-{%- if foo -%}
-
-{%- endif -%}
+{%- if foo -%}{%- endif -%}
 
 {{ 1 + 2 }}
 {{ foo ~ bar }}
