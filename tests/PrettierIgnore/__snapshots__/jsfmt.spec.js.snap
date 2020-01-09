@@ -15,7 +15,7 @@ exports[`prettierIgnore.melody.twig 1`] = `
     <span class="what-about-this">Should re-format</span>
 </div>
 
-{#prettier-ignore#}
+{# prettier-ignore #}
 <div><span    class="what-about-this"  >Should not re-format</span></div>
 <div>
     <span class="what-about-this">Should re-format</span>
@@ -24,7 +24,7 @@ exports[`prettierIgnore.melody.twig 1`] = `
 `;
 
 exports[`prettierIgnoreStartEnd.melody.twig 1`] = `
-<!-- prettier-ignore-start -->
+<!--prettier-ignore-start-->
 <div><span    class="what-about-this"  >Should not re-format</span></div>
 <div><span    class="what-about-this"  >Should not re-format</span></div>
 <div><span    class="what-about-this"  >Should not re-format</span></div>

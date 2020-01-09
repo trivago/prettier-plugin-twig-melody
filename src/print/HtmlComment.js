@@ -3,14 +3,15 @@ const { concat, join, indent, hardline } = prettier.doc.builders;
 const {
     createTextGroups,
     stripHtmlCommentChars,
-    normalizeHtmlComment
+    normalizeHtmlComment,
+    countNewlines
 } = require("../util");
 
 const p = (node, path, print) => {
     const commentText = stripHtmlCommentChars(node.value.value || "");
 
-    if (commentText.trim() === "prettier-ignore-end") {
-        // Weird workaround for a bug I don't understand
+    const numNewlines = countNewlines(commentText);
+    if (numNewlines === 0) {
         return normalizeHtmlComment(commentText);
     }
 
