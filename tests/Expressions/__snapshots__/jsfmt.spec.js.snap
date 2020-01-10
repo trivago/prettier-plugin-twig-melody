@@ -165,11 +165,9 @@ exports[`conditionalExpression.melody.twig 1`] = `
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {{ test ? 'One' : 'Two' }}
 
-{{
-    test
+{{ test
         ? 'This is a slightly longer string to overflow the line'
-        : 'and here is its counterpart'
-}}
+        : 'and here is its counterpart' }}
 
 `;
 
