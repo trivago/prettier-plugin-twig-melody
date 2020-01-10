@@ -52,9 +52,7 @@ exports[`twigCodingStandards.melody.twig 1`] = `
 {{ foo | upper | lower }}
 {{ user.name }}
 {{ user[name] }}
-{% for i in 1[12] %}
-
-{% endfor %}
+{% for i in 1[12] %}{% endfor %}
 
 {{ foo | default('foo') }}
 {{ range(1[10]) }}
