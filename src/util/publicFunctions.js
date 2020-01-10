@@ -459,6 +459,7 @@ module.exports = {
     testCurrentNode,
     testCurrentAndParentNodes,
     isWhitespaceOnly,
+    isWhitespaceNode,
     hasNoNewlines,
     countNewlines,
     hasAtLeastTwoNewlines,
