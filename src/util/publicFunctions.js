@@ -27,6 +27,43 @@ const INLINE_HTML_ELEMENTS = [
 ];
 
 /**
+ * Node types around which we avoid an extra line break.
+ * Example:
+ * {{ {
+ *     animal: "dog",
+ *     owner: "Jim"
+ *  } }}
+ *
+ * instead of
+ * {{
+ *     {
+ *         animal: "dog",
+ *         owner: "Jim"
+ *     }
+ * }}
+ */
+const CONTRACTABLE_NODE_TYPES = [
+    "ObjectExpression",
+    "BinaryExpression",
+    "ConditionalExpression"
+];
+
+const registerContractableNodeType = nodeType => {
+    CONTRACTABLE_NODE_TYPES.push(nodeType);
+};
+
+const isContractableNodeType = node => {
+    for (let i = 0; i < CONTRACTABLE_NODE_TYPES.length; i++) {
+        const contractableNodeType = CONTRACTABLE_NODE_TYPES[i];
+        const methodName = "is" + contractableNodeType;
+        if (Node[methodName] && Node[methodName].call(null, node)) {
+            return true;
+        }
+    }
+    return false;
+};
+
+/**
  * Calls the callback for each parent
  *
  * Return false from the callback if you want the iteration
@@ -415,6 +452,8 @@ module.exports = {
     someParentNode,
     walkParents,
     firstValueInAncestorChain,
+    isContractableNodeType,
+    registerContractableNodeType,
     quoteChar,
     isValidIdentifierName,
     testCurrentNode,
