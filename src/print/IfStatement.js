@@ -12,15 +12,17 @@ const p = (node, path, print) => {
         Array.isArray(node.alternate) && node.alternate.length > 0;
     const hasElseIfBranch = Node.isIfStatement(node.alternate);
     const isElseIf = node[IS_ELSEIF] === true;
-    const hasOnlyOneChild = node.consequent.length === 1;
+    const isEmptyIf = node.consequent.length === 0;
+    const hasOneChild = node.consequent.length === 1;
     const firstChild = node.consequent[0];
     const printInline =
         !isElseIf &&
         !node.alternate &&
-        hasOnlyOneChild &&
-        !Node.isElement(firstChild) &&
-        (!Node.isPrintTextStatement(firstChild) ||
-            hasNoNewlines(firstChild.value.value));
+        (isEmptyIf ||
+            (hasOneChild &&
+                !Node.isElement(firstChild) &&
+                (!Node.isPrintTextStatement(firstChild) ||
+                    hasNoNewlines(firstChild.value.value))));
 
     const ifClause = group(
         concat([
@@ -32,7 +34,9 @@ const p = (node, path, print) => {
         ])
     );
     const ifBody = printInline
-        ? path.call(print, "consequent", "0")
+        ? isEmptyIf
+            ? ""
+            : path.call(print, "consequent", "0")
         : printChildBlock(node, path, print, "consequent");
     const parts = [ifClause, ifBody];
     if (hasElseBranch) {

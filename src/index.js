@@ -98,6 +98,13 @@ const options = {
         category: "Global",
         default: 80,
         description: "Print width for Twig files"
+    },
+    twigFollowOfficialCodingStandards: {
+        type: "boolean",
+        category: "Global",
+        default: true,
+        description:
+            "See https://twig.symfony.com/doc/2.x/coding_standards.html"
     }
 };
 

@@ -55,7 +55,7 @@ exports[`forIfElse.melody.twig 1`] = `
 </ul>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <ul>
-    {% for a, b in c | slice(3, c.length) if b is even -%}
+    {% for a, b in c|slice(3, c.length) if b is even -%}
         <li>{{ a }} - {{ b }}</li>
     {%- else %}
         <li>No results found</li>
@@ -105,13 +105,13 @@ exports[`forWithBlock.melody.twig 1`] = `
 </ul>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <h1>
-    {{ title | title }}
+    {{ title|title }}
 </h1>
 <ul>
     {% for item in items %}
         <li class="{{ loop.last ? 'last' : '' }}">
             {% block title %}
-                {{ loop.index0 }} {{ item.name | title }} {{ loop.index }}
+                {{ loop.index0 }} {{ item.name|title }} {{ loop.index }}
             {% endblock title %}
         </li>
     {% endfor %}
@@ -158,7 +158,7 @@ exports[`if.melody.twig 1`] = `
     <img class="{{ {
             (css.logo): not useWiderItems,
             (css.logoWider): useWiderItems
-        } | classes }}"
+        }|classes }}"
         srcABC="{{ partner.logoUrl }}"
         alt="{{ partner.name }}" />
 {%- elseif partnerName %}
@@ -169,10 +169,10 @@ exports[`if.melody.twig 1`] = `
 
 <!-- Don't break -->
 {% if isLeftToRight %}Hund{% endif %}
-{% if isRTL %}{{ '&#8206;' | raw }}{% endif %}
+{% if isRTL %}{{ '&#8206;'|raw }}{% endif %}
 
 <!-- Do break -->
-{% if (unitAfter | length) > 0 and not withoutDisplayPattern %}
+{% if (unitAfter|length) > 0 and not withoutDisplayPattern %}
     <span key="unit-after" class="unit unit--after">{{ unitAfter }}</span>
 {% endif %}
 
