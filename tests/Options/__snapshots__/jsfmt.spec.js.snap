@@ -6,7 +6,7 @@ exports[`alwaysBreakObjects.melody.twig 1`] = `
 } | classes }}">
 </section>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-<section class="{{ { base: css.prices } | classes }}"></section>
+<section class="{{ { base: css.prices }|classes }}"></section>
 
 `;
 
