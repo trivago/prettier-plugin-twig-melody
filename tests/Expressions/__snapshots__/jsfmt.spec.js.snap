@@ -318,7 +318,7 @@ exports[`operators.melody.twig 1`] = `
 {{ a matches '^foo' }}
 {{ a starts with b }}
 {{ a ends with b }}
-{{ a .. b }}
+{{ a..b }}
 {{ a + b }}
 {{ a - b }}
 {{ a ~ b }}
