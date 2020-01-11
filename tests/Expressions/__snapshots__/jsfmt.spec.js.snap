@@ -185,20 +185,20 @@ exports[`filterExpression.melody.twig 1`] = `
     }
 ) only %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{{ 'test.foo' | split('.') }}
-{{ range(3) | sort | join(',') }}
+{{ 'test.foo'|split('.') }}
+{{ range(3)|sort|join(',') }}
 {{
     'SHOUTING'
-        | lower
-        | escape('html')
-        | upper
-        | escape('markdown')
-        | lower
-        | upper
-        | escape('markdown')
+        |lower
+        |escape('html')
+        |upper
+        |escape('markdown')
+        |lower
+        |upper
+        |escape('markdown')
 }}
 
-{% include './usefulDeal.melody.twig' with deal | merge({
+{% include './usefulDeal.melody.twig' with deal|merge({
     index: loop.index0,
     isOverview: isOverview,
     isRTL: isRTL,
@@ -236,8 +236,8 @@ exports[`objectExpression.melody.twig 1`] = `
 }}
 
 <h1 class="{{ {
-        ('hero__title--' ~ (locale | lower)): locale in ['CN', 'JP', 'DE', 'RU']
-    } | classes }}">
+        ('hero__title--' ~ (locale|lower)): locale in ['CN', 'JP', 'DE', 'RU']
+    }|classes }}">
     Heading
 </h1>
 
@@ -360,20 +360,20 @@ exports[`operators.melody.twig 1`] = `
 }}
 
 {{ dump(test) }}
-{{ range(2, 3) | sort | join(',') }}
-{{ range(3) | sort | join(',') }}
-{{ range(2, 3, 2) | sort | join(',') }}
-{{ test | raw }}
-{{ 2.4 | abs }}
+{{ range(2, 3)|sort|join(',') }}
+{{ range(3)|sort|join(',') }}
+{{ range(2, 3, 2)|sort|join(',') }}
+{{ test|raw }}
+{{ 2.4|abs }}
 {{
     {
         a: 'b'
     }
-        | json_encode
-        | trim
+        |json_encode
+        |trim
 }}
-{{ [2, 3] | length }}
-{{ 'test.foo' | split('.') }}
+{{ [2, 3]|length }}
+{{ 'test.foo'|split('.') }}
 
 `;
 
