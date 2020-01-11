@@ -49,12 +49,12 @@ exports[`twigCodingStandards.melody.twig 1`] = `
 
 {{ 1 + 2 * 3 }}
 
-{{ foo | upper | lower }}
+{{ foo|upper|lower }}
 {{ user.name }}
 {{ user[name] }}
 {% for i in 1 .. 12 %}{% endfor %}
 
-{{ foo | default('foo') }}
+{{ foo|default('foo') }}
 {{ range(1 .. 10) }}
 
 {% block foo %}

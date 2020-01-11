@@ -45,15 +45,19 @@ const printOneFilterExpression = (node, path, print, nodePath) => {
     return concat([filterName, args]);
 };
 
-const joinFilters = filterExpressions => {
-    return join(concat([line, "| "]), filterExpressions);
+const joinFilters = (filterExpressions, space = "") => {
+    return join(
+        concat([space === "" ? softline : line, "|", space]),
+        filterExpressions
+    );
 };
 
-const p = (node, path, print) => {
+const p = (node, path, print, options) => {
     let currentNode = node;
     node[EXPRESSION_NEEDED] = false;
     node[STRING_NEEDS_QUOTES] = true;
-
+    const spaceAroundPipe = options.twigFollowOfficialCodingStandards === false;
+    const space = spaceAroundPipe ? " " : "";
     const pathToFinalTarget = ["target"];
     let filterExpressions = [printOneFilterExpression(node, path, print, [])];
 
@@ -90,12 +94,12 @@ const p = (node, path, print) => {
     }
     if (filterExpressions.length === 1) {
         // No breaks and indentation for just one expression
-        parts.push(" | ", filterExpressions[0]);
+        parts.push(`${space}|${space}`, filterExpressions[0]);
     } else if (filterExpressions.length > 1) {
         const indentedFilters = concat([
-            line,
-            "| ",
-            joinFilters(filterExpressions)
+            spaceAroundPipe ? line : softline,
+            `|${space}`,
+            joinFilters(filterExpressions, space)
         ]);
         parts.push(indent(indentedFilters));
     }

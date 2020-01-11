@@ -66,12 +66,12 @@ exports[`filter.melody.twig 1`] = `
 {%- endfilter %}
 
 {%- filter lower
-    | escape('html')
-    | upper
-    | escape('markdown')
-    | lower
-    | upper
-    | escape('markdown')
+    |escape('html')
+    |upper
+    |escape('markdown')
+    |lower
+    |upper
+    |escape('markdown')
 %}
     <strong>SOME TEXT</strong>
 
@@ -136,7 +136,7 @@ exports[`macro.melody.twig 1`] = `
 %}
     <input type="{{ type }}"
         name="{{ name }}"
-        value="{{ value | e }}"
+        value="{{ value|e }}"
         size="{{ size }}" />
 {% endmacro %}
 
@@ -156,7 +156,7 @@ exports[`macro.melody.twig 1`] = `
 
 {% macro partner(groupId, value) %}
     {# 80 is the groupid of specific hotel websites that may not have a correct partner name #}
-    {{ groupId == 80 ? 'book_hotel_website_test' | translate : value }}
+    {{ groupId == 80 ? 'book_hotel_website_test'|translate : value }}
 {% endmacro %}
 
 `;
@@ -220,15 +220,15 @@ exports[`set.melody.twig 1`] = `
     </p>
 {%- endset -%}
 
-{% set showArrows = hideArrowWhenDisabled | default(false)
-    ? (shouldShowArrows | default(false)) and (scrollEnabled | default(false))
-    : shouldShowArrows | default(false)
+{% set showArrows = hideArrowWhenDisabled|default(false)
+    ? (shouldShowArrows|default(false)) and (scrollEnabled|default(false))
+    : shouldShowArrows|default(false)
 %}
 
 {% set recommendedClickoutAttributes = hasRecommendedPrice
-    ? clickoutAttributes | merge({
+    ? clickoutAttributes|merge({
         'data-id': recommendedPrice.dealId,
-        'data-co_params': recommendedPrice.clcklB | json_encode,
+        'data-co_params': recommendedPrice.clcklB|json_encode,
         'data-co_li_lo': 1
     })
     : {}
