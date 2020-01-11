@@ -244,6 +244,7 @@ const unifyWhitespace = (s, replacement = " ") =>
     splitByWhitespace(s)
         .filter(s => !isWhitespaceOnly(s))
         .join(replacement);
+
 const normalizeWhitespace = whitespace => {
     const numNewlines = countNewlines(whitespace);
     if (numNewlines > 0) {
@@ -253,14 +254,6 @@ const normalizeWhitespace = whitespace => {
     // Normalize to one single space
     return [line];
 };
-// Split string by whitespace, but preserving the whitespace
-// "\n   Next\n" => ["", "\n   ", "Next", "\n", ""]
-const splitByWhitespace = s => s.split(/([\s\n]+)/gm);
-
-const unifyWhitespace = (s, replacement = " ") =>
-    splitByWhitespace(s)
-        .filter(s => !isWhitespaceOnly(s))
-        .join(replacement);
 
 const createTextGroups = (
     s,
