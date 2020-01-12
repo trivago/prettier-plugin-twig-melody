@@ -6,6 +6,11 @@
 
 -   Bug fixes
 
+## v0.2.1
+
+-   Bug fixes
+    -   Improve printing of HTML and Twig comments
+
 ## v0.2.0
 
 -   Features
