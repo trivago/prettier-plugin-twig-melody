@@ -82,10 +82,8 @@ exports[`controversial.melody.twig 1`] = `
 `;
 
 exports[`failing.melody.twig 1`] = `
-{{ someMethod('foo\\\\bar\\\\baz') }}
 {#- comment -#}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{{ someMethod('foo\\bar\\\\baz') }}
 {# - comment - #}
 
 `;
