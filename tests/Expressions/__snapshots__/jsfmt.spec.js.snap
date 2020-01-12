@@ -392,6 +392,13 @@ exports[`stringConcat.melody.twig 1`] = `
 
 `;
 
+exports[`stringLiteral.melody.twig 1`] = `
+{{ 'zzz\\\\bar\\\\baz' }}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{{ 'zzz\\\\bar\\\\baz' }}
+
+`;
+
 exports[`unaryNot.melody.twig 1`] = `
 {% if not invalid %}
     <p>All's well.</p>
