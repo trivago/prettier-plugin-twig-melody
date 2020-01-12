@@ -1,5 +1,10 @@
 # Changelog
 
+## master
+
+-   Bug fixes
+    -   Avoid dropping of backslash in string literal: [https://github.com/trivago/prettier-plugin-twig-melody/issues/11](https://github.com/trivago/prettier-plugin-twig-melody/issues/11)
+
 ## v0.1.1
 
 -   Bug fixes
