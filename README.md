@@ -32,19 +32,19 @@ In your editor, if the plugin is not automatically picked up and invoked (e.g., 
 
 This Prettier plugin comes with some options that you can add to your Prettier configuration (e.g., `prettierrc.json`).
 
-### twigSingleQuote
+### twigSingleQuote (default: `true`)
 
 Values can be `true` or `false`. If `true`, single quotes will be used for string literals in Twig files.
 
-### twigMelodyPlugins
+### twigMelodyPlugins (default: `""`)
 
 An array containing file paths to plugin directories. This can be used to add your own printers and parser extensions.
 
-### twigPrintWidth
+### twigPrintWidth (default: `80`)
 
 Because Twig files might have a lot of nesting, it can be useful to define a separate print width for Twig files. This can be done with this option. If it is not set, the standard `printWidth` option is used.
 
-### twigAlwaysBreakObjects
+### twigAlwaysBreakObjects (default: `false`)
 
 If set to `true`, objects will always be wrapped/broken, even if they would fit on one line:
 
@@ -60,6 +60,10 @@ If set to `false` (default value), this would be printed as:
 ```
 <section class="{{ { base: css.prices } | classes }}"></section>
 ```
+
+### twigFollowOfficialCodingStandards (default: `true`)
+
+Follow the standards described in [https://twig.symfony.com/doc/2.x/coding_standards.html](https://twig.symfony.com/doc/2.x/coding_standards.html) exactly. If set to `false`, some slight deviations might occur, such as spaces around the filter `|` operator (`s | upper` instead of `s|upper`).
 
 ## Plugins
 

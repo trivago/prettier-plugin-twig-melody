@@ -27,6 +27,43 @@ const INLINE_HTML_ELEMENTS = [
 ];
 
 /**
+ * Node types around which we avoid an extra line break.
+ * Example:
+ * {{ {
+ *     animal: "dog",
+ *     owner: "Jim"
+ *  } }}
+ *
+ * instead of
+ * {{
+ *     {
+ *         animal: "dog",
+ *         owner: "Jim"
+ *     }
+ * }}
+ */
+const CONTRACTABLE_NODE_TYPES = [
+    "ObjectExpression",
+    "BinaryExpression",
+    "ConditionalExpression"
+];
+
+const registerContractableNodeType = nodeType => {
+    CONTRACTABLE_NODE_TYPES.push(nodeType);
+};
+
+const isContractableNodeType = node => {
+    for (let i = 0; i < CONTRACTABLE_NODE_TYPES.length; i++) {
+        const contractableNodeType = CONTRACTABLE_NODE_TYPES[i];
+        const methodName = "is" + contractableNodeType;
+        if (Node[methodName] && Node[methodName].call(null, node)) {
+            return true;
+        }
+    }
+    return false;
+};
+
+/**
  * Calls the callback for each parent
  *
  * Return false from the callback if you want the iteration
@@ -199,14 +236,31 @@ const hasNoNewlines = s => {
 
 const hasAtLeastTwoNewlines = s => countNewlines(s) >= 2;
 
+// Split string by whitespace, but preserving the whitespace
+// "\n   Next\n" => ["", "\n   ", "Next", "\n", ""]
+const splitByWhitespace = s => s.split(/([\s\n]+)/gm);
+
+const unifyWhitespace = (s, replacement = " ") =>
+    splitByWhitespace(s)
+        .filter(s => !isWhitespaceOnly(s))
+        .join(replacement);
+
+const normalizeWhitespace = whitespace => {
+    const numNewlines = countNewlines(whitespace);
+    if (numNewlines > 0) {
+        // Normalize to one/two newline(s)
+        return numNewlines > 1 ? [hardline, hardline] : [hardline];
+    }
+    // Normalize to one single space
+    return [line];
+};
+
 const createTextGroups = (
     s,
     preserveLeadingWhitespace,
     preserveTrailingWhitespace
 ) => {
-    // Split string by whitespace, but preserving the whitespace
-    // "\n   Next\n" => ["", "\n   ", "Next", "\n", ""]
-    const parts = s.split(/([\s\n]+)/gm);
+    const parts = splitByWhitespace(s);
     const groups = [];
     let currentGroup = [];
     const len = parts.length;
@@ -219,12 +273,11 @@ const createTextGroups = (
                     index === len - 1 ||
                     (index === len - 2 && parts[len - 1] === "");
                 // Remove leading whitespace if allowed
-                if (isFirst && preserveLeadingWhitespace) {
-                    // Normalize to one single space
-                    currentGroup.push(line);
-                } else if (isLast && preserveTrailingWhitespace) {
-                    // Remove trailing whitespace if allowed
-                    currentGroup.push(line);
+                if (
+                    (isFirst && preserveLeadingWhitespace) ||
+                    (isLast && preserveTrailingWhitespace)
+                ) {
+                    currentGroup.push(...normalizeWhitespace(curr));
                 } else if (!isFirst && !isLast) {
                     const numNewlines = countNewlines(curr);
                     if (numNewlines <= 1) {
@@ -248,7 +301,9 @@ const createTextGroups = (
 
 const isWhitespaceNode = node => {
     return (
-        Node.isPrintTextStatement(node) && isWhitespaceOnly(node.value.value)
+        (Node.isPrintTextStatement(node) &&
+            isWhitespaceOnly(node.value.value)) ||
+        (Node.isStringLiteral(node) && isWhitespaceOnly(node.value))
     );
 };
 
@@ -305,6 +360,46 @@ const addNewlineIfNotEmpty = items => {
 
 const endsWithHtmlComment = s => s.endsWith("-->");
 
+const stripCommentChars = (start, end) => s => {
+    let result = s;
+    if (result.startsWith(start)) {
+        result = result.slice(start.length);
+    }
+    if (result.endsWith(end)) {
+        result = result.slice(0, 0 - end.length);
+    }
+    return result;
+};
+
+const stripHtmlCommentChars = stripCommentChars("<!--", "-->");
+const stripTwigCommentChars = stripCommentChars("{#", "#}");
+
+const normalizeHtmlComment = s => {
+    const commentText = stripHtmlCommentChars(s);
+    return "<!-- " + unifyWhitespace(commentText) + " -->";
+};
+
+const normalizeTwigComment = s => {
+    const commentText = stripTwigCommentChars(s);
+    return "{# " + unifyWhitespace(commentText) + " #}";
+};
+
+const isHtmlCommentEqualTo = substr => node => {
+    return (
+        node.constructor.name === "HtmlComment" &&
+        node.value.value &&
+        normalizeHtmlComment(node.value.value) === "<!-- " + substr + " -->"
+    );
+};
+
+const isTwigCommentEqualTo = substr => node => {
+    return (
+        node.constructor.name === "TwigComment" &&
+        node.value.value &&
+        normalizeTwigComment(node.value.value) === "{# " + substr + " #}"
+    );
+};
+
 const isInlineTextStatement = node => {
     if (!Node.isPrintTextStatement(node)) {
         return false;
@@ -326,6 +421,9 @@ const isInlineElement = node => {
     );
 };
 
+const isCommentNode = node =>
+    Node.isTwigComment(node) || Node.isHtmlComment(node);
+
 const createInlineMap = nodes => nodes.map(node => isInlineElement(node));
 
 const textStatementsOnlyNewlines = nodes => {
@@ -338,14 +436,18 @@ const textStatementsOnlyNewlines = nodes => {
 
 const addPreserveWhitespaceInfo = (inlineMap, nodes) => {
     nodes.forEach((node, index) => {
+        const previousNodeIsComment =
+            index > 0 && isCommentNode(nodes[index - 1]);
+        const followingNodeIsComment =
+            index < nodes.length - 1 && isCommentNode(nodes[index + 1]);
         if (Node.isPrintTextStatement(node)) {
             const hasPreviousInlineElement = index > 0 && inlineMap[index - 1];
-            if (hasPreviousInlineElement) {
+            if (hasPreviousInlineElement || previousNodeIsComment) {
                 node[PRESERVE_LEADING_WHITESPACE] = true;
             }
             const hasFollowingInlineElement =
                 index < inlineMap.length - 1 && inlineMap[index + 1];
-            if (hasFollowingInlineElement) {
+            if (hasFollowingInlineElement || followingNodeIsComment) {
                 node[PRESERVE_TRAILING_WHITESPACE] = true;
             }
         }
@@ -399,14 +501,23 @@ module.exports = {
     someParentNode,
     walkParents,
     firstValueInAncestorChain,
+    isContractableNodeType,
+    registerContractableNodeType,
     quoteChar,
     isValidIdentifierName,
     testCurrentNode,
     testCurrentAndParentNodes,
     isWhitespaceOnly,
+    isWhitespaceNode,
     hasNoNewlines,
     countNewlines,
     hasAtLeastTwoNewlines,
+    stripHtmlCommentChars,
+    stripTwigCommentChars,
+    normalizeHtmlComment,
+    normalizeTwigComment,
+    isHtmlCommentEqualTo,
+    isTwigCommentEqualTo,
     createTextGroups,
     removeSurroundingWhitespace,
     getDeepProperty,

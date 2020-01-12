@@ -4,7 +4,7 @@ const { EXPRESSION_NEEDED, wrapExpressionIfNeeded } = require("../util");
 
 const p = (node, path, print, options) => {
     if (node.properties.length === 0) {
-        return "{ }";
+        return "{}";
     }
     node[EXPRESSION_NEEDED] = false;
     const mappedElements = path.map(print, "properties");

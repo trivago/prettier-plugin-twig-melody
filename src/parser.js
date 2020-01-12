@@ -5,6 +5,8 @@ const {
     getPluginPathsFromOptions
 } = require("./util");
 
+const ORIGINAL_SOURCE = Symbol("ORIGINAL_SOURCE");
+
 const createConfiguredLexer = (code, ...extensions) => {
     const lexer = new Lexer(new CharStream(code));
     for (const extension of extensions) {
@@ -54,7 +56,8 @@ const createConfiguredParser = (code, ...extensions) => {
         {
             ignoreComments: false,
             ignoreHtmlComments: false,
-            decodeEntities: false
+            decodeEntities: false,
+            source: code
         }
     );
     configureParser(parser, ...extensions);
@@ -68,9 +71,12 @@ const parse = (text, parsers, options) => {
         ...getAdditionalMelodyExtensions(pluginPaths)
     ];
     const parser = createConfiguredParser(text, ...extensions);
-    return parser.parse();
+    const ast = parser.parse();
+    ast[ORIGINAL_SOURCE] = text;
+    return ast;
 };
 
 module.exports = {
-    parse
+    parse,
+    ORIGINAL_SOURCE
 };
