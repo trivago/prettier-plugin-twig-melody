@@ -56,8 +56,8 @@ const createConfiguredParser = (code, ...extensions) => {
         {
             ignoreComments: false,
             ignoreHtmlComments: false,
-            decodeEntities: false,
-            source: code
+            ignoreDeclarations: false,
+            decodeEntities: false
         }
     );
     configureParser(parser, ...extensions);

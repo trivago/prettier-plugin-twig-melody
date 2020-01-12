@@ -13,6 +13,13 @@
 const STRING_NEEDS_QUOTES = Symbol("STRING_NEEDS_QUOTES");
 
 /**
+ * Set to " or '
+ * Allows a node type to determine the quote char string
+ * literals must use.
+ */
+const OVERRIDE_QUOTE_CHAR = Symbol("OVERRIDE_QUOTE_CHAR");
+
+/**
  * This signals to child nodes that an expression environment
  * {{ ... }} has not yet been opened, so they might have
  * to open one. Example: An Element node, in its attributes
@@ -56,6 +63,7 @@ const NEWLINES_ONLY = Symbol("NEWLINES_ONLY");
 
 module.exports = {
     STRING_NEEDS_QUOTES,
+    OVERRIDE_QUOTE_CHAR,
     INSIDE_OF_STRING,
     EXPRESSION_NEEDED,
     FILTER_BLOCK,

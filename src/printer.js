@@ -39,6 +39,7 @@ const { printImportDeclaration } = require("./print/ImportDeclaration.js");
 const { printFromStatement } = require("./print/FromStatement.js");
 const { printTwigComment } = require("./print/TwigComment.js");
 const { printHtmlComment } = require("./print/HtmlComment.js");
+const { printDeclaration } = require("./print/Declaration.js");
 const {
     printMacroDeclarationStatement
 } = require("./print/MacroDeclarationStatement.js");
@@ -262,6 +263,7 @@ printFunctions["FromStatement"] = printFromStatement;
 printFunctions["MacroDeclarationStatement"] = printMacroDeclarationStatement;
 printFunctions["TwigComment"] = printTwigComment;
 printFunctions["HtmlComment"] = printHtmlComment;
+printFunctions["Declaration"] = printDeclaration;
 
 // Fallbacks
 printFunctions["String"] = s => s;

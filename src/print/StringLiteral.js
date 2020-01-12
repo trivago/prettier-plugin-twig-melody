@@ -1,7 +1,8 @@
 const {
     firstValueInAncestorChain,
     quoteChar,
-    STRING_NEEDS_QUOTES
+    STRING_NEEDS_QUOTES,
+    OVERRIDE_QUOTE_CHAR
 } = require("../util");
 
 const p = (node, path, print, options) => {
@@ -12,9 +13,16 @@ const p = (node, path, print, options) => {
         STRING_NEEDS_QUOTES,
         false
     );
+    const overridingQuoteChar = firstValueInAncestorChain(
+        path,
+        OVERRIDE_QUOTE_CHAR,
+        null
+    );
 
     if (needsQuotes) {
-        const quote = quoteChar(options);
+        const quote = overridingQuoteChar
+            ? overridingQuoteChar
+            : quoteChar(options);
         return quote + node.value + quote;
     }
 
