@@ -65,6 +65,27 @@ If set to `false` (default value), this would be printed as:
 
 Follow the standards described in [https://twig.symfony.com/doc/2.x/coding_standards.html](https://twig.symfony.com/doc/2.x/coding_standards.html) exactly. If set to `false`, some slight deviations might occur, such as spaces around the filter `|` operator (`s | upper` instead of `s|upper`).
 
+## Features
+
+### `prettier-ignore` and `prettier-ignore-start`
+
+When you are not happy with how Prettier formats a certain element or section in the code, you can tell it to leave it in peace:
+
+```
+{# prettier-ignore #}
+<div   class="weird-formatting"   >This will not be re-formatted</div>
+
+<div   class="weird-formatting"   >But this will be</div>
+```
+
+You can also tell Prettier to leave entire regions as they are:
+
+```
+{# prettier-ignore-start #}
+    ...
+{# prettier-ignore-end #}
+```
+
 ## Plugins
 
 [Melody](https://melody.js.org) features an extensible parser, so chances are you add custom elements for which the parsing and printing logic is not part of this Prettier plugin. Therefore, this Prettier plugin is itself pluggable.

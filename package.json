@@ -1,6 +1,6 @@
 {
     "name": "prettier-plugin-twig-melody",
-    "version": "0.1.1",
+    "version": "0.2.0",
     "description": "Prettier Plugin for Twig/Melody",
     "main": "src",
     "repository": "https://github.com/trivago/prettier-plugin-twig-melody",

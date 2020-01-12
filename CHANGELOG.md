@@ -2,8 +2,20 @@
 
 ## master
 
+-   Features
+
+-   Bug fixes
+
+## v0.2.0
+
+-   Features
+
+    -   Introduction of `prettier-ignore` functionality
+    -   Better adherence to Twig coding standards
+
 -   Bug fixes
     -   Avoid dropping of backslash in string literal: [https://github.com/trivago/prettier-plugin-twig-melody/issues/11](https://github.com/trivago/prettier-plugin-twig-melody/issues/11)
+    -   Not crashing when facing declarations (`<!DOCTYPE html>`) any more
 
 ## v0.1.1
 
