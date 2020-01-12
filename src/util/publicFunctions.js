@@ -372,16 +372,34 @@ const stripCommentChars = (start, end) => s => {
 };
 
 const stripHtmlCommentChars = stripCommentChars("<!--", "-->");
-const stripTwigCommentChars = stripCommentChars("{#", "#}");
+
+const stripTwigCommentChars = s => {
+    let result = s;
+    if (result.startsWith("{#")) {
+        result = result.slice(2);
+    }
+    if (result.startsWith("-")) {
+        result = result.slice(1);
+    }
+    if (result.endsWith("#}")) {
+        result = result.slice(0, -2);
+    }
+    if (result.endsWith("-")) {
+        result = result.slice(0, -1);
+    }
+    return result;
+};
 
 const normalizeHtmlComment = s => {
     const commentText = stripHtmlCommentChars(s);
     return "<!-- " + unifyWhitespace(commentText) + " -->";
 };
 
-const normalizeTwigComment = s => {
+const normalizeTwigComment = (s, trimLeft, trimRight) => {
     const commentText = stripTwigCommentChars(s);
-    return "{# " + unifyWhitespace(commentText) + " #}";
+    const open = trimLeft ? "{#-" : "{#";
+    const close = trimRight ? "-#}" : "#}";
+    return open + " " + unifyWhitespace(commentText) + " " + close;
 };
 
 const isHtmlCommentEqualTo = substr => node => {
