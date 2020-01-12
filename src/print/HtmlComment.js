@@ -15,13 +15,7 @@ const p = (node, path, print) => {
         return normalizeHtmlComment(commentText);
     }
 
-    const textGroups = createTextGroups(commentText, true, true);
-
-    return concat([
-        "<!--",
-        indent(join(concat([hardline, hardline]), textGroups)),
-        "-->"
-    ]);
+    return concat(["<!-- ", commentText, " -->"]);
 };
 
 module.exports = {

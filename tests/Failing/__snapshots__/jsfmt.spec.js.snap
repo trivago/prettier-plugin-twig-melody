@@ -50,8 +50,9 @@ exports[`controversial.melody.twig 1`] = `
 <!-- Always break objects -->
 <section class="{{ { base: css.prices } | classes }}"></section>
 
-<!-- This is what happens if we reduce indentation depth here: "as" and object keys at same indentation level
-    -->
+<!--  This is what happens if we reduce indentation depth here:
+    "as" and object keys at same indentation level
+ -->
 <article>
     {% mount '@hotelsearch/accommodation-list/src/Slideout/index'
         as 'accommodation-slideout-' ~ accommodation.id.id with {
@@ -82,8 +83,6 @@ exports[`controversial.melody.twig 1`] = `
 `;
 
 exports[`failing.melody.twig 1`] = `
-{#- comment -#}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{# - comment - #}
 
 `;

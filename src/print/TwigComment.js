@@ -8,19 +8,21 @@ const {
 } = require("../util");
 
 const p = (node, path, print) => {
-    const commentText = stripTwigCommentChars(node.value.value || "");
+    const originalText = node.value.value || "";
+    const commentText = stripTwigCommentChars(originalText);
+    const trimLeft = originalText.length >= 3 ? originalText[2] === "-" : false;
+    const trimRight =
+        originalText.length >= 3 ? originalText.slice(-3, -2) === "-" : false;
 
     const numNewlines = countNewlines(commentText);
     if (numNewlines === 0) {
-        return normalizeTwigComment(commentText);
+        return normalizeTwigComment(commentText, trimLeft, trimRight);
     }
 
-    const textGroups = createTextGroups(commentText, true, true);
-
     return concat([
-        "{#",
-        indent(join(concat([hardline, hardline]), textGroups)),
-        "#}"
+        trimLeft ? "{#- " : "{# ",
+        commentText,
+        trimRight ? "-#}" : "#}"
     ]);
 };
 

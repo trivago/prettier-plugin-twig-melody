@@ -12,6 +12,10 @@ Another paragraph
 
 
 A third paragraph
+
+<!-- This is the story of a little lamb 
+     that gets lost in a dark forest and
+     struggles to find home -->
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <!-- I am a comment -->
 This is a paragraph
@@ -24,6 +28,10 @@ Another paragraph
 
 A third paragraph
 
+<!--  This is the story of a little lamb 
+     that gets lost in a dark forest and
+     struggles to find home  -->
+
 `;
 
 exports[`twigComments.melody.twig 1`] = `
@@ -35,6 +43,20 @@ exports[`twigComments.melody.twig 1`] = `
             {# This is a Twig comment #}
 <li>No results found</li>
 {% endif %}
+
+{#- comment -#}
+
+{#- 
+    comment
+    with multiple lines
+-#}
+
+{##
+# Illustration Hotel Interaction
+#
+# This image is just of decorative nature and doesn't contain relevant information
+# for visually impaired users.
+#}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {# One #}
 
@@ -44,5 +66,19 @@ exports[`twigComments.melody.twig 1`] = `
     {# This is a Twig comment #}
     <li>No results found</li>
 {% endif %}
+
+{#- comment -#}
+
+{#-  
+    comment
+    with multiple lines
+-#}
+
+{# #
+# Illustration Hotel Interaction
+#
+# This image is just of decorative nature and doesn't contain relevant information
+# for visually impaired users.
+#}
 
 `;
