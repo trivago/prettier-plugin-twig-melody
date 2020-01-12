@@ -84,6 +84,6 @@ exports[`controversial.melody.twig 1`] = `
 exports[`failing.melody.twig 1`] = `
 {#- comment -#}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{#- comment -#}
+{# - comment - #}
 
 `;

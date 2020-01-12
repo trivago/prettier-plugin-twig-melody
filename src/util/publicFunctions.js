@@ -236,6 +236,15 @@ const hasNoNewlines = s => {
 
 const hasAtLeastTwoNewlines = s => countNewlines(s) >= 2;
 
+// Split string by whitespace, but preserving the whitespace
+// "\n   Next\n" => ["", "\n   ", "Next", "\n", ""]
+const splitByWhitespace = s => s.split(/([\s\n]+)/gm);
+
+const unifyWhitespace = (s, replacement = " ") =>
+    splitByWhitespace(s)
+        .filter(s => !isWhitespaceOnly(s))
+        .join(replacement);
+
 const normalizeWhitespace = whitespace => {
     const numNewlines = countNewlines(whitespace);
     if (numNewlines > 0) {
@@ -251,9 +260,7 @@ const createTextGroups = (
     preserveLeadingWhitespace,
     preserveTrailingWhitespace
 ) => {
-    // Split string by whitespace, but preserving the whitespace
-    // "\n   Next\n" => ["", "\n   ", "Next", "\n", ""]
-    const parts = s.split(/([\s\n]+)/gm);
+    const parts = splitByWhitespace(s);
     const groups = [];
     let currentGroup = [];
     const len = parts.length;
@@ -294,7 +301,9 @@ const createTextGroups = (
 
 const isWhitespaceNode = node => {
     return (
-        Node.isPrintTextStatement(node) && isWhitespaceOnly(node.value.value)
+        (Node.isPrintTextStatement(node) &&
+            isWhitespaceOnly(node.value.value)) ||
+        (Node.isStringLiteral(node) && isWhitespaceOnly(node.value))
     );
 };
 
@@ -350,6 +359,46 @@ const addNewlineIfNotEmpty = items => {
 };
 
 const endsWithHtmlComment = s => s.endsWith("-->");
+
+const stripCommentChars = (start, end) => s => {
+    let result = s;
+    if (result.startsWith(start)) {
+        result = result.slice(start.length);
+    }
+    if (result.endsWith(end)) {
+        result = result.slice(0, 0 - end.length);
+    }
+    return result;
+};
+
+const stripHtmlCommentChars = stripCommentChars("<!--", "-->");
+const stripTwigCommentChars = stripCommentChars("{#", "#}");
+
+const normalizeHtmlComment = s => {
+    const commentText = stripHtmlCommentChars(s);
+    return "<!-- " + unifyWhitespace(commentText) + " -->";
+};
+
+const normalizeTwigComment = s => {
+    const commentText = stripTwigCommentChars(s);
+    return "{# " + unifyWhitespace(commentText) + " #}";
+};
+
+const isHtmlCommentEqualTo = substr => node => {
+    return (
+        node.constructor.name === "HtmlComment" &&
+        node.value.value &&
+        normalizeHtmlComment(node.value.value) === "<!-- " + substr + " -->"
+    );
+};
+
+const isTwigCommentEqualTo = substr => node => {
+    return (
+        node.constructor.name === "TwigComment" &&
+        node.value.value &&
+        normalizeTwigComment(node.value.value) === "{# " + substr + " #}"
+    );
+};
 
 const isInlineTextStatement = node => {
     if (!Node.isPrintTextStatement(node)) {
@@ -463,6 +512,12 @@ module.exports = {
     hasNoNewlines,
     countNewlines,
     hasAtLeastTwoNewlines,
+    stripHtmlCommentChars,
+    stripTwigCommentChars,
+    normalizeHtmlComment,
+    normalizeTwigComment,
+    isHtmlCommentEqualTo,
+    isTwigCommentEqualTo,
     createTextGroups,
     removeSurroundingWhitespace,
     getDeepProperty,

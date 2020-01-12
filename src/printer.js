@@ -52,9 +52,13 @@ const {
     printNamedArgumentExpression
 } = require("./print/NamedArgumentExpression.js");
 const {
+    isWhitespaceNode,
+    isHtmlCommentEqualTo,
+    isTwigCommentEqualTo,
     getPluginPathsFromOptions,
     loadPlugins
-} = require("./util/pluginUtil.js");
+} = require("./util");
+const { ORIGINAL_SOURCE } = require("./parser");
 
 const printFunctions = {};
 
@@ -74,23 +78,91 @@ const applyPlugins = options => {
     });
 };
 
+const isHtmlIgnoreNextComment = isHtmlCommentEqualTo("prettier-ignore");
+const isHtmlIgnoreStartComment = isHtmlCommentEqualTo("prettier-ignore-start");
+const isHtmlIgnoreEndComment = isHtmlCommentEqualTo("prettier-ignore-end");
+const isTwigIgnoreNextComment = isTwigCommentEqualTo("prettier-ignore");
+const isTwigIgnoreStartComment = isTwigCommentEqualTo("prettier-ignore-start");
+const isTwigIgnoreEndComment = isTwigCommentEqualTo("prettier-ignore-end");
+
+const isIgnoreNextComment = s =>
+    isHtmlIgnoreNextComment(s) || isTwigIgnoreNextComment(s);
+const isIgnoreRegionStartComment = s =>
+    isHtmlIgnoreStartComment(s) || isTwigIgnoreStartComment(s);
+const isIgnoreRegionEndComment = s =>
+    isHtmlIgnoreEndComment(s) || isTwigIgnoreEndComment(s);
+
+let originalSource = "";
+let ignoreRegion = false;
+let ignoreNext = false;
+
+const checkForIgnoreStart = node => {
+    // Keep current "ignoreNext" value if it's true,
+    // but is not applied in this step yet
+    ignoreNext =
+        (ignoreNext && !shouldApplyIgnoreNext(node)) ||
+        isIgnoreNextComment(node);
+    ignoreRegion = ignoreRegion || isIgnoreRegionStartComment(node);
+};
+
+const checkForIgnoreEnd = node => {
+    if (ignoreRegion && isIgnoreRegionEndComment(node)) {
+        ignoreRegion = false;
+    }
+};
+
+const shouldApplyIgnoreNext = node => !isWhitespaceNode(node);
+
 const print = (path, options, print) => {
     applyPlugins(options);
 
     const node = path.getValue();
     const nodeType = node.constructor.name;
 
+    // Try to get the entire original source from AST root
+    if (node[ORIGINAL_SOURCE]) {
+        originalSource = node[ORIGINAL_SOURCE];
+    }
+
     if (options.twigPrintWidth) {
         options.printWidth = options.twigPrintWidth;
     }
 
-    if (printFunctions[nodeType]) {
+    checkForIgnoreEnd(node);
+    const useOriginalSource =
+        (shouldApplyIgnoreNext(node) && ignoreNext) || ignoreRegion;
+    const hasPrintFunction = printFunctions[nodeType];
+
+    // Happy path: We have a formatting function, and the user wants the
+    // node formatted
+    if (!useOriginalSource && hasPrintFunction) {
+        checkForIgnoreStart(node);
         return printFunctions[nodeType](node, path, print, options);
+    } else if (!hasPrintFunction) {
+        console.warn(`No print function available for node type "${nodeType}"`);
     }
-    console.warn(`No print function available for node type "${nodeType}"`);
+
+    checkForIgnoreStart(node);
+
+    // Fallback: Use the node's loc property with the
+    // originalSource property on the AST root
+    if (canGetSubstringForNode(node)) {
+        return getSubstringForNode(node);
+    }
+
     return "";
 };
 
+const getSubstringForNode = node =>
+    originalSource.substring(node.loc.start.index, node.loc.end.index);
+
+const canGetSubstringForNode = node =>
+    originalSource &&
+    node.loc &&
+    node.loc.start &&
+    node.loc.end &&
+    node.loc.start.index &&
+    node.loc.end.index;
 /**
  * Prettier printing works with a so-called FastPath object, which is
  * passed into many of the following methods through a "path" argument.
