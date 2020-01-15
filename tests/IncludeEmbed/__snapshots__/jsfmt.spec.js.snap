@@ -150,6 +150,7 @@ exports[`include.melody.twig 1`] = `
 </div>
 
 {% include 'foo/' ~ BRT %}
+{% include "#{filename}" %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <div key="1" class="test">
     {{ message | lower | upper }}{% flush %}
@@ -176,6 +177,7 @@ exports[`include.melody.twig 1`] = `
 </div>
 
 {% include 'foo/' ~ BRT %}
+{% include filename %}
 
 `;
 

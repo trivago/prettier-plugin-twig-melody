@@ -83,8 +83,7 @@ exports[`controversial.melody.twig 1`] = `
 `;
 
 exports[`failing.melody.twig 1`] = `
-{% include "#{URS}" %}
+
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{% include URS %}
 
 `;
