@@ -23,7 +23,7 @@ const printInterpolatedString = (node, path, print, options) => {
     node[STRING_NEEDS_QUOTES] = false;
     node[INSIDE_OF_STRING] = true;
 
-    const printedFragments = [quoteChar(options)];
+    const printedFragments = ['"']; // For interpolated strings, we HAVE to use double quotes
     let currentNode = node;
     const currentPath = [];
     while (Node.isBinaryConcatExpression(currentNode)) {
@@ -32,7 +32,7 @@ const printInterpolatedString = (node, path, print, options) => {
         currentNode = currentNode.left;
     }
     printedFragments.unshift(path.call(print, ...currentPath));
-    printedFragments.unshift(quoteChar(options));
+    printedFragments.unshift('"');
     return concat(printedFragments);
 };
 
