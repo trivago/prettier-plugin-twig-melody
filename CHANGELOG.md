@@ -6,9 +6,12 @@
 
 -   Bug fixes
 
-## v0.2.2
+## v0.2.3
 
--   Features
+-   Bug fixes
+    -   [Issue #21](https://github.com/trivago/prettier-plugin-twig-melody/issues/21): Always use double quotes around interpolated strings
+
+## v0.2.2
 
 -   Bug fixes
     -   [Issue #20](https://github.com/trivago/prettier-plugin-twig-melody/issues/20): Double quotation marks in `include` statement
