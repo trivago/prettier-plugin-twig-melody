@@ -6,6 +6,14 @@
 
 -   Bug fixes
 
+## v0.2.2
+
+-   Features
+
+-   Bug fixes
+    -   [Issue #20](https://github.com/trivago/prettier-plugin-twig-melody/issues/20): Double quotation marks in `include` statement
+    -   [Issue #21](https://github.com/trivago/prettier-plugin-twig-melody/issues/21): Essentially same bug as Issue #20
+
 ## v0.2.1
 
 -   Bug fixes
