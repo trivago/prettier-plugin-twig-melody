@@ -26,7 +26,7 @@ exports[`block.melody.twig 1`] = `
         <div key="1" class="test">
             <span>Hello</span>
         </div>
-    {% endblock hello %}
+    {% endblock %}
 </section>
 
 {% block bar foo %}
@@ -34,11 +34,11 @@ exports[`block.melody.twig 1`] = `
 {{ block('hello') }}
 
 {% block content %}
-{% endblock content %}
+{% endblock %}
 
 {%- block hello -%}
     Hello
-{%- endblock hello -%}
+{%- endblock -%}
 
 {%- block bar foo -%}
 
@@ -78,15 +78,15 @@ exports[`embed.melody.twig 1`] = `
                 {% embed 'bar.twig' -%}
                     {% block hello %}
                         {{ message }}
-                    {% endblock hello %}
+                    {% endblock %}
                     {% block test %}
 
-                    {% endblock test %}
+                    {% endblock %}
                 {%- endembed %}
-            {% endblock hello %}
+            {% endblock %}
         {% endembed -%}
     </div>
-{% endblock hello %}
+{% endblock %}
 
 `;
 

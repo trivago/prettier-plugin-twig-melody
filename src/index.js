@@ -105,6 +105,12 @@ const options = {
         default: true,
         description:
             "See https://twig.symfony.com/doc/2.x/coding_standards.html"
+    },
+    twigOutputEndblockName: {
+        type: "boolean",
+        category: "Global",
+        default: false,
+        description: "Output the Twig block name in the 'endblock' tag"
     }
 };
 
