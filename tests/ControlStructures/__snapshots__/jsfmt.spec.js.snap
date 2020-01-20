@@ -112,7 +112,7 @@ exports[`forWithBlock.melody.twig 1`] = `
         <li class="{{ loop.last ? 'last' : '' }}">
             {% block title %}
                 {{ loop.index0 }} {{ item.name|title }} {{ loop.index }}
-            {% endblock title %}
+            {% endblock %}
         </li>
     {% endfor %}
 </ul>

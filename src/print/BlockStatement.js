@@ -3,9 +3,10 @@ const { concat, hardline, group } = prettier.doc.builders;
 const { Node } = require("melody-types");
 const { EXPRESSION_NEEDED, printChildBlock } = require("../util");
 
-const p = (node, path, print) => {
+const p = (node, path, print, options) => {
     node[EXPRESSION_NEEDED] = false;
     const hasChildren = Array.isArray(node.body);
+    const printEndblockName = options.twigOutputEndblockName === true;
 
     if (hasChildren) {
         const blockName = path.call(print, "name");
@@ -23,8 +24,8 @@ const p = (node, path, print) => {
         parts.push(hardline);
         parts.push(
             node.trimLeftEndblock ? "{%-" : "{%",
-            " endblock ",
-            blockName,
+            " endblock",
+            printEndblockName ? concat([" ", blockName]) : "",
             node.trimRight ? " -%}" : " %}"
         );
 

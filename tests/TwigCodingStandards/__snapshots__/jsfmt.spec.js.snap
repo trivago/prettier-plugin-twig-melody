@@ -61,6 +61,6 @@ exports[`twigCodingStandards.melody.twig 1`] = `
     {% if true %}
         true
     {% endif %}
-{% endblock foo %}
+{% endblock %}
 
 `;
