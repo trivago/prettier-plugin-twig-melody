@@ -65,6 +65,10 @@ If set to `false` (default value), this would be printed as:
 
 Follow the standards described in [https://twig.symfony.com/doc/2.x/coding_standards.html](https://twig.symfony.com/doc/2.x/coding_standards.html) exactly. If set to `false`, some slight deviations might occur, such as spaces around the filter `|` operator (`s | upper` instead of `s|upper`).
 
+### twigOutputEndblockName (default: `false`)
+
+Choose whether to output the block name in `{% endblock %}` tags (e.g., `{% endblock content %}`) or not. The default is not to output it.
+
 ## Features
 
 ### `prettier-ignore` and `prettier-ignore-start`

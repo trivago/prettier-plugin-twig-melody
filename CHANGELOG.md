@@ -6,6 +6,11 @@
 
 -   Bug fixes
 
+## v0.3.0
+
+-   Features
+    -   [Issue #22](https://github.com/trivago/prettier-plugin-twig-melody/issues/22): Add `twigOutputEndblockName` option so that you can choose whether to print the name in the `{% endblock %}` tag or not.
+
 ## v0.2.3
 
 -   Bug fixes
