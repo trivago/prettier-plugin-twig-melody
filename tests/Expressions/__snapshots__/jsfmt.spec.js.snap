@@ -394,8 +394,24 @@ exports[`stringConcat.melody.twig 1`] = `
 
 exports[`stringLiteral.melody.twig 1`] = `
 {{ 'zzz\\\\bar\\\\baz' }}
+
+{{ "College - Women's" }}
+
+{{ "test ' with \\\\"both\\\\" kinds" }}
+
+{{ 'test \\\\' with "both" kinds' }}
+
+{{ "Quoted \\\\'' unquoted" }}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {{ 'zzz\\\\bar\\\\baz' }}
+
+{{ "College - Women's" }}
+
+{{ "test ' with \\"both\\" kinds" }}
+
+{{ 'test \\' with "both" kinds' }}
+
+{{ "Quoted \\\\'' unquoted" }}
 
 `;
 
