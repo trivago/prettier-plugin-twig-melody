@@ -6,6 +6,11 @@
 
 -   Bug fixes
 
+## v0.3.1
+
+-   Bug fixes
+    -   [Issue #24](https://github.com/trivago/prettier-plugin-twig-melody/issues/24): Take the string contents into account when choosing the quote characters surrounding a string literal.
+
 ## v0.3.0
 
 -   Features
