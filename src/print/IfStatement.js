@@ -29,7 +29,7 @@ const p = (node, path, print) => {
             node.trimLeft ? "{%- " : "{% ",
             isElseIf ? "elseif" : "if",
             indent(concat([line, path.call(print, "test")])),
-            line,
+            " ",
             node.trimRightIf ? "-%}" : "%}"
         ])
     );
