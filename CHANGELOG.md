@@ -6,6 +6,10 @@
 
 -   Bug fixes
 
+## v0.3.4
+
+-   Fix: Stylistic improvements
+
 ## v0.3.3
 
 -   Bug fix: Mount statement of the form `mount ... from ...` were dropping the source. Fixed now.
