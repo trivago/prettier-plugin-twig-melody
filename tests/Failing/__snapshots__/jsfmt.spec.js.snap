@@ -40,8 +40,8 @@ exports[`controversial.melody.twig 1`] = `
     {{ 'results_for' | translate({ 'searchedterm': '<mark class="highlight-search-term">' ~ semKeyword ~ '</mark>'}) | raw }}
 </p>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{% set isRewardRate = isMarriottRewardRate
-    or rewardRateAltIds and deal.dealId in rewardRateAltIds[accommodation.id.id] %}
+{% set isRewardRate = isMarriottRewardRate or rewardRateAltIds and deal.dealId in rewardRateAltIds[accommodation.id.id]
+%}
 
 <!-- Alternatively, introduce another variable -->
 {% set altIds = rewardRateAltIds[accommodation.id.id] %}
@@ -83,7 +83,35 @@ exports[`controversial.melody.twig 1`] = `
 `;
 
 exports[`failing.melody.twig 1`] = `
+<!-- Double interpolation. Get rid of spaces in interpolation. -->
+{% mount 'general/arrow-36x36' with {
+        classList: {
+            base: "#{ css['arrowIcon#{ action }'] } icon-rtl",
+            'icon-flip': flipIcon ?? false
+        } | classes
+    } %}
 
+
+<!-- preserve parentheses -->
+{% set isRewardRate = isMarriottRewardRate or (rewardRateAltIds and deal.dealId in rewardRateAltIds[accommodation.id.id]) %}
+
+<!-- Look into exception for break before %} -->
+{% set replacement = {
+    '$address': '<span itemprop="streetAddress">' ~ address_attributes.address
+        ~ '</span>'
+} %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+<!-- Double interpolation. Get rid of spaces in interpolation. -->
+{% mount 'general/arrow-36x36' with {
+        classList: { base: "#{ css["arrowIcon#{ action }"] } icon-rtl", 'icon-flip': flipIcon ?? false } | classes
+    }
+%}
+
+<!-- preserve parentheses -->
+{% set isRewardRate = isMarriottRewardRate or rewardRateAltIds and deal.dealId in rewardRateAltIds[accommodation.id.id]
+%}
+
+<!-- Look into exception for break before %} -->
+{% set replacement = { '$address': '<span itemprop="streetAddress">' ~ address_attributes.address ~ '</span>' } %}
 
 `;
