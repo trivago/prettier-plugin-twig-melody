@@ -9,21 +9,28 @@ const formatDelay = delay => {
 const buildOpener = (node, path, print) => {
     const result = [];
     const firstGroup = [node.trimLeft ? "{%-" : "{%", " mount"];
-    const sourcePath = node.name ? "name" : "source";
-    const printedSource = path.call(print, sourcePath);
     if (node.async === true) {
         firstGroup.push(" async");
     }
-    firstGroup.push(" ", printedSource);
+
+    if (node.name) {
+        firstGroup.push(" ", path.call(print, "name"));
+    }
+
+    if (node.name && node.source) {
+        firstGroup.push(" from");
+    }
+
+    if (node.source) {
+        firstGroup.push(" ", path.call(print, "source"));
+    }
 
     if (node.key) {
         firstGroup.push(indent(concat([line, "as ", path.call(print, "key")])));
     }
     result.push(group(concat(firstGroup)));
     if (node.argument) {
-        result.push(
-            group(indent(concat([" with ", path.call(print, "argument")])))
-        );
+        result.push(indent(concat([" with ", path.call(print, "argument")])));
     }
     if (node.delayBy) {
         result.push(

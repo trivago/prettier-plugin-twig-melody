@@ -224,6 +224,13 @@ exports[`mount.melody.twig 1`] = `
 <div class="popover__body">
     {% mount ContentComponent as 'popover-component' ~ activeView with _context %}
 </div>
+
+<div id="js_homepage_tabs" class="tabs no-select" key="SEOTabs">
+    {% mount Tabs from '@trivago/components' as seotabs with {   
+        tabs: tabs,
+        classList: 'tabs--homepage',
+    } %}
+</div>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {%- mount './component' as 'bar' -%}
 
@@ -270,6 +277,14 @@ exports[`mount.melody.twig 1`] = `
 
 <div class="popover__body">
     {% mount ContentComponent as 'popover-component' ~ activeView with _context
+    %}
+</div>
+
+<div id="js_homepage_tabs" class="tabs no-select" key="SEOTabs">
+    {% mount Tabs from '@trivago/components' as seotabs with {
+            tabs: tabs,
+            classList: 'tabs--homepage'
+        }
     %}
 </div>
 
