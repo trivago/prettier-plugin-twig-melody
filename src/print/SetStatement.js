@@ -1,14 +1,19 @@
 const prettier = require("prettier");
 const { group, concat, line, hardline } = prettier.doc.builders;
 const { printChildBlock, STRING_NEEDS_QUOTES } = require("../util");
+const { Node } = require("melody-types");
 
-const buildSetStatement = (node, printedAssignment) => {
+const buildSetStatement = (
+    node,
+    printedAssignment,
+    avoidBreakBeforeClosing
+) => {
     return group(
         concat([
             node.trimLeft ? "{%-" : "{%",
             " set ",
             printedAssignment,
-            " ",
+            avoidBreakBeforeClosing ? " " : line,
             node.trimRight ? "-%}" : "%}"
         ])
     );
@@ -28,11 +33,17 @@ const printRegularSet = (node, path, print) => {
         Array.isArray(node.assignments) && node.assignments.length > 0;
     if (hasAssignments) {
         const printedAssignments = path.map(print, "assignments");
-        printedAssignments.forEach(assignment => {
+        printedAssignments.forEach((assignment, index) => {
+            const originalAssignment = node.assignments[index];
+            const avoidBreakBeforeClosing = Node.isObjectExpression(
+                originalAssignment.value
+            );
             if (parts.length > 0) {
                 parts.push(hardline);
             }
-            parts.push(buildSetStatement(node, assignment));
+            parts.push(
+                buildSetStatement(node, assignment, avoidBreakBeforeClosing)
+            );
         });
     }
     return concat(parts);

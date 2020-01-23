@@ -65,16 +65,19 @@ exports[`binaryExpressions.melody.twig 1`] = `
 {% set highlightValueForMoney = isFeatureEnabled('vFMV5')
     or isCTestActive('WEB-48935')
     or isCTestActive('WEB-48956')
-    or isCTestActive('WEB-48955') %}
+    or isCTestActive('WEB-48955')
+%}
 
 {% set name = condition1
-    or condition2 and condition3
+    or (condition2 and condition3)
     or condition4
-    or condition5 and condition6 %}
+    or (condition5 and condition6)
+%}
 
-{% set name = condition1 and condition2
-    or condition3 and condition4 and condition5
-    or condition6 %}
+{% set name = (condition1 and condition2)
+    or (condition3 and condition4 and condition5)
+    or condition6
+%}
 
 <!-- indent operators -->
 {% set replacement = {
@@ -85,10 +88,12 @@ exports[`binaryExpressions.melody.twig 1`] = `
 {% set renderLoadingBar = showNewLoadingAnimation
     and isCTestActive('WEB-47697')
     and showLoadingBar
-    and (isABCD or isLoading) %}
+    and (isABCD or isLoading)
+%}
 
 {% set result = (conditionAlpha or conditionBeta)
-    and (conditionGamma or conditionDelta) %}
+    and (conditionGamma or conditionDelta)
+%}
 
 `;
 
@@ -223,7 +228,7 @@ exports[`objectExpression.melody.twig 1`] = `
 {{
     {
         a: 'foo',
-        "b#{ ar }": 'bar',
+        "b#{ar}": 'bar',
         2: 4,
         (a): foo
     }
