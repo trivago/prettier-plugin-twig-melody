@@ -103,7 +103,7 @@ exports[`failing.melody.twig 1`] = `
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <!-- Double interpolation. Get rid of spaces in interpolation. -->
 {% mount 'general/arrow-36x36' with {
-        classList: { base: "#{ css["arrowIcon#{ action }"] } icon-rtl", 'icon-flip': flipIcon ?? false } | classes
+        classList: { base: "#{css["arrowIcon#{action}"]} icon-rtl", 'icon-flip': flipIcon ?? false } | classes
     }
 %}
 

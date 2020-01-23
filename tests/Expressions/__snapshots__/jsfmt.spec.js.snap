@@ -229,7 +229,7 @@ exports[`objectExpression.melody.twig 1`] = `
 {{
     {
         a: 'foo',
-        "b#{ ar }": 'bar',
+        "b#{ar}": 'bar',
         2: 4,
         (a): foo
     }

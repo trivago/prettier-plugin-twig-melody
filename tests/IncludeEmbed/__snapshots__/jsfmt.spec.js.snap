@@ -234,7 +234,7 @@ exports[`mount.melody.twig 1`] = `
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {%- mount './component' as 'bar' -%}
 
-{% mount async "./parts/#{ part }.twig" as "bar-#{ part }" with {
+{% mount async "./parts/#{part}.twig" as "bar-#{part}" with {
         foo: 'bar'
     }
     delay placeholder by 1s

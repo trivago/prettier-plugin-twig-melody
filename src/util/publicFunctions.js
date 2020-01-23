@@ -220,8 +220,8 @@ const wrapInEnvironment = (parts, trimLeft = false, trimRight = false) => {
  *                  except for concatenation and grouping
  */
 const wrapInStringInterpolation = parts => {
-    parts.unshift("#{ ");
-    parts.push(" }");
+    parts.unshift("#{");
+    parts.push("}");
 };
 
 const isWhitespaceOnly = s => typeof s === "string" && s.trim() === "";
