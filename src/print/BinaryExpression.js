@@ -40,6 +40,10 @@ const operatorNeedsSpaces = operator => {
     return NO_WHITESPACE_AROUND.indexOf(operator) < 0;
 };
 
+const hasLogicalOperator = node => {
+    return node.operator === "or" || node.operator === "and";
+};
+
 const printBinaryExpression = (node, path, print) => {
     node[EXPRESSION_NEEDED] = false;
     node[STRING_NEEDS_QUOTES] = true;
@@ -86,9 +90,15 @@ const printBinaryExpression = (node, path, print) => {
 
     const parts = [];
     const leftNeedsParens =
-        leftPrecedence < ownPrecedence || Node.isFilterExpression(node.left);
+        (leftPrecedence != ownPrecedence &&
+            Node.isBinaryExpression(node.left) &&
+            hasLogicalOperator(node.left)) ||
+        Node.isFilterExpression(node.left);
     const rightNeedsParens =
-        rightPrecedence < ownPrecedence || Node.isFilterExpression(node.right);
+        (rightPrecedence != ownPrecedence &&
+            Node.isBinaryExpression(node.right) &&
+            hasLogicalOperator(node.right)) ||
+        Node.isFilterExpression(node.right);
     if (leftNeedsParens) {
         parts.push("(");
     }

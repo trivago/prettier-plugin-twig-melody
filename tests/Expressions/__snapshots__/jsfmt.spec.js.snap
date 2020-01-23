@@ -69,13 +69,13 @@ exports[`binaryExpressions.melody.twig 1`] = `
 %}
 
 {% set name = condition1
-    or condition2 and condition3
+    or (condition2 and condition3)
     or condition4
-    or condition5 and condition6
+    or (condition5 and condition6)
 %}
 
-{% set name = condition1 and condition2
-    or condition3 and condition4 and condition5
+{% set name = (condition1 and condition2)
+    or (condition3 and condition4 and condition5)
     or condition6
 %}
 

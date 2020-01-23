@@ -40,12 +40,13 @@ exports[`controversial.melody.twig 1`] = `
     {{ 'results_for' | translate({ 'searchedterm': '<mark class="highlight-search-term">' ~ semKeyword ~ '</mark>'}) | raw }}
 </p>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{% set isRewardRate = isMarriottRewardRate or rewardRateAltIds and deal.dealId in rewardRateAltIds[accommodation.id.id]
+{% set isRewardRate = isMarriottRewardRate
+    or (rewardRateAltIds and deal.dealId in rewardRateAltIds[accommodation.id.id])
 %}
 
 <!-- Alternatively, introduce another variable -->
 {% set altIds = rewardRateAltIds[accommodation.id.id] %}
-{% set isRewardRate = isMarriottRewardRate or rewardRateAltIds and deal.dealId in altIds %}
+{% set isRewardRate = isMarriottRewardRate or (rewardRateAltIds and deal.dealId in altIds) %}
 
 <!-- Always break objects -->
 <section class="{{ { base: css.prices } | classes }}"></section>
@@ -83,11 +84,6 @@ exports[`controversial.melody.twig 1`] = `
 `;
 
 exports[`failing.melody.twig 1`] = `
-<!-- preserve parentheses -->
-{% set isRewardRate = isMarriottRewardRate or (rewardRateAltIds and deal.dealId in rewardRateAltIds[accommodation.id.id]) %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-<!-- preserve parentheses -->
-{% set isRewardRate = isMarriottRewardRate or rewardRateAltIds and deal.dealId in rewardRateAltIds[accommodation.id.id]
-%}
 
 `;
