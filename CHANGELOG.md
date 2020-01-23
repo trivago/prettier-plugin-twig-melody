@@ -6,6 +6,10 @@
 
 -   Bug fixes
 
+## v0.3.3
+
+-   Bug fix: Mount statement of the form `mount ... from ...` were dropping the source. Fixed now.
+
 ## v0.3.2
 
 -   Bug fix: No breaking point before closing `%}` for `for`, `if`, `set`.
