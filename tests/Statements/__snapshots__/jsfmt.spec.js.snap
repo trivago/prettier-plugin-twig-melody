@@ -198,14 +198,16 @@ exports[`set.melody.twig 1`] = `
     shape: 'round',
     taste: 'sweet',
     region: 'Europe'
-} %}
+}
+%}
 {% set foo = {
     fruit: 'apple',
     shape: 'round',
     taste: 'sweet',
     region: 'Europe',
     colour: 'reddish'
-} %}
+}
+%}
 {% set foo = 'foo' %}
 {% set bar = 'bar' %}
 {%- set foo -%}
@@ -220,7 +222,8 @@ exports[`set.melody.twig 1`] = `
 
 {% set showArrows = hideArrowWhenDisabled|default(false)
     ? (shouldShowArrows|default(false)) and (scrollEnabled|default(false))
-    : shouldShowArrows|default(false) %}
+    : shouldShowArrows|default(false)
+%}
 
 {% set recommendedClickoutAttributes = hasRecommendedPrice
     ? clickoutAttributes|merge({
@@ -228,7 +231,8 @@ exports[`set.melody.twig 1`] = `
         'data-co_params': recommendedPrice.clcklB|json_encode,
         'data-co_li_lo': 1
     })
-    : {} %}
+    : {}
+%}
 
 `;
 

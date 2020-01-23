@@ -8,7 +8,7 @@ const buildSetStatement = (node, printedAssignment) => {
             node.trimLeft ? "{%-" : "{%",
             " set ",
             printedAssignment,
-            " ",
+            line,
             node.trimRight ? "-%}" : "%}"
         ])
     );
