@@ -83,8 +83,7 @@ exports[`binaryExpressions.melody.twig 1`] = `
 {% set replacement = {
     '$address': '<span itemprop="streetAddress">' ~ address_attributes.address
         ~ '</span>'
-}
-%}
+} %}
 
 {% set renderLoadingBar = showNewLoadingAnimation
     and isCTestActive('WEB-47697')

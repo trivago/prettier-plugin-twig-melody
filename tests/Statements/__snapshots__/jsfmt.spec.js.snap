@@ -198,16 +198,14 @@ exports[`set.melody.twig 1`] = `
     shape: 'round',
     taste: 'sweet',
     region: 'Europe'
-}
-%}
+} %}
 {% set foo = {
     fruit: 'apple',
     shape: 'round',
     taste: 'sweet',
     region: 'Europe',
     colour: 'reddish'
-}
-%}
+} %}
 {% set foo = 'foo' %}
 {% set bar = 'bar' %}
 {%- set foo -%}
