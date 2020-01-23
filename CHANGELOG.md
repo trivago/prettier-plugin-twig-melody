@@ -6,6 +6,10 @@
 
 -   Bug fixes
 
+## v0.3.2
+
+-   Bug fix: No breaking point before closing `%}` for `for`, `if`, `set`.
+
 ## v0.3.1
 
 -   Bug fixes
