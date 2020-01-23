@@ -17,7 +17,7 @@ const printFor = (node, path, print) => {
             indent(concat([line, "if ", path.call(print, "condition")]))
         );
     }
-    parts.push(concat([line, node.trimRightFor ? "-%}" : "%}"]));
+    parts.push(concat([" ", node.trimRightFor ? "-%}" : "%}"]));
     return group(concat(parts));
 };
 
