@@ -36,9 +36,15 @@ This Prettier plugin comes with some options that you can add to your Prettier c
 
 Values can be `true` or `false`. If `true`, single quotes will be used for string literals in Twig files.
 
-### twigMelodyPlugins (default: `""`)
+### twigMelodyPlugins (default: `[]`)
 
 An array containing file paths to plugin directories. This can be used to add your own printers and parser extensions.
+
+The paths are relative paths, seen from the project root. Example:
+
+```
+"twigMelodyPlugins": ["src-js/some-melody-plugin", "src-js/some-other-plugin"]
+```
 
 ### twigPrintWidth (default: `80`)
 
