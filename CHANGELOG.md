@@ -6,6 +6,10 @@
 
 -   Bug fixes
 
+## v0.3.5
+
+-   Fix: `twigMelodyPlugins` option is finally an array, not a string separated by `|` any more.
+
 ## v0.3.4
 
 -   Fix: Stylistic improvements
