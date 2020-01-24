@@ -40,7 +40,7 @@ Values can be `true` or `false`. If `true`, single quotes will be used for strin
 
 An array containing file paths to plugin directories. This can be used to add your own printers and parser extensions.
 
-Example:
+The paths are relative paths, seen from the project root. Example:
 
 ```
 "twigMelodyPlugins": ["src-js/some-melody-plugin", "src-js/some-other-plugin"]
