@@ -77,7 +77,8 @@ const options = {
     twigMelodyPlugins: {
         type: "path",
         category: "Global",
-        default: "",
+        array: true,
+        default: [{ value: [] }],
         description:
             "Provide additional plugins for Melody. Relative file path from the project root."
     },
