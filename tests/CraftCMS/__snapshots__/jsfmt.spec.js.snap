@@ -13,9 +13,22 @@ exports[`nav.melody.twig 1`] = `
         </li>
     {% endnav %}
 </ul>
+
+{%- nav entry in entries -%}
+        
+{%- endnav -%}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <ul id="nav">
-    nav
+    {% nav entry in entries %}
+        <li>
+            <a href="{{ entry.url }}">{{ entry.title }}</a>
+            ifchildren
+        </li>
+    {% endnav %}
 </ul>
+
+{%- nav entry in entries -%}
+
+{%- endnav -%}
 
 `;

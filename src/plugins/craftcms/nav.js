@@ -1,15 +1,18 @@
-const { Node, type } = require("melody-types");
+const { Node, type, Identifier } = require("melody-types");
 const {
     Types,
+    createNode,
     setStartFromToken,
     setEndFromToken,
     hasTagStartTokenTrimLeft,
     hasTagEndTokenTrimRight
 } = require("melody-parser");
+const prettier = require("prettier");
+const { group, indent, line, hardline, concat } = prettier.doc.builders;
 
 function CraftCMS_NavStatement() {
     Node.call(this);
-    this.keyTarget = null;
+    this.valueTarget = null;
     this.sequence = null;
     this.body = null;
 }
@@ -43,7 +46,12 @@ const NavParser = {
         const tagOpenToken = tokenStream.la(-1);
         let endnavStartToken = null;
 
-        result.keyTarget = tokenStream.expect(Types.SYMBOL);
+        const valueTarget = tokenStream.expect(Types.SYMBOL);
+        result.valueTarget = createNode(
+            Identifier,
+            valueTarget,
+            valueTarget.text
+        );
 
         tokenStream.expect(Types.OPERATOR, "in");
         result.sequence = parser.matchExpression();
@@ -117,7 +125,26 @@ const IfChildrenParser = {
 };
 
 const printNav = (node, path, print) => {
-    return "nav";
+    const parts = [node.trimLeft ? "{%-" : "{%", " nav "];
+    if (node.valueTarget) {
+        parts.push(path.call(print, "valueTarget"));
+    }
+    if (node.sequence) {
+        parts.push(" in ", path.call(print, "sequence"));
+    }
+    parts.push(node.trimRightNav ? " -%}" : " %}");
+
+    const printedChildren = path.call(print, "body");
+    parts.push(indent(concat([hardline, printedChildren])));
+
+    parts.push(
+        hardline,
+        node.trimLeftEndnav ? "{%-" : "{%",
+        " endnav ",
+        node.trimRight ? "-%}" : "%}"
+    );
+
+    return group(concat(parts));
 };
 
 const printChildren = (node, path, print) => {
