@@ -60,6 +60,7 @@ const {
     loadPlugins
 } = require("./util");
 const { ORIGINAL_SOURCE } = require("./parser");
+const craftCMSPlugin = require("./plugins/craftcms");
 
 const printFunctions = {};
 
@@ -77,6 +78,7 @@ const applyPlugins = options => {
     loadedPlugins.forEach(plugin => {
         applyPlugin(plugin);
     });
+    applyPlugin(craftCMSPlugin);
 };
 
 const isHtmlIgnoreNextComment = isHtmlCommentEqualTo("prettier-ignore");

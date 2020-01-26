@@ -1,5 +1,6 @@
 const { CharStream, Lexer, TokenStream, Parser } = require("melody-parser");
 const { extension: coreExtension } = require("melody-extension-core");
+const { melodyExtensions: craftCMSExtensions } = require("./plugins/craftcms");
 const {
     getAdditionalMelodyExtensions,
     getPluginPathsFromOptions
@@ -68,6 +69,7 @@ const parse = (text, parsers, options) => {
     const pluginPaths = getPluginPathsFromOptions(options);
     const extensions = [
         coreExtension,
+        ...craftCMSExtensions,
         ...getAdditionalMelodyExtensions(pluginPaths)
     ];
     const parser = createConfiguredParser(text, ...extensions);
