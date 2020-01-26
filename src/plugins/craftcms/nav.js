@@ -148,11 +148,28 @@ const printNav = (node, path, print) => {
 };
 
 const printChildren = (node, path, print) => {
-    return "children";
+    const parts = [node.trimLeft ? "{%-" : "{%"];
+    parts.push(" children ");
+    parts.push(node.trimRight ? "-%}" : "%}");
+    return concat(parts);
 };
 
 const printIfChildren = (node, path, print) => {
-    return "ifchildren";
+    const parts = [node.trimLeft ? "{%-" : "{%"];
+    parts.push(" ifchildren ");
+    parts.push(node.trimRightIfChildren ? "-%}" : "%}");
+
+    const printedChildren = path.call(print, "body");
+    parts.push(indent(concat([hardline, printedChildren])));
+
+    parts.push(
+        hardline,
+        node.trimLeftEndIfChildren ? "{%-" : "{%",
+        " endifchildren ",
+        node.trimRight ? "-%}" : "%}"
+    );
+
+    return concat(parts);
 };
 
 module.exports = {
