@@ -7,7 +7,8 @@ const p = (node, path) => {
 
     const parts = [node.name];
     wrapExpressionIfNeeded(path, parts, node);
-    return group(concat(parts));
+    const result = concat(parts);
+    return parts.length === 1 ? result : group(result);
 };
 
 module.exports = {
