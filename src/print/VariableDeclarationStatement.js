@@ -10,7 +10,11 @@ const p = (node, path, print) => {
     const rightHandSide = shouldCondenseLayout
         ? concat([" ", printedValue])
         : indent(concat([line, printedValue]));
-    return group(concat([printedName, " =", rightHandSide]));
+
+    // We are explicitly not returning a group here, because
+    // a VariableDeclarationStatement is - currently - always
+    // embedded in a group created by SetStatement.
+    return concat([printedName, " =", rightHandSide]);
 };
 
 module.exports = {

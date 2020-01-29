@@ -5,8 +5,9 @@ const {
     EXPRESSION_NEEDED,
     STRING_NEEDS_QUOTES,
     INSIDE_OF_STRING,
+    GROUP_TOP_LEVEL_BINARY,
     firstValueInAncestorChain,
-    quoteChar
+    findParentNode
 } = require("../util");
 const { extension: coreExtension } = require("melody-extension-core");
 const ALREADY_INDENTED = Symbol("ALREADY_INDENTED");
@@ -50,7 +51,7 @@ const printBinaryExpression = (node, path, print) => {
 
     const isBinaryLeft = Node.isBinaryExpression(node.left);
     const isBinaryRight = Node.isBinaryExpression(node.right);
-    const isLogicalOperator = ["and", "or", "not"].indexOf(node.operator) > -1;
+    const isLogicalOperator = ["and", "or"].indexOf(node.operator) > -1;
     const whitespaceAroundOperator = operatorNeedsSpaces(node.operator);
 
     const alreadyIndented = firstValueInAncestorChain(
@@ -66,6 +67,10 @@ const printBinaryExpression = (node, path, print) => {
         IS_ROOT_BINARY_EXPRESSION,
         false
     );
+
+    const parentNode = findParentNode(path);
+    const shouldGroupOnTopLevel = parentNode[GROUP_TOP_LEVEL_BINARY] !== false;
+
     if (!foundRootAbove) {
         node[IS_ROOT_BINARY_EXPRESSION] = true;
     }
@@ -123,12 +128,16 @@ const printBinaryExpression = (node, path, print) => {
         : indent(concat(potentiallyIndented));
     const result = concat([...parts, rightHandSide]);
 
-    return !foundRootAbove ||
+    const shouldCreateTopLevelGroup = !foundRootAbove && shouldGroupOnTopLevel;
+    const isDifferentLogicalOperator =
+        isLogicalOperator && node.operator !== parentOperator;
+
+    const shouldGroupResult =
+        shouldCreateTopLevelGroup ||
         !isLogicalOperator ||
-        (isLogicalOperator && ownPrecedence < parentPrecedence) ||
-        (isLogicalOperator && node.operator !== parentOperator)
-        ? group(result)
-        : result;
+        (foundRootAbove && isDifferentLogicalOperator);
+
+    return shouldGroupResult ? group(result) : result;
 };
 
 const p = (node, path, print, options) => {

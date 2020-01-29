@@ -61,6 +61,13 @@ const PRESERVE_TRAILING_WHITESPACE = Symbol("PRESERVE_TRAILING_WHITESPACE");
  */
 const NEWLINES_ONLY = Symbol("NEWLINES_ONLY");
 
+/**
+ * This defaults to TRUE. Only if it is explicitly set to FALSE,
+ * a BinaryExpression will not create a wrapping group on the
+ * top level
+ */
+const GROUP_TOP_LEVEL_BINARY = Symbol("GROUP_TOP_LEVEL_BINARY");
+
 module.exports = {
     STRING_NEEDS_QUOTES,
     OVERRIDE_QUOTE_CHAR,
@@ -69,5 +76,6 @@ module.exports = {
     FILTER_BLOCK,
     PRESERVE_TRAILING_WHITESPACE,
     PRESERVE_LEADING_WHITESPACE,
-    NEWLINES_ONLY
+    NEWLINES_ONLY,
+    GROUP_TOP_LEVEL_BINARY
 };
