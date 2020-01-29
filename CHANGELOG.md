@@ -6,6 +6,10 @@
 
 -   Bug fixes
 
+## v0.3.6
+
+-   Bug fix: Optimize group structure when using `SetStatement`, `VariableDeclarationStatement`, and logical binary expressions. Previously, the group created by `SetStatement` had only one breaking point (before the closing `%}`), which led to some undesirable results.
+
 ## v0.3.5
 
 -   Fix: `twigMelodyPlugins` option is finally an array, not a string separated by `|` any more.
