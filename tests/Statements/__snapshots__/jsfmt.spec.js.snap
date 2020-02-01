@@ -191,6 +191,10 @@ exports[`set.melody.twig 1`] = `
 }) : {} %}
 
 {% set showAAScoreRating = isAAScoreActive and isAAAccommodation and aaScoreRatingData and aaScoreRatingData.score > 0 %}
+
+{% set displayLegalPaymentInfo = not (isFrance and isAtLeastScreenTabletWide) %}
+
+{% set displayLegalPaymentInfo = not (isAAScoreActive and isAAAccommodation and aaScoreRatingData and aaScoreRatingDataABC > 0 and aaScoreRatingDataABC < 5) %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {% set list = [1, 2] %}
 {%- set foo = 0 -%}
@@ -239,6 +243,16 @@ exports[`set.melody.twig 1`] = `
     and aaScoreRatingData
     and aaScoreRatingData.score > 0
 %}
+
+{% set displayLegalPaymentInfo = not (isFrance and isAtLeastScreenTabletWide) %}
+
+{% set displayLegalPaymentInfo = not (
+    isAAScoreActive
+        and isAAAccommodation
+        and aaScoreRatingData
+        and aaScoreRatingDataABC > 0
+        and aaScoreRatingDataABC < 5
+) %}
 
 `;
 

@@ -60,8 +60,14 @@ const isContractableNodeType = node => {
             return true;
         }
     }
+    if (Node.isUnaryLike(node)) {
+        return true;
+    }
     return false;
 };
+
+const isNotExpression = node =>
+    Node.isUnaryLike(node) && node.operator === "not";
 
 /**
  * Calls the callback for each parent
@@ -520,6 +526,7 @@ module.exports = {
     walkParents,
     firstValueInAncestorChain,
     isContractableNodeType,
+    isNotExpression,
     registerContractableNodeType,
     quoteChar,
     isValidIdentifierName,

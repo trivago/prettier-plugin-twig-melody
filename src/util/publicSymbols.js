@@ -63,10 +63,16 @@ const NEWLINES_ONLY = Symbol("NEWLINES_ONLY");
 
 /**
  * This defaults to TRUE. Only if it is explicitly set to FALSE,
- * a BinaryExpression will not create a wrapping group on the
+ * a logical expression will not create a wrapping group on the
  * top level
  */
-const GROUP_TOP_LEVEL_BINARY = Symbol("GROUP_TOP_LEVEL_BINARY");
+const GROUP_TOP_LEVEL_LOGICAL = Symbol("GROUP_TOP_LEVEL_LOGICAL");
+
+/**
+ * Used to mark the root of a logical expression. Can be important
+ * for grouping and parenthesis placement.
+ */
+const IS_ROOT_LOGICAL_EXPRESSION = Symbol("IS_ROOT_LOGICAL_EXPRESSION");
 
 module.exports = {
     STRING_NEEDS_QUOTES,
@@ -77,5 +83,6 @@ module.exports = {
     PRESERVE_TRAILING_WHITESPACE,
     PRESERVE_LEADING_WHITESPACE,
     NEWLINES_ONLY,
-    GROUP_TOP_LEVEL_BINARY
+    GROUP_TOP_LEVEL_LOGICAL,
+    IS_ROOT_LOGICAL_EXPRESSION
 };

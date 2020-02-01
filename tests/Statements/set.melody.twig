@@ -27,3 +27,7 @@
 }) : {} %}
 
 {% set showAAScoreRating = isAAScoreActive and isAAAccommodation and aaScoreRatingData and aaScoreRatingData.score > 0 %}
+
+{% set displayLegalPaymentInfo = not (isFrance and isAtLeastScreenTabletWide) %}
+
+{% set displayLegalPaymentInfo = not (isAAScoreActive and isAAAccommodation and aaScoreRatingData and aaScoreRatingDataABC > 0 and aaScoreRatingDataABC < 5) %}

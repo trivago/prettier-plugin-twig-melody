@@ -5,13 +5,13 @@ const {
     EXPRESSION_NEEDED,
     STRING_NEEDS_QUOTES,
     INSIDE_OF_STRING,
-    GROUP_TOP_LEVEL_BINARY,
+    GROUP_TOP_LEVEL_LOGICAL,
+    IS_ROOT_LOGICAL_EXPRESSION,
     firstValueInAncestorChain,
     findParentNode
 } = require("../util");
 const { extension: coreExtension } = require("melody-extension-core");
 const ALREADY_INDENTED = Symbol("ALREADY_INDENTED");
-const IS_ROOT_BINARY_EXPRESSION = Symbol("IS_ROOT_BINARY_EXPRESSION");
 const OPERATOR_PRECEDENCE = Symbol("OPERATOR_PRECEDENCE");
 const NO_WHITESPACE_AROUND = [".."];
 
@@ -64,23 +64,20 @@ const printBinaryExpression = (node, path, print) => {
     }
     const foundRootAbove = firstValueInAncestorChain(
         path,
-        IS_ROOT_BINARY_EXPRESSION,
+        IS_ROOT_LOGICAL_EXPRESSION,
         false
     );
 
     const parentNode = findParentNode(path);
-    const shouldGroupOnTopLevel = parentNode[GROUP_TOP_LEVEL_BINARY] !== false;
+    const shouldGroupOnTopLevel = parentNode[GROUP_TOP_LEVEL_LOGICAL] !== false;
 
     if (!foundRootAbove) {
-        node[IS_ROOT_BINARY_EXPRESSION] = true;
+        node[IS_ROOT_LOGICAL_EXPRESSION] = true;
     }
     const parentOperator = foundRootAbove
         ? firstValueInAncestorChain(path, "operator")
         : "";
 
-    const parentPrecedence = foundRootAbove
-        ? firstValueInAncestorChain(path, OPERATOR_PRECEDENCE, -1)
-        : -1;
     const ownPrecedence = operatorPrecedence[node.operator];
     node[OPERATOR_PRECEDENCE] = ownPrecedence;
 

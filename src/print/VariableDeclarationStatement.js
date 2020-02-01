@@ -1,5 +1,5 @@
 const prettier = require("prettier");
-const { group, concat, line, indent } = prettier.doc.builders;
+const { concat, line, indent } = prettier.doc.builders;
 const { STRING_NEEDS_QUOTES, isContractableNodeType } = require("../util");
 
 const p = (node, path, print) => {

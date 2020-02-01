@@ -2,15 +2,19 @@ const prettier = require("prettier");
 const { group, concat, line, hardline } = prettier.doc.builders;
 const {
     printChildBlock,
+    isNotExpression,
     STRING_NEEDS_QUOTES,
-    GROUP_TOP_LEVEL_BINARY
+    GROUP_TOP_LEVEL_LOGICAL
 } = require("../util");
 const { Node } = require("melody-types");
 
+const shouldAvoidBreakBeforeClosing = valueNode =>
+    Node.isObjectExpression(valueNode) || isNotExpression(valueNode);
+
 const buildSetStatement = (node, path, print, assignmentIndex) => {
     const varDeclaration = node.assignments[assignmentIndex];
-    varDeclaration[GROUP_TOP_LEVEL_BINARY] = false;
-    const avoidBreakBeforeClosing = Node.isObjectExpression(
+    varDeclaration[GROUP_TOP_LEVEL_LOGICAL] = false;
+    const avoidBreakBeforeClosing = shouldAvoidBreakBeforeClosing(
         varDeclaration.value
     );
 
