@@ -6,6 +6,10 @@
 
 -   Bug fixes
 
+## v0.3.7
+
+-   Bug fix: Expressions like `not (a and b)` lost the parentheses, thus changing the meaning of the expression.
+
 ## v0.3.6
 
 -   Bug fix: Optimize group structure when using `SetStatement`, `VariableDeclarationStatement`, and logical binary expressions. Previously, the group created by `SetStatement` had only one breaking point (before the closing `%}`), which led to some undesirable results.
