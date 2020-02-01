@@ -165,8 +165,8 @@ exports[`conditionalExpression.melody.twig 1`] = `
 {{ test ? 'One' : 'Two' }}
 
 {{ test
-        ? 'This is a slightly longer string to overflow the line'
-        : 'and here is its counterpart' }}
+    ? 'This is a slightly longer string to overflow the line'
+    : 'and here is its counterpart' }}
 
 `;
 
@@ -345,18 +345,16 @@ exports[`operators.melody.twig 1`] = `
 {{ a is not odd }}
 {{ a is same as(b) }}
 {{ a is not same as(b) }}
-{{
-    a is not same as(
-        banana,
-        apple,
-        orange,
-        lemonade,
-        kiwi,
-        coconut,
-        pineapple,
-        pomegrenade
-    )
-}}
+{{ a is not same as(
+    banana,
+    apple,
+    orange,
+    lemonade,
+    kiwi,
+    coconut,
+    pineapple,
+    pomegrenade
+) }}
 
 {{ dump(test) }}
 {{ range(2, 3)|sort|join(',') }}

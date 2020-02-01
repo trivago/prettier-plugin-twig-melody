@@ -16,14 +16,9 @@ const p = (node, path, print) => {
         isContractableNodeType(node.value) &&
         !Node.isObjectExpression(node.value);
     const padding = shouldContractValue ? " " : line;
-    return group(
-        concat([
-            opener,
-            indent(concat([padding, path.call(print, "value")])),
-            padding,
-            closing
-        ])
-    );
+    const printedValue = concat([padding, path.call(print, "value")]);
+    const value = shouldContractValue ? printedValue : indent(printedValue);
+    return group(concat([opener, value, padding, closing]));
 };
 
 module.exports = {
