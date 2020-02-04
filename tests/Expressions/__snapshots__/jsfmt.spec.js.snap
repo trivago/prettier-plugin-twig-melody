@@ -19,20 +19,18 @@ exports[`arrayExpression.melody.twig 1`] = `
 
 {{ [2, 3, 'cat', 'dog', 'mouse'] }}
 
-{{
-    [
-        2,
-        3,
-        'cat',
-        'dog',
-        'mouse',
-        'cake',
-        'elephant',
-        'zebra',
-        3.1415,
-        translate('translation_key')
-    ]
-}}
+{{ [
+    2,
+    3,
+    'cat',
+    'dog',
+    'mouse',
+    'cake',
+    'elephant',
+    'zebra',
+    3.1415,
+    translate('translation_key')
+] }}
 
 {{ numbers[:1] }}
 

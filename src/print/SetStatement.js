@@ -9,7 +9,9 @@ const {
 const { Node } = require("melody-types");
 
 const shouldAvoidBreakBeforeClosing = valueNode =>
-    Node.isObjectExpression(valueNode) || isNotExpression(valueNode);
+    Node.isObjectExpression(valueNode) ||
+    isNotExpression(valueNode) ||
+    Node.isArrayExpression(valueNode);
 
 const buildSetStatement = (node, path, print, assignmentIndex) => {
     const varDeclaration = node.assignments[assignmentIndex];

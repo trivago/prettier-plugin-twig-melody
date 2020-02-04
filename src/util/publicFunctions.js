@@ -45,7 +45,8 @@ const INLINE_HTML_ELEMENTS = [
 const CONTRACTABLE_NODE_TYPES = [
     "ObjectExpression",
     "BinaryExpression",
-    "ConditionalExpression"
+    "ConditionalExpression",
+    "ArrayExpression"
 ];
 
 const registerContractableNodeType = nodeType => {
