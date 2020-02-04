@@ -6,6 +6,10 @@
 
 -   Bug fixes
 
+## v0.3.8
+
+-   Bug fix/optimization: ArrayExpression was causing too many newlines
+
 ## v0.3.7
 
 -   Bug fix: Expressions like `not (a and b)` lost the parentheses, thus changing the meaning of the expression.
