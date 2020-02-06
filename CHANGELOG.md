@@ -9,6 +9,7 @@
 ## v0.3.8
 
 -   Bug fix/optimization: ArrayExpression was causing too many newlines
+-   Bug fix: Filter target was losing parentheses, which was altering the meaning (e.g., conditional expression)
 
 ## v0.3.7
 
