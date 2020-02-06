@@ -8,7 +8,8 @@ const {
     GROUP_TOP_LEVEL_LOGICAL,
     IS_ROOT_LOGICAL_EXPRESSION,
     firstValueInAncestorChain,
-    findParentNode
+    findParentNode,
+    wrapExpressionIfNeeded
 } = require("../util");
 const { extension: coreExtension } = require("melody-extension-core");
 const ALREADY_INDENTED = Symbol("ALREADY_INDENTED");
@@ -123,7 +124,9 @@ const printBinaryExpression = (node, path, print) => {
     const rightHandSide = alreadyIndented
         ? concat(potentiallyIndented)
         : indent(concat(potentiallyIndented));
-    const result = concat([...parts, rightHandSide]);
+    const result = concat(
+        wrapExpressionIfNeeded(path, [...parts, rightHandSide], node)
+    );
 
     const shouldCreateTopLevelGroup = !foundRootAbove && shouldGroupOnTopLevel;
     const isDifferentLogicalOperator =
