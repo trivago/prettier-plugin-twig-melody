@@ -6,7 +6,9 @@ const {
     STRING_NEEDS_QUOTES,
     FILTER_BLOCK,
     shouldExpressionsBeWrapped,
-    someParentNode
+    someParentNode,
+    isMultipartExpression,
+    getDeepProperty
 } = require("../util");
 
 const isInFilterBlock = path =>
@@ -87,7 +89,17 @@ const p = (node, path, print, options) => {
 
     const finalTarget = path.call(print, ...pathToFinalTarget);
     const isFilterBlock = isInFilterBlock(path); // Special case of FilterBlockStatement
-    const parts = [finalTarget];
+    const targetNeedsParentheses = isMultipartExpression(
+        getDeepProperty(node, ...pathToFinalTarget)
+    );
+    const parts = [];
+    if (targetNeedsParentheses) {
+        parts.push("(");
+    }
+    parts.push(finalTarget);
+    if (targetNeedsParentheses) {
+        parts.push(")");
+    }
     if (isFilterBlock) {
         parts.push(concat([" ", filterExpressions[0]]));
         filterExpressions = filterExpressions.slice(1);

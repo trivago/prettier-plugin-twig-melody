@@ -70,6 +70,14 @@ const isContractableNodeType = node => {
 const isNotExpression = node =>
     Node.isUnaryLike(node) && node.operator === "not";
 
+const isMultipartExpression = node => {
+    return (
+        Node.isBinaryExpression(node) ||
+        Node.isConditionalExpression(node) ||
+        Node.isUnaryLike(node)
+    );
+};
+
 /**
  * Calls the callback for each parent
  *
@@ -528,6 +536,7 @@ module.exports = {
     firstValueInAncestorChain,
     isContractableNodeType,
     isNotExpression,
+    isMultipartExpression,
     registerContractableNodeType,
     quoteChar,
     isValidIdentifierName,

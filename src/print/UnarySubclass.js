@@ -4,13 +4,12 @@ const { Node } = require("melody-types");
 const {
     firstValueInAncestorChain,
     findParentNode,
+    isMultipartExpression,
     IS_ROOT_LOGICAL_EXPRESSION,
     GROUP_TOP_LEVEL_LOGICAL
 } = require("../util");
 
-const argumentNeedsParentheses = node => {
-    return Node.isBinaryExpression(node);
-};
+const argumentNeedsParentheses = node => isMultipartExpression(node);
 
 const isLogicalOperator = operator => operator === "not";
 

@@ -10,3 +10,9 @@
         'useWiderItems': useWiderItems
     }
 ) only %}
+
+{{ (hasAdvertiserRatings
+            ? 'tri_based_on' | translate({ 'iBasedOn': '<b>' ~ reviewCount ~ '</b>' })
+            : 'tri_based_on_no_partners' | translate({ 'iBasedOn': '<b>' ~ reviewCount ~ '</b>' })
+        ) | raw
+        }}
