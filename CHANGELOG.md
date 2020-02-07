@@ -6,6 +6,10 @@
 
 -   Bug fixes
 
+## v0.3.9
+
+-   Fix [issue #32](https://github.com/trivago/prettier-plugin-twig-melody/issues/32): Curly braces around a binary expression were lost when they were in fact needed.
+
 ## v0.3.8
 
 -   Bug fix/optimization: ArrayExpression was causing too many newlines
