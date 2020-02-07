@@ -12,6 +12,8 @@ exports[`attributes.melody.twig 1`] = `
 
 <!-- Remove extra spaces in attribute values -->
 <div id="pspIframe " class="  red   hot  ">abcd</div>
+
+<input type="text" name="fromName" value="{{ fromName ?? ' ' }}" />
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <a href="#abcd" target="_blank" lang="en">Link</a>
 
@@ -28,6 +30,8 @@ exports[`attributes.melody.twig 1`] = `
 <div id="pspIframe" class="red hot">
     abcd
 </div>
+
+<input type="text" name="fromName" value="{{ fromName ?? ' ' }}" />
 
 `;
 
