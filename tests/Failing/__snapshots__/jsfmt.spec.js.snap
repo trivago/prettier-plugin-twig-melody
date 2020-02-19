@@ -84,6 +84,23 @@ exports[`controversial.melody.twig 1`] = `
 `;
 
 exports[`failing.melody.twig 1`] = `
+{% mount '@trivago/popover-component' as 'toolbar-popover' with {
+        ContentComponent: PopoverComponent,
+
+        position: 'bottom-leading'
+    }
+%}
+
+{# Parentheses dropped #}
+{% header 'Cache-Control: max-age=' ~ (expiry.timestamp - now.timestamp) %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{% mount '@trivago/popover-component' as 'toolbar-popover' with {
+        ContentComponent: PopoverComponent,
+        position: 'bottom-leading'
+    }
+%}
+
+{# Parentheses dropped #}
+{% header 'Cache-Control: max-age=' ~ expiry.timestamp - now.timestamp %}
 
 `;
