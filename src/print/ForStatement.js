@@ -1,6 +1,10 @@
 const prettier = require("prettier");
 const { group, indent, line, hardline, concat } = prettier.doc.builders;
-const { EXPRESSION_NEEDED, isWhitespaceNode } = require("../util");
+const {
+    EXPRESSION_NEEDED,
+    isWhitespaceNode,
+    indentWithHardline
+} = require("../util");
 
 const printFor = (node, path, print) => {
     const parts = [node.trimLeft ? "{%-" : "{%", " for "];
@@ -20,8 +24,6 @@ const printFor = (node, path, print) => {
     parts.push(concat([" ", node.trimRightFor ? "-%}" : "%}"]));
     return group(concat(parts));
 };
-
-const indentWithHardline = contents => indent(concat([hardline, contents]));
 
 const p = (node, path, print) => {
     node[EXPRESSION_NEEDED] = false;

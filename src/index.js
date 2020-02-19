@@ -82,6 +82,13 @@ const options = {
         description:
             "Provide additional plugins for Melody. Relative file path from the project root."
     },
+    twigMultiTags: {
+        type: "path",
+        category: "Global",
+        array: true,
+        default: [{ value: [] }],
+        description: "Make custom Twig tags known to the parser."
+    },
     twigSingleQuote: {
         type: "boolean",
         category: "Global",

@@ -487,6 +487,8 @@ const addPreserveWhitespaceInfo = (inlineMap, nodes) => {
     });
 };
 
+const indentWithHardline = contents => indent(concat([hardline, contents]));
+
 const printChildGroups = (node, path, print, ...childPath) => {
     // For the preprocessed children, get a map showing which elements can
     // be printed inline
@@ -559,5 +561,6 @@ module.exports = {
     setDeepProperty,
     isInlineElement,
     printChildBlock,
-    printChildGroups
+    printChildGroups,
+    indentWithHardline
 };

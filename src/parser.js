@@ -20,7 +20,7 @@ const createConfiguredLexer = (code, ...extensions) => {
     return lexer;
 };
 
-const configureParser = (parser, ...extensions) => {
+const applyParserExtensions = (parser, ...extensions) => {
     for (const extension of extensions) {
         if (extension.tags) {
             for (const tag of extension.tags) {
@@ -45,7 +45,7 @@ const configureParser = (parser, ...extensions) => {
     }
 };
 
-const createConfiguredParser = (code, ...extensions) => {
+const createConfiguredParser = (code, multiTagConfig, ...extensions) => {
     const parser = new Parser(
         new TokenStream(createConfiguredLexer(code, ...extensions), {
             ignoreWhitespace: true,
@@ -57,20 +57,30 @@ const createConfiguredParser = (code, ...extensions) => {
             ignoreComments: false,
             ignoreHtmlComments: false,
             ignoreDeclarations: false,
-            decodeEntities: false
+            decodeEntities: false,
+            multiTags: multiTagConfig,
+            allowUnknownTags: true
         }
     );
-    configureParser(parser, ...extensions);
+    applyParserExtensions(parser, ...extensions);
     return parser;
 };
 
+const getMultiTagConfig = (tagsCsvs = []) =>
+    tagsCsvs.reduce((acc, curr) => {
+        const tagNames = curr.split(",");
+        acc[tagNames[0].trim()] = tagNames.slice(1).map(s => s.trim());
+        return acc;
+    }, {});
+
 const parse = (text, parsers, options) => {
     const pluginPaths = getPluginPathsFromOptions(options);
+    const multiTagConfig = getMultiTagConfig(options.twigMultiTags || []);
     const extensions = [
         coreExtension,
         ...getAdditionalMelodyExtensions(pluginPaths)
     ];
-    const parser = createConfiguredParser(text, ...extensions);
+    const parser = createConfiguredParser(text, multiTagConfig, ...extensions);
     const ast = parser.parse();
     ast[ORIGINAL_SOURCE] = text;
     return ast;
