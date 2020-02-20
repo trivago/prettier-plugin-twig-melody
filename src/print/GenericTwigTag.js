@@ -14,15 +14,15 @@ const buildOpeningTag = (node, path, print) => {
     if (printedParts.length > 0) {
         parts.push(" ", printedParts[0]);
     }
-    const indentedParts = [line];
-    for (let i = 1; i < parts.length; i++) {
-        const part = parts[i];
+    const indentedParts = [];
+    for (let i = 1; i < node.parts.length; i++) {
+        const part = node.parts[i];
         const isToken = Node.isGenericToken(part);
         const separator =
             isToken && noSpaceBeforeToken[part.tokenText] ? "" : line;
         indentedParts.push(separator, printedParts[i]);
     }
-    if (indentedParts.length > 1) {
+    if (node.parts.length > 1) {
         parts.push(indent(concat(indentedParts)));
     }
     const closing = node.trimRight ? "-%}" : "%}";

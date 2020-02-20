@@ -15,11 +15,12 @@ exports[`cache.melody.twig 1`] = `
 {% endcache %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {% cache globally
-
     using
     key
     craft.some.rather.long.property.chain.request.path
     for
+    3
+    weeks
 %}
     {% for block in entry.myMatrixField %}
         <p>
@@ -84,13 +85,60 @@ exports[`nav.melody.twig 1`] = `
 
 exports[`paginate.melody.twig 1`] = `
 {% paginate craft.entries.section('blog').limit(10) as pageInfo, pageEntries %}
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{% paginate craft.entries.section('blog').limit(10)
 
+{% paginate craft.entries.section('blog').limit(10) as pageInfo, pageEntries, pageProperties %}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{% paginate craft.entries.section('blog').limit(10) as pageInfo, pageEntries %}
+
+{% paginate craft.entries.section('blog').limit(10)
     as
-    pageInfo
-    ,
-    pageEntries
+    pageInfo,
+    pageEntries,
+    pageProperties
 %}
+
+`;
+
+exports[`redirect.melody.twig 1`] = `
+{% redirect "pricing" 301 %}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{% redirect pricing 301 %}
+
+`;
+
+exports[`switch.melody.twig 1`] = `
+{% switch matrixBlock.type %}
+
+    {% case "text" %}
+
+        {{ matrixBlock.textField | markdown }}
+
+    {% case "image" %}
+
+        {{ matrixBlock.image[0].getImg() }}
+
+    {% default %}
+
+        <p>A font walks into a bar.</p>
+        <p>The bartender says, “Hey, we don’t serve your type in here!”</p>
+
+{% endswitch %}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{% switch matrixBlock.type %}
+
+{% case text %}
+    {{ matrixBlock.textField|markdown }}
+{% case image %}
+    {{ matrixBlock.image[0].getImg() }}
+
+    {% default %}
+
+    <p>
+        A font walks into a bar.
+    </p>
+    <p>
+        The bartender says, “Hey, we don’t serve your type in here!”
+    </p>
+{% endswitch %}
 
 `;
