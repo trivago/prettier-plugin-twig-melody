@@ -132,7 +132,11 @@ const isValidIdentifierName = s => {
 
 const isMelodyNode = n => {
     const proto = n.__proto__;
-    return typeof n === "object" && proto.type && proto.visitorKeys;
+    return (
+        typeof n === "object" &&
+        proto.type &&
+        typeof Node["is" + proto.type] === "function"
+    );
 };
 
 const findParentNode = path => {

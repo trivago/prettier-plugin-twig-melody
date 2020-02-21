@@ -1,7 +1,7 @@
 const prettier = require("prettier");
 const { concat, indent, line, hardline, join, group } = prettier.doc.builders;
 const { Node } = require("melody-types");
-const { indentWithHardline } = require("../util");
+const { STRING_NEEDS_QUOTES, indentWithHardline } = require("../util");
 
 const noSpaceBeforeToken = {
     ",": true
@@ -31,6 +31,7 @@ const buildOpeningTag = (node, path, print) => {
 };
 
 const p = (node, path, print) => {
+    node[STRING_NEEDS_QUOTES] = true;
     const openingTag = buildOpeningTag(node, path, print);
     const parts = [openingTag];
     const printedSections = path.map(print, "sections");

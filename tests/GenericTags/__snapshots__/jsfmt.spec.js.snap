@@ -102,7 +102,7 @@ exports[`paginate.melody.twig 1`] = `
 exports[`redirect.melody.twig 1`] = `
 {% redirect "pricing" 301 %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{% redirect pricing 301 %}
+{% redirect 'pricing' 301 %}
 
 `;
 
@@ -126,9 +126,9 @@ exports[`switch.melody.twig 1`] = `
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {% switch matrixBlock.type %}
 
-{% case text %}
+{% case 'text' %}
     {{ matrixBlock.textField|markdown }}
-{% case image %}
+{% case 'image' %}
     {{ matrixBlock.image[0].getImg() }}
 
     {% default %}
