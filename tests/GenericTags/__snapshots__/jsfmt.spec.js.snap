@@ -38,43 +38,6 @@ exports[`cache.melody.twig 1`] = `
 
 `;
 
-exports[`failing.melody.twig 1`] = `
-{% switch matrixBlock.type %}
-
-    {% case "text" %}
-
-        {{ matrixBlock.textField | markdown }}
-
-    {% case "image" %}
-
-        {{ matrixBlock.image[0].getImg() }}
-
-    {% default %}
-
-        <p>A font walks into a bar.</p>
-        <p>The bartender says, “Hey, we don’t serve your type in here!”</p>
-
-{% endswitch %}
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{% switch matrixBlock.type %}
-
-{% case 'text' %}
-    {{ matrixBlock.textField|markdown }}
-{% case 'image' %}
-    {{ matrixBlock.image[0].getImg() }}
-
-    {% default %}
-
-    <p>
-        A font walks into a bar.
-    </p>
-    <p>
-        The bartender says, “Hey, we don’t serve your type in here!”
-    </p>
-{% endswitch %}
-
-`;
-
 exports[`header.melody.twig 1`] = `
 {%  header "Cache-Control: max-age=" ~ (expiry.timestamp - now.timestamp)  %}
 
@@ -144,7 +107,38 @@ exports[`redirect.melody.twig 1`] = `
 `;
 
 exports[`switch.melody.twig 1`] = `
+{% switch matrixBlock.type %}
 
+
+
+    {% case "text" %}
+
+        {{ matrixBlock.textField | markdown }}
+
+    {% case "image" %}
+
+        {{ matrixBlock.image[0].getImg() }}
+
+    {% default %}
+
+        <p>A font walks into a bar.</p>
+        <p>The bartender says, “Hey, we don’t serve your type in here!”</p>
+
+{% endswitch %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{% switch matrixBlock.type %}
+
+{% case 'text' %}
+    {{ matrixBlock.textField|markdown }}
+{% case 'image' %}
+    {{ matrixBlock.image[0].getImg() }}
+{% default %}
+    <p>
+        A font walks into a bar.
+    </p>
+    <p>
+        The bartender says, “Hey, we don’t serve your type in here!”
+    </p>
+{% endswitch %}
 
 `;
