@@ -39,8 +39,6 @@ exports[`cache.melody.twig 1`] = `
 `;
 
 exports[`failing.melody.twig 1`] = `
-{% header "Cache-Control: max-age=" ~ (expiry.timestamp - now.timestamp) %}
-
 {% switch matrixBlock.type %}
 
     {% case "text" %}
@@ -58,8 +56,6 @@ exports[`failing.melody.twig 1`] = `
 
 {% endswitch %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{% header 'Cache-Control: max-age=' ~ expiry.timestamp - now.timestamp %}
-
 {% switch matrixBlock.type %}
 
 {% case 'text' %}
@@ -80,11 +76,15 @@ exports[`failing.melody.twig 1`] = `
 `;
 
 exports[`header.melody.twig 1`] = `
+{%  header "Cache-Control: max-age=" ~ (expiry.timestamp - now.timestamp)  %}
+
 {# prettier-ignore #}
-{% header "Cache-Control: max-age=" ~ (expiry.timestamp - now.timestamp) %}
+{%  header "Cache-Control: max-age=" ~ (expiry.timestamp - now.timestamp)  %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{% header 'Cache-Control: max-age=' ~ (expiry.timestamp - now.timestamp) %}
+
 {# prettier-ignore #}
-{% header "Cache-Control: max-age=" ~ (expiry.timestamp - now.timestamp) %}
+{%  header "Cache-Control: max-age=" ~ (expiry.timestamp - now.timestamp)  %}
 
 `;
 

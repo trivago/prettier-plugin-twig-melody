@@ -90,17 +90,11 @@ exports[`failing.melody.twig 1`] = `
         position: 'bottom-leading'
     }
 %}
-
-{# Parentheses dropped #}
-{% header 'Cache-Control: max-age=' ~ (expiry.timestamp - now.timestamp) %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {% mount '@trivago/popover-component' as 'toolbar-popover' with {
         ContentComponent: PopoverComponent,
         position: 'bottom-leading'
     }
 %}
-
-{# Parentheses dropped #}
-{% header 'Cache-Control: max-age=' ~ expiry.timestamp - now.timestamp %}
 
 `;
