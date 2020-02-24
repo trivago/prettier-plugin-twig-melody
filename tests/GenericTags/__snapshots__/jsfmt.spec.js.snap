@@ -127,7 +127,6 @@ exports[`switch.melody.twig 1`] = `
 {% endswitch %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {% switch matrixBlock.type %}
-
 {% case 'text' %}
     {{ matrixBlock.textField|markdown }}
 {% case 'image' %}

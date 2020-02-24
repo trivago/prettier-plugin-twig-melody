@@ -326,6 +326,9 @@ const isWhitespaceNode = node => {
     );
 };
 
+const isEmptySequence = node =>
+    Node.isSequenceExpression(node) && node.expressions.length === 0;
+
 const removeSurroundingWhitespace = children => {
     if (!Array.isArray(children)) {
         return children;
@@ -550,6 +553,7 @@ module.exports = {
     testCurrentAndParentNodes,
     isWhitespaceOnly,
     isWhitespaceNode,
+    isEmptySequence,
     hasNoNewlines,
     countNewlines,
     hasAtLeastTwoNewlines,
