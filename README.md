@@ -42,7 +42,7 @@ An array containing file paths to plugin directories. This can be used to add yo
 
 The paths are relative paths, seen from the project root. Example:
 
-```
+```json
 "twigMelodyPlugins": ["src-js/some-melody-plugin", "src-js/some-other-plugin"]
 ```
 
@@ -54,16 +54,17 @@ Because Twig files might have a lot of nesting, it can be useful to define a sep
 
 If set to `true`, objects will always be wrapped/broken, even if they would fit on one line:
 
-```
-<section class="{{ {
+```html
+<section
+    class="{{ {
     base: css.prices
-} | classes }}">
-</section>
+} | classes }}"
+></section>
 ```
 
 If set to `false` (default value), this would be printed as:
 
-```
+```html
 <section class="{{ { base: css.prices } | classes }}"></section>
 ```
 
@@ -74,6 +75,41 @@ Follow the standards described in [https://twig.symfony.com/doc/2.x/coding_stand
 ### twigOutputEndblockName (default: `false`)
 
 Choose whether to output the block name in `{% endblock %}` tags (e.g., `{% endblock content %}`) or not. The default is not to output it.
+
+### twigMultiTags (default: `[]`)
+
+An array of coherent sequences of non-standard Twig tags that should be treated as belonging together. Example (inspired by [Craft CMS](https://docs.craftcms.com/v2/templating/nav.html)):
+
+```json
+twigMultiTags: [
+    "nav,endnav",
+    "switch,case,default,endswitch",
+    "ifchildren,endifchildren",
+    "cache,endcache"
+]
+```
+
+Looking at the case of `nav,endnav`, this means that the Twig tags `{% nav %}` and `{% endnav %}` will be treated as a pair, and everything in between will be indented:
+
+```twig
+{% nav entry in entries %}
+    <li>
+        <a href="{{ entry.url }}">{{ entry.title }}</a>
+    </li>
+{% endnav %}
+```
+
+If we did not list the `"nav,endnav"` entry in `twigMultiTags`, this code example would be printed without indentation, because `{% nav %}` and `{% endnav %}` would be treated as unrelated, individual Twig tags:
+
+```twig
+{% nav entry in entries %}
+<li>
+    <a href="{{ entry.url }}">{{ entry.title }}</a>
+</li>
+{% endnav %}
+```
+
+Note that the order matters: It has to be `"nav,endnav"`, and it must not be `"endnav,nav"`. In general, the first and the last tag name matter. In the case of `"switch,case,default,endswitch"`, the order of `case` and `default` does not matter. However, `switch` has to come first, and `endswitch` has to come last.
 
 ## Features
 
