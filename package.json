@@ -12,6 +12,12 @@
     "engines": {
         "node": ">=6"
     },
+    "scripts": {
+        "lint": "jest -c jest.eslint.config.js",
+        "test": "jest",
+        "prettier": "prettier --plugin=. --parser=melody",
+        "publish": "npm publish"
+    },
     "dependencies": {
         "babel-types": "^6.26.0",
         "melody-extension-core": "^1.7.1",
@@ -29,11 +35,6 @@
         "eslint-plugin-prettier": "^2.4.0",
         "jest": "^21.1.0",
         "jest-runner-eslint": "^0.3.0"
-    },
-    "scripts": {
-        "lint": "jest -c jest.eslint.config.js",
-        "test": "jest",
-        "prettier": "prettier --plugin=. --parser=melody"
     },
     "jest": {
         "projects": [
