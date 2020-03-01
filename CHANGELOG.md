@@ -6,6 +6,10 @@
 
 -   Bug fixes
 
+## v0.4.0
+
+-   Fix [issue #1](https://github.com/trivago/prettier-plugin-twig-melody/issues/1): Non-standard (custom) Twig tags don't make the parser crash any more, and receive at least some default printing. Complex tags can be configured using the `twigMultiTags` option.
+
 ## v0.3.9
 
 -   Fix [issue #32](https://github.com/trivago/prettier-plugin-twig-melody/issues/32): Curly braces around a binary expression were lost when they were in fact needed.
