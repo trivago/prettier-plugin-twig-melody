@@ -12,9 +12,14 @@ const getProjectRoot = () => {
     const parts = __dirname.split(path.sep);
     let index = parts.length - 1;
     let dirName = parts[index];
-    while (dirName !== "node_modules") {
+    while (dirName !== "node_modules" && index > 0) {
         index--;
         dirName = parts[index];
+    }
+    // If we are not inside a "node_modules" folder, just
+    // strip away "src" and "util"
+    if (index === 0) {
+        index = parts.length - 2;
     }
     const subPath = parts.slice(0, index);
     const joined = path.join(...subPath);

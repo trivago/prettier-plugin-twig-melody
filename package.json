@@ -14,10 +14,10 @@
     },
     "dependencies": {
         "babel-types": "^6.26.0",
-        "melody-extension-core": "^1.6.0",
-        "melody-parser": "^1.6.0",
-        "melody-traverse": "^1.6.0",
-        "melody-types": "^1.6.0",
+        "melody-extension-core": "^1.7.1",
+        "melody-parser": "^1.7.1",
+        "melody-traverse": "^1.7.1",
+        "melody-types": "^1.7.1",
         "prettier": "^1.8.2",
         "resolve": "^1.12.0"
     },

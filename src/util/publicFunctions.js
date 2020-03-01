@@ -132,7 +132,11 @@ const isValidIdentifierName = s => {
 
 const isMelodyNode = n => {
     const proto = n.__proto__;
-    return typeof n === "object" && proto.type && proto.visitorKeys;
+    return (
+        typeof n === "object" &&
+        proto.type &&
+        typeof Node["is" + proto.type] === "function"
+    );
 };
 
 const findParentNode = path => {
@@ -322,6 +326,9 @@ const isWhitespaceNode = node => {
     );
 };
 
+const isEmptySequence = node =>
+    Node.isSequenceExpression(node) && node.expressions.length === 0;
+
 const removeSurroundingWhitespace = children => {
     if (!Array.isArray(children)) {
         return children;
@@ -487,6 +494,8 @@ const addPreserveWhitespaceInfo = (inlineMap, nodes) => {
     });
 };
 
+const indentWithHardline = contents => indent(concat([hardline, contents]));
+
 const printChildGroups = (node, path, print, ...childPath) => {
     // For the preprocessed children, get a map showing which elements can
     // be printed inline
@@ -544,6 +553,7 @@ module.exports = {
     testCurrentAndParentNodes,
     isWhitespaceOnly,
     isWhitespaceNode,
+    isEmptySequence,
     hasNoNewlines,
     countNewlines,
     hasAtLeastTwoNewlines,
@@ -559,5 +569,6 @@ module.exports = {
     setDeepProperty,
     isInlineElement,
     printChildBlock,
-    printChildGroups
+    printChildGroups,
+    indentWithHardline
 };

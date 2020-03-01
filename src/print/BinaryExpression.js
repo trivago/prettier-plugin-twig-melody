@@ -46,11 +46,26 @@ const hasLogicalOperator = node => {
     return node.operator === "or" || node.operator === "and";
 };
 
+const otherNeedsParentheses = (node, otherProp) => {
+    const other = node[otherProp];
+    const isBinaryOther = Node.isBinaryExpression(other);
+    const ownPrecedence = operatorPrecedence[node.operator];
+    const otherPrecedence = isBinaryOther
+        ? operatorPrecedence[node[otherProp].operator]
+        : Number.MAX_SAFE_INTEGER;
+    return (
+        otherPrecedence < ownPrecedence ||
+        (otherPrecedence > ownPrecedence &&
+            isBinaryOther &&
+            hasLogicalOperator(other)) ||
+        Node.isFilterExpression(other)
+    );
+};
+
 const printBinaryExpression = (node, path, print) => {
     node[EXPRESSION_NEEDED] = false;
     node[STRING_NEEDS_QUOTES] = true;
 
-    const isBinaryLeft = Node.isBinaryExpression(node.left);
     const isBinaryRight = Node.isBinaryExpression(node.right);
     const isLogicalOperator = ["and", "or"].indexOf(node.operator) > -1;
     const whitespaceAroundOperator = operatorNeedsSpaces(node.operator);
@@ -79,29 +94,15 @@ const printBinaryExpression = (node, path, print) => {
         ? firstValueInAncestorChain(path, "operator")
         : "";
 
-    const ownPrecedence = operatorPrecedence[node.operator];
-    node[OPERATOR_PRECEDENCE] = ownPrecedence;
+    node[OPERATOR_PRECEDENCE] = operatorPrecedence[node.operator];
 
-    const leftPrecedence = isBinaryLeft
-        ? operatorPrecedence[node.left.operator]
-        : Number.MAX_SAFE_INTEGER;
-    const rightPrecedence = isBinaryRight
-        ? operatorPrecedence[node.right.operator]
-        : Number.MAX_SAFE_INTEGER;
     const printedLeft = path.call(print, "left");
     const printedRight = path.call(print, "right");
 
     const parts = [];
-    const leftNeedsParens =
-        (leftPrecedence != ownPrecedence &&
-            Node.isBinaryExpression(node.left) &&
-            hasLogicalOperator(node.left)) ||
-        Node.isFilterExpression(node.left);
-    const rightNeedsParens =
-        (rightPrecedence != ownPrecedence &&
-            Node.isBinaryExpression(node.right) &&
-            hasLogicalOperator(node.right)) ||
-        Node.isFilterExpression(node.right);
+    const leftNeedsParens = otherNeedsParentheses(node, "left");
+    const rightNeedsParens = otherNeedsParentheses(node, "right");
+
     if (leftNeedsParens) {
         parts.push("(");
     }

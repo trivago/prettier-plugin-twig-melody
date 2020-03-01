@@ -84,6 +84,17 @@ exports[`controversial.melody.twig 1`] = `
 `;
 
 exports[`failing.melody.twig 1`] = `
+{% mount '@trivago/popover-component' as 'toolbar-popover' with {
+        ContentComponent: PopoverComponent,
+
+        position: 'bottom-leading'
+    }
+%}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{% mount '@trivago/popover-component' as 'toolbar-popover' with {
+        ContentComponent: PopoverComponent,
+        position: 'bottom-leading'
+    }
+%}
 
 `;

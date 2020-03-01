@@ -40,6 +40,8 @@ const { printFromStatement } = require("./print/FromStatement.js");
 const { printTwigComment } = require("./print/TwigComment.js");
 const { printHtmlComment } = require("./print/HtmlComment.js");
 const { printDeclaration } = require("./print/Declaration.js");
+const { printGenericTwigTag } = require("./print/GenericTwigTag.js");
+const { printGenericToken } = require("./print/GenericToken.js");
 const {
     printMacroDeclarationStatement
 } = require("./print/MacroDeclarationStatement.js");
@@ -264,6 +266,16 @@ printFunctions["MacroDeclarationStatement"] = printMacroDeclarationStatement;
 printFunctions["TwigComment"] = printTwigComment;
 printFunctions["HtmlComment"] = printHtmlComment;
 printFunctions["Declaration"] = printDeclaration;
+printFunctions["GenericTwigTag"] = (node, path, print, options) => {
+    const tagName = node.tagName;
+    if (printFunctions[tagName + "Tag"]) {
+        // Give the user the chance to implement a custom
+        // print function for certain generic Twig tags
+        return printFunctions[tagName + "Tag"](node, path, print, options);
+    }
+    return printGenericTwigTag(node, path, print, options);
+};
+printFunctions["GenericToken"] = printGenericToken;
 
 // Fallbacks
 printFunctions["String"] = s => s;

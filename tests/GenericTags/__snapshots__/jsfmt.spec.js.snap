@@ -1,0 +1,143 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`cache.melody.twig 1`] = `
+{% cache globally using key craft.some.rather.long.property.chain.request.path for 3 weeks %}
+    {% for block in entry.myMatrixField %}
+        <p>{{ block.text }}</p>
+    {% endfor %}
+{% endcache %}
+
+{# prettier-ignore #}
+{% cache globally using key craft.some.rather.long.property.chain.request.path for 3 weeks %}
+    {% for block in entry.myMatrixField %}
+        <p>{{ block.text }}</p>
+    {% endfor %}
+{% endcache %}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{% cache globally
+    using
+    key
+    craft.some.rather.long.property.chain.request.path
+    for
+    3
+    weeks
+%}
+    {% for block in entry.myMatrixField %}
+        <p>
+            {{ block.text }}
+        </p>
+    {% endfor %}
+{% endcache %}
+
+{# prettier-ignore #}
+{% cache globally using key craft.some.rather.long.property.chain.request.path for 3 weeks %}
+    {% for block in entry.myMatrixField %}
+        <p>{{ block.text }}</p>
+    {% endfor %}
+{% endcache %}
+
+`;
+
+exports[`header.melody.twig 1`] = `
+{%  header "Cache-Control: max-age=" ~ (expiry.timestamp - now.timestamp)  %}
+
+{# prettier-ignore #}
+{%  header "Cache-Control: max-age=" ~ (expiry.timestamp - now.timestamp)  %}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{% header 'Cache-Control: max-age=' ~ (expiry.timestamp - now.timestamp) %}
+
+{# prettier-ignore #}
+{%  header "Cache-Control: max-age=" ~ (expiry.timestamp - now.timestamp)  %}
+
+`;
+
+exports[`includeCssFile.melody.twig 1`] = `
+{% includeCssFile "/assets/css/layouts/" ~ entry.layout ~ ".css" %}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{% includeCssFile '/assets/css/layouts/' ~ entry.layout ~ '.css' %}
+
+`;
+
+exports[`nav.melody.twig 1`] = `
+{% nav entry in entries %}
+    <li>
+        <a href="{{ entry.url }}">{{ entry.title }}</a>
+        {% ifchildren %}
+            <ul>
+                {% children %}
+            </ul>
+        {% endifchildren %}
+    </li>
+{% endnav %}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{% nav entry in entries %}
+    <li>
+        <a href="{{ entry.url }}">{{ entry.title }}</a>
+        {% ifchildren %}
+            <ul>
+                {% children %}
+            </ul>
+        {% endifchildren %}
+    </li>
+{% endnav %}
+
+`;
+
+exports[`paginate.melody.twig 1`] = `
+{% paginate craft.entries.section('blog').limit(10) as pageInfo, pageEntries %}
+
+{% paginate craft.entries.section('blog').limit(10) as pageInfo, pageEntries, pageProperties %}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{% paginate craft.entries.section('blog').limit(10) as pageInfo, pageEntries %}
+
+{% paginate craft.entries.section('blog').limit(10)
+    as
+    pageInfo,
+    pageEntries,
+    pageProperties
+%}
+
+`;
+
+exports[`redirect.melody.twig 1`] = `
+{% redirect "pricing" 301 %}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{% redirect 'pricing' 301 %}
+
+`;
+
+exports[`switch.melody.twig 1`] = `
+{% switch matrixBlock.type %}
+
+
+
+    {% case "text" %}
+
+        {{ matrixBlock.textField | markdown }}
+
+    {% case "image" %}
+
+        {{ matrixBlock.image[0].getImg() }}
+
+    {% default %}
+
+        <p>A font walks into a bar.</p>
+        <p>The bartender says, “Hey, we don’t serve your type in here!”</p>
+
+{% endswitch %}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{% switch matrixBlock.type %}
+{% case 'text' %}
+    {{ matrixBlock.textField|markdown }}
+{% case 'image' %}
+    {{ matrixBlock.image[0].getImg() }}
+{% default %}
+    <p>
+        A font walks into a bar.
+    </p>
+    <p>
+        The bartender says, “Hey, we don’t serve your type in here!”
+    </p>
+{% endswitch %}
+
+`;
