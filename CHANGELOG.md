@@ -6,6 +6,10 @@
 
 -   Bug fixes
 
+## v0.4.1
+
+-   Bug fix: Preserve leading (non-newline) whitespace in inline IF statement body
+
 ## v0.4.0
 
 -   Fix [issue #1](https://github.com/trivago/prettier-plugin-twig-melody/issues/1): Non-standard (custom) Twig tags don't make the parser crash any more, and receive at least some default printing. Complex tags can be configured using the `twigMultiTags` option.
