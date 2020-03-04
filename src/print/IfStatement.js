@@ -2,7 +2,11 @@ const prettier = require("prettier");
 const { group, indent, line, hardline, concat } = prettier.doc.builders;
 const { EXPRESSION_NEEDED, printChildBlock } = require("../util");
 const { Node } = require("melody-types");
-const { hasNoNewlines } = require("../util");
+const {
+    hasNoNewlines,
+    PRESERVE_LEADING_WHITESPACE,
+    PRESERVE_TRAILING_WHITESPACE
+} = require("../util");
 
 const IS_ELSEIF = Symbol("IS_ELSEIF");
 
@@ -23,6 +27,16 @@ const p = (node, path, print) => {
                 !Node.isElement(firstChild) &&
                 (!Node.isPrintTextStatement(firstChild) ||
                     hasNoNewlines(firstChild.value.value))));
+
+    // Preserve no-newline white space in single text node child
+    if (
+        hasOneChild &&
+        Node.isPrintTextStatement(firstChild) &&
+        hasNoNewlines(firstChild.value.value)
+    ) {
+        firstChild[PRESERVE_LEADING_WHITESPACE] = true;
+        firstChild[PRESERVE_TRAILING_WHITESPACE] = true;
+    }
 
     const ifClause = group(
         concat([
