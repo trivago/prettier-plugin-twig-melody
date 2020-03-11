@@ -1,6 +1,16 @@
-{% mount '@trivago/popover-component' as 'toolbar-popover' with {
-        ContentComponent: PopoverComponent,
 
-        position: 'bottom-leading'
-    }
-%}
+{% mount async "./views/#{view}" as view delay placeholder by 100ms %}
+
+
+<select name="purchasableId" id="purchasableId" class="purchasableId">
+                            {%- for purchasable in product.getVariants() -%}
+                                <option {% if not purchasable.isAvailable %}disabled{% endif %}>
+                                    {{ purchasable.description }}
+                                    {{
+                                        purchasable.salePrice|commerceCurrency(
+                                            cart.currency
+                                        )
+                                    }}
+                                </option>
+                            {%- endfor -%}
+                        </select>
