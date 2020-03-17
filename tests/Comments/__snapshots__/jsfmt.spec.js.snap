@@ -39,6 +39,13 @@ exports[`twigComments.melody.twig 1`] = `
 
 {# Two #}
 
+{#comment #}
+
+{# comment#}
+
+{# comment
+#}
+
 {% if searchResultFailing %}
             {# This is a Twig comment #}
 <li>No results found</li>
@@ -46,7 +53,7 @@ exports[`twigComments.melody.twig 1`] = `
 
 {#- comment -#}
 
-{#- 
+{#-
     comment
     with multiple lines
 -#}
@@ -62,6 +69,13 @@ exports[`twigComments.melody.twig 1`] = `
 
 {# Two #}
 
+{# comment #}
+
+{# comment #}
+
+{# comment
+#}
+
 {% if searchResultFailing %}
     {# This is a Twig comment #}
     <li>No results found</li>
@@ -69,12 +83,12 @@ exports[`twigComments.melody.twig 1`] = `
 
 {#- comment -#}
 
-{#-  
+{#-
     comment
     with multiple lines
 -#}
 
-{# #
+{##
 # Illustration Hotel Interaction
 #
 # This image is just of decorative nature and doesn't contain relevant information
