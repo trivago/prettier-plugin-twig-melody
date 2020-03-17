@@ -131,7 +131,7 @@ exports[`failing.melody.twig 1`] = `
     </div>
 </li>
 
-{# 
+{#
 <select name="purchasableId" id="purchasableId" class="purchasableId">
     {%- for purchasable in product.getVariants() -%}
         <option {% if not purchasable.isAvailable %}disabled{% endif %}>
