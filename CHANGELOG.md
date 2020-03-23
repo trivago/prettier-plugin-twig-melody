@@ -6,6 +6,10 @@
 
 -   Bug fixes
 
+## v0.4.2
+
+-   Bug fix: Remove hard-coded space at the beginning of Twig comments
+
 ## v0.4.1
 
 -   Bug fix: Preserve leading (non-newline) whitespace in inline IF statement body
