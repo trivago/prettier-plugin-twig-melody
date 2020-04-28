@@ -3,3 +3,5 @@
 </div>
 
 <span data-whitespace-test="Testing: {{- noWhitespaceTest -}} foo">Test</span>
+
+{% set calendarIcon = isNewGuestSelector ? 'icn_#{type | lower}_line_dark' : type | lower %}

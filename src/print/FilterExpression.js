@@ -3,9 +3,11 @@ const { group, concat, indent, line, softline, join } = prettier.doc.builders;
 const { Node } = require("melody-types");
 const {
     EXPRESSION_NEEDED,
+    INSIDE_OF_STRING,
     STRING_NEEDS_QUOTES,
     FILTER_BLOCK,
     shouldExpressionsBeWrapped,
+    wrapInStringInterpolation,
     someParentNode,
     isMultipartExpression,
     getDeepProperty
@@ -116,11 +118,14 @@ const p = (node, path, print, options) => {
         parts.push(indent(indentedFilters));
     }
 
-    if (shouldExpressionsBeWrapped(path)) {
-        // We manually wrap here, to avoid a line break
-        // between the curly braces
+    const kindOfWrap = shouldExpressionsBeWrapped(path);
+    if (kindOfWrap === EXPRESSION_NEEDED) {
+        // Instead of using wrapExpressionIfNeeded(), we manually
+        // wrap here, to avoid a line break between the curly braces
         parts.push(" }}");
         parts.unshift("{{ ");
+    } else if (kindOfWrap === INSIDE_OF_STRING) {
+        wrapInStringInterpolation(parts);
     }
 
     return group(concat(parts));

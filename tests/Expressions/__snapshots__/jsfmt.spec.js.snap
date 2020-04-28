@@ -238,7 +238,7 @@ exports[`objectExpression.melody.twig 1`] = `
 <h1 class="{{ {
             ('hero__title--' ~ (locale | lower)): locale in ['CN', 'JP', 'DE', 'RU'],
         } | classes }}">Heading</h1>
-        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {{
     {
         a: 'foo',
@@ -394,12 +394,19 @@ exports[`stringConcat.melody.twig 1`] = `
 </div>
 
 <span data-whitespace-test="Testing: {{- noWhitespaceTest -}} foo">Test</span>
+
+{% set calendarIcon = isNewGuestSelector ? 'icn_#{type | lower}_line_dark' : type | lower %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <div>
     {{ first ~ second }}
 </div>
 
 <span data-whitespace-test="Testing: {{- noWhitespaceTest -}} foo">Test</span>
+
+{% set calendarIcon = isNewGuestSelector
+    ? "icn_#{type|lower}_line_dark"
+    : type|lower
+%}
 
 `;
 
