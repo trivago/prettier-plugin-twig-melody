@@ -6,6 +6,10 @@
 
 -   Bug fixes
 
+## v0.4.3
+
+-   Bug fix: Filter expression was not correctly interpolated in a string
+
 ## v0.4.2
 
 -   Bug fix: Remove hard-coded space at the beginning of Twig comments
