@@ -537,6 +537,8 @@ const printChildGroups = (node, path, print, ...childPath) => {
 module.exports = {
     shouldExpressionsBeWrapped,
     wrapExpressionIfNeeded,
+    wrapInStringInterpolation,
+    wrapInEnvironment,
     findParentNode,
     isRootNode,
     isMelodyNode,
