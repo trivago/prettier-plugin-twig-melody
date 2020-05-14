@@ -18,12 +18,14 @@ const INLINE_HTML_ELEMENTS = [
     "em",
     "i",
     "li",
+    "mark",
     "s",
     "strong",
     "sup",
     "sub",
     "small",
-    "span"
+    "span",
+    "time"
 ];
 
 /**
