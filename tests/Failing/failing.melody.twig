@@ -9,6 +9,7 @@
 </option>
 #}
 
-{# -}} becomes }} #}
-{% if isRTL %}{{ '&#8206;' | raw }}{% endif %}
-{{- '' ~ (not deal.displayPrice and deal.name.value != '' ? dash : deal.displayPrice) -}}
+{{- ratingValue == 10 -}}
+{{- ratingValue == 10 | number_format(1) -}}
+{{- ratingValue == 10 ? ratingValue : ratingValue -}}
+{{- ratingValue == 10 ? ratingValue : ratingValue | number_format(1) -}}
