@@ -12,20 +12,34 @@ const {
 const INLINE_HTML_ELEMENTS = [
     "a",
     "abbr",
+    "acronym",
     "b",
+    "bdo",
+    "big",
     "br",
+    "button",
+    "cite",
+    "code",
     "dd",
+    "dfn",
     "em",
     "i",
+    "img",
+    "kbd",
+    "label",
     "li",
     "mark",
+    "q",
     "s",
+    "samp",
     "strong",
     "sup",
     "sub",
     "small",
     "span",
-    "time"
+    "time",
+    "tt",
+    "var"
 ];
 
 /**
