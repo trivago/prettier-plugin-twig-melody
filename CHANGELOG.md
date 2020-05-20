@@ -6,6 +6,10 @@
 
 -   Bug fixes
 
+## v0.4.4
+
+-   Bug fix: Expand the list of HTML tags treated as "inline"
+
 ## v0.4.3
 
 -   Bug fix: Filter expression was not correctly interpolated in a string
