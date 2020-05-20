@@ -94,6 +94,10 @@ exports[`failing.melody.twig 1`] = `
     }}
 </option>
 #}
+
+{# -}} becomes }} #}
+{% if isRTL %}{{ '&#8206;' | raw }}{% endif %}
+{{- '' ~ (not deal.displayPrice and deal.name.value != '' ? dash : deal.displayPrice) -}}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {# IF tag in element not allowed
 <option {% if not purchasable.isAvailable %}disabled{% endif %}>
@@ -105,5 +109,9 @@ exports[`failing.melody.twig 1`] = `
     }}
 </option>
 #}
+
+{# -}} becomes }} #}
+{% if isRTL %}{{ '&#8206;' | raw }}{% endif %}
+{{- '' ~ not deal.displayPrice and deal.name.value != '' ? dash : deal.displayPrice -}}
 
 `;
