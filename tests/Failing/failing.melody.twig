@@ -8,3 +8,11 @@
     }}
 </option>
 #}
+
+{% icon 'general/arrow-36x36' with {
+        classList: {	        
+            base: "#{css['arrowIcon#{action}']} icon-rtl",	            
+            'icon-flip': flipIcon ?? false
+        } | classes
+    } 
+%}

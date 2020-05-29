@@ -94,6 +94,14 @@ exports[`failing.melody.twig 1`] = `
     }}
 </option>
 #}
+
+{% icon 'general/arrow-36x36' with {
+        classList: {	        
+            base: "#{css['arrowIcon#{action}']} icon-rtl",	            
+            'icon-flip': flipIcon ?? false
+        } | classes
+    } 
+%}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {# IF tag in element not allowed
 <option {% if not purchasable.isAvailable %}disabled{% endif %}>
@@ -105,5 +113,10 @@ exports[`failing.melody.twig 1`] = `
     }}
 </option>
 #}
+
+{% icon 'general/arrow-36x36'
+    with
+    { classList: { base: "#{css["arrowIcon#{action}"]} icon-rtl", 'icon-flip': flipIcon ?? false } | classes }
+%}
 
 `;
