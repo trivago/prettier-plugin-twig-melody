@@ -6,6 +6,10 @@
 
 -   Bug fixes
 
+## v0.4.5
+
+-   Bug fix (Melody): Whitespace trimming information was lost when using a conditional expression
+
 ## v0.4.4
 
 -   Bug fix: Expand the list of HTML tags treated as "inline"
