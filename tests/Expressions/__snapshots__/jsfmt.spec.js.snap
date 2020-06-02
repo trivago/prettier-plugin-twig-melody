@@ -400,6 +400,8 @@ exports[`stringConcat.melody.twig 1`] = `
 <span data-whitespace-test="Testing: {{- noWhitespaceTest -}} foo">Test</span>
 
 {% set calendarIcon = isNewGuestSelector ? 'icn_#{type | lower}_line_dark' : type | lower %}
+
+{% icon 'name' with { classList: 'classA' ~ (not needsB ? ' classB') } %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <div>
     {{ first ~ second }}
@@ -410,6 +412,13 @@ exports[`stringConcat.melody.twig 1`] = `
 {% set calendarIcon = isNewGuestSelector
     ? "icn_#{type|lower}_line_dark"
     : type|lower
+%}
+
+{% icon 'name'
+    with
+    {
+        classList: 'classA' ~ (not needsB ? ' classB')
+    }
 %}
 
 `;
