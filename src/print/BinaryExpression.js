@@ -58,7 +58,9 @@ const otherNeedsParentheses = (node, otherProp) => {
         (otherPrecedence > ownPrecedence &&
             isBinaryOther &&
             hasLogicalOperator(other)) ||
-        Node.isFilterExpression(other)
+        Node.isFilterExpression(other) ||
+        (Node.isBinaryConcatExpression(node) &&
+            Node.isConditionalExpression(other))
     );
 };
 
