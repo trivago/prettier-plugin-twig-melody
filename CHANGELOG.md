@@ -6,6 +6,10 @@
 
 -   Bug fixes
 
+## v0.4.6
+
+-   Bug fix: Leave parentheses in place in `'classA' ~ (not needsB ? ' classB')`
+
 ## v0.4.5
 
 -   Bug fix (Melody): Whitespace trimming information was lost when using a conditional expression
