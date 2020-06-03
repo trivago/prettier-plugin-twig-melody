@@ -16,3 +16,38 @@
         } | classes
     } 
 %}
+
+{# "only" dropped, comment dropped #}
+{% embed '@hotelsearch/common/tooltip/tooltip.melody.twig' with {
+            position: 'bottomTrailing',
+            id: 'most-popular-badge',
+            classList: tooltipOpen ? 'show-tooltip',
+            isAriaHidden: not tooltipOpen ?? false
+        } only %}
+            {# Necessary block to inject html into the tooltip #} 
+            {% block text %}
+            <p>Hey></p>
+            {% endblock %}
+{% endembed %}
+
+{# Inserts a newline where it shouldn't #}
+<span class="rat-chart__bar">
+    <span class="rat-chart__bar-holder">
+        <span class="rat-chart__bar-content rat-color--{{ valueIndex }}" {{ { "style": width } | attrs }}></span>
+    </span>
+</span>
+
+{# Parentheses dropped. Might be valid, but could be better, cosmetically #}
+{% for feature in (showAAAmenities ? entirePlaceFeatures : topFeatures) %}
+    abcd
+{% endfor %}
+
+{# There should be no whitespace changes in textarea #}
+<textarea class="{{ codePreview }}">{{
+'
+{% icon "' ~ icon ~ '" with {
+    classList: "' ~ classMap | classes ~ '",
+} %}
+'
+        }}
+</textarea>

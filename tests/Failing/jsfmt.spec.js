@@ -1,5 +1,5 @@
 run_spec(__dirname, ["melody"], {
     twigPrintWidth: 120,
-    twigAlwaysBreakObjects: false,
+    twigAlwaysBreakObjects: true,
     twigFollowOfficialCodingStandards: false
 });
