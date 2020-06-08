@@ -143,6 +143,11 @@ exports[`failing.melody.twig 1`] = `
 '
         }}
 </textarea>
+
+{# Before the closing -->, whitespace keeps being added #}
+<!--     
+    This is a comment
+-->
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {# IF tag in element not allowed
 <option {% if not purchasable.isAvailable %}disabled{% endif %}>
@@ -206,5 +211,10 @@ exports[`failing.melody.twig 1`] = `
 } %}
 ' }}
 </textarea>
+
+{# Before the closing -->, whitespace keeps being added #}
+<!--      
+    This is a comment
+ -->
 
 `;
