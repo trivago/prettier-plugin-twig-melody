@@ -19,6 +19,9 @@ const printOpener = (node, path, print) => {
             indent(concat([line, "with ", path.call(print, "argument")]))
         );
     }
+    if (node.contextFree) {
+      parts.push(" only");
+    }
     parts.push(concat([line, node.trimRightEmbed ? "-%}" : "%}"]));
     return group(concat(parts));
 };
