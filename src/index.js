@@ -16,8 +16,13 @@ const languages = [
         codemirrorMimeType: "text/melody-twig",
         extensions: [".melody.twig", ".html.twig", ".twig"],
         linguistLanguageId: 0,
-        vscodeLanguageIds: ["twig"]
-    }
+        vscodeLanguageIds: [
+            "twig",
+            "html.twig",
+            "html.twig.js.css",
+            "xml.twig",
+        ],
+    },
 ];
 
 function hasPragma(/* text */) {
@@ -38,8 +43,8 @@ const parsers = {
         astFormat: "melody",
         hasPragma,
         locStart,
-        locEnd
-    }
+        locEnd,
+    },
 };
 
 function canAttachComment(node) {
@@ -69,8 +74,8 @@ const printers = {
         printComment,
         canAttachComment,
         massageAstNode: clean,
-        willPrintOwnComments: () => true
-    }
+        willPrintOwnComments: () => true,
+    },
 };
 
 const options = {
@@ -80,53 +85,53 @@ const options = {
         array: true,
         default: [{ value: [] }],
         description:
-            "Provide additional plugins for Melody. Relative file path from the project root."
+            "Provide additional plugins for Melody. Relative file path from the project root.",
     },
     twigMultiTags: {
         type: "path",
         category: "Global",
         array: true,
         default: [{ value: [] }],
-        description: "Make custom Twig tags known to the parser."
+        description: "Make custom Twig tags known to the parser.",
     },
     twigSingleQuote: {
         type: "boolean",
         category: "Global",
         default: true,
-        description: "Use single quotes in Twig files?"
+        description: "Use single quotes in Twig files?",
     },
     twigAlwaysBreakObjects: {
         type: "boolean",
         category: "Global",
         default: true,
-        description: "Should objects always break in Twig files?"
+        description: "Should objects always break in Twig files?",
     },
     twigPrintWidth: {
         type: "int",
         category: "Global",
         default: 80,
-        description: "Print width for Twig files"
+        description: "Print width for Twig files",
     },
     twigFollowOfficialCodingStandards: {
         type: "boolean",
         category: "Global",
         default: true,
         description:
-            "See https://twig.symfony.com/doc/2.x/coding_standards.html"
+            "See https://twig.symfony.com/doc/2.x/coding_standards.html",
     },
     twigOutputEndblockName: {
         type: "boolean",
         category: "Global",
         default: false,
-        description: "Output the Twig block name in the 'endblock' tag"
-    }
+        description: "Output the Twig block name in the 'endblock' tag",
+    },
 };
 
 const pluginExports = {
     languages,
     printers,
     parsers,
-    options
+    options,
 };
 const combinedExports = Object.assign(
     {},
