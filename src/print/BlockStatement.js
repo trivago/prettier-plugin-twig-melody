@@ -17,11 +17,17 @@ const p = (node, path, print, options) => {
             node.trimRightBlock ? " -%}" : " %}"
         ]);
         const parts = [opener];
-        if (node.body.length > 0) {
+        if (
+          node.body.length === 1 &&
+          node.body[0].type === "PrintTextStatement" &&
+          // .value is a StringLiteral; .value.value is a string.
+          isWhitespaceOnly(node.body[0].value.value)
+        ) {
+          // noop; Opening and closing tag should be on the same line.
+        } else if (node.body.length > 0) {
             const indentedBody = printChildBlock(node, path, print, "body");
-            parts.push(indentedBody);
+            parts.push(indentedBody, hardline);
         }
-        parts.push(hardline);
         parts.push(
             node.trimLeftEndblock ? "{%-" : "{%",
             " endblock",
