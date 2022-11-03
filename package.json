@@ -1,6 +1,6 @@
 {
     "name": "@supersoniks/prettier-plugin-twig-melody",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Prettier Plugin for Twig/Melody",
     "main": "src",
     "publishConfig": {
