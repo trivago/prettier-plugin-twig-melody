@@ -47,6 +47,7 @@ const p = (node, path, print) => {
         node.children = removeSurroundingWhitespace(node.children);
 
         const childGroups = printChildGroups(node, path, print, "children");
+        const hasChildren = childGroups.length > 0;
         const closingTag = concat(["</", node.name, ">"]);
         const result = [
           openingGroup,
