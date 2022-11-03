@@ -3,6 +3,9 @@
     "version": "0.4.6",
     "description": "Prettier Plugin for Twig/Melody",
     "main": "src",
+    "publishConfig": {
+      "access": "public"
+    },
     "repository": "https://github.com/AgenceSupersoniks/prettier-plugin-twig-melody",
     "author": "Tom Bartel <thomas.bartel@trivago.com>",
     "license": "Apache 2.0",
