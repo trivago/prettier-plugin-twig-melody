@@ -1,6 +1,6 @@
 {
     "name": "@supersoniks/prettier-plugin-twig-melody",
-    "version": "0.5.0",
+    "version": "1.0.1",
     "description": "Prettier Plugin for Twig/Melody",
     "main": "src",
     "publishConfig": {
@@ -19,7 +19,7 @@
         "lint": "jest -c jest.eslint.config.js",
         "test": "jest",
         "prettier": "prettier --plugin=. --parser=melody",
-        "publish": "npm publish"
+        "publish": "npm publish --access public"
     },
     "dependencies": {
         "babel-types": "^6.26.0",
