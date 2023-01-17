@@ -16,7 +16,12 @@ const languages = [
         codemirrorMimeType: "text/melody-twig",
         extensions: [".melody.twig", ".html.twig", ".twig"],
         linguistLanguageId: 0,
-        vscodeLanguageIds: ["twig"]
+        vscodeLanguageIds: [
+            "twig", 
+            "html.twig", 
+            "html.twig.js.css", 
+            "xml.twig"
+        ]
     }
 ];
 
