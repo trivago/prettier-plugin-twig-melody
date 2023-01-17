@@ -47,26 +47,18 @@ const p = (node, path, print) => {
         node.children = removeSurroundingWhitespace(node.children);
 
         const childGroups = printChildGroups(node, path, print, "children");
+        const hasChildren = childGroups.length > 0;
         const closingTag = concat(["</", node.name, ">"]);
-        const result = [openingGroup];
-        const joinedChildren = concat(childGroups);
-        if (isInlineElement(node)) {
-            result.push(indent(concat([softline, joinedChildren])), softline);
-        } else {
-            const childBlock = [];
-            if (childGroups.length > 0) {
-                childBlock.push(hardline);
-            }
-            childBlock.push(joinedChildren);
-            result.push(indent(concat(childBlock)));
-            if (childGroups.length > 0) {
-                result.push(hardline);
-            }
-        }
-        result.push(closingTag);
-
-        return isInlineElement(node) ? group(concat(result)) : concat(result);
-    }
+        const result = [
+          openingGroup,
+          // No newlines between opening and closing tag of empty elements.
+          indent(concat([hasChildren ? softline : "", concat(childGroups)])),
+          ...[hasChildren ? softline : ""],
+          closingTag,
+        ];
+    
+        return group(concat(result));
+      }
 
     return openingGroup;
 };
