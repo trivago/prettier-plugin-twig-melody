@@ -1,9 +1,9 @@
 const prettier = require("prettier");
-const { concat, line, indent, group } = prettier.doc.builders;
+const { line, indent, group } = prettier.doc.builders;
 const {
     EXPRESSION_NEEDED,
     STRING_NEEDS_QUOTES,
-    wrapExpressionIfNeeded
+    wrapExpressionIfNeeded,
 } = require("../util");
 
 const p = (node, path, print) => {
@@ -12,17 +12,17 @@ const p = (node, path, print) => {
 
     const rest = [line, "?"];
     if (node.consequent) {
-        rest.push(concat([" ", path.call(print, "consequent")]));
+        rest.push([" ", path.call(print, "consequent")]);
     }
     if (node.alternate) {
         rest.push(line, ": ", path.call(print, "alternate"));
     }
-    const parts = [path.call(print, "test"), indent(concat(rest))];
+    const parts = [path.call(print, "test"), indent(rest)];
     wrapExpressionIfNeeded(path, parts, node);
 
-    return group(concat(parts));
+    return group(parts);
 };
 
 module.exports = {
-    printConditionalExpression: p
+    printConditionalExpression: p,
 };

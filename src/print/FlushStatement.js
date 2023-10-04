@@ -5,5 +5,5 @@ const p = (node, path, print) => {
 };
 
 module.exports = {
-    printFlushStatement: p
+    printFlushStatement: p,
 };

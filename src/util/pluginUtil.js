@@ -1,9 +1,9 @@
 const path = require("path");
 const resolve = require("resolve");
 
-const getPluginPathsFromOptions = options => {
+const getPluginPathsFromOptions = (options) => {
     if (options.twigMelodyPlugins && Array.isArray(options.twigMelodyPlugins)) {
-        return options.twigMelodyPlugins.map(s => s.trim());
+        return options.twigMelodyPlugins.map((s) => s.trim());
     }
     return [];
 };
@@ -34,7 +34,7 @@ const getProjectRoot = () => {
     return __dirname.slice(0, foundIndex) + joined;
 };
 
-const tryLoadPlugin = pluginPath => {
+const tryLoadPlugin = (pluginPath) => {
     try {
         const projectRoot = getProjectRoot();
         const requirePath = resolve.sync(path.resolve(projectRoot, pluginPath));
@@ -45,10 +45,10 @@ const tryLoadPlugin = pluginPath => {
     }
 };
 
-const loadPlugins = pluginPaths => {
+const loadPlugins = (pluginPaths) => {
     const result = [];
     if (pluginPaths && Array.isArray(pluginPaths)) {
-        pluginPaths.forEach(pluginPath => {
+        pluginPaths.forEach((pluginPath) => {
             const loadedPlugin = tryLoadPlugin(pluginPath);
             if (loadedPlugin) {
                 result.push(loadedPlugin);
@@ -58,19 +58,19 @@ const loadPlugins = pluginPaths => {
     return result;
 };
 
-const getAdditionalMelodyExtensions = pluginPaths => {
+const getAdditionalMelodyExtensions = (pluginPaths) => {
     let result = [];
     const loadedPlugins = loadPlugins(pluginPaths);
-    loadedPlugins.forEach(loadedPlugin => {
+    loadedPlugins.forEach((loadedPlugin) => {
         result = result.concat(loadedPlugin.melodyExtensions);
     });
     // Filter out potential "undefined" values
-    return result.filter(elem => !!elem);
+    return result.filter((elem) => !!elem);
 };
 
 module.exports = {
     getPluginPathsFromOptions,
     tryLoadPlugin,
     loadPlugins,
-    getAdditionalMelodyExtensions
+    getAdditionalMelodyExtensions,
 };

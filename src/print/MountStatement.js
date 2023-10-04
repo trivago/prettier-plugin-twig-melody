@@ -1,8 +1,8 @@
 const prettier = require("prettier");
-const { group, concat, indent, line, hardline } = prettier.doc.builders;
+const { group, indent, line, hardline } = prettier.doc.builders;
 const { EXPRESSION_NEEDED, STRING_NEEDS_QUOTES } = require("../util");
 
-const formatDelay = delay => {
+const formatDelay = (delay) => {
     return "" + delay / 1000 + "s";
 };
 
@@ -26,44 +26,36 @@ const buildOpener = (node, path, print) => {
     }
 
     if (node.key) {
-        firstGroup.push(indent(concat([line, "as ", path.call(print, "key")])));
+        firstGroup.push(indent([line, "as ", path.call(print, "key")]));
     }
-    result.push(group(concat(firstGroup)));
+    result.push(group(firstGroup));
     if (node.argument) {
-        result.push(indent(concat([" with ", path.call(print, "argument")])));
+        result.push(indent([" with ", path.call(print, "argument")]));
     }
     if (node.delayBy) {
         result.push(
-            indent(
-                concat([
-                    line,
-                    "delay placeholder by ",
-                    formatDelay(node.delayBy)
-                ])
-            )
+            indent([line, "delay placeholder by ", formatDelay(node.delayBy)])
         );
     }
     const trimRightMount =
         node.body || node.otherwise ? node.trimRightMount : node.trimRight;
-    result.push(concat([line, trimRightMount ? "-%}" : "%}"]));
-    return group(concat(result));
+    result.push([line, trimRightMount ? "-%}" : "%}"]);
+    return group(result);
 };
 
 const buildBody = (path, print) => {
-    return indent(concat([hardline, path.call(print, "body")]));
+    return indent([hardline, path.call(print, "body")]);
 };
 
 const buildErrorHandling = (node, path, print) => {
     const parts = [];
-    parts.push(
-        concat([hardline, node.trimLeftCatch ? "{%-" : "{%", " catch "])
-    );
+    parts.push([hardline, node.trimLeftCatch ? "{%-" : "{%", " catch "]);
     if (node.errorVariableName) {
         parts.push(path.call(print, "errorVariableName"), " ");
     }
     parts.push(node.trimRightCatch ? "-%}" : "%}");
-    parts.push(indent(concat([hardline, path.call(print, "otherwise")])));
-    return concat(parts);
+    parts.push(indent([hardline, path.call(print, "otherwise")]));
+    return parts;
 };
 
 const p = (node, path, print) => {
@@ -77,19 +69,17 @@ const p = (node, path, print) => {
         parts.push(buildErrorHandling(node, path, print));
     }
     if (node.body || node.otherwise) {
-        parts.push(
-            concat([
-                hardline,
-                node.trimLeftEndmount ? "{%-" : "{%",
-                " endmount ",
-                node.trimRight ? "-%}" : "%}"
-            ])
-        );
+        parts.push([
+            hardline,
+            node.trimLeftEndmount ? "{%-" : "{%",
+            " endmount ",
+            node.trimRight ? "-%}" : "%}",
+        ]);
     }
 
-    return concat(parts);
+    return parts;
 };
 
 module.exports = {
-    printMountStatement: p
+    printMountStatement: p,
 };

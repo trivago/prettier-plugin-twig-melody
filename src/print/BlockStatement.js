@@ -1,5 +1,5 @@
 const prettier = require("prettier");
-const { concat, hardline, group } = prettier.doc.builders;
+const { hardline, group } = prettier.doc.builders;
 const { Node } = require("melody-types");
 const { EXPRESSION_NEEDED, printChildBlock } = require("../util");
 
@@ -10,12 +10,12 @@ const p = (node, path, print, options) => {
 
     if (hasChildren) {
         const blockName = path.call(print, "name");
-        const opener = concat([
+        const opener = [
             node.trimLeft ? "{%-" : "{%",
             " block ",
             blockName,
-            node.trimRightBlock ? " -%}" : " %}"
-        ]);
+            node.trimRightBlock ? " -%}" : " %}",
+        ];
         const parts = [opener];
         if (node.body.length > 0) {
             const indentedBody = printChildBlock(node, path, print, "body");
@@ -25,11 +25,11 @@ const p = (node, path, print, options) => {
         parts.push(
             node.trimLeftEndblock ? "{%-" : "{%",
             " endblock",
-            printEndblockName ? concat([" ", blockName]) : "",
+            printEndblockName ? [" ", blockName] : "",
             node.trimRight ? " -%}" : " %}"
         );
 
-        const result = group(concat(parts));
+        const result = group(parts);
         return result;
     } else if (Node.isPrintExpressionStatement(node.body)) {
         const parts = [
@@ -38,12 +38,12 @@ const p = (node, path, print, options) => {
             path.call(print, "name"),
             " ",
             path.call(print, "body", "value"),
-            node.trimRight ? " -%}" : " %}"
+            node.trimRight ? " -%}" : " %}",
         ];
-        return concat(parts);
+        return parts;
     }
 };
 
 module.exports = {
-    printBlockStatement: p
+    printBlockStatement: p,
 };
