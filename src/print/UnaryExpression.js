@@ -1,9 +1,9 @@
 const prettier = require("prettier");
-const { concat, group } = prettier.doc.builders;
+const { group } = prettier.doc.builders;
 const {
     EXPRESSION_NEEDED,
     STRING_NEEDS_QUOTES,
-    wrapExpressionIfNeeded
+    wrapExpressionIfNeeded,
 } = require("../util");
 
 const p = (node, path, print) => {
@@ -11,9 +11,9 @@ const p = (node, path, print) => {
     node[STRING_NEEDS_QUOTES] = true;
     const parts = [node.operator, path.call(print, "argument")];
     wrapExpressionIfNeeded(path, parts, node);
-    return group(concat(parts));
+    return group(parts);
 };
 
 module.exports = {
-    printUnaryExpression: p
+    printUnaryExpression: p,
 };

@@ -1,15 +1,14 @@
 const prettier = require("prettier");
-const { concat } = prettier.doc.builders;
 
 const p = (node, path, print) => {
-    return concat([
+    return [
         node.trimLeft ? "{%-" : "{%",
         " do ",
         path.call(print, "value"),
-        node.trimRight ? " -%}" : " %}"
-    ]);
+        node.trimRight ? " -%}" : " %}",
+    ];
 };
 
 module.exports = {
-    printDoStatement: p
+    printDoStatement: p,
 };

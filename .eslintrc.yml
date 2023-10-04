@@ -35,6 +35,7 @@ rules:
         - error
         - never
         - exceptRange: true
+    prettier/prettier: ["error", { "endOfLine": "auto" }]
 overrides:
     - files: "tests/**/*.js"
       rules:

@@ -1,12 +1,12 @@
 const prettier = require("prettier");
-const { concat, line, join, hardline } = prettier.doc.builders;
+const { line, join, hardline } = prettier.doc.builders;
 const {
     isWhitespaceOnly,
     countNewlines,
     createTextGroups,
     PRESERVE_LEADING_WHITESPACE,
     PRESERVE_TRAILING_WHITESPACE,
-    NEWLINES_ONLY
+    NEWLINES_ONLY,
 } = require("../util");
 
 const newlinesOnly = (s, preserveWhitespace = true) => {
@@ -16,7 +16,7 @@ const newlinesOnly = (s, preserveWhitespace = true) => {
     } else if (numNewlines === 1) {
         return hardline;
     }
-    return concat([hardline, hardline]);
+    return [hardline, hardline];
 };
 
 const p = (node, path, print) => {
@@ -38,9 +38,9 @@ const p = (node, path, print) => {
         preserveTrailingWhitespace
     );
 
-    return join(concat([hardline, hardline]), textGroups);
+    return join([hardline, hardline], textGroups);
 };
 
 module.exports = {
-    printTextStatement: p
+    printTextStatement: p,
 };

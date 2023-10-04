@@ -3,5 +3,5 @@ const p = (node, path, print) => {
 };
 
 module.exports = {
-    printGenericToken: p
+    printGenericToken: p,
 };

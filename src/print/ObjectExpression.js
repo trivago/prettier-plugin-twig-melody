@@ -1,5 +1,5 @@
 const prettier = require("prettier");
-const { group, concat, line, hardline, indent, join } = prettier.doc.builders;
+const { group, line, hardline, indent, join } = prettier.doc.builders;
 const { EXPRESSION_NEEDED, wrapExpressionIfNeeded } = require("../util");
 
 const p = (node, path, print, options) => {
@@ -9,17 +9,14 @@ const p = (node, path, print, options) => {
     node[EXPRESSION_NEEDED] = false;
     const mappedElements = path.map(print, "properties");
     const separator = options.twigAlwaysBreakObjects ? hardline : line;
-    const indentedContent = concat([
-        line,
-        join(concat([",", separator]), mappedElements)
-    ]);
+    const indentedContent = [line, join([",", separator], mappedElements)];
 
     const parts = ["{", indent(indentedContent), separator, "}"];
     wrapExpressionIfNeeded(path, parts, node);
 
-    return group(concat(parts));
+    return group(parts);
 };
 
 module.exports = {
-    printObjectExpression: p
+    printObjectExpression: p,
 };

@@ -1,11 +1,11 @@
 const prettier = require("prettier");
-const { concat, hardline } = prettier.doc.builders;
+const { hardline } = prettier.doc.builders;
 const { Node } = require("melody-types");
 const {
     STRING_NEEDS_QUOTES,
     indentWithHardline,
     printSingleTwigTag,
-    isEmptySequence
+    isEmptySequence,
 } = require("../util");
 
 const p = (node, path, print) => {
@@ -15,7 +15,7 @@ const p = (node, path, print) => {
     const printedSections = path.map(print, "sections");
     node.sections.forEach((section, i) => {
         if (Node.isGenericTwigTag(section)) {
-            parts.push(concat([hardline, printedSections[i]]));
+            parts.push([hardline, printedSections[i]]);
         } else {
             if (!isEmptySequence(section)) {
                 // Indent
@@ -23,9 +23,9 @@ const p = (node, path, print) => {
             }
         }
     });
-    return concat(parts);
+    return parts;
 };
 
 module.exports = {
-    printGenericTwigTag: p
+    printGenericTwigTag: p,
 };

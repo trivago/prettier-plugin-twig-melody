@@ -1,5 +1,5 @@
 const prettier = require("prettier");
-const { concat, softline, line, group, join, indent } = prettier.doc.builders;
+const { softline, line, group, join, indent } = prettier.doc.builders;
 const { findParentNode } = require("../util");
 
 const textMap = {
@@ -10,10 +10,10 @@ const textMap = {
     TestEvenExpression: "even",
     TestOddExpression: "odd",
     TestIterableExpression: "iterable",
-    TestSameAsExpression: "same as"
+    TestSameAsExpression: "same as",
 };
 
-const isNegator = node =>
+const isNegator = (node) =>
     node.constructor.name === "UnarySubclass" && node.operator === "not";
 
 const p = (node, path, print) => {
@@ -34,22 +34,15 @@ const p = (node, path, print) => {
     }
     if (hasArguments) {
         const printedArguments = path.map(print, "arguments");
-        const joinedArguments = join(concat([",", line]), printedArguments);
+        const joinedArguments = join([",", line], printedArguments);
         parts.push(
-            group(
-                concat([
-                    "(",
-                    indent(concat([softline, joinedArguments])),
-                    softline,
-                    ")"
-                ])
-            )
+            group(["(", indent([softline, joinedArguments]), softline, ")"])
         );
     }
 
-    return concat(parts);
+    return parts;
 };
 
 module.exports = {
-    printTestExpression: p
+    printTestExpression: p,
 };

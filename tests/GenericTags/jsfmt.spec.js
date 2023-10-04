@@ -3,6 +3,6 @@ run_spec(__dirname, ["melody"], {
         "nav,endnav",
         "switch,case,default,endswitch",
         "ifchildren,endifchildren",
-        "cache,endcache"
-    ]
+        "cache,endcache",
+    ],
 });

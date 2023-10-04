@@ -1,5 +1,5 @@
 const prettier = require("prettier");
-const { group, concat, indent, line, softline, join } = prettier.doc.builders;
+const { group, indent, line, softline, join } = prettier.doc.builders;
 const { Node } = require("melody-types");
 const {
     EXPRESSION_NEEDED,
@@ -10,11 +10,11 @@ const {
     wrapInStringInterpolation,
     someParentNode,
     isMultipartExpression,
-    getDeepProperty
+    getDeepProperty,
 } = require("../util");
 
-const isInFilterBlock = path =>
-    someParentNode(path, node => node[FILTER_BLOCK] === true);
+const isInFilterBlock = (path) =>
+    someParentNode(path, (node) => node[FILTER_BLOCK] === true);
 
 const printArguments = (node, path, print, nodePath) => {
     const hasArguments = node.arguments && node.arguments.length > 0;
@@ -28,30 +28,26 @@ const printArguments = (node, path, print, nodePath) => {
         Node.isObjectExpression(node.arguments[0])
     ) {
         // Optimization: Avoid additional indentation level
-        return group(concat(["(", printedArguments[0], ")"]));
+        return group(["(", printedArguments[0], ")"]);
     }
 
-    return group(
-        concat([
-            "(",
-            indent(
-                concat([softline, join(concat([",", line]), printedArguments)])
-            ),
-            softline,
-            ")"
-        ])
-    );
+    return group([
+        "(",
+        indent([softline, join([",", line], printedArguments)]),
+        softline,
+        ")",
+    ]);
 };
 
 const printOneFilterExpression = (node, path, print, nodePath) => {
     const args = printArguments(node, path, print, nodePath);
     const filterName = path.call(print, ...nodePath, "name");
-    return concat([filterName, args]);
+    return [filterName, args];
 };
 
 const joinFilters = (filterExpressions, space = "") => {
     return join(
-        concat([space === "" ? softline : line, "|", space]),
+        [space === "" ? softline : line, "|", space],
         filterExpressions
     );
 };
@@ -103,18 +99,18 @@ const p = (node, path, print, options) => {
         parts.push(")");
     }
     if (isFilterBlock) {
-        parts.push(concat([" ", filterExpressions[0]]));
+        parts.push([" ", filterExpressions[0]]);
         filterExpressions = filterExpressions.slice(1);
     }
     if (filterExpressions.length === 1) {
         // No breaks and indentation for just one expression
         parts.push(`${space}|${space}`, filterExpressions[0]);
     } else if (filterExpressions.length > 1) {
-        const indentedFilters = concat([
+        const indentedFilters = [
             spaceAroundPipe ? line : softline,
             `|${space}`,
-            joinFilters(filterExpressions, space)
-        ]);
+            joinFilters(filterExpressions, space),
+        ];
         parts.push(indent(indentedFilters));
     }
 
@@ -128,9 +124,9 @@ const p = (node, path, print, options) => {
         wrapInStringInterpolation(parts);
     }
 
-    return group(concat(parts));
+    return group(parts);
 };
 
 module.exports = {
-    printFilterExpression: p
+    printFilterExpression: p,
 };

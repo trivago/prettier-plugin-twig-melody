@@ -2,14 +2,14 @@ const {
     firstValueInAncestorChain,
     quoteChar,
     STRING_NEEDS_QUOTES,
-    OVERRIDE_QUOTE_CHAR
+    OVERRIDE_QUOTE_CHAR,
 } = require("../util");
 
 const isUnmaskedOccurrence = (s, pos) => {
     return pos === 0 || s[pos - 1] !== "\\";
 };
 
-const containsUnmasked = char => s => {
+const containsUnmasked = (char) => (s) => {
     let pos = s.indexOf(char);
     while (pos >= 0) {
         if (isUnmaskedOccurrence(s, pos)) {
@@ -61,5 +61,5 @@ const p = (node, path, print, options) => {
 };
 
 module.exports = {
-    printStringLiteral: p
+    printStringLiteral: p,
 };

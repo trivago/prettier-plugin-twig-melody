@@ -3,7 +3,7 @@
 const { printSequenceExpression } = require("./print/SequenceExpression.js");
 const { printBinaryExpression } = require("./print/BinaryExpression.js");
 const {
-    printConditionalExpression
+    printConditionalExpression,
 } = require("./print/ConditionalExpression.js");
 const { printElement } = require("./print/Element.js");
 const { printAttribute } = require("./print/Attribute.js");
@@ -43,29 +43,29 @@ const { printDeclaration } = require("./print/Declaration.js");
 const { printGenericTwigTag } = require("./print/GenericTwigTag.js");
 const { printGenericToken } = require("./print/GenericToken.js");
 const {
-    printMacroDeclarationStatement
+    printMacroDeclarationStatement,
 } = require("./print/MacroDeclarationStatement.js");
 const {
-    printFilterBlockStatement
+    printFilterBlockStatement,
 } = require("./print/FilterBlockStatement.js");
 const {
-    printVariableDeclarationStatement
+    printVariableDeclarationStatement,
 } = require("./print/VariableDeclarationStatement.js");
 const {
-    printNamedArgumentExpression
+    printNamedArgumentExpression,
 } = require("./print/NamedArgumentExpression.js");
 const {
     isWhitespaceNode,
     isHtmlCommentEqualTo,
     isTwigCommentEqualTo,
     getPluginPathsFromOptions,
-    loadPlugins
+    loadPlugins,
 } = require("./util");
 const { ORIGINAL_SOURCE } = require("./parser");
 
 const printFunctions = {};
 
-const applyPlugin = loadedPlugin => {
+const applyPlugin = (loadedPlugin) => {
     if (loadedPlugin && loadedPlugin.printers) {
         for (const printerName of Object.keys(loadedPlugin.printers)) {
             printFunctions[printerName] = loadedPlugin.printers[printerName];
@@ -73,10 +73,10 @@ const applyPlugin = loadedPlugin => {
     }
 };
 
-const applyPlugins = options => {
+const applyPlugins = (options) => {
     const pluginPaths = getPluginPathsFromOptions(options);
     const loadedPlugins = loadPlugins(pluginPaths);
-    loadedPlugins.forEach(plugin => {
+    loadedPlugins.forEach((plugin) => {
         applyPlugin(plugin);
     });
 };
@@ -88,18 +88,18 @@ const isTwigIgnoreNextComment = isTwigCommentEqualTo("prettier-ignore");
 const isTwigIgnoreStartComment = isTwigCommentEqualTo("prettier-ignore-start");
 const isTwigIgnoreEndComment = isTwigCommentEqualTo("prettier-ignore-end");
 
-const isIgnoreNextComment = s =>
+const isIgnoreNextComment = (s) =>
     isHtmlIgnoreNextComment(s) || isTwigIgnoreNextComment(s);
-const isIgnoreRegionStartComment = s =>
+const isIgnoreRegionStartComment = (s) =>
     isHtmlIgnoreStartComment(s) || isTwigIgnoreStartComment(s);
-const isIgnoreRegionEndComment = s =>
+const isIgnoreRegionEndComment = (s) =>
     isHtmlIgnoreEndComment(s) || isTwigIgnoreEndComment(s);
 
 let originalSource = "";
 let ignoreRegion = false;
 let ignoreNext = false;
 
-const checkForIgnoreStart = node => {
+const checkForIgnoreStart = (node) => {
     // Keep current "ignoreNext" value if it's true,
     // but is not applied in this step yet
     ignoreNext =
@@ -108,13 +108,13 @@ const checkForIgnoreStart = node => {
     ignoreRegion = ignoreRegion || isIgnoreRegionStartComment(node);
 };
 
-const checkForIgnoreEnd = node => {
+const checkForIgnoreEnd = (node) => {
     if (ignoreRegion && isIgnoreRegionEndComment(node)) {
         ignoreRegion = false;
     }
 };
 
-const shouldApplyIgnoreNext = node => !isWhitespaceNode(node);
+const shouldApplyIgnoreNext = (node) => !isWhitespaceNode(node);
 
 const print = (path, options, print) => {
     applyPlugins(options);
@@ -156,10 +156,10 @@ const print = (path, options, print) => {
     return "";
 };
 
-const getSubstringForNode = node =>
+const getSubstringForNode = (node) =>
     originalSource.substring(node.loc.start.index, node.loc.end.index);
 
-const canGetSubstringForNode = node =>
+const canGetSubstringForNode = (node) =>
     originalSource &&
     node.loc &&
     node.loc.start &&
@@ -208,7 +208,7 @@ const canGetSubstringForNode = node =>
  */
 
 printFunctions["SequenceExpression"] = printSequenceExpression;
-printFunctions["ConstantValue"] = node => {
+printFunctions["ConstantValue"] = (node) => {
     return node.value;
 };
 printFunctions["StringLiteral"] = printStringLiteral;
@@ -229,7 +229,7 @@ printFunctions["ObjectExpression"] = printObjectExpression;
 printFunctions["ObjectProperty"] = printObjectProperty;
 
 // Return value has to be a string
-const returnNodeValue = node => "" + node.value;
+const returnNodeValue = (node) => "" + node.value;
 
 printFunctions["Fragment"] = (node, path, print) => {
     return path.call(print, "value");
@@ -253,9 +253,8 @@ printFunctions["MountStatement"] = printMountStatement;
 printFunctions["ForStatement"] = printForStatement;
 printFunctions["BinaryConcatExpression"] = printBinaryExpression;
 printFunctions["SetStatement"] = printSetStatement;
-printFunctions[
-    "VariableDeclarationStatement"
-] = printVariableDeclarationStatement;
+printFunctions["VariableDeclarationStatement"] =
+    printVariableDeclarationStatement;
 printFunctions["DoStatement"] = printDoStatement;
 printFunctions["ExtendsStatement"] = printExtendsStatement;
 printFunctions["EmbedStatement"] = printEmbedStatement;
@@ -278,8 +277,8 @@ printFunctions["GenericTwigTag"] = (node, path, print, options) => {
 printFunctions["GenericToken"] = printGenericToken;
 
 // Fallbacks
-printFunctions["String"] = s => s;
+printFunctions["String"] = (s) => s;
 
 module.exports = {
-    print
+    print,
 };

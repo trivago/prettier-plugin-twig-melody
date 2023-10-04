@@ -1,5 +1,4 @@
 const prettier = require("prettier");
-const { concat } = prettier.doc.builders;
 const { isValidIdentifierName, STRING_NEEDS_QUOTES } = require("../util");
 const { Node } = require("melody-types");
 
@@ -21,9 +20,9 @@ const p = (node, path, print, options) => {
     parts.push(": ");
     node[STRING_NEEDS_QUOTES] = true;
     parts.push(path.call(print, "value"));
-    return concat(parts);
+    return parts;
 };
 
 module.exports = {
-    printObjectProperty: p
+    printObjectProperty: p,
 };

@@ -1,5 +1,5 @@
 const prettier = require("prettier");
-const { concat, line, indent } = prettier.doc.builders;
+const { line, indent } = prettier.doc.builders;
 const { STRING_NEEDS_QUOTES, isContractableNodeType } = require("../util");
 
 const p = (node, path, print) => {
@@ -8,15 +8,15 @@ const p = (node, path, print) => {
     const printedValue = path.call(print, "value");
     const shouldCondenseLayout = isContractableNodeType(node.value);
     const rightHandSide = shouldCondenseLayout
-        ? concat([" ", printedValue])
-        : indent(concat([line, printedValue]));
+        ? [" ", printedValue]
+        : indent([line, printedValue]);
 
     // We are explicitly not returning a group here, because
     // a VariableDeclarationStatement is - currently - always
     // embedded in a group created by SetStatement.
-    return concat([printedName, " =", rightHandSide]);
+    return [printedName, " =", rightHandSide];
 };
 
 module.exports = {
-    printVariableDeclarationStatement: p
+    printVariableDeclarationStatement: p,
 };

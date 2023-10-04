@@ -1,5 +1,5 @@
 const prettier = require("prettier");
-const { group, concat } = prettier.doc.builders;
+const { group } = prettier.doc.builders;
 const { STRING_NEEDS_QUOTES } = require("../util");
 
 const p = (node, path, print) => {
@@ -7,7 +7,7 @@ const p = (node, path, print) => {
     const parts = [
         node.trimLeft ? "{%-" : "{%",
         " include ",
-        path.call(print, "source")
+        path.call(print, "source"),
     ];
     if (node.argument) {
         const printedArguments = path.call(print, "argument");
@@ -19,9 +19,9 @@ const p = (node, path, print) => {
         parts.push(" only");
     }
     parts.push(node.trimRight ? " -%}" : " %}");
-    return group(concat(parts));
+    return group(parts);
 };
 
 module.exports = {
-    printIncludeStatement: p
+    printIncludeStatement: p,
 };

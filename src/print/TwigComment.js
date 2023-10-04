@@ -1,13 +1,12 @@
 const prettier = require("prettier");
-const { concat } = prettier.doc.builders;
 const {
     createTextGroups,
     stripTwigCommentChars,
     normalizeTwigComment,
-    countNewlines
+    countNewlines,
 } = require("../util");
 
-const p = node => {
+const p = (node) => {
     const originalText = node.value.value || "";
     const commentText = stripTwigCommentChars(originalText);
     const trimLeft = originalText.length >= 3 ? originalText[2] === "-" : false;
@@ -19,13 +18,9 @@ const p = node => {
         return normalizeTwigComment(commentText, trimLeft, trimRight);
     }
 
-    return concat([
-        trimLeft ? "{#-" : "{#",
-        commentText,
-        trimRight ? "-#}" : "#}"
-    ]);
+    return [trimLeft ? "{#-" : "{#", commentText, trimRight ? "-#}" : "#}"];
 };
 
 module.exports = {
-    printTwigComment: p
+    printTwigComment: p,
 };

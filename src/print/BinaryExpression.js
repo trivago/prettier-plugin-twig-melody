@@ -1,5 +1,5 @@
 const prettier = require("prettier");
-const { group, concat, line, softline, indent } = prettier.doc.builders;
+const { group, line, softline, indent } = prettier.doc.builders;
 const { Node } = require("melody-types");
 const {
     EXPRESSION_NEEDED,
@@ -9,7 +9,7 @@ const {
     IS_ROOT_LOGICAL_EXPRESSION,
     firstValueInAncestorChain,
     findParentNode,
-    wrapExpressionIfNeeded
+    wrapExpressionIfNeeded,
 } = require("../util");
 const { extension: coreExtension } = require("melody-extension-core");
 const ALREADY_INDENTED = Symbol("ALREADY_INDENTED");
@@ -35,14 +35,14 @@ const printInterpolatedString = (node, path, print, options) => {
     }
     printedFragments.unshift(path.call(print, ...currentPath));
     printedFragments.unshift('"');
-    return concat(printedFragments);
+    return printedFragments;
 };
 
-const operatorNeedsSpaces = operator => {
+const operatorNeedsSpaces = (operator) => {
     return NO_WHITESPACE_AROUND.indexOf(operator) < 0;
 };
 
-const hasLogicalOperator = node => {
+const hasLogicalOperator = (node) => {
     return node.operator === "or" || node.operator === "and";
 };
 
@@ -115,7 +115,7 @@ const printBinaryExpression = (node, path, print) => {
     const potentiallyIndented = [
         whitespaceAroundOperator ? line : softline,
         node.operator,
-        whitespaceAroundOperator ? " " : ""
+        whitespaceAroundOperator ? " " : "",
     ];
     if (rightNeedsParens) {
         potentiallyIndented.push("(");
@@ -125,12 +125,13 @@ const printBinaryExpression = (node, path, print) => {
         potentiallyIndented.push(")");
     }
     const rightHandSide = alreadyIndented
-        ? concat(potentiallyIndented)
-        : indent(concat(potentiallyIndented));
-    const result = concat(
-        wrapExpressionIfNeeded(path, [...parts, rightHandSide], node)
+        ? potentiallyIndented
+        : indent(potentiallyIndented);
+    const result = wrapExpressionIfNeeded(
+        path,
+        [...parts, rightHandSide],
+        node
     );
-
     const shouldCreateTopLevelGroup = !foundRootAbove && shouldGroupOnTopLevel;
     const isDifferentLogicalOperator =
         isLogicalOperator && node.operator !== parentOperator;
@@ -151,5 +152,5 @@ const p = (node, path, print, options) => {
 };
 
 module.exports = {
-    printBinaryExpression: p
+    printBinaryExpression: p,
 };

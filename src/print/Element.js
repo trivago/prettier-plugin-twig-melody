@@ -1,19 +1,11 @@
 const prettier = require("prettier");
-const {
-    concat,
-    group,
-    line,
-    hardline,
-    softline,
-    indent,
-    join
-} = prettier.doc.builders;
+const { group, line, hardline, softline, indent, join } = prettier.doc.builders;
 const {
     removeSurroundingWhitespace,
     isInlineElement,
     printChildGroups,
     EXPRESSION_NEEDED,
-    STRING_NEEDS_QUOTES
+    STRING_NEEDS_QUOTES,
 } = require("../util");
 
 const printOpeningTag = (node, path, print) => {
@@ -23,17 +15,13 @@ const printOpeningTag = (node, path, print) => {
     const hasAttributes = node.attributes && node.attributes.length > 0;
 
     if (hasAttributes) {
-        return concat([
-            opener,
-            indent(concat([" ", printedAttributes])),
-            openingTagEnd
-        ]);
+        return [opener, indent([" ", printedAttributes]), openingTagEnd];
     }
-    return concat([opener, openingTagEnd]);
+    return [opener, openingTagEnd];
 };
 
 const printSeparatedList = (path, print, separator, attrName) => {
-    return join(concat([separator, line]), path.map(print, attrName));
+    return join([separator, line], path.map(print, attrName));
 };
 
 const p = (node, path, print) => {
@@ -47,30 +35,30 @@ const p = (node, path, print) => {
         node.children = removeSurroundingWhitespace(node.children);
 
         const childGroups = printChildGroups(node, path, print, "children");
-        const closingTag = concat(["</", node.name, ">"]);
+        const closingTag = ["</", node.name, ">"];
         const result = [openingGroup];
-        const joinedChildren = concat(childGroups);
+        const joinedChildren = childGroups;
         if (isInlineElement(node)) {
-            result.push(indent(concat([softline, joinedChildren])), softline);
+            result.push(indent([softline, joinedChildren]), softline);
         } else {
             const childBlock = [];
             if (childGroups.length > 0) {
                 childBlock.push(hardline);
             }
             childBlock.push(joinedChildren);
-            result.push(indent(concat(childBlock)));
+            result.push(indent(childBlock));
             if (childGroups.length > 0) {
                 result.push(hardline);
             }
         }
         result.push(closingTag);
 
-        return isInlineElement(node) ? group(concat(result)) : concat(result);
+        return isInlineElement(node) ? group(result) : result;
     }
 
     return openingGroup;
 };
 
 module.exports = {
-    printElement: p
+    printElement: p,
 };

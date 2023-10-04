@@ -1,9 +1,9 @@
 const prettier = require("prettier");
-const { concat, group, indent, line } = prettier.doc.builders;
+const { group, indent, line } = prettier.doc.builders;
 const {
     EXPRESSION_NEEDED,
     STRING_NEEDS_QUOTES,
-    isContractableNodeType
+    isContractableNodeType,
 } = require("../util");
 const { Node } = require("melody-types");
 
@@ -16,11 +16,11 @@ const p = (node, path, print) => {
         isContractableNodeType(node.value) &&
         !Node.isObjectExpression(node.value);
     const padding = shouldContractValue ? " " : line;
-    const printedValue = concat([padding, path.call(print, "value")]);
+    const printedValue = [padding, path.call(print, "value")];
     const value = shouldContractValue ? printedValue : indent(printedValue);
-    return group(concat([opener, value, padding, closing]));
+    return group([opener, value, padding, closing]);
 };
 
 module.exports = {
-    printExpressionStatement: p
+    printExpressionStatement: p,
 };

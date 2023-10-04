@@ -1,17 +1,17 @@
 const prettier = require("prettier");
-const { concat, hardline } = prettier.doc.builders;
+const { hardline } = prettier.doc.builders;
 const { printChildBlock, quoteChar } = require("../util");
 
 const createOpener = (node, options) => {
-    return concat([
+    return [
         node.trimLeft ? "{%-" : "{%",
         " autoescape ",
         quoteChar(options),
         node.escapeType || "html",
         quoteChar(options),
         " ",
-        node.trimRightAutoescape ? "-%}" : "%}"
-    ]);
+        node.trimRightAutoescape ? "-%}" : "%}",
+    ];
 };
 
 const p = (node, path, print, options) => {
@@ -24,9 +24,9 @@ const p = (node, path, print, options) => {
         node.trimRight ? "-%}" : "%}"
     );
 
-    return concat(parts);
+    return parts;
 };
 
 module.exports = {
-    printAutoescapeBlock: p
+    printAutoescapeBlock: p,
 };

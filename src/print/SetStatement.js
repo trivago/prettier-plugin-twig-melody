@@ -1,14 +1,14 @@
 const prettier = require("prettier");
-const { group, concat, line, hardline } = prettier.doc.builders;
+const { group, line, hardline } = prettier.doc.builders;
 const {
     printChildBlock,
     isNotExpression,
     STRING_NEEDS_QUOTES,
-    GROUP_TOP_LEVEL_LOGICAL
+    GROUP_TOP_LEVEL_LOGICAL,
 } = require("../util");
 const { Node } = require("melody-types");
 
-const shouldAvoidBreakBeforeClosing = valueNode =>
+const shouldAvoidBreakBeforeClosing = (valueNode) =>
     Node.isObjectExpression(valueNode) ||
     isNotExpression(valueNode) ||
     Node.isArrayExpression(valueNode);
@@ -20,18 +20,16 @@ const buildSetStatement = (node, path, print, assignmentIndex) => {
         varDeclaration.value
     );
 
-    return group(
-        concat([
-            node.trimLeft ? "{%-" : "{%",
-            " set ",
-            path.call(print, "assignments", assignmentIndex),
-            avoidBreakBeforeClosing ? " " : line,
-            node.trimRight ? "-%}" : "%}"
-        ])
-    );
+    return group([
+        node.trimLeft ? "{%-" : "{%",
+        " set ",
+        path.call(print, "assignments", assignmentIndex),
+        avoidBreakBeforeClosing ? " " : line,
+        node.trimRight ? "-%}" : "%}",
+    ]);
 };
 
-const isEmbracingSet = node => {
+const isEmbracingSet = (node) => {
     return (
         Array.isArray(node.assignments) &&
         node.assignments.length === 1 &&
@@ -51,7 +49,7 @@ const printRegularSet = (node, path, print) => {
             parts.push(buildSetStatement(node, path, print, index));
         });
     }
-    return concat(parts);
+    return parts;
 };
 
 const printEmbracingSet = (node, path, print) => {
@@ -59,7 +57,7 @@ const printEmbracingSet = (node, path, print) => {
         node.trimLeft ? "{%-" : "{%",
         " set ",
         path.call(print, "assignments", "0", "name"),
-        node.trimRightSet ? " -%}" : " %}"
+        node.trimRightSet ? " -%}" : " %}",
     ];
     node[STRING_NEEDS_QUOTES] = false;
     const printedContents = printChildBlock(
@@ -78,7 +76,7 @@ const printEmbracingSet = (node, path, print) => {
         " endset ",
         node.trimRight ? "-%}" : "%}"
     );
-    return concat(parts);
+    return parts;
 };
 
 const p = (node, path, print) => {
@@ -90,5 +88,5 @@ const p = (node, path, print) => {
 };
 
 module.exports = {
-    printSetStatement: p
+    printSetStatement: p,
 };

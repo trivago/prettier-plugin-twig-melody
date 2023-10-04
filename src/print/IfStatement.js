@@ -1,11 +1,11 @@
 const prettier = require("prettier");
-const { group, indent, line, hardline, concat } = prettier.doc.builders;
+const { group, indent, line, hardline } = prettier.doc.builders;
 const { EXPRESSION_NEEDED, printChildBlock } = require("../util");
 const { Node } = require("melody-types");
 const {
     hasNoNewlines,
     PRESERVE_LEADING_WHITESPACE,
-    PRESERVE_TRAILING_WHITESPACE
+    PRESERVE_TRAILING_WHITESPACE,
 } = require("../util");
 
 const IS_ELSEIF = Symbol("IS_ELSEIF");
@@ -38,15 +38,13 @@ const p = (node, path, print) => {
         firstChild[PRESERVE_TRAILING_WHITESPACE] = true;
     }
 
-    const ifClause = group(
-        concat([
-            node.trimLeft ? "{%- " : "{% ",
-            isElseIf ? "elseif" : "if",
-            indent(concat([line, path.call(print, "test")])),
-            " ",
-            node.trimRightIf ? "-%}" : "%}"
-        ])
-    );
+    const ifClause = group([
+        node.trimLeft ? "{%- " : "{% ",
+        isElseIf ? "elseif" : "if",
+        indent([line, path.call(print, "test")]),
+        " ",
+        node.trimRightIf ? "-%}" : "%}",
+    ]);
     const ifBody = printInline
         ? isEmptyIf
             ? ""
@@ -75,9 +73,9 @@ const p = (node, path, print) => {
             node.trimRight ? "-%}" : "%}"
         );
     }
-    return concat(parts);
+    return parts;
 };
 
 module.exports = {
-    printIfStatement: p
+    printIfStatement: p,
 };

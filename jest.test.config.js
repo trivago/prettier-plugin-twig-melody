@@ -9,5 +9,5 @@ module.exports = {
     testRegex: "jsfmt\\.spec\\.js$|__tests__/.*\\.js$",
     collectCoverage: ENABLE_COVERAGE,
     collectCoverageFrom: ["src/**/*.js", "!<rootDir>/node_modules/"],
-    transform: {}
+    transform: {},
 };

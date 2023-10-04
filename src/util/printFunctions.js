@@ -1,9 +1,9 @@
 const prettier = require("prettier");
-const { line, indent, concat, group } = prettier.doc.builders;
+const { line, indent, group } = prettier.doc.builders;
 const { Node } = require("melody-types");
 
 const noSpaceBeforeToken = {
-    ",": true
+    ",": true,
 };
 
 const printSingleTwigTag = (node, path, print) => {
@@ -22,13 +22,13 @@ const printSingleTwigTag = (node, path, print) => {
         indentedParts.push(separator, printedParts[i]);
     }
     if (node.parts.length > 1) {
-        parts.push(indent(concat(indentedParts)));
+        parts.push(indent(indentedParts));
     }
     const closing = node.trimRight ? "-%}" : "%}";
     parts.push(line, closing);
-    return group(concat(parts));
+    return group(parts);
 };
 
 module.exports = {
-    printSingleTwigTag
+    printSingleTwigTag,
 };
