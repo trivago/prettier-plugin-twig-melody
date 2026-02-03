@@ -1,5 +1,10 @@
 # Prettier for Melody
 
+> [!CAUTION]
+> This repository has been archived as of October 2025.  
+> If you wish to update or extend this project, please create a fork.
+
+
 ![Prettier Banner](https://raw.githubusercontent.com/prettier/prettier-logo/master/images/prettier-banner-light.png)
 
 ---
